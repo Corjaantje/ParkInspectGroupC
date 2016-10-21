@@ -1,4 +1,4 @@
-﻿print 'Account scripts aan het uitvoeren :)';
+﻿print 'Account script aan het uitvoeren :)';
 
 insert Account select 1, 'piepschuimer', '1234'
 where not exists (select 1 from Account where Id = 1);
@@ -12,3 +12,11 @@ where not exists (select 1 from Account where Id = 3);
 insert Account select 4, 'darkplats', 'parkeertmscheef'
 where not exists (select 1 from Account where Id = 4);
 
+insert Account select 5, 'jvisser', 'jvisservistniet'
+where not exists (select 1 from Account where Id = 5);
+
+insert Account select 6, 'upijnenborg', '2bdkcvnwj3kN@dj'
+where not exists (select 1 from Account where Id = 6);
+
+insert Account select 7, 'jirkenbeem', 'ponnylover86'
+where not exists (select 1 from Account where Id = 7);

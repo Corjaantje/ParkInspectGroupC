@@ -86,4 +86,19 @@
   <ItemGroup>
     <None Include="PostDeployment\AccountPost.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="PostDeployment\RegionPost.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PostDeployment\EmployeeStatusPost.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PostDeployment\InspectionStatusPost.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PostDeployment\EmployeePost.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PostDeployment\AssignmentPost.sql" />
+  </ItemGroup>
 </Project>
