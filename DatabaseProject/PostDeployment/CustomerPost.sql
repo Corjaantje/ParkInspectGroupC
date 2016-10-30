@@ -1,6 +1,6 @@
 ﻿print 'Customer script aan het uitvoeren :)';
 
-insert Customer select 1, 1, 'Piepschuim', 'Hogeschoollaan 2915', 'Den Bosch', '088 525 7500', 'piepschuim@avans.nl'
+insert Customer select 1, 1, 'H. Piepschuim', 'Hogeschoollaan 2915', 'Den Bosch', '088 525 7500', 'piepschuim@avans.nl'
 where not exists (select 1 from Customer where Id = 1);
 
 insert Customer select 2, 2, 'Ger Haris', 'SarisLaan 1', 'Den Bosch', '06 666 666', 'gharis@avans.nl'
