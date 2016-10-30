@@ -72,6 +72,10 @@
     <Build Include="Tables\Account.sql" />
     <Build Include="Tables\WorkingHours.sql" />
     <Build Include="Tables\Questionnaire.sql" />
+    <Build Include="Tables\Module.sql" />
+    <Build Include="Tables\Question.sql" />
+    <Build Include="Tables\QuestionnaireQuestion.sql" />
+    <Build Include="Tables\QuestionSort.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="DatabaseProject.refactorlog" />
@@ -100,5 +104,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="PostDeployment\AssignmentPost.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PostDeployment\QuestionsPost.sql" />
   </ItemGroup>
 </Project>
