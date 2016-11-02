@@ -8,10 +8,8 @@
     [EndDate] DATETIME NOT NULL, 
     [StatusId] INT NOT NULL, 
     [InspectorId] INT NULL, 
-    [QuestionnaireId] INT NULL, 
     CONSTRAINT [FK_Inspection_Assignment] FOREIGN KEY ([AssignmentId]) REFERENCES [Assignment]([Id]), 
     CONSTRAINT [FK_Inspection_InspectionStatus] FOREIGN KEY ([StatusId]) REFERENCES [InspectionStatus]([Id]), 
     CONSTRAINT [FK_Inspection_Region] FOREIGN KEY ([RegionId]) REFERENCES [Region]([Id]), 
-    CONSTRAINT [FK_Inspection_Employee] FOREIGN KEY ([InspectorId]) REFERENCES [Employee]([Id]), 
-    CONSTRAINT [FK_Inspection_Questionnaire] FOREIGN KEY ([QuestionnaireId]) REFERENCES [Questionnaire]([Id])
+    CONSTRAINT [FK_Inspection_Employee] FOREIGN KEY ([InspectorId]) REFERENCES [Employee]([Id]) 
 )

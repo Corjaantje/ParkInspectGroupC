@@ -74,8 +74,9 @@
     <Build Include="Tables\Questionnaire.sql" />
     <Build Include="Tables\Module.sql" />
     <Build Include="Tables\Question.sql" />
-    <Build Include="Tables\QuestionnaireQuestion.sql" />
     <Build Include="Tables\QuestionSort.sql" />
+    <Build Include="Tables\QuestionnaireModule.sql" />
+    <Build Include="Tables\QuestionAnswer.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="DatabaseProject.refactorlog" />

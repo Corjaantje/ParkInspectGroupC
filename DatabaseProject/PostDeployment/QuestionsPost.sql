@@ -10,7 +10,7 @@ where not exists (select 1 from QuestionSort where Id = 2);
 insert QuestionSort select 3, 'VARCHAR'
 where not exists (select 1 from QuestionSort where Id = 3);
 
-insert QuestionSort select 4, 'BIT'
+insert QuestionSort select 4, 'BOOL'
 where not exists (select 1 from QuestionSort where Id = 4);
 
 --Modules
@@ -42,6 +42,7 @@ where not exists (select 1 from Question where Id = 5);
 insert Question select 6, 2, 'Hoeveel vrachtwagen parkeerplaatsen zijn er aanwezig?', 3
 where not exists (select 1 from Question where Id = 6);
 
+/*
 --Questionnaire
 insert Questionnaire select 1, 1
 where not exists (select 1 from Questionnaire where Id = 1);
@@ -54,3 +55,4 @@ where not exists (select 1 from Questionnaire where Id = 3);
 
 insert Questionnaire select 4, 3
 where not exists (select 1 from Questionnaire where Id = 4);
+*/
