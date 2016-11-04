@@ -27,6 +27,8 @@ namespace ParkInspectGroupC.Encryption
 
 			hashedPassword = GenerateHashValue(stringToHash);
 
+			// Dit is even om Corné zijn Github skills te testen.
+
 			return hashedPassword;
 		}
 
