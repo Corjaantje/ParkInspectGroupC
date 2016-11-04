@@ -1,5 +1,7 @@
 ﻿print 'Account script aan het uitvoeren :)';
 
+-- Niet meer geheel bruikbaar na veranderingen
+/*
 insert Account select 1, 'piepschuimer', '1234'
 where not exists (select 1 from Account where Id = 1);
 
@@ -20,3 +22,4 @@ where not exists (select 1 from Account where Id = 6);
 
 insert Account select 7, 'jirkenbeem', 'ponnylover86'
 where not exists (select 1 from Account where Id = 7);
+*/
