@@ -12,6 +12,3 @@ where not exists (select 1 from EmployeeStatus where Id = 3);
 
 insert EmployeeStatus select 4, 'Ontslagen'
 where not exists (select 1 from EmployeeStatus where Id = 4);
-
-insert EmployeeStatus select 5, 'Dood'
-where not exists (select 1 from EmployeeStatus where Id = 5);

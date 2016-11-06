@@ -5,4 +5,5 @@
 :r .\InspectionStatusPost.sql
 :r .\EmployeePost.sql
 :r .\AssignmentPost.sql
+:r .\WorkingHoursPost.sql
 --:r .\QuestionsPost.sql
