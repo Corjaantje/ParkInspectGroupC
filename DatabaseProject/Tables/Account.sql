@@ -3,6 +3,8 @@
     [Id] INT NOT NULL,  
     [Username] VARCHAR(25) NOT NULL, 
     [Password] VARCHAR(50) NOT NULL, 
-    [UserGuid] VARBINARY(50) NOT NULL, 
+    [UserGuid] VARCHAR(50) NOT NULL, 
     CONSTRAINT [PK_Account] PRIMARY KEY ([Id]) 
 )
+
+GO
