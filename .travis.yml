@@ -1,2 +1,6 @@
 language: csharp
 solution: ParkInspectGroupC.sln
+script:
+  - xbuild /p:Configuration=Release ParkInspectGroupC.sln
+mono:
+  - latest
