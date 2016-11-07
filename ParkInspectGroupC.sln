@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkInspectGroupC", "ParkIn
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DatabaseProject", "DatabaseProject\DatabaseProject.sqlproj", "{E47A0819-225D-4BCA-8926-61063B077630}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocalDatabase", "LocalDatabase\LocalDatabase.csproj", "{D90B7234-64DB-4CDA-9AED-A36E512E1783}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{E47A0819-225D-4BCA-8926-61063B077630}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E47A0819-225D-4BCA-8926-61063B077630}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E47A0819-225D-4BCA-8926-61063B077630}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{D90B7234-64DB-4CDA-9AED-A36E512E1783}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D90B7234-64DB-4CDA-9AED-A36E512E1783}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D90B7234-64DB-4CDA-9AED-A36E512E1783}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D90B7234-64DB-4CDA-9AED-A36E512E1783}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
