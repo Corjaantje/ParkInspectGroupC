@@ -4,7 +4,9 @@
     [Username] VARCHAR(25) NOT NULL, 
     [Password] VARCHAR(50) NOT NULL, 
     [UserGuid] VARCHAR(50) NOT NULL, 
-    CONSTRAINT [PK_Account] PRIMARY KEY ([Id]) 
+    [EmployeeId] INT NOT NULL, 
+    CONSTRAINT [PK_Account] PRIMARY KEY ([Id]), 
+    CONSTRAINT [FK_Account_Employee] FOREIGN KEY ([EmployeeId]) REFERENCES [Employee]([Id]) 
 )
 
 GO

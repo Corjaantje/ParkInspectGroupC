@@ -10,13 +10,10 @@
     [ZipCode] VARCHAR(10) NULL, 
     [Phonenumber] VARCHAR(15) NULL, 
     [Email] VARCHAR(50) NULL,
-	[RegionId] INT NULL,
-	 
+	[RegionId] INT NULL,	 
     [EmployeeStatusId] INT NULL, 
     [Inspecter] BIT NOT NULL, 
     [Manager] BIT NOT NULL, 
-    [AccountId] INT NOT NULL, 
     CONSTRAINT [FK_Employee_Region] FOREIGN KEY ([RegionId]) REFERENCES [Region]([Id]), 
-    CONSTRAINT [FK_Employee_EmployeeStatus] FOREIGN KEY ([EmployeeStatusId]) REFERENCES [EmployeeStatus]([Id]), 
-    CONSTRAINT [FK_Employee_Account] FOREIGN KEY ([AccountId]) REFERENCES [Account]([Id]), 
+    CONSTRAINT [FK_Employee_EmployeeStatus] FOREIGN KEY ([EmployeeStatusId]) REFERENCES [EmployeeStatus]([Id]) 
 )
