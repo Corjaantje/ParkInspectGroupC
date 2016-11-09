@@ -61,6 +61,7 @@ namespace LocalDatabase
         {
             return "";
         }
+        
         /*public Tuple<string, List<Record>, List<Record>> SyncLocalToCentral()//TODO
         {
             //The SQL database needs te be more finished for this part because we need the Entity Model for this part

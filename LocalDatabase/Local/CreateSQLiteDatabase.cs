@@ -18,8 +18,7 @@ namespace LocalDatabase.Local
                 //Create the connection & Create the tables
                 SQLiteConnection _connection = new SQLiteConnection("Data Source=" + dbName + ".sqlite;Version=3;");
                 bool createtable = false;
-
-                //14 tables
+                
                 createtable = Account(_sqliteActions, _connection);
                 if (!createtable) return false;
 
@@ -60,9 +59,8 @@ namespace LocalDatabase.Local
                 if (!createdbfile) return false;
 
                 createdbfile = QuestionAnswer(_sqliteActions, _connection);
-                if (!createdbfile) return false;
 
-                return true;
+                return createdbfile;
             }
             else
             {
@@ -297,6 +295,9 @@ namespace LocalDatabase.Local
                 "QuestionnaireId INT NOT NULL ,"+
                 "QuestionId INT NOT NULL,"+
                 "Result VARCHAR(255) NULL,"+
+                "DateCreated datetime NOT NULL," +
+                "DateUpdated datetime NOT NULL," +
+                "ExistsInCentral INT NOT NULL," +
                 "PRIMARY KEY(QuestionId, QuestionnaireId)," +
                 "FOREIGN KEY(QuestionnaireId) REFERENCES Questionnaire(Id)," +
                 "FOREIGN KEY(QuestionId) REFERENCES Question(Id)" +
