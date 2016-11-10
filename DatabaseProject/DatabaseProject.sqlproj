@@ -77,6 +77,10 @@
     <Build Include="Tables\QuestionSort.sql" />
     <Build Include="Tables\QuestionnaireModule.sql" />
     <Build Include="Tables\QuestionAnswer.sql" />
+    <Build Include="Tables\Keyword.sql" />
+    <Build Include="Tables\KeywordCategory.sql" />
+    <Build Include="Tables\QuestionKeyword.sql" />
+    <Build Include="Tables\InspectionImage.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="DatabaseProject.refactorlog" />
@@ -84,6 +88,7 @@
   <ItemGroup>
     <None Include="PostDeployment\CustomerPost.sql" />
     <PostDeploy Include="PostDeployment\ParkPostDeploy.sql" />
+    <None Include="DatabaseProjectAzure.publish.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DatabaseProject.publish.xml" />
@@ -111,5 +116,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="PostDeployment\WorkingHoursPost.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PostDeployment\KeywordPost.sql" />
   </ItemGroup>
 </Project>

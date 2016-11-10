@@ -329,4 +329,39 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="UserGuid" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="83799c2b-80a8-449c-bdf4-769c1a5fa81f" ChangeDateTime="11/10/2016 16:09:52">
+    <Property Name="ElementName" Value="[dbo].[Keyword].[Categorie]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Keyword]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CategorieId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="2fcfae74-adf1-43ec-ab4f-47f5c3041568" ChangeDateTime="11/10/2016 16:13:11">
+    <Property Name="ElementName" Value="[dbo].[QuestionKeyword].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[QuestionKeyword]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="QuestionId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="2b5b1ba6-39c0-4f12-a272-99eb9ef0c940" ChangeDateTime="11/10/2016 16:20:24">
+    <Property Name="ElementName" Value="[dbo].[Keyword].[Keyword]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Keyword]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Description" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="d890317d-b1a3-4c78-8159-6b5f2c67a674" ChangeDateTime="11/10/2016 16:26:44">
+    <Property Name="ElementName" Value="[dbo].[Module].[Notitie]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Module]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Note" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="a2c084d9-720c-48a6-aeca-19faf709a713" ChangeDateTime="11/10/2016 16:29:12">
+    <Property Name="ElementName" Value="[dbo].[InspectionImages].[Image]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[InspectionImages]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="File" />
+  </Operation>
 </Operations>

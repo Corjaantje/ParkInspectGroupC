@@ -1,5 +1,6 @@
 ﻿:r .\RegionPost.sql
 :r .\EmployeeStatusPost.sql
+:r .\KeywordPost.sql
 :r .\EmployeePost.sql
 :r .\AccountPost.sql
 :r .\CustomerPost.sql
