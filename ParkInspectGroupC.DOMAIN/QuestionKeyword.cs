@@ -12,12 +12,14 @@ namespace ParkInspectGroupC.DOMAIN
     using System;
     using System.Collections.Generic;
     
-    public partial class sysdiagrams
+    public partial class QuestionKeyword
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public int QuestionId { get; set; }
+        public int KeywordId { get; set; }
+        public System.DateTime DateCreated { get; set; }
+        public System.DateTime DateUpdated { get; set; }
+    
+        public virtual Keyword Keyword { get; set; }
+        public virtual Question Question { get; set; }
     }
 }

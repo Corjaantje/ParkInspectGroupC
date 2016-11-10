@@ -18,6 +18,8 @@ namespace ParkInspectGroupC.DOMAIN
         public Nullable<System.DateTime> Date { get; set; }
         public Nullable<System.TimeSpan> StartTime { get; set; }
         public Nullable<System.TimeSpan> EndTime { get; set; }
+        public System.DateTime DateCreated { get; set; }
+        public System.DateTime DateUpdated { get; set; }
     
         public virtual Employee Employee { get; set; }
     }

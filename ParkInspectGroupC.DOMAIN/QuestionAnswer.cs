@@ -17,6 +17,8 @@ namespace ParkInspectGroupC.DOMAIN
         public int QuestionnaireId { get; set; }
         public int QuestionId { get; set; }
         public string Result { get; set; }
+        public System.DateTime DateCreated { get; set; }
+        public System.DateTime DateUpdated { get; set; }
     
         public virtual Question Question { get; set; }
         public virtual Questionnaire Questionnaire { get; set; }

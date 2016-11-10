@@ -12,16 +12,14 @@ namespace ParkInspectGroupC.DOMAIN
     using System;
     using System.Collections.Generic;
     
-    public partial class Account
+    public partial class QuestionnaireModule
     {
-        public int Id { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public string UserGuid { get; set; }
-        public int EmployeeId { get; set; }
+        public int ModuleId { get; set; }
+        public int QuestionnaireId { get; set; }
         public System.DateTime DateCreated { get; set; }
         public System.DateTime DateUpdated { get; set; }
     
-        public virtual Employee Employee { get; set; }
+        public virtual Module Module { get; set; }
+        public virtual Questionnaire Questionnaire { get; set; }
     }
 }

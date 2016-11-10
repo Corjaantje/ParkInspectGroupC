@@ -17,6 +17,8 @@ namespace ParkInspectGroupC.DOMAIN
         public int Id { get; set; }
         public string File { get; set; }
         public Nullable<int> InspectionId { get; set; }
+        public System.DateTime DateCreated { get; set; }
+        public System.DateTime DateUpdated { get; set; }
     
         public virtual Inspection Inspection { get; set; }
     }

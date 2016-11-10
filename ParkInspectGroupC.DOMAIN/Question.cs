@@ -18,19 +18,21 @@ namespace ParkInspectGroupC.DOMAIN
         public Question()
         {
             this.QuestionAnswer = new HashSet<QuestionAnswer>();
-            this.Keyword = new HashSet<Keyword>();
+            this.QuestionKeyword = new HashSet<QuestionKeyword>();
         }
     
         public int Id { get; set; }
         public int SortId { get; set; }
         public string Description { get; set; }
         public Nullable<int> ModuleId { get; set; }
+        public System.DateTime DateCreated { get; set; }
+        public System.DateTime DateUpdated { get; set; }
     
         public virtual Module Module { get; set; }
         public virtual QuestionSort QuestionSort { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<QuestionAnswer> QuestionAnswer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Keyword> Keyword { get; set; }
+        public virtual ICollection<QuestionKeyword> QuestionKeyword { get; set; }
     }
 }

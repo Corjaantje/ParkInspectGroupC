@@ -17,15 +17,17 @@ namespace ParkInspectGroupC.DOMAIN
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Keyword()
         {
-            this.Question = new HashSet<Question>();
+            this.QuestionKeyword = new HashSet<QuestionKeyword>();
         }
     
         public int Id { get; set; }
         public int CategoryId { get; set; }
         public string Description { get; set; }
+        public System.DateTime DateCreated { get; set; }
+        public System.DateTime DateUpdated { get; set; }
     
         public virtual KeywordCategory KeywordCategory { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Question> Question { get; set; }
+        public virtual ICollection<QuestionKeyword> QuestionKeyword { get; set; }
     }
 }

@@ -29,6 +29,8 @@ namespace ParkInspectGroupC.DOMAIN
         public System.DateTime EndDate { get; set; }
         public int StatusId { get; set; }
         public Nullable<int> InspectorId { get; set; }
+        public System.DateTime DateCreated { get; set; }
+        public System.DateTime DateUpdated { get; set; }
     
         public virtual Assignment Assignment { get; set; }
         public virtual Employee Employee { get; set; }

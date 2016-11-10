@@ -5,12 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="ParkInspectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="__RefactorLog">
-          <Key>
-            <PropertyRef Name="OperationKey" />
-          </Key>
-          <Property Name="OperationKey" Type="uniqueidentifier" Nullable="false" />
-        </EntityType>
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="Id" />
@@ -507,7 +501,6 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="ParkInspectModelStoreContainer">
-          <EntitySet Name="__RefactorLog" EntityType="Self.__RefactorLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Assignment" EntityType="Self.Assignment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
@@ -639,18 +632,128 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ParkInspectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ParkInspectEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Account" EntityType="ParkInspectModel.Account" />
+          <EntitySet Name="Assignment" EntityType="ParkInspectModel.Assignment" />
+          <EntitySet Name="Customer" EntityType="ParkInspectModel.Customer" />
+          <EntitySet Name="Employee" EntityType="ParkInspectModel.Employee" />
+          <EntitySet Name="EmployeeStatus" EntityType="ParkInspectModel.EmployeeStatus" />
+          <EntitySet Name="Inspection" EntityType="ParkInspectModel.Inspection" />
+          <EntitySet Name="InspectionImage" EntityType="ParkInspectModel.InspectionImage" />
+          <EntitySet Name="InspectionStatus" EntityType="ParkInspectModel.InspectionStatus" />
+          <EntitySet Name="Keyword" EntityType="ParkInspectModel.Keyword" />
+          <EntitySet Name="KeywordCategory" EntityType="ParkInspectModel.KeywordCategory" />
+          <EntitySet Name="Module" EntityType="ParkInspectModel.Module" />
+          <EntitySet Name="Question" EntityType="ParkInspectModel.Question" />
+          <EntitySet Name="QuestionAnswer" EntityType="ParkInspectModel.QuestionAnswer" />
+          <EntitySet Name="QuestionKeyword" EntityType="ParkInspectModel.QuestionKeyword" />
+          <EntitySet Name="Questionnaire" EntityType="ParkInspectModel.Questionnaire" />
+          <EntitySet Name="QuestionnaireModule" EntityType="ParkInspectModel.QuestionnaireModule" />
+          <EntitySet Name="QuestionSort" EntityType="ParkInspectModel.QuestionSort" />
+          <EntitySet Name="Region" EntityType="ParkInspectModel.Region" />
+          <EntitySet Name="Availability" EntityType="ParkInspectModel.Availability" />
+          <EntitySet Name="WorkingHours" EntityType="ParkInspectModel.WorkingHours" />
+          <AssociationSet Name="FK_Account_Employee" Association="ParkInspectModel.FK_Account_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Assignment_Customer" Association="ParkInspectModel.FK_Assignment_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Assignment" EntitySet="Assignment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Assignment_Manager" Association="ParkInspectModel.FK_Assignment_Manager">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Assignment" EntitySet="Assignment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inspection_Assignment" Association="ParkInspectModel.FK_Inspection_Assignment">
+            <End Role="Assignment" EntitySet="Assignment" />
+            <End Role="Inspection" EntitySet="Inspection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Availability_Employee" Association="ParkInspectModel.FK_Availability_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Availability" EntitySet="Availability" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_EmployeeStatus" Association="ParkInspectModel.FK_Employee_EmployeeStatus">
+            <End Role="EmployeeStatus" EntitySet="EmployeeStatus" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Region" Association="ParkInspectModel.FK_Employee_Region">
+            <End Role="Region" EntitySet="Region" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inspection_Employee" Association="ParkInspectModel.FK_Inspection_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Inspection" EntitySet="Inspection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkingHours_Employee" Association="ParkInspectModel.FK_WorkingHours_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="WorkingHours" EntitySet="WorkingHours" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inspection_InspectionStatus" Association="ParkInspectModel.FK_Inspection_InspectionStatus">
+            <End Role="InspectionStatus" EntitySet="InspectionStatus" />
+            <End Role="Inspection" EntitySet="Inspection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inspection_Region" Association="ParkInspectModel.FK_Inspection_Region">
+            <End Role="Region" EntitySet="Region" />
+            <End Role="Inspection" EntitySet="Inspection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InspectionImages_Inspection" Association="ParkInspectModel.FK_InspectionImages_Inspection">
+            <End Role="Inspection" EntitySet="Inspection" />
+            <End Role="InspectionImage" EntitySet="InspectionImage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Questionnaire_Inspection" Association="ParkInspectModel.FK_Questionnaire_Inspection">
+            <End Role="Inspection" EntitySet="Inspection" />
+            <End Role="Questionnaire" EntitySet="Questionnaire" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Keyword_KeywordCategory" Association="ParkInspectModel.FK_Keyword_KeywordCategory">
+            <End Role="KeywordCategory" EntitySet="KeywordCategory" />
+            <End Role="Keyword" EntitySet="Keyword" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuestionKeyword_Keyword" Association="ParkInspectModel.FK_QuestionKeyword_Keyword">
+            <End Role="Keyword" EntitySet="Keyword" />
+            <End Role="QuestionKeyword" EntitySet="QuestionKeyword" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Question_Module" Association="ParkInspectModel.FK_Question_Module">
+            <End Role="Module" EntitySet="Module" />
+            <End Role="Question" EntitySet="Question" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuestionnaireModule_Module" Association="ParkInspectModel.FK_QuestionnaireModule_Module">
+            <End Role="Module" EntitySet="Module" />
+            <End Role="QuestionnaireModule" EntitySet="QuestionnaireModule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Question_QuestionSort" Association="ParkInspectModel.FK_Question_QuestionSort">
+            <End Role="QuestionSort" EntitySet="QuestionSort" />
+            <End Role="Question" EntitySet="Question" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuestionAnswer_Question" Association="ParkInspectModel.FK_QuestionAnswer_Question">
+            <End Role="Question" EntitySet="Question" />
+            <End Role="QuestionAnswer" EntitySet="QuestionAnswer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuestionKeyword_Question" Association="ParkInspectModel.FK_QuestionKeyword_Question">
+            <End Role="Question" EntitySet="Question" />
+            <End Role="QuestionKeyword" EntitySet="QuestionKeyword" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuestionAnswer_Questionnaire" Association="ParkInspectModel.FK_QuestionAnswer_Questionnaire">
+            <End Role="Questionnaire" EntitySet="Questionnaire" />
+            <End Role="QuestionAnswer" EntitySet="QuestionAnswer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuestionnaireModule_Questionnaire" Association="ParkInspectModel.FK_QuestionnaireModule_Questionnaire">
+            <End Role="Questionnaire" EntitySet="Questionnaire" />
+            <End Role="QuestionnaireModule" EntitySet="QuestionnaireModule" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Username" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="UserGuid" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserGuid" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="EmployeeId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Employee" Relationship="Self.FK_Account_Employee" FromRole="Account" ToRole="Employee" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Employee" Relationship="ParkInspectModel.FK_Account_Employee" FromRole="Account" ToRole="Employee" />
         </EntityType>
         <EntityType Name="Assignment">
           <Key>
@@ -662,34 +765,34 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="StartDate" Type="DateTime" Precision="0" />
           <Property Name="EndDate" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Customer" Relationship="Self.FK_Assignment_Customer" FromRole="Assignment" ToRole="Customer" />
-          <NavigationProperty Name="Employee" Relationship="Self.FK_Assignment_Manager" FromRole="Assignment" ToRole="Employee" />
-          <NavigationProperty Name="Inspection" Relationship="Self.FK_Inspection_Assignment" FromRole="Assignment" ToRole="Inspection" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Customer" Relationship="ParkInspectModel.FK_Assignment_Customer" FromRole="Assignment" ToRole="Customer" />
+          <NavigationProperty Name="Employee" Relationship="ParkInspectModel.FK_Assignment_Manager" FromRole="Assignment" ToRole="Employee" />
+          <NavigationProperty Name="Inspection" Relationship="ParkInspectModel.FK_Inspection_Assignment" FromRole="Assignment" ToRole="Inspection" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Phonenumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Assignment" Relationship="Self.FK_Assignment_Customer" FromRole="Customer" ToRole="Assignment" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Assignment" Relationship="ParkInspectModel.FK_Assignment_Customer" FromRole="Customer" ToRole="Assignment" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="Prefix" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="SurName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SurName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="Gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="City" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -700,25 +803,25 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <Property Name="EmployeeStatusId" Type="Int32" />
           <Property Name="Inspecter" Type="Boolean" Nullable="false" />
           <Property Name="Manager" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Account" Relationship="Self.FK_Account_Employee" FromRole="Employee" ToRole="Account" />
-          <NavigationProperty Name="Assignment" Relationship="Self.FK_Assignment_Manager" FromRole="Employee" ToRole="Assignment" />
-          <NavigationProperty Name="Availability" Relationship="Self.FK_Availability_Employee" FromRole="Employee" ToRole="Availability" />
-          <NavigationProperty Name="EmployeeStatus" Relationship="Self.FK_Employee_EmployeeStatus" FromRole="Employee" ToRole="EmployeeStatus" />
-          <NavigationProperty Name="Region" Relationship="Self.FK_Employee_Region" FromRole="Employee" ToRole="Region" />
-          <NavigationProperty Name="Inspection" Relationship="Self.FK_Inspection_Employee" FromRole="Employee" ToRole="Inspection" />
-          <NavigationProperty Name="WorkingHours" Relationship="Self.FK_WorkingHours_Employee" FromRole="Employee" ToRole="WorkingHours" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Account" Relationship="ParkInspectModel.FK_Account_Employee" FromRole="Employee" ToRole="Account" />
+          <NavigationProperty Name="Assignment" Relationship="ParkInspectModel.FK_Assignment_Manager" FromRole="Employee" ToRole="Assignment" />
+          <NavigationProperty Name="Availability" Relationship="ParkInspectModel.FK_Availability_Employee" FromRole="Employee" ToRole="Availability" />
+          <NavigationProperty Name="EmployeeStatus" Relationship="ParkInspectModel.FK_Employee_EmployeeStatus" FromRole="Employee" ToRole="EmployeeStatus" />
+          <NavigationProperty Name="Region" Relationship="ParkInspectModel.FK_Employee_Region" FromRole="Employee" ToRole="Region" />
+          <NavigationProperty Name="Inspection" Relationship="ParkInspectModel.FK_Inspection_Employee" FromRole="Employee" ToRole="Inspection" />
+          <NavigationProperty Name="WorkingHours" Relationship="ParkInspectModel.FK_WorkingHours_Employee" FromRole="Employee" ToRole="WorkingHours" />
         </EntityType>
         <EntityType Name="EmployeeStatus">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Description" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Employee" Relationship="Self.FK_Employee_EmployeeStatus" FromRole="EmployeeStatus" ToRole="Employee" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Employee" Relationship="ParkInspectModel.FK_Employee_EmployeeStatus" FromRole="EmployeeStatus" ToRole="Employee" />
         </EntityType>
         <EntityType Name="Inspection">
           <Key>
@@ -727,40 +830,40 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="AssignmentId" Type="Int32" Nullable="false" />
           <Property Name="RegionId" Type="Int32" Nullable="false" />
-          <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Location" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="StatusId" Type="Int32" Nullable="false" />
           <Property Name="InspectorId" Type="Int32" />
-          <NavigationProperty Name="Assignment" Relationship="Self.FK_Inspection_Assignment" FromRole="Inspection" ToRole="Assignment" />
-          <NavigationProperty Name="Employee" Relationship="Self.FK_Inspection_Employee" FromRole="Inspection" ToRole="Employee" />
-          <NavigationProperty Name="InspectionStatus" Relationship="Self.FK_Inspection_InspectionStatus" FromRole="Inspection" ToRole="InspectionStatus" />
-          <NavigationProperty Name="Region" Relationship="Self.FK_Inspection_Region" FromRole="Inspection" ToRole="Region" />
-          <NavigationProperty Name="InspectionImage" Relationship="Self.FK_InspectionImages_Inspection" FromRole="Inspection" ToRole="InspectionImage" />
-          <NavigationProperty Name="Questionnaire" Relationship="Self.FK_Questionnaire_Inspection" FromRole="Inspection" ToRole="Questionnaire" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Assignment" Relationship="ParkInspectModel.FK_Inspection_Assignment" FromRole="Inspection" ToRole="Assignment" />
+          <NavigationProperty Name="Employee" Relationship="ParkInspectModel.FK_Inspection_Employee" FromRole="Inspection" ToRole="Employee" />
+          <NavigationProperty Name="InspectionStatus" Relationship="ParkInspectModel.FK_Inspection_InspectionStatus" FromRole="Inspection" ToRole="InspectionStatus" />
+          <NavigationProperty Name="Region" Relationship="ParkInspectModel.FK_Inspection_Region" FromRole="Inspection" ToRole="Region" />
+          <NavigationProperty Name="InspectionImage" Relationship="ParkInspectModel.FK_InspectionImages_Inspection" FromRole="Inspection" ToRole="InspectionImage" />
+          <NavigationProperty Name="Questionnaire" Relationship="ParkInspectModel.FK_Questionnaire_Inspection" FromRole="Inspection" ToRole="Questionnaire" />
         </EntityType>
         <EntityType Name="InspectionImage">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="File" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="File" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="InspectionId" Type="Int32" />
-          <NavigationProperty Name="Inspection" Relationship="Self.FK_InspectionImages_Inspection" FromRole="InspectionImage" ToRole="Inspection" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Inspection" Relationship="ParkInspectModel.FK_InspectionImages_Inspection" FromRole="InspectionImage" ToRole="Inspection" />
         </EntityType>
         <EntityType Name="InspectionStatus">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Inspection" Relationship="Self.FK_Inspection_InspectionStatus" FromRole="InspectionStatus" ToRole="Inspection" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Inspection" Relationship="ParkInspectModel.FK_Inspection_InspectionStatus" FromRole="InspectionStatus" ToRole="Inspection" />
         </EntityType>
         <EntityType Name="Keyword">
           <Key>
@@ -768,11 +871,11 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CategoryId" Type="Int32" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="KeywordCategory" Relationship="Self.FK_Keyword_KeywordCategory" FromRole="Keyword" ToRole="KeywordCategory" />
-          <NavigationProperty Name="Question" Relationship="Self.QuestionKeyword" FromRole="Keyword" ToRole="Question" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="KeywordCategory" Relationship="ParkInspectModel.FK_Keyword_KeywordCategory" FromRole="Keyword" ToRole="KeywordCategory" />
+          <NavigationProperty Name="QuestionKeyword" Relationship="ParkInspectModel.FK_QuestionKeyword_Keyword" FromRole="Keyword" ToRole="QuestionKeyword" />
         </EntityType>
         <EntityType Name="KeywordCategory">
           <Key>
@@ -780,22 +883,22 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Keyword" Relationship="Self.FK_Keyword_KeywordCategory" FromRole="KeywordCategory" ToRole="Keyword" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Keyword" Relationship="ParkInspectModel.FK_Keyword_KeywordCategory" FromRole="KeywordCategory" ToRole="Keyword" />
         </EntityType>
         <EntityType Name="Module">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Question" Relationship="Self.FK_Question_Module" FromRole="Module" ToRole="Question" />
-          <NavigationProperty Name="Questionnaire" Relationship="Self.QuestionnaireModule" FromRole="Module" ToRole="Questionnaire" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Question" Relationship="ParkInspectModel.FK_Question_Module" FromRole="Module" ToRole="Question" />
+          <NavigationProperty Name="QuestionnaireModule" Relationship="ParkInspectModel.FK_QuestionnaireModule_Module" FromRole="Module" ToRole="QuestionnaireModule" />
         </EntityType>
         <EntityType Name="Question">
           <Key>
@@ -803,14 +906,14 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="SortId" Type="Int32" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="ModuleId" Type="Int32" />
-          <NavigationProperty Name="Module" Relationship="Self.FK_Question_Module" FromRole="Question" ToRole="Module" />
-          <NavigationProperty Name="QuestionSort" Relationship="Self.FK_Question_QuestionSort" FromRole="Question" ToRole="QuestionSort" />
-          <NavigationProperty Name="QuestionAnswer" Relationship="Self.FK_QuestionAnswer_Question" FromRole="Question" ToRole="QuestionAnswer" />
-          <NavigationProperty Name="Keyword" Relationship="Self.QuestionKeyword" FromRole="Question" ToRole="Keyword" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Module" Relationship="ParkInspectModel.FK_Question_Module" FromRole="Question" ToRole="Module" />
+          <NavigationProperty Name="QuestionSort" Relationship="ParkInspectModel.FK_Question_QuestionSort" FromRole="Question" ToRole="QuestionSort" />
+          <NavigationProperty Name="QuestionAnswer" Relationship="ParkInspectModel.FK_QuestionAnswer_Question" FromRole="Question" ToRole="QuestionAnswer" />
+          <NavigationProperty Name="QuestionKeyword" Relationship="ParkInspectModel.FK_QuestionKeyword_Question" FromRole="Question" ToRole="QuestionKeyword" />
         </EntityType>
         <EntityType Name="QuestionAnswer">
           <Key>
@@ -820,10 +923,22 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <Property Name="QuestionnaireId" Type="Int32" Nullable="false" />
           <Property Name="QuestionId" Type="Int32" Nullable="false" />
           <Property Name="Result" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Question" Relationship="Self.FK_QuestionAnswer_Question" FromRole="QuestionAnswer" ToRole="Question" />
-          <NavigationProperty Name="Questionnaire" Relationship="Self.FK_QuestionAnswer_Questionnaire" FromRole="QuestionAnswer" ToRole="Questionnaire" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Question" Relationship="ParkInspectModel.FK_QuestionAnswer_Question" FromRole="QuestionAnswer" ToRole="Question" />
+          <NavigationProperty Name="Questionnaire" Relationship="ParkInspectModel.FK_QuestionAnswer_Questionnaire" FromRole="QuestionAnswer" ToRole="Questionnaire" />
+        </EntityType>
+        <EntityType Name="QuestionKeyword">
+          <Key>
+            <PropertyRef Name="QuestionId" />
+            <PropertyRef Name="KeywordId" />
+          </Key>
+          <Property Name="QuestionId" Type="Int32" Nullable="false" />
+          <Property Name="KeywordId" Type="Int32" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Keyword" Relationship="ParkInspectModel.FK_QuestionKeyword_Keyword" FromRole="QuestionKeyword" ToRole="Keyword" />
+          <NavigationProperty Name="Question" Relationship="ParkInspectModel.FK_QuestionKeyword_Question" FromRole="QuestionKeyword" ToRole="Question" />
         </EntityType>
         <EntityType Name="Questionnaire">
           <Key>
@@ -831,42 +946,44 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="InspectionId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Inspection" Relationship="Self.FK_Questionnaire_Inspection" FromRole="Questionnaire" ToRole="Inspection" />
-          <NavigationProperty Name="QuestionAnswer" Relationship="Self.FK_QuestionAnswer_Questionnaire" FromRole="Questionnaire" ToRole="QuestionAnswer" />
-          <NavigationProperty Name="Module" Relationship="Self.QuestionnaireModule" FromRole="Questionnaire" ToRole="Module" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Inspection" Relationship="ParkInspectModel.FK_Questionnaire_Inspection" FromRole="Questionnaire" ToRole="Inspection" />
+          <NavigationProperty Name="QuestionAnswer" Relationship="ParkInspectModel.FK_QuestionAnswer_Questionnaire" FromRole="Questionnaire" ToRole="QuestionAnswer" />
+          <NavigationProperty Name="QuestionnaireModule" Relationship="ParkInspectModel.FK_QuestionnaireModule_Questionnaire" FromRole="Questionnaire" ToRole="QuestionnaireModule" />
+        </EntityType>
+        <EntityType Name="QuestionnaireModule">
+          <Key>
+            <PropertyRef Name="ModuleId" />
+            <PropertyRef Name="QuestionnaireId" />
+          </Key>
+          <Property Name="ModuleId" Type="Int32" Nullable="false" />
+          <Property Name="QuestionnaireId" Type="Int32" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Module" Relationship="ParkInspectModel.FK_QuestionnaireModule_Module" FromRole="QuestionnaireModule" ToRole="Module" />
+          <NavigationProperty Name="Questionnaire" Relationship="ParkInspectModel.FK_QuestionnaireModule_Questionnaire" FromRole="QuestionnaireModule" ToRole="Questionnaire" />
         </EntityType>
         <EntityType Name="QuestionSort">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Discription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Question" Relationship="Self.FK_Question_QuestionSort" FromRole="QuestionSort" ToRole="Question" />
+          <Property Name="Discription" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Question" Relationship="ParkInspectModel.FK_Question_QuestionSort" FromRole="QuestionSort" ToRole="Question" />
         </EntityType>
         <EntityType Name="Region">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Region1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Employee" Relationship="Self.FK_Employee_Region" FromRole="Region" ToRole="Employee" />
-          <NavigationProperty Name="Inspection" Relationship="Self.FK_Inspection_Region" FromRole="Region" ToRole="Inspection" />
+          <Property Name="Region1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Employee" Relationship="ParkInspectModel.FK_Employee_Region" FromRole="Region" ToRole="Employee" />
+          <NavigationProperty Name="Inspection" Relationship="ParkInspectModel.FK_Inspection_Region" FromRole="Region" ToRole="Inspection" />
         </EntityType>
         <EntityType Name="Availability">
           <Key>
@@ -878,9 +995,9 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <Property Name="Date" Type="DateTime" Precision="0" />
           <Property Name="StartTime" Type="Time" Precision="0" />
           <Property Name="EndTime" Type="Time" Precision="0" />
-          <NavigationProperty Name="Employee" Relationship="Self.FK_Availability_Employee" FromRole="Availability" ToRole="Employee" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Employee" Relationship="ParkInspectModel.FK_Availability_Employee" FromRole="Availability" ToRole="Employee" />
         </EntityType>
         <EntityType Name="WorkingHours">
           <Key>
@@ -892,13 +1009,13 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <Property Name="Date" Type="DateTime" Precision="0" />
           <Property Name="StartTime" Type="Time" Precision="0" />
           <Property Name="EndTime" Type="Time" Precision="0" />
-          <NavigationProperty Name="Employee" Relationship="Self.FK_WorkingHours_Employee" FromRole="WorkingHours" ToRole="Employee" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Employee" Relationship="ParkInspectModel.FK_WorkingHours_Employee" FromRole="WorkingHours" ToRole="Employee" />
         </EntityType>
         <Association Name="FK_Account_Employee">
-          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <End Type="ParkInspectModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="ParkInspectModel.Account" Role="Account" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employee">
               <PropertyRef Name="Id" />
@@ -909,8 +1026,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Assignment_Customer">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
-          <End Role="Assignment" Type="Self.Assignment" Multiplicity="*" />
+          <End Type="ParkInspectModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="ParkInspectModel.Assignment" Role="Assignment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Customer">
               <PropertyRef Name="Id" />
@@ -921,8 +1038,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Assignment_Manager">
-          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-          <End Role="Assignment" Type="Self.Assignment" Multiplicity="*" />
+          <End Type="ParkInspectModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="ParkInspectModel.Assignment" Role="Assignment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employee">
               <PropertyRef Name="Id" />
@@ -933,8 +1050,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Inspection_Assignment">
-          <End Role="Assignment" Type="Self.Assignment" Multiplicity="1" />
-          <End Role="Inspection" Type="Self.Inspection" Multiplicity="*" />
+          <End Type="ParkInspectModel.Assignment" Role="Assignment" Multiplicity="1" />
+          <End Type="ParkInspectModel.Inspection" Role="Inspection" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Assignment">
               <PropertyRef Name="Id" />
@@ -945,8 +1062,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Availability_Employee">
-          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-          <End Role="Availability" Type="Self.Availability" Multiplicity="0..1" />
+          <End Type="ParkInspectModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="ParkInspectModel.Availability" Role="Availability" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employee">
               <PropertyRef Name="Id" />
@@ -957,8 +1074,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Employee_EmployeeStatus">
-          <End Role="EmployeeStatus" Type="Self.EmployeeStatus" Multiplicity="0..1" />
-          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <End Type="ParkInspectModel.EmployeeStatus" Role="EmployeeStatus" Multiplicity="0..1" />
+          <End Type="ParkInspectModel.Employee" Role="Employee" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="EmployeeStatus">
               <PropertyRef Name="Id" />
@@ -969,8 +1086,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Employee_Region">
-          <End Role="Region" Type="Self.Region" Multiplicity="0..1" />
-          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <End Type="ParkInspectModel.Region" Role="Region" Multiplicity="0..1" />
+          <End Type="ParkInspectModel.Employee" Role="Employee" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Region">
               <PropertyRef Name="Id" />
@@ -981,8 +1098,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Inspection_Employee">
-          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
-          <End Role="Inspection" Type="Self.Inspection" Multiplicity="*" />
+          <End Type="ParkInspectModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="ParkInspectModel.Inspection" Role="Inspection" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employee">
               <PropertyRef Name="Id" />
@@ -993,8 +1110,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_WorkingHours_Employee">
-          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-          <End Role="WorkingHours" Type="Self.WorkingHours" Multiplicity="0..1" />
+          <End Type="ParkInspectModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="ParkInspectModel.WorkingHours" Role="WorkingHours" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employee">
               <PropertyRef Name="Id" />
@@ -1005,8 +1122,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Inspection_InspectionStatus">
-          <End Role="InspectionStatus" Type="Self.InspectionStatus" Multiplicity="1" />
-          <End Role="Inspection" Type="Self.Inspection" Multiplicity="*" />
+          <End Type="ParkInspectModel.InspectionStatus" Role="InspectionStatus" Multiplicity="1" />
+          <End Type="ParkInspectModel.Inspection" Role="Inspection" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="InspectionStatus">
               <PropertyRef Name="Id" />
@@ -1017,8 +1134,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Inspection_Region">
-          <End Role="Region" Type="Self.Region" Multiplicity="1" />
-          <End Role="Inspection" Type="Self.Inspection" Multiplicity="*" />
+          <End Type="ParkInspectModel.Region" Role="Region" Multiplicity="1" />
+          <End Type="ParkInspectModel.Inspection" Role="Inspection" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Region">
               <PropertyRef Name="Id" />
@@ -1029,8 +1146,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_InspectionImages_Inspection">
-          <End Role="Inspection" Type="Self.Inspection" Multiplicity="0..1" />
-          <End Role="InspectionImage" Type="Self.InspectionImage" Multiplicity="*" />
+          <End Type="ParkInspectModel.Inspection" Role="Inspection" Multiplicity="0..1" />
+          <End Type="ParkInspectModel.InspectionImage" Role="InspectionImage" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Inspection">
               <PropertyRef Name="Id" />
@@ -1041,8 +1158,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Questionnaire_Inspection">
-          <End Role="Inspection" Type="Self.Inspection" Multiplicity="1" />
-          <End Role="Questionnaire" Type="Self.Questionnaire" Multiplicity="*" />
+          <End Type="ParkInspectModel.Inspection" Role="Inspection" Multiplicity="1" />
+          <End Type="ParkInspectModel.Questionnaire" Role="Questionnaire" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Inspection">
               <PropertyRef Name="Id" />
@@ -1053,8 +1170,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Keyword_KeywordCategory">
-          <End Role="KeywordCategory" Type="Self.KeywordCategory" Multiplicity="1" />
-          <End Role="Keyword" Type="Self.Keyword" Multiplicity="*" />
+          <End Type="ParkInspectModel.KeywordCategory" Role="KeywordCategory" Multiplicity="1" />
+          <End Type="ParkInspectModel.Keyword" Role="Keyword" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="KeywordCategory">
               <PropertyRef Name="Id" />
@@ -1064,9 +1181,21 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_QuestionKeyword_Keyword">
+          <End Type="ParkInspectModel.Keyword" Role="Keyword" Multiplicity="1" />
+          <End Type="ParkInspectModel.QuestionKeyword" Role="QuestionKeyword" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Keyword">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QuestionKeyword">
+              <PropertyRef Name="KeywordId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Question_Module">
-          <End Role="Module" Type="Self.Module" Multiplicity="0..1" />
-          <End Role="Question" Type="Self.Question" Multiplicity="*" />
+          <End Type="ParkInspectModel.Module" Role="Module" Multiplicity="0..1" />
+          <End Type="ParkInspectModel.Question" Role="Question" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Module">
               <PropertyRef Name="Id" />
@@ -1076,9 +1205,21 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_QuestionnaireModule_Module">
+          <End Type="ParkInspectModel.Module" Role="Module" Multiplicity="1" />
+          <End Type="ParkInspectModel.QuestionnaireModule" Role="QuestionnaireModule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Module">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QuestionnaireModule">
+              <PropertyRef Name="ModuleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Question_QuestionSort">
-          <End Role="QuestionSort" Type="Self.QuestionSort" Multiplicity="1" />
-          <End Role="Question" Type="Self.Question" Multiplicity="*" />
+          <End Type="ParkInspectModel.QuestionSort" Role="QuestionSort" Multiplicity="1" />
+          <End Type="ParkInspectModel.Question" Role="Question" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="QuestionSort">
               <PropertyRef Name="Id" />
@@ -1089,8 +1230,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_QuestionAnswer_Question">
-          <End Role="Question" Type="Self.Question" Multiplicity="1" />
-          <End Role="QuestionAnswer" Type="Self.QuestionAnswer" Multiplicity="*" />
+          <End Type="ParkInspectModel.Question" Role="Question" Multiplicity="1" />
+          <End Type="ParkInspectModel.QuestionAnswer" Role="QuestionAnswer" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Question">
               <PropertyRef Name="Id" />
@@ -1100,9 +1241,21 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_QuestionKeyword_Question">
+          <End Type="ParkInspectModel.Question" Role="Question" Multiplicity="1" />
+          <End Type="ParkInspectModel.QuestionKeyword" Role="QuestionKeyword" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QuestionKeyword">
+              <PropertyRef Name="QuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_QuestionAnswer_Questionnaire">
-          <End Role="Questionnaire" Type="Self.Questionnaire" Multiplicity="1" />
-          <End Role="QuestionAnswer" Type="Self.QuestionAnswer" Multiplicity="*" />
+          <End Type="ParkInspectModel.Questionnaire" Role="Questionnaire" Multiplicity="1" />
+          <End Type="ParkInspectModel.QuestionAnswer" Role="QuestionAnswer" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Questionnaire">
               <PropertyRef Name="Id" />
@@ -1112,122 +1265,18 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="QuestionKeyword">
-          <End Role="Keyword" Type="Self.Keyword" Multiplicity="*" />
-          <End Role="Question" Type="Self.Question" Multiplicity="*" />
+        <Association Name="FK_QuestionnaireModule_Questionnaire">
+          <End Type="ParkInspectModel.Questionnaire" Role="Questionnaire" Multiplicity="1" />
+          <End Type="ParkInspectModel.QuestionnaireModule" Role="QuestionnaireModule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Questionnaire">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QuestionnaireModule">
+              <PropertyRef Name="QuestionnaireId" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
-        <Association Name="QuestionnaireModule">
-          <End Role="Module" Type="Self.Module" Multiplicity="*" />
-          <End Role="Questionnaire" Type="Self.Questionnaire" Multiplicity="*" />
-        </Association>
-        <EntityContainer Name="ParkInspectEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Account" EntityType="Self.Account" />
-          <EntitySet Name="Assignment" EntityType="Self.Assignment" />
-          <EntitySet Name="Customer" EntityType="Self.Customer" />
-          <EntitySet Name="Employee" EntityType="Self.Employee" />
-          <EntitySet Name="EmployeeStatus" EntityType="Self.EmployeeStatus" />
-          <EntitySet Name="Inspection" EntityType="Self.Inspection" />
-          <EntitySet Name="InspectionImage" EntityType="Self.InspectionImage" />
-          <EntitySet Name="InspectionStatus" EntityType="Self.InspectionStatus" />
-          <EntitySet Name="Keyword" EntityType="Self.Keyword" />
-          <EntitySet Name="KeywordCategory" EntityType="Self.KeywordCategory" />
-          <EntitySet Name="Module" EntityType="Self.Module" />
-          <EntitySet Name="Question" EntityType="Self.Question" />
-          <EntitySet Name="QuestionAnswer" EntityType="Self.QuestionAnswer" />
-          <EntitySet Name="Questionnaire" EntityType="Self.Questionnaire" />
-          <EntitySet Name="QuestionSort" EntityType="Self.QuestionSort" />
-          <EntitySet Name="Region" EntityType="Self.Region" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <EntitySet Name="Availability" EntityType="Self.Availability" />
-          <EntitySet Name="WorkingHours" EntityType="Self.WorkingHours" />
-          <AssociationSet Name="FK_Account_Employee" Association="Self.FK_Account_Employee">
-            <End Role="Employee" EntitySet="Employee" />
-            <End Role="Account" EntitySet="Account" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Assignment_Customer" Association="Self.FK_Assignment_Customer">
-            <End Role="Customer" EntitySet="Customer" />
-            <End Role="Assignment" EntitySet="Assignment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Assignment_Manager" Association="Self.FK_Assignment_Manager">
-            <End Role="Employee" EntitySet="Employee" />
-            <End Role="Assignment" EntitySet="Assignment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Inspection_Assignment" Association="Self.FK_Inspection_Assignment">
-            <End Role="Assignment" EntitySet="Assignment" />
-            <End Role="Inspection" EntitySet="Inspection" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Availability_Employee" Association="Self.FK_Availability_Employee">
-            <End Role="Employee" EntitySet="Employee" />
-            <End Role="Availability" EntitySet="Availability" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Employee_EmployeeStatus" Association="Self.FK_Employee_EmployeeStatus">
-            <End Role="EmployeeStatus" EntitySet="EmployeeStatus" />
-            <End Role="Employee" EntitySet="Employee" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Employee_Region" Association="Self.FK_Employee_Region">
-            <End Role="Region" EntitySet="Region" />
-            <End Role="Employee" EntitySet="Employee" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Inspection_Employee" Association="Self.FK_Inspection_Employee">
-            <End Role="Employee" EntitySet="Employee" />
-            <End Role="Inspection" EntitySet="Inspection" />
-          </AssociationSet>
-          <AssociationSet Name="FK_WorkingHours_Employee" Association="Self.FK_WorkingHours_Employee">
-            <End Role="Employee" EntitySet="Employee" />
-            <End Role="WorkingHours" EntitySet="WorkingHours" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Inspection_InspectionStatus" Association="Self.FK_Inspection_InspectionStatus">
-            <End Role="InspectionStatus" EntitySet="InspectionStatus" />
-            <End Role="Inspection" EntitySet="Inspection" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Inspection_Region" Association="Self.FK_Inspection_Region">
-            <End Role="Region" EntitySet="Region" />
-            <End Role="Inspection" EntitySet="Inspection" />
-          </AssociationSet>
-          <AssociationSet Name="FK_InspectionImages_Inspection" Association="Self.FK_InspectionImages_Inspection">
-            <End Role="Inspection" EntitySet="Inspection" />
-            <End Role="InspectionImage" EntitySet="InspectionImage" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Questionnaire_Inspection" Association="Self.FK_Questionnaire_Inspection">
-            <End Role="Inspection" EntitySet="Inspection" />
-            <End Role="Questionnaire" EntitySet="Questionnaire" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Keyword_KeywordCategory" Association="Self.FK_Keyword_KeywordCategory">
-            <End Role="KeywordCategory" EntitySet="KeywordCategory" />
-            <End Role="Keyword" EntitySet="Keyword" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Question_Module" Association="Self.FK_Question_Module">
-            <End Role="Module" EntitySet="Module" />
-            <End Role="Question" EntitySet="Question" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Question_QuestionSort" Association="Self.FK_Question_QuestionSort">
-            <End Role="QuestionSort" EntitySet="QuestionSort" />
-            <End Role="Question" EntitySet="Question" />
-          </AssociationSet>
-          <AssociationSet Name="FK_QuestionAnswer_Question" Association="Self.FK_QuestionAnswer_Question">
-            <End Role="Question" EntitySet="Question" />
-            <End Role="QuestionAnswer" EntitySet="QuestionAnswer" />
-          </AssociationSet>
-          <AssociationSet Name="FK_QuestionAnswer_Questionnaire" Association="Self.FK_QuestionAnswer_Questionnaire">
-            <End Role="Questionnaire" EntitySet="Questionnaire" />
-            <End Role="QuestionAnswer" EntitySet="QuestionAnswer" />
-          </AssociationSet>
-          <AssociationSet Name="QuestionKeyword" Association="Self.QuestionKeyword">
-            <End Role="Keyword" EntitySet="Keyword" />
-            <End Role="Question" EntitySet="Question" />
-          </AssociationSet>
-          <AssociationSet Name="QuestionnaireModule" Association="Self.QuestionnaireModule">
-            <End Role="Module" EntitySet="Module" />
-            <End Role="Questionnaire" EntitySet="Questionnaire" />
-          </AssociationSet>
-          <EntitySet Name="C__RefactorLog" EntityType="ParkInspectModel.C__RefactorLog" />
-        </EntityContainer>
-        <EntityType Name="C__RefactorLog">
-          <Key>
-            <PropertyRef Name="OperationKey" />
-          </Key>
-          <Property Name="OperationKey" Type="Guid" Nullable="false" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1239,11 +1288,11 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
               <MappingFragment StoreEntitySet="Account">
                 <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="UserGuid" ColumnName="UserGuid" />
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="UserGuid" ColumnName="UserGuid" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1252,12 +1301,12 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
               <MappingFragment StoreEntitySet="Assignment">
                 <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-                <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
                 <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1266,12 +1315,12 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
               <MappingFragment StoreEntitySet="Customer">
                 <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Location" ColumnName="Location" />
-                <ScalarProperty Name="Phonenumber" ColumnName="Phonenumber" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phonenumber" ColumnName="Phonenumber" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1280,20 +1329,20 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
               <MappingFragment StoreEntitySet="Employee">
                 <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="Prefix" ColumnName="Prefix" />
-                <ScalarProperty Name="SurName" ColumnName="SurName" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
-                <ScalarProperty Name="Phonenumber" ColumnName="Phonenumber" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
-                <ScalarProperty Name="EmployeeStatusId" ColumnName="EmployeeStatusId" />
-                <ScalarProperty Name="Inspecter" ColumnName="Inspecter" />
                 <ScalarProperty Name="Manager" ColumnName="Manager" />
+                <ScalarProperty Name="Inspecter" ColumnName="Inspecter" />
+                <ScalarProperty Name="EmployeeStatusId" ColumnName="EmployeeStatusId" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phonenumber" ColumnName="Phonenumber" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="SurName" ColumnName="SurName" />
+                <ScalarProperty Name="Prefix" ColumnName="Prefix" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1302,8 +1351,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
               <MappingFragment StoreEntitySet="EmployeeStatus">
                 <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1312,14 +1361,14 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
               <MappingFragment StoreEntitySet="Inspection">
                 <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="AssignmentId" ColumnName="AssignmentId" />
-                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
-                <ScalarProperty Name="Location" ColumnName="Location" />
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
                 <ScalarProperty Name="InspectorId" ColumnName="InspectorId" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+                <ScalarProperty Name="AssignmentId" ColumnName="AssignmentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1328,9 +1377,9 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
               <MappingFragment StoreEntitySet="InspectionImage">
                 <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="File" ColumnName="File" />
                 <ScalarProperty Name="InspectionId" ColumnName="InspectionId" />
+                <ScalarProperty Name="File" ColumnName="File" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1339,8 +1388,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
               <MappingFragment StoreEntitySet="InspectionStatus">
                 <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1349,9 +1398,9 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
               <MappingFragment StoreEntitySet="Keyword">
                 <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1360,8 +1409,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
               <MappingFragment StoreEntitySet="KeywordCategory">
                 <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1370,10 +1419,10 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
               <MappingFragment StoreEntitySet="Module">
                 <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1382,10 +1431,10 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
               <MappingFragment StoreEntitySet="Question">
                 <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="SortId" ColumnName="SortId" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="SortId" ColumnName="SortId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1394,9 +1443,19 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
               <MappingFragment StoreEntitySet="QuestionAnswer">
                 <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-                <ScalarProperty Name="QuestionnaireId" ColumnName="QuestionnaireId" />
-                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
                 <ScalarProperty Name="Result" ColumnName="Result" />
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+                <ScalarProperty Name="QuestionnaireId" ColumnName="QuestionnaireId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuestionKeyword">
+            <EntityTypeMapping TypeName="ParkInspectModel.QuestionKeyword">
+              <MappingFragment StoreEntitySet="QuestionKeyword">
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="KeywordId" ColumnName="KeywordId" />
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1405,8 +1464,18 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
               <MappingFragment StoreEntitySet="Questionnaire">
                 <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="InspectionId" ColumnName="InspectionId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuestionnaireModule">
+            <EntityTypeMapping TypeName="ParkInspectModel.QuestionnaireModule">
+              <MappingFragment StoreEntitySet="QuestionnaireModule">
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="QuestionnaireId" ColumnName="QuestionnaireId" />
+                <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1415,8 +1484,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
               <MappingFragment StoreEntitySet="QuestionSort">
                 <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Discription" ColumnName="Discription" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1425,8 +1494,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
               <MappingFragment StoreEntitySet="Region">
                 <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Region1" ColumnName="Region" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1435,10 +1504,10 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
               <MappingFragment StoreEntitySet="Availability">
                 <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
                 <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1447,33 +1516,10 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
               <MappingFragment StoreEntitySet="WorkingHours">
                 <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
                 <ScalarProperty Name="EndTime" ColumnName="EndTime" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <AssociationSetMapping Name="QuestionKeyword" TypeName="ParkInspectModel.QuestionKeyword" StoreEntitySet="QuestionKeyword">
-            <EndProperty Name="Keyword">
-              <ScalarProperty Name="Id" ColumnName="KeywordId" />
-            </EndProperty>
-            <EndProperty Name="Question">
-              <ScalarProperty Name="Id" ColumnName="QuestionId" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="QuestionnaireModule" TypeName="ParkInspectModel.QuestionnaireModule" StoreEntitySet="QuestionnaireModule">
-            <EndProperty Name="Module">
-              <ScalarProperty Name="Id" ColumnName="ModuleId" />
-            </EndProperty>
-            <EndProperty Name="Questionnaire">
-              <ScalarProperty Name="Id" ColumnName="QuestionnaireId" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <EntitySetMapping Name="C__RefactorLog">
-            <EntityTypeMapping TypeName="ParkInspectModel.C__RefactorLog">
-              <MappingFragment StoreEntitySet="__RefactorLog">
-                <ScalarProperty Name="OperationKey" ColumnName="OperationKey" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
