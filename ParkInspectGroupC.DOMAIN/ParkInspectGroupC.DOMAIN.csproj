@@ -104,16 +104,19 @@
     <Compile Include="QuestionAnswer.cs">
       <DependentUpon>ParkInspectDomain.tt</DependentUpon>
     </Compile>
+    <Compile Include="QuestionKeyword.cs">
+      <DependentUpon>ParkInspectDomain.tt</DependentUpon>
+    </Compile>
     <Compile Include="Questionnaire.cs">
+      <DependentUpon>ParkInspectDomain.tt</DependentUpon>
+    </Compile>
+    <Compile Include="QuestionnaireModule.cs">
       <DependentUpon>ParkInspectDomain.tt</DependentUpon>
     </Compile>
     <Compile Include="QuestionSort.cs">
       <DependentUpon>ParkInspectDomain.tt</DependentUpon>
     </Compile>
     <Compile Include="Region.cs">
-      <DependentUpon>ParkInspectDomain.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sysdiagrams.cs">
       <DependentUpon>ParkInspectDomain.tt</DependentUpon>
     </Compile>
     <Compile Include="WorkingHours.cs">
