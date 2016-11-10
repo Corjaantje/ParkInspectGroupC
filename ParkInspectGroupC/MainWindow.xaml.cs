@@ -24,7 +24,6 @@ namespace ParkInspectGroupC
         public MainWindow()
         {
             InitializeComponent();
-            LocalDatabaseMain ldb = new LocalDatabaseMain("ParkInspectLDB");//For testing purposes
         }
     }
 }
