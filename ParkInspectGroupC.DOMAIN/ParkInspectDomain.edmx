@@ -4,7 +4,13 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ParkInspectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ParkInspectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__RefactorLog">
+          <Key>
+            <PropertyRef Name="OperationKey" />
+          </Key>
+          <Property Name="OperationKey" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="Id" />
@@ -14,6 +20,8 @@
           <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="UserGuid" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Assignment">
           <Key>
@@ -25,17 +33,23 @@
           <Property Name="Description" Type="varchar(max)" />
           <Property Name="StartDate" Type="date" />
           <Property Name="EndDate" Type="date" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ParkInspect.dbo.Availability' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Availability">
           <Key>
             <PropertyRef Name="EmployeeId" />
+            <PropertyRef Name="DateCreated" />
+            <PropertyRef Name="DateUpdated" />
           </Key>
           <Property Name="EmployeeId" Type="int" Nullable="false" />
           <Property Name="Date" Type="date" />
           <Property Name="StartTime" Type="time" Precision="0" />
           <Property Name="EndTime" Type="time" Precision="0" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -47,6 +61,8 @@ warning 6002: The table/view 'ParkInspect.dbo.Availability' does not have a prim
           <Property Name="Location" Type="varchar" MaxLength="50" />
           <Property Name="Phonenumber" Type="varchar" MaxLength="15" />
           <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -66,6 +82,8 @@ warning 6002: The table/view 'ParkInspect.dbo.Availability' does not have a prim
           <Property Name="EmployeeStatusId" Type="int" />
           <Property Name="Inspecter" Type="bit" Nullable="false" />
           <Property Name="Manager" Type="bit" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="EmployeeStatus">
           <Key>
@@ -73,6 +91,8 @@ warning 6002: The table/view 'ParkInspect.dbo.Availability' does not have a prim
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Description" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Inspection">
           <Key>
@@ -86,6 +106,8 @@ warning 6002: The table/view 'ParkInspect.dbo.Availability' does not have a prim
           <Property Name="EndDate" Type="datetime" Nullable="false" />
           <Property Name="StatusId" Type="int" Nullable="false" />
           <Property Name="InspectorId" Type="int" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="InspectionImage">
           <Key>
@@ -94,6 +116,8 @@ warning 6002: The table/view 'ParkInspect.dbo.Availability' does not have a prim
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="File" Type="varchar(max)" Nullable="false" />
           <Property Name="InspectionId" Type="int" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="InspectionStatus">
           <Key>
@@ -101,6 +125,8 @@ warning 6002: The table/view 'ParkInspect.dbo.Availability' does not have a prim
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Keyword">
           <Key>
@@ -109,6 +135,8 @@ warning 6002: The table/view 'ParkInspect.dbo.Availability' does not have a prim
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CategoryId" Type="int" Nullable="false" />
           <Property Name="Description" Type="varchar(max)" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="KeywordCategory">
           <Key>
@@ -116,6 +144,8 @@ warning 6002: The table/view 'ParkInspect.dbo.Availability' does not have a prim
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Description" Type="varchar(max)" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Module">
           <Key>
@@ -125,6 +155,8 @@ warning 6002: The table/view 'ParkInspect.dbo.Availability' does not have a prim
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="varchar(max)" />
           <Property Name="Note" Type="varchar(max)" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Question">
           <Key>
@@ -134,6 +166,8 @@ warning 6002: The table/view 'ParkInspect.dbo.Availability' does not have a prim
           <Property Name="SortId" Type="int" Nullable="false" />
           <Property Name="Description" Type="varchar(max)" Nullable="false" />
           <Property Name="ModuleId" Type="int" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="QuestionAnswer">
           <Key>
@@ -143,6 +177,8 @@ warning 6002: The table/view 'ParkInspect.dbo.Availability' does not have a prim
           <Property Name="QuestionnaireId" Type="int" Nullable="false" />
           <Property Name="QuestionId" Type="int" Nullable="false" />
           <Property Name="Result" Type="nvarchar(max)" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="QuestionKeyword">
           <Key>
@@ -151,6 +187,8 @@ warning 6002: The table/view 'ParkInspect.dbo.Availability' does not have a prim
           </Key>
           <Property Name="QuestionId" Type="int" Nullable="false" />
           <Property Name="KeywordId" Type="int" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Questionnaire">
           <Key>
@@ -158,6 +196,8 @@ warning 6002: The table/view 'ParkInspect.dbo.Availability' does not have a prim
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="InspectionId" Type="int" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="QuestionnaireModule">
           <Key>
@@ -166,6 +206,8 @@ warning 6002: The table/view 'ParkInspect.dbo.Availability' does not have a prim
           </Key>
           <Property Name="ModuleId" Type="int" Nullable="false" />
           <Property Name="QuestionnaireId" Type="int" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="QuestionSort">
           <Key>
@@ -173,6 +215,8 @@ warning 6002: The table/view 'ParkInspect.dbo.Availability' does not have a prim
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Discription" Type="varchar(max)" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Region">
           <Key>
@@ -180,27 +224,23 @@ warning 6002: The table/view 'ParkInspect.dbo.Availability' does not have a prim
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Region" Type="varchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="WorkingHours">
           <Key>
             <PropertyRef Name="EmployeeId" />
+            <PropertyRef Name="DateCreated" />
+            <PropertyRef Name="DateUpdated" />
           </Key>
           <Property Name="EmployeeId" Type="int" Nullable="false" />
           <Property Name="Date" Type="date" />
-          <Property Name="StartTime" Type="time" Precision="7" />
-          <Property Name="EndTime" Type="time" Precision="7" />
+          <Property Name="StartTime" Type="time" Precision="0" />
+          <Property Name="EndTime" Type="time" Precision="0" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
         </EntityType>
         <Association Name="FK_Account_Employee">
           <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
@@ -240,7 +280,7 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
         </Association>
         <Association Name="FK_Availability_Employee">
           <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-          <End Role="Availability" Type="Self.Availability" Multiplicity="0..1" />
+          <End Role="Availability" Type="Self.Availability" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employee">
               <PropertyRef Name="Id" />
@@ -456,7 +496,7 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
         </Association>
         <Association Name="FK_WorkingHours_Employee">
           <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-          <End Role="WorkingHours" Type="Self.WorkingHours" Multiplicity="0..1" />
+          <End Role="WorkingHours" Type="Self.WorkingHours" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employee">
               <PropertyRef Name="Id" />
@@ -467,6 +507,7 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="ParkInspectModelStoreContainer">
+          <EntitySet Name="__RefactorLog" EntityType="Self.__RefactorLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Assignment" EntityType="Self.Assignment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
@@ -485,13 +526,14 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <EntitySet Name="QuestionnaireModule" EntityType="Self.QuestionnaireModule" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="QuestionSort" EntityType="Self.QuestionSort" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Region" EntityType="Self.Region" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Availability" EntityType="Self.Availability" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Availability].[EmployeeId] AS [EmployeeId], 
     [Availability].[Date] AS [Date], 
     [Availability].[StartTime] AS [StartTime], 
-    [Availability].[EndTime] AS [EndTime]
+    [Availability].[EndTime] AS [EndTime], 
+    [Availability].[DateCreated] AS [DateCreated], 
+    [Availability].[DateUpdated] AS [DateUpdated]
     FROM [dbo].[Availability] AS [Availability]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="WorkingHours" EntityType="Self.WorkingHours" store:Type="Tables" store:Schema="dbo">
@@ -499,7 +541,9 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
     [WorkingHours].[EmployeeId] AS [EmployeeId], 
     [WorkingHours].[Date] AS [Date], 
     [WorkingHours].[StartTime] AS [StartTime], 
-    [WorkingHours].[EndTime] AS [EndTime]
+    [WorkingHours].[EndTime] AS [EndTime], 
+    [WorkingHours].[DateCreated] AS [DateCreated], 
+    [WorkingHours].[DateUpdated] AS [DateUpdated]
     FROM [dbo].[WorkingHours] AS [WorkingHours]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_Account_Employee" Association="Self.FK_Account_Employee">
@@ -591,8 +635,7 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
             <End Role="WorkingHours" EntitySet="WorkingHours" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ParkInspectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -606,6 +649,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <Property Name="UserGuid" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="EmployeeId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Employee" Relationship="Self.FK_Account_Employee" FromRole="Account" ToRole="Employee" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="Assignment">
           <Key>
@@ -620,6 +665,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <NavigationProperty Name="Customer" Relationship="Self.FK_Assignment_Customer" FromRole="Assignment" ToRole="Customer" />
           <NavigationProperty Name="Employee" Relationship="Self.FK_Assignment_Manager" FromRole="Assignment" ToRole="Employee" />
           <NavigationProperty Name="Inspection" Relationship="Self.FK_Inspection_Assignment" FromRole="Assignment" ToRole="Inspection" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -632,6 +679,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <Property Name="Phonenumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Assignment" Relationship="Self.FK_Assignment_Customer" FromRole="Customer" ToRole="Assignment" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -658,6 +707,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <NavigationProperty Name="Region" Relationship="Self.FK_Employee_Region" FromRole="Employee" ToRole="Region" />
           <NavigationProperty Name="Inspection" Relationship="Self.FK_Inspection_Employee" FromRole="Employee" ToRole="Inspection" />
           <NavigationProperty Name="WorkingHours" Relationship="Self.FK_WorkingHours_Employee" FromRole="Employee" ToRole="WorkingHours" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="EmployeeStatus">
           <Key>
@@ -666,6 +717,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Description" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Employee" Relationship="Self.FK_Employee_EmployeeStatus" FromRole="EmployeeStatus" ToRole="Employee" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="Inspection">
           <Key>
@@ -685,6 +738,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <NavigationProperty Name="Region" Relationship="Self.FK_Inspection_Region" FromRole="Inspection" ToRole="Region" />
           <NavigationProperty Name="InspectionImage" Relationship="Self.FK_InspectionImages_Inspection" FromRole="Inspection" ToRole="InspectionImage" />
           <NavigationProperty Name="Questionnaire" Relationship="Self.FK_Questionnaire_Inspection" FromRole="Inspection" ToRole="Questionnaire" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="InspectionImage">
           <Key>
@@ -694,6 +749,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <Property Name="File" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="InspectionId" Type="Int32" />
           <NavigationProperty Name="Inspection" Relationship="Self.FK_InspectionImages_Inspection" FromRole="InspectionImage" ToRole="Inspection" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="InspectionStatus">
           <Key>
@@ -702,6 +759,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Inspection" Relationship="Self.FK_Inspection_InspectionStatus" FromRole="InspectionStatus" ToRole="Inspection" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="Keyword">
           <Key>
@@ -712,6 +771,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="KeywordCategory" Relationship="Self.FK_Keyword_KeywordCategory" FromRole="Keyword" ToRole="KeywordCategory" />
           <NavigationProperty Name="Question" Relationship="Self.QuestionKeyword" FromRole="Keyword" ToRole="Question" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="KeywordCategory">
           <Key>
@@ -720,6 +781,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Keyword" Relationship="Self.FK_Keyword_KeywordCategory" FromRole="KeywordCategory" ToRole="Keyword" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="Module">
           <Key>
@@ -731,6 +794,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Question" Relationship="Self.FK_Question_Module" FromRole="Module" ToRole="Question" />
           <NavigationProperty Name="Questionnaire" Relationship="Self.QuestionnaireModule" FromRole="Module" ToRole="Questionnaire" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="Question">
           <Key>
@@ -744,6 +809,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <NavigationProperty Name="QuestionSort" Relationship="Self.FK_Question_QuestionSort" FromRole="Question" ToRole="QuestionSort" />
           <NavigationProperty Name="QuestionAnswer" Relationship="Self.FK_QuestionAnswer_Question" FromRole="Question" ToRole="QuestionAnswer" />
           <NavigationProperty Name="Keyword" Relationship="Self.QuestionKeyword" FromRole="Question" ToRole="Keyword" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="QuestionAnswer">
           <Key>
@@ -755,6 +822,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <Property Name="Result" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Question" Relationship="Self.FK_QuestionAnswer_Question" FromRole="QuestionAnswer" ToRole="Question" />
           <NavigationProperty Name="Questionnaire" Relationship="Self.FK_QuestionAnswer_Questionnaire" FromRole="QuestionAnswer" ToRole="Questionnaire" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="Questionnaire">
           <Key>
@@ -765,6 +834,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <NavigationProperty Name="Inspection" Relationship="Self.FK_Questionnaire_Inspection" FromRole="Questionnaire" ToRole="Inspection" />
           <NavigationProperty Name="QuestionAnswer" Relationship="Self.FK_QuestionAnswer_Questionnaire" FromRole="Questionnaire" ToRole="QuestionAnswer" />
           <NavigationProperty Name="Module" Relationship="Self.QuestionnaireModule" FromRole="Questionnaire" ToRole="Module" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="QuestionSort">
           <Key>
@@ -773,6 +844,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Discription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Question" Relationship="Self.FK_Question_QuestionSort" FromRole="QuestionSort" ToRole="Question" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="Region">
           <Key>
@@ -782,6 +855,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <Property Name="Region1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Employee" Relationship="Self.FK_Employee_Region" FromRole="Region" ToRole="Employee" />
           <NavigationProperty Name="Inspection" Relationship="Self.FK_Inspection_Region" FromRole="Region" ToRole="Inspection" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -796,22 +871,30 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
         <EntityType Name="Availability">
           <Key>
             <PropertyRef Name="EmployeeId" />
+            <PropertyRef Name="DateCreated" />
+            <PropertyRef Name="DateUpdated" />
           </Key>
           <Property Name="EmployeeId" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Precision="0" />
           <Property Name="StartTime" Type="Time" Precision="0" />
           <Property Name="EndTime" Type="Time" Precision="0" />
           <NavigationProperty Name="Employee" Relationship="Self.FK_Availability_Employee" FromRole="Availability" ToRole="Employee" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="WorkingHours">
           <Key>
             <PropertyRef Name="EmployeeId" />
+            <PropertyRef Name="DateCreated" />
+            <PropertyRef Name="DateUpdated" />
           </Key>
           <Property Name="EmployeeId" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Precision="0" />
-          <Property Name="StartTime" Type="Time" Precision="7" />
-          <Property Name="EndTime" Type="Time" Precision="7" />
+          <Property Name="StartTime" Type="Time" Precision="0" />
+          <Property Name="EndTime" Type="Time" Precision="0" />
           <NavigationProperty Name="Employee" Relationship="Self.FK_WorkingHours_Employee" FromRole="WorkingHours" ToRole="Employee" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <Association Name="FK_Account_Employee">
           <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
@@ -1137,7 +1220,14 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
             <End Role="Module" EntitySet="Module" />
             <End Role="Questionnaire" EntitySet="Questionnaire" />
           </AssociationSet>
+          <EntitySet Name="C__RefactorLog" EntityType="ParkInspectModel.C__RefactorLog" />
         </EntityContainer>
+        <EntityType Name="C__RefactorLog">
+          <Key>
+            <PropertyRef Name="OperationKey" />
+          </Key>
+          <Property Name="OperationKey" Type="Guid" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1147,6 +1237,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <EntitySetMapping Name="Account">
             <EntityTypeMapping TypeName="ParkInspectModel.Account">
               <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
@@ -1158,6 +1250,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <EntitySetMapping Name="Assignment">
             <EntityTypeMapping TypeName="ParkInspectModel.Assignment">
               <MappingFragment StoreEntitySet="Assignment">
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
                 <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
@@ -1170,6 +1264,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <EntitySetMapping Name="Customer">
             <EntityTypeMapping TypeName="ParkInspectModel.Customer">
               <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
@@ -1182,6 +1278,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <EntitySetMapping Name="Employee">
             <EntityTypeMapping TypeName="ParkInspectModel.Employee">
               <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="Prefix" ColumnName="Prefix" />
@@ -1202,6 +1300,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <EntitySetMapping Name="EmployeeStatus">
             <EntityTypeMapping TypeName="ParkInspectModel.EmployeeStatus">
               <MappingFragment StoreEntitySet="EmployeeStatus">
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
               </MappingFragment>
@@ -1210,6 +1310,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <EntitySetMapping Name="Inspection">
             <EntityTypeMapping TypeName="ParkInspectModel.Inspection">
               <MappingFragment StoreEntitySet="Inspection">
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="AssignmentId" ColumnName="AssignmentId" />
                 <ScalarProperty Name="RegionId" ColumnName="RegionId" />
@@ -1224,6 +1326,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <EntitySetMapping Name="InspectionImage">
             <EntityTypeMapping TypeName="ParkInspectModel.InspectionImage">
               <MappingFragment StoreEntitySet="InspectionImage">
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="File" ColumnName="File" />
                 <ScalarProperty Name="InspectionId" ColumnName="InspectionId" />
@@ -1233,6 +1337,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <EntitySetMapping Name="InspectionStatus">
             <EntityTypeMapping TypeName="ParkInspectModel.InspectionStatus">
               <MappingFragment StoreEntitySet="InspectionStatus">
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
               </MappingFragment>
@@ -1241,6 +1347,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <EntitySetMapping Name="Keyword">
             <EntityTypeMapping TypeName="ParkInspectModel.Keyword">
               <MappingFragment StoreEntitySet="Keyword">
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -1250,6 +1358,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <EntitySetMapping Name="KeywordCategory">
             <EntityTypeMapping TypeName="ParkInspectModel.KeywordCategory">
               <MappingFragment StoreEntitySet="KeywordCategory">
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
               </MappingFragment>
@@ -1258,6 +1368,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <EntitySetMapping Name="Module">
             <EntityTypeMapping TypeName="ParkInspectModel.Module">
               <MappingFragment StoreEntitySet="Module">
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -1268,6 +1380,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <EntitySetMapping Name="Question">
             <EntityTypeMapping TypeName="ParkInspectModel.Question">
               <MappingFragment StoreEntitySet="Question">
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="SortId" ColumnName="SortId" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -1278,6 +1392,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <EntitySetMapping Name="QuestionAnswer">
             <EntityTypeMapping TypeName="ParkInspectModel.QuestionAnswer">
               <MappingFragment StoreEntitySet="QuestionAnswer">
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
                 <ScalarProperty Name="QuestionnaireId" ColumnName="QuestionnaireId" />
                 <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
                 <ScalarProperty Name="Result" ColumnName="Result" />
@@ -1287,6 +1403,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <EntitySetMapping Name="Questionnaire">
             <EntityTypeMapping TypeName="ParkInspectModel.Questionnaire">
               <MappingFragment StoreEntitySet="Questionnaire">
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="InspectionId" ColumnName="InspectionId" />
               </MappingFragment>
@@ -1295,6 +1413,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <EntitySetMapping Name="QuestionSort">
             <EntityTypeMapping TypeName="ParkInspectModel.QuestionSort">
               <MappingFragment StoreEntitySet="QuestionSort">
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Discription" ColumnName="Discription" />
               </MappingFragment>
@@ -1303,25 +1423,18 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <EntitySetMapping Name="Region">
             <EntityTypeMapping TypeName="ParkInspectModel.Region">
               <MappingFragment StoreEntitySet="Region">
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Region1" ColumnName="Region" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="ParkInspectModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Availability">
             <EntityTypeMapping TypeName="ParkInspectModel.Availability">
               <MappingFragment StoreEntitySet="Availability">
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="StartTime" ColumnName="StartTime" />
@@ -1332,6 +1445,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <EntitySetMapping Name="WorkingHours">
             <EntityTypeMapping TypeName="ParkInspectModel.WorkingHours">
               <MappingFragment StoreEntitySet="WorkingHours">
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="StartTime" ColumnName="StartTime" />
@@ -1355,6 +1470,13 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
               <ScalarProperty Name="Id" ColumnName="QuestionnaireId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="C__RefactorLog">
+            <EntityTypeMapping TypeName="ParkInspectModel.C__RefactorLog">
+              <MappingFragment StoreEntitySet="__RefactorLog">
+                <ScalarProperty Name="OperationKey" ColumnName="OperationKey" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

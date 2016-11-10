@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="cbb9ca90c2fa411b9bc4db601f4febd2" Name="Diagram1" ZoomLevel="40">
+      <Diagram DiagramId="cbb9ca90c2fa411b9bc4db601f4febd2" Name="Diagram1" ZoomLevel="88">
         <EntityTypeShape EntityType="ParkInspectModel.Account" Width="1.5" PointX="5.25" PointY="4.125" IsExpanded="true" />
         <EntityTypeShape EntityType="ParkInspectModel.Assignment" Width="1.5" PointX="8.25" PointY="6.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ParkInspectModel.Customer" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
@@ -44,6 +44,7 @@
         <AssociationConnector Association="ParkInspectModel.FK_QuestionAnswer_Questionnaire" ManuallyRouted="false" />
         <AssociationConnector Association="ParkInspectModel.QuestionKeyword" ManuallyRouted="false" />
         <AssociationConnector Association="ParkInspectModel.QuestionnaireModule" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ParkInspectModel.C__RefactorLog" Width="1.5" PointX="5.375" PointY="7.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
