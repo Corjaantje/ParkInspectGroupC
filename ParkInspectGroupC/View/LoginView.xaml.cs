@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ParkInspectGroupC.Miscellaneous;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,11 +19,19 @@ namespace ParkInspectGroupC.View
 	/// <summary>
 	/// Interaction logic for LoginView.xaml
 	/// </summary>
-	public partial class LoginView : UserControl
+	public partial class LoginView : UserControl, IHavePassword
 	{
 		public LoginView()
 		{
 			InitializeComponent();
+		}
+
+		public System.Security.SecureString Password
+		{
+			get
+			{
+				return MyPasswordBox.SecurePassword;
+			}
 		}
 	}
 }
