@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
@@ -14,49 +15,56 @@ namespace ParkInspectGroupC.ViewModel
 		public string Username
 		{
 			get { return _username; }
-			set { _username = value; RaisePropertyChanged("Username"); }
+			set { _username = value.Trim(); RaisePropertyChanged("Username"); }
 		}
 
 		private string _firstName;
 		public string FirstName
 		{
 			get { return _firstName; }
-			set { _firstName = value; RaisePropertyChanged("FirstName"); }
+			set { _firstName = value.Trim(); RaisePropertyChanged("FirstName"); }
 		}
 
 		private string _prefix;
 		public string Prefix
 		{
 			get { return _prefix; }
-			set { _prefix = value; RaisePropertyChanged("Prefix"); }
+			set { _prefix = value.Trim(); RaisePropertyChanged("Prefix"); }
 		}
 
 		private string _surName;
 		public string SurName
 		{
 			get { return _surName; }
-			set { _surName = value; RaisePropertyChanged("SurName"); }
+			set { _surName = value.Trim(); RaisePropertyChanged("SurName"); }
 		}
 
 		private string _gender;
 		public string Gender
 		{
 			get { return _gender; }
-			set { _gender = value; RaisePropertyChanged("Gender"); }
+			set { _gender = value.Trim(); RaisePropertyChanged("Gender"); }
+		}
+
+		private GenderOption _genderEnum;
+		public GenderOption GenderEnum
+		{
+			get { return _genderEnum; }
+			set { _genderEnum = value; RaisePropertyChanged("GenderEnum"); }
 		}
 
 		private string _street;
 		public string Street
 		{
 			get { return _street; }
-			set { _street = value; RaisePropertyChanged("Street"); }
+			set { _street = value.Trim(); RaisePropertyChanged("Street"); }
 		}
 
 		private string _number;
 		public string Number
 		{
 			get { return _number; }
-			set { _number = value; RaisePropertyChanged("Number"); }
+			set { _number = value.Trim(); RaisePropertyChanged("Number"); }
 		}
 
 		/*
@@ -72,29 +80,30 @@ namespace ParkInspectGroupC.ViewModel
 		public string City
 		{
 			get { return _city; }
-			set { _city = value; RaisePropertyChanged("City"); }
+			set { _city = value.Trim(); RaisePropertyChanged("City"); }
 		}
 
 		private string _email;
 		public string Email
 		{
 			get { return _email; }
-			set { _email = value; RaisePropertyChanged("Email");} 
+			set { _email = value.Trim(); RaisePropertyChanged("Email");} 
 		}
 
 		private string _zipCode;
 		public string ZipCode
 		{
 			get { return _zipCode; }
-			set { _zipCode = value; RaisePropertyChanged("ZipCode"); }
+			set { _zipCode = value.Trim(); RaisePropertyChanged("ZipCode"); }
 		}
 
 		private string _telNumber;
 		public string TelNumber
 		{
 			get { return _telNumber; }
-			set { _telNumber = value; RaisePropertyChanged("TelNumber"); }
+			set { _telNumber = value.Trim(); RaisePropertyChanged("TelNumber"); }
 		}
+
 
 		private Region _selectedRegion;
 		public Region SelectedRegion
@@ -155,18 +164,21 @@ namespace ParkInspectGroupC.ViewModel
 				var nEmployee = new Employee
 				{
 					FirstName = this.FirstName,
-					Prefix = this.Prefix,
 					SurName = this.SurName,
-					Gender = "M",
+					Gender = GenderEnum.ToString().ElementAt(0).ToString(),
 					City = this.City,
 					Address = this.Street + " " + this.Number,
 					ZipCode = this.ZipCode,
 					Phonenumber = this.TelNumber,
 					Email = this.Email,
-					Region = this.SelectedRegion,
 					Inspecter = this.IsInspector,
 					Manager = this.IsManager,
 				};
+				if (!string.IsNullOrWhiteSpace(Prefix))
+					nEmployee.Prefix = this.Prefix;
+
+				nEmployee.Region = (from r in context.Region where r.Id == SelectedRegion.Id select r).FirstOrDefault();
+
 				var nAccount = new Account
 				{
 					Username = this.Username,
@@ -183,6 +195,15 @@ namespace ParkInspectGroupC.ViewModel
 
 		private bool CanSaveEmployee()
 		{
+			if (string.IsNullOrWhiteSpace(Username)
+			    || string.IsNullOrWhiteSpace(SurName)
+			    || string.IsNullOrWhiteSpace(City)
+			    || string.IsNullOrWhiteSpace(Street)
+			    || string.IsNullOrWhiteSpace(ZipCode)
+			    || string.IsNullOrWhiteSpace(TelNumber)
+			    || string.IsNullOrWhiteSpace(Email))
+				return false;
+
 			return true;
 		}
 
@@ -190,11 +211,11 @@ namespace ParkInspectGroupC.ViewModel
 		{
 			
 		}
+	}
 
-		public enum GenderOption
-		{
-			Male,
-			Female
-		}
+	public enum GenderOption
+	{
+		Male,
+		Female
 	}
 }

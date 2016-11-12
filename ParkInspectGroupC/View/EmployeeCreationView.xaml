@@ -6,6 +6,8 @@
              xmlns:local="clr-namespace:ParkInspectGroupC.View"
 			 xmlns:main="clr-namespace:ParkInspectGroupC"
 			 xmlns:validation="clr-namespace:ParkInspectGroupC.Validation"
+			 xmlns:converter="clr-namespace:ParkInspectGroupC.Converter"
+			 xmlns:vm="clr-namespace:ParkInspectGroupC.ViewModel"
 			 mc:Ignorable="d"
 			 DataContext="{Binding EmployeeCreation, Source={StaticResource Locator}}">
 
@@ -36,6 +38,10 @@
 				<ColumnDefinition MinWidth="150"/>
 			</Grid.ColumnDefinitions>
 
+			<Grid.Resources>
+				<converter:EnumToBooleanConverter x:Key="EnumToBooleanConverter"></converter:EnumToBooleanConverter>
+			</Grid.Resources>
+			
 			<Label Grid.Row="0" Grid.Column="0" Content="Gebruikersnaam:" Margin="0,0,10,0" />
 			<TextBox Grid.Row="0" Grid.Column="1" Margin="0,2,10,2" MinWidth="100" Text="{Binding Path=Username, UpdateSourceTrigger=PropertyChanged}" />
 
@@ -50,8 +56,8 @@
 
 			<Label Grid.Row="4" Grid.Column="0" Content="Geslacht:" Margin="0,0,10,0" />
 			<WrapPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-				<RadioButton GroupName="Gender" Content="M" />
-				<RadioButton GroupName="Gender" Content="V" />
+				<RadioButton GroupName="Gender" Content="Man" IsChecked="{Binding GenderEnum, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:GenderOption.Male}}" />
+				<RadioButton GroupName="Gender" Content="Vrouw" IsChecked="{Binding GenderEnum, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:GenderOption.Female}}" />
 			</WrapPanel>
 
 			<Label Grid.Row="5" Grid.Column="0" Content="Straat:" Margin="0,0,10,0" />
@@ -94,7 +100,7 @@
 
 			<WrapPanel Grid.Row="17" Grid.Column="0" Orientation="Horizontal" Margin="0,0,0,0" VerticalAlignment="Center">
 				<Button Content="Save" MinWidth="60" Margin="3,3,3,3" Command="{Binding Path=SaveCommand}" />
-				<Button Content="Reset" MinWidth="60" Margin="3,3,3,3" />
+				<!-- <Button Content="Reset" MinWidth="60" Margin="3,3,3,3" /> -->
 			</WrapPanel>
 		</Grid>
 	</Viewbox>

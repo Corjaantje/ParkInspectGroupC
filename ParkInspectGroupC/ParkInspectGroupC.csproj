@@ -89,6 +89,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converter\EnumToBooleanConverter.cs" />
     <Compile Include="Validation\EmailValidation.cs" />
     <Compile Include="ViewModel\EmployeeCreationViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
