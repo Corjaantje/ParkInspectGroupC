@@ -11,6 +11,79 @@ namespace ParkInspectGroupC.ViewModel
 {
 	public class EmployeeCreationViewModel : ViewModelBase
 	{
+		public EmployeeCreationViewModel()
+		{
+			SaveCommand = new RelayCommand(SaveEmployee, CanSaveEmployee);
+			ResetFieldsCommand = new RelayCommand(ResetFields);
+
+			// Retreive abailable data from database.
+			using (var context = new ParkInspectEntities())
+			{
+				var regionList = context.Region.ToList();
+				AvailableRegions = new ObservableCollection<Region>(regionList);
+
+				var managerList = (from m in context.Employee where m.Manager == true select m);
+				AvailableManagers = new ObservableCollection<Employee>(managerList);
+			}
+		}
+
+		private void SaveEmployee()
+		{
+			using (var context = new ParkInspectEntities())
+			{
+				var guid = PassEncrypt.GenerateGuid();
+				var tempPass = "parkinspect";
+				var nEmployee = new Employee
+				{
+					FirstName = this.FirstName,
+					SurName = this.SurName,
+					Gender = GenderEnum.ToString().ElementAt(0).ToString(),
+					City = this.City,
+					Address = this.Street + " " + this.Number,
+					ZipCode = this.ZipCode,
+					Phonenumber = this.TelNumber,
+					Email = this.Email,
+					Inspecter = this.IsInspector,
+					Manager = this.IsManager,
+				};
+				if (!string.IsNullOrWhiteSpace(Prefix))
+					nEmployee.Prefix = this.Prefix;
+
+				nEmployee.Region = (from r in context.Region where r.Id == SelectedRegion.Id select r).FirstOrDefault();
+
+				var nAccount = new Account
+				{
+					Username = this.Username,
+					UserGuid = guid,
+					Password = PassEncrypt.GetPasswordHash(tempPass, guid),
+					Employee = nEmployee
+				};
+
+				context.Employee.Add(nEmployee);
+				context.Account.Add(nAccount);
+				context.SaveChanges();
+			}
+		}
+
+		private bool CanSaveEmployee()
+		{
+			if (string.IsNullOrWhiteSpace(Username)
+			    || string.IsNullOrWhiteSpace(SurName)
+			    || string.IsNullOrWhiteSpace(City)
+			    || string.IsNullOrWhiteSpace(Street)
+			    || string.IsNullOrWhiteSpace(ZipCode)
+			    || string.IsNullOrWhiteSpace(TelNumber)
+			    || string.IsNullOrWhiteSpace(Email))
+				return false;
+
+			return true;
+		}
+
+		private void ResetFields()
+		{
+			
+		}
+
 		private string _username;
 		public string Username
 		{
@@ -87,7 +160,7 @@ namespace ParkInspectGroupC.ViewModel
 		public string Email
 		{
 			get { return _email; }
-			set { _email = value.Trim(); RaisePropertyChanged("Email");} 
+			set { _email = value.Trim(); RaisePropertyChanged("Email"); }
 		}
 
 		private string _zipCode;
@@ -118,7 +191,7 @@ namespace ParkInspectGroupC.ViewModel
 			get { return _selectedManager; }
 			set { _selectedManager = value; RaisePropertyChanged("SelectedManager"); }
 		}
-		
+
 		public ObservableCollection<Region> AvailableRegions { get; set; }
 		public ObservableCollection<Employee> AvailableManagers { get; set; }
 
@@ -139,78 +212,6 @@ namespace ParkInspectGroupC.ViewModel
 		public ICommand SaveCommand { get; set; }
 		public ICommand ResetFieldsCommand { get; set; }
 
-		public EmployeeCreationViewModel()
-		{
-			SaveCommand = new RelayCommand(SaveEmployee, CanSaveEmployee);
-			ResetFieldsCommand = new RelayCommand(ResetFields);
-
-			// Retreive abailable data from database.
-			using (var context = new ParkInspectEntities())
-			{
-				var regionList = context.Region.ToList();
-				AvailableRegions = new ObservableCollection<Region>(regionList);
-
-				var managerList = (from m in context.Employee where m.Manager == true select m);
-				AvailableManagers = new ObservableCollection<Employee>(managerList);
-			}
-		}
-
-		private void SaveEmployee()
-		{
-			using (var context = new ParkInspectEntities())
-			{
-				var guid = PassEncrypt.GenerateGuid();
-				var tempPass = "parkinspect";
-				var nEmployee = new Employee
-				{
-					FirstName = this.FirstName,
-					SurName = this.SurName,
-					Gender = GenderEnum.ToString().ElementAt(0).ToString(),
-					City = this.City,
-					Address = this.Street + " " + this.Number,
-					ZipCode = this.ZipCode,
-					Phonenumber = this.TelNumber,
-					Email = this.Email,
-					Inspecter = this.IsInspector,
-					Manager = this.IsManager,
-				};
-				if (!string.IsNullOrWhiteSpace(Prefix))
-					nEmployee.Prefix = this.Prefix;
-
-				nEmployee.Region = (from r in context.Region where r.Id == SelectedRegion.Id select r).FirstOrDefault();
-
-				var nAccount = new Account
-				{
-					Username = this.Username,
-					UserGuid = guid,
-					Password = PassEncrypt.GetPasswordHash(tempPass, guid),
-					Employee = nEmployee
-				};
-
-				context.Employee.Add(nEmployee);
-				context.Account.Add(nAccount);
-				context.SaveChanges();
-			}
-		}
-
-		private bool CanSaveEmployee()
-		{
-			if (string.IsNullOrWhiteSpace(Username)
-			    || string.IsNullOrWhiteSpace(SurName)
-			    || string.IsNullOrWhiteSpace(City)
-			    || string.IsNullOrWhiteSpace(Street)
-			    || string.IsNullOrWhiteSpace(ZipCode)
-			    || string.IsNullOrWhiteSpace(TelNumber)
-			    || string.IsNullOrWhiteSpace(Email))
-				return false;
-
-			return true;
-		}
-
-		private void ResetFields()
-		{
-			
-		}
 	}
 
 	public enum GenderOption
