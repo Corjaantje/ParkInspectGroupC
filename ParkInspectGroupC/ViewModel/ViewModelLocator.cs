@@ -43,6 +43,7 @@ namespace ParkInspectGroupC.ViewModel
             ////}
 
             SimpleIoc.Default.Register<MainViewModel>();
+			SimpleIoc.Default.Register<EmployeeCreationViewModel>();
         }
 
         public MainViewModel Main
@@ -52,6 +53,15 @@ namespace ParkInspectGroupC.ViewModel
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
             }
         }
+
+	    public EmployeeCreationViewModel EmployeeCreation
+	    {
+		    get
+		    {
+			    return ServiceLocator.Current.GetInstance<EmployeeCreationViewModel>();
+			    
+		    }
+	    }
         
         public static void Cleanup()
         {

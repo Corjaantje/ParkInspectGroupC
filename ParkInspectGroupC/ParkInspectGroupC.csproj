@@ -89,6 +89,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Validation\EmailValidation.cs" />
+    <Compile Include="ViewModel\EmployeeCreationViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\EmployeeCreationView.xaml.cs">
@@ -146,6 +148,12 @@
   <ItemGroup>
     <Folder Include="Image\" />
     <Folder Include="Miscellaneous\Commands\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ParkInspectGroupC.DOMAIN\ParkInspectGroupC.DOMAIN.csproj">
+      <Project>{D1CC6F15-9980-47B1-AC43-11502E5D3668}</Project>
+      <Name>ParkInspectGroupC.DOMAIN</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
