@@ -43,6 +43,7 @@ namespace ParkInspectGroupC.ViewModel
             ////}
 
             SimpleIoc.Default.Register<MainViewModel>();
+			SimpleIoc.Default.Register<LoginViewModel>();
         }
 
         public MainViewModel Main
@@ -53,6 +54,14 @@ namespace ParkInspectGroupC.ViewModel
             }
         }
         
+		public LoginViewModel LoginWindow
+		{
+			get
+			{
+				return ServiceLocator.Current.GetInstance<LoginViewModel>();
+			}
+		}
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels
