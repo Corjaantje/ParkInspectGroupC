@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Security;
+using System.Runtime.InteropServices;
 
 namespace ParkInspectGroupC.Encryption
 {
@@ -13,7 +14,8 @@ namespace ParkInspectGroupC.Encryption
 		// GetPasswordHash
 		// </summary>
 		// <returns>
-		// Return the hash value from the password and identical guid. </returns>
+		// Return the hash value from the password and identical guid. 
+		// </returns>
 		// <param name="passString">
 		// passString; the original password from a textbox 
 		// </param>
@@ -28,6 +30,15 @@ namespace ParkInspectGroupC.Encryption
 			hashedPassword = GenerateHashValue(stringToHash);
 
 			// Dit is even om Corné zijn Github skills te testen.
+
+			return hashedPassword;
+		}
+
+		public static string GetPasswordHash(string passString)
+		{
+			string hashedPassword;
+
+			hashedPassword = GenerateHashValue(passString);
 
 			return hashedPassword;
 		}
@@ -54,6 +65,28 @@ namespace ParkInspectGroupC.Encryption
 			}
 
 			return sb.ToString();
+		}
+
+		// <summary>
+		// Retreives a secure password.
+		// </summary>
+		public static string ConvertToUnsecureString(SecureString securePassword)
+		{
+			if (securePassword == null)
+			{
+				return string.Empty;
+			}
+
+			IntPtr unmanagedString = IntPtr.Zero;
+			try
+			{
+				unmanagedString = Marshal.SecureStringToGlobalAllocUnicode(securePassword);
+				return Marshal.PtrToStringUni(unmanagedString);
+			}
+			finally
+			{
+				Marshal.ZeroFreeGlobalAllocUnicode(unmanagedString);
+			}
 		}
 
 	}
