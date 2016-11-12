@@ -138,6 +138,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Image\" />
+    <Folder Include="Miscellaneous\Commands\" />
     <Folder Include="View\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
