@@ -153,6 +153,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Image\Logo_WhiteBack.PNG" />
+    <Folder Include="Image\" />
+    <Folder Include="Miscellaneous\Commands\" />
+    <Folder Include="View\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
