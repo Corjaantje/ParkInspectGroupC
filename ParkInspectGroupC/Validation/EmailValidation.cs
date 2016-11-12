@@ -29,7 +29,7 @@ namespace ParkInspectGroupC.Validation
 		}
 
 		// Copied from the internet XD.
-		public bool IsValidEmail(string strIn)
+		private bool IsValidEmail(string strIn)
 		{
 			invalid = false;
 			if (String.IsNullOrEmpty(strIn))
