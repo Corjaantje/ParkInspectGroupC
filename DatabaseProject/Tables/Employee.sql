@@ -11,7 +11,7 @@
     [Phonenumber] VARCHAR(15) NULL, 
     [Email] VARCHAR(50) NULL,
 	[RegionId] INT NULL,	 
-    [EmployeeStatusId] INT NULL, 
+    [EmployeeStatusId] INT NULL DEFAULT 1, 
     [IsInspecter] BIT NOT NULL, 
     [IsManager] BIT NOT NULL, 
 	[ManagerId] int NULL,
