@@ -45,13 +45,12 @@ namespace ParkInspectGroupC.ViewModel
 					Email = this.Email,
 					IsInspecter = this.IsInspector,
 					IsManager = this.IsManager,
-					Region = SelectedRegion,
-					Employee2 = SelectedManager
 				};
 				if (!string.IsNullOrWhiteSpace(Prefix))
 					nEmployee.Prefix = this.Prefix;
 
 				nEmployee.Region = (from r in context.Region where r.Id == SelectedRegion.Id select r).FirstOrDefault();
+				nEmployee.Manager = (from m in context.Employee where m.Id == SelectedManager.Id select m).FirstOrDefault();
 
 				var nAccount = new Account
 				{
