@@ -822,8 +822,6 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="RegionId" Type="Int32" />
           <Property Name="EmployeeStatusId" Type="Int32" />
-          <Property Name="Inspecter" Type="Boolean" Nullable="false" />
-          <Property Name="Manager" Type="Boolean" Nullable="false" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="Account" Relationship="ParkInspectModel.FK_Account_Employee" FromRole="Employee" ToRole="Account" />
@@ -836,8 +834,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <Property Name="IsInspecter" Type="Boolean" Nullable="false" />
           <Property Name="IsManager" Type="Boolean" Nullable="false" />
           <Property Name="ManagerId" Type="Int32" />
-          <NavigationProperty Name="Employee1" Relationship="ParkInspectModel.FK_Employee_Manager" FromRole="Employee" ToRole="Employee1" />
-          <NavigationProperty Name="Employee2" Relationship="ParkInspectModel.FK_Employee_Manager" FromRole="Employee1" ToRole="Employee" />
+          <NavigationProperty Name="Employees" Relationship="ParkInspectModel.FK_Employee_Manager" FromRole="Employee" ToRole="Employee1" />
+          <NavigationProperty Name="Manager" Relationship="ParkInspectModel.FK_Employee_Manager" FromRole="Employee1" ToRole="Employee" />
         </EntityType>
         <EntityType Name="EmployeeStatus">
           <Key>
