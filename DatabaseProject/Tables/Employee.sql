@@ -12,10 +12,12 @@
     [Email] VARCHAR(50) NULL,
 	[RegionId] INT NULL,	 
     [EmployeeStatusId] INT NULL, 
-    [Inspecter] BIT NOT NULL, 
-    [Manager] BIT NOT NULL, 
+    [IsInspecter] BIT NOT NULL, 
+    [IsManager] BIT NOT NULL, 
+	[ManagerId] int NULL,
     [DateCreated] DATETIME NOT NULL DEFAULT GETDATE(), 
     [DateUpdated] DATETIME NOT NULL DEFAULT GETDATE(),
     CONSTRAINT [FK_Employee_Region] FOREIGN KEY ([RegionId]) REFERENCES [Region]([Id]), 
-    CONSTRAINT [FK_Employee_EmployeeStatus] FOREIGN KEY ([EmployeeStatusId]) REFERENCES [EmployeeStatus]([Id]) 
+    CONSTRAINT [FK_Employee_EmployeeStatus] FOREIGN KEY ([EmployeeStatusId]) REFERENCES [EmployeeStatus]([Id]),
+	CONSTRAINT [FK_Employee_Manager] FOREIGN KEY ([ManagerId]) REFERENCES [Employee]([Id])
 )
