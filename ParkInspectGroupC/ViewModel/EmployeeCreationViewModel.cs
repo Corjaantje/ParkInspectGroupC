@@ -22,7 +22,7 @@ namespace ParkInspectGroupC.ViewModel
 				var regionList = context.Region.ToList();
 				AvailableRegions = new ObservableCollection<Region>(regionList);
 
-				var managerList = (from m in context.Employee where m.Manager == true select m);
+				var managerList = (from m in context.Employee where m.IsManager == true select m);
 				AvailableManagers = new ObservableCollection<Employee>(managerList);
 			}
 		}
@@ -43,8 +43,10 @@ namespace ParkInspectGroupC.ViewModel
 					ZipCode = this.ZipCode,
 					Phonenumber = this.TelNumber,
 					Email = this.Email,
-					Inspecter = this.IsInspector,
-					Manager = this.IsManager,
+					IsInspecter = this.IsInspector,
+					IsManager = this.IsManager,
+					Region = SelectedRegion,
+					Employee2 = SelectedManager
 				};
 				if (!string.IsNullOrWhiteSpace(Prefix))
 					nEmployee.Prefix = this.Prefix;
