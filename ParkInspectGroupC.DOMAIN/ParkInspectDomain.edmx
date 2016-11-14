@@ -14,8 +14,8 @@
           <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="UserGuid" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="EmployeeId" Type="int" Nullable="false" />
-          <Property Name="DateCreated" Type="datetime" Nullable="false" />
-          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="Assignment">
           <Key>
@@ -27,8 +27,8 @@
           <Property Name="Description" Type="varchar(max)" />
           <Property Name="StartDate" Type="date" />
           <Property Name="EndDate" Type="date" />
-          <Property Name="DateCreated" Type="datetime" Nullable="false" />
-          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ParkInspect.dbo.Availability' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -42,8 +42,8 @@ warning 6002: The table/view 'ParkInspect.dbo.Availability' does not have a prim
           <Property Name="Date" Type="date" />
           <Property Name="StartTime" Type="time" Precision="0" />
           <Property Name="EndTime" Type="time" Precision="0" />
-          <Property Name="DateCreated" Type="datetime" Nullable="false" />
-          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -55,8 +55,8 @@ warning 6002: The table/view 'ParkInspect.dbo.Availability' does not have a prim
           <Property Name="Location" Type="varchar" MaxLength="50" />
           <Property Name="Phonenumber" Type="varchar" MaxLength="15" />
           <Property Name="Email" Type="varchar" MaxLength="50" />
-          <Property Name="DateCreated" Type="datetime" Nullable="false" />
-          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -74,10 +74,11 @@ warning 6002: The table/view 'ParkInspect.dbo.Availability' does not have a prim
           <Property Name="Email" Type="varchar" MaxLength="50" />
           <Property Name="RegionId" Type="int" />
           <Property Name="EmployeeStatusId" Type="int" />
-          <Property Name="Inspecter" Type="bit" Nullable="false" />
-          <Property Name="Manager" Type="bit" Nullable="false" />
-          <Property Name="DateCreated" Type="datetime" Nullable="false" />
-          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+          <Property Name="IsInspecter" Type="bit" Nullable="false" />
+          <Property Name="IsManager" Type="bit" Nullable="false" />
+          <Property Name="ManagerId" Type="int" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="EmployeeStatus">
           <Key>
@@ -85,8 +86,8 @@ warning 6002: The table/view 'ParkInspect.dbo.Availability' does not have a prim
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Description" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="DateCreated" Type="datetime" Nullable="false" />
-          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="Inspection">
           <Key>
@@ -100,8 +101,8 @@ warning 6002: The table/view 'ParkInspect.dbo.Availability' does not have a prim
           <Property Name="EndDate" Type="datetime" Nullable="false" />
           <Property Name="StatusId" Type="int" Nullable="false" />
           <Property Name="InspectorId" Type="int" />
-          <Property Name="DateCreated" Type="datetime" Nullable="false" />
-          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="InspectionImage">
           <Key>
@@ -110,8 +111,8 @@ warning 6002: The table/view 'ParkInspect.dbo.Availability' does not have a prim
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="File" Type="varchar(max)" Nullable="false" />
           <Property Name="InspectionId" Type="int" />
-          <Property Name="DateCreated" Type="datetime" Nullable="false" />
-          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="InspectionStatus">
           <Key>
@@ -119,8 +120,8 @@ warning 6002: The table/view 'ParkInspect.dbo.Availability' does not have a prim
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="DateCreated" Type="datetime" Nullable="false" />
-          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="Keyword">
           <Key>
@@ -129,8 +130,8 @@ warning 6002: The table/view 'ParkInspect.dbo.Availability' does not have a prim
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CategoryId" Type="int" Nullable="false" />
           <Property Name="Description" Type="varchar(max)" Nullable="false" />
-          <Property Name="DateCreated" Type="datetime" Nullable="false" />
-          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="KeywordCategory">
           <Key>
@@ -138,8 +139,8 @@ warning 6002: The table/view 'ParkInspect.dbo.Availability' does not have a prim
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Description" Type="varchar(max)" />
-          <Property Name="DateCreated" Type="datetime" Nullable="false" />
-          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="Module">
           <Key>
@@ -149,8 +150,8 @@ warning 6002: The table/view 'ParkInspect.dbo.Availability' does not have a prim
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="varchar(max)" />
           <Property Name="Note" Type="varchar(max)" />
-          <Property Name="DateCreated" Type="datetime" Nullable="false" />
-          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="Question">
           <Key>
@@ -160,8 +161,8 @@ warning 6002: The table/view 'ParkInspect.dbo.Availability' does not have a prim
           <Property Name="SortId" Type="int" Nullable="false" />
           <Property Name="Description" Type="varchar(max)" Nullable="false" />
           <Property Name="ModuleId" Type="int" />
-          <Property Name="DateCreated" Type="datetime" Nullable="false" />
-          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="QuestionAnswer">
           <Key>
@@ -171,8 +172,8 @@ warning 6002: The table/view 'ParkInspect.dbo.Availability' does not have a prim
           <Property Name="QuestionnaireId" Type="int" Nullable="false" />
           <Property Name="QuestionId" Type="int" Nullable="false" />
           <Property Name="Result" Type="nvarchar(max)" />
-          <Property Name="DateCreated" Type="datetime" Nullable="false" />
-          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="QuestionKeyword">
           <Key>
@@ -181,8 +182,8 @@ warning 6002: The table/view 'ParkInspect.dbo.Availability' does not have a prim
           </Key>
           <Property Name="QuestionId" Type="int" Nullable="false" />
           <Property Name="KeywordId" Type="int" Nullable="false" />
-          <Property Name="DateCreated" Type="datetime" Nullable="false" />
-          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="Questionnaire">
           <Key>
@@ -190,8 +191,8 @@ warning 6002: The table/view 'ParkInspect.dbo.Availability' does not have a prim
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="InspectionId" Type="int" Nullable="false" />
-          <Property Name="DateCreated" Type="datetime" Nullable="false" />
-          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="QuestionnaireModule">
           <Key>
@@ -200,8 +201,8 @@ warning 6002: The table/view 'ParkInspect.dbo.Availability' does not have a prim
           </Key>
           <Property Name="ModuleId" Type="int" Nullable="false" />
           <Property Name="QuestionnaireId" Type="int" Nullable="false" />
-          <Property Name="DateCreated" Type="datetime" Nullable="false" />
-          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="QuestionSort">
           <Key>
@@ -209,8 +210,8 @@ warning 6002: The table/view 'ParkInspect.dbo.Availability' does not have a prim
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Discription" Type="varchar(max)" Nullable="false" />
-          <Property Name="DateCreated" Type="datetime" Nullable="false" />
-          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="Region">
           <Key>
@@ -218,8 +219,8 @@ warning 6002: The table/view 'ParkInspect.dbo.Availability' does not have a prim
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Region" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="DateCreated" Type="datetime" Nullable="false" />
-          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -233,8 +234,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <Property Name="Date" Type="date" />
           <Property Name="StartTime" Type="time" Precision="0" />
           <Property Name="EndTime" Type="time" Precision="0" />
-          <Property Name="DateCreated" Type="datetime" Nullable="false" />
-          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <Association Name="FK_Account_Employee">
           <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
@@ -293,6 +294,18 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
             </Principal>
             <Dependent Role="Employee">
               <PropertyRef Name="EmployeeStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Manager">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Employee1" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee1">
+              <PropertyRef Name="ManagerId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -559,6 +572,10 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
             <End Role="EmployeeStatus" EntitySet="EmployeeStatus" />
             <End Role="Employee" EntitySet="Employee" />
           </AssociationSet>
+          <AssociationSet Name="FK_Employee_Manager" Association="Self.FK_Employee_Manager">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Employee1" EntitySet="Employee" />
+          </AssociationSet>
           <AssociationSet Name="FK_Employee_Region" Association="Self.FK_Employee_Region">
             <End Role="Region" EntitySet="Region" />
             <End Role="Employee" EntitySet="Employee" />
@@ -741,6 +758,10 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
             <End Role="Questionnaire" EntitySet="Questionnaire" />
             <End Role="QuestionnaireModule" EntitySet="QuestionnaireModule" />
           </AssociationSet>
+          <AssociationSet Name="FK_Employee_Manager" Association="ParkInspectModel.FK_Employee_Manager">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Employee1" EntitySet="Employee" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Account">
           <Key>
@@ -751,8 +772,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="UserGuid" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="EmployeeId" Type="Int32" Nullable="false" />
-          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="Employee" Relationship="ParkInspectModel.FK_Account_Employee" FromRole="Account" ToRole="Employee" />
         </EntityType>
         <EntityType Name="Assignment">
@@ -765,8 +786,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="StartDate" Type="DateTime" Precision="0" />
           <Property Name="EndDate" Type="DateTime" Precision="0" />
-          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="Customer" Relationship="ParkInspectModel.FK_Assignment_Customer" FromRole="Assignment" ToRole="Customer" />
           <NavigationProperty Name="Employee" Relationship="ParkInspectModel.FK_Assignment_Manager" FromRole="Assignment" ToRole="Employee" />
           <NavigationProperty Name="Inspection" Relationship="ParkInspectModel.FK_Inspection_Assignment" FromRole="Assignment" ToRole="Inspection" />
@@ -781,8 +802,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Phonenumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="Assignment" Relationship="ParkInspectModel.FK_Assignment_Customer" FromRole="Customer" ToRole="Assignment" />
         </EntityType>
         <EntityType Name="Employee">
@@ -801,10 +822,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="RegionId" Type="Int32" />
           <Property Name="EmployeeStatusId" Type="Int32" />
-          <Property Name="Inspecter" Type="Boolean" Nullable="false" />
-          <Property Name="Manager" Type="Boolean" Nullable="false" />
-          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="Account" Relationship="ParkInspectModel.FK_Account_Employee" FromRole="Employee" ToRole="Account" />
           <NavigationProperty Name="Assignment" Relationship="ParkInspectModel.FK_Assignment_Manager" FromRole="Employee" ToRole="Assignment" />
           <NavigationProperty Name="Availability" Relationship="ParkInspectModel.FK_Availability_Employee" FromRole="Employee" ToRole="Availability" />
@@ -812,6 +831,11 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <NavigationProperty Name="Region" Relationship="ParkInspectModel.FK_Employee_Region" FromRole="Employee" ToRole="Region" />
           <NavigationProperty Name="Inspection" Relationship="ParkInspectModel.FK_Inspection_Employee" FromRole="Employee" ToRole="Inspection" />
           <NavigationProperty Name="WorkingHours" Relationship="ParkInspectModel.FK_WorkingHours_Employee" FromRole="Employee" ToRole="WorkingHours" />
+          <Property Name="IsInspecter" Type="Boolean" Nullable="false" />
+          <Property Name="IsManager" Type="Boolean" Nullable="false" />
+          <Property Name="ManagerId" Type="Int32" />
+          <NavigationProperty Name="Employees" Relationship="ParkInspectModel.FK_Employee_Manager" FromRole="Employee" ToRole="Employee1" />
+          <NavigationProperty Name="Manager" Relationship="ParkInspectModel.FK_Employee_Manager" FromRole="Employee1" ToRole="Employee" />
         </EntityType>
         <EntityType Name="EmployeeStatus">
           <Key>
@@ -819,8 +843,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="Employee" Relationship="ParkInspectModel.FK_Employee_EmployeeStatus" FromRole="EmployeeStatus" ToRole="Employee" />
         </EntityType>
         <EntityType Name="Inspection">
@@ -835,8 +859,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="StatusId" Type="Int32" Nullable="false" />
           <Property Name="InspectorId" Type="Int32" />
-          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="Assignment" Relationship="ParkInspectModel.FK_Inspection_Assignment" FromRole="Inspection" ToRole="Assignment" />
           <NavigationProperty Name="Employee" Relationship="ParkInspectModel.FK_Inspection_Employee" FromRole="Inspection" ToRole="Employee" />
           <NavigationProperty Name="InspectionStatus" Relationship="ParkInspectModel.FK_Inspection_InspectionStatus" FromRole="Inspection" ToRole="InspectionStatus" />
@@ -851,8 +875,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="File" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="InspectionId" Type="Int32" />
-          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="Inspection" Relationship="ParkInspectModel.FK_InspectionImages_Inspection" FromRole="InspectionImage" ToRole="Inspection" />
         </EntityType>
         <EntityType Name="InspectionStatus">
@@ -861,8 +885,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="Inspection" Relationship="ParkInspectModel.FK_Inspection_InspectionStatus" FromRole="InspectionStatus" ToRole="Inspection" />
         </EntityType>
         <EntityType Name="Keyword">
@@ -872,8 +896,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CategoryId" Type="Int32" Nullable="false" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="KeywordCategory" Relationship="ParkInspectModel.FK_Keyword_KeywordCategory" FromRole="Keyword" ToRole="KeywordCategory" />
           <NavigationProperty Name="QuestionKeyword" Relationship="ParkInspectModel.FK_QuestionKeyword_Keyword" FromRole="Keyword" ToRole="QuestionKeyword" />
         </EntityType>
@@ -883,8 +907,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="Keyword" Relationship="ParkInspectModel.FK_Keyword_KeywordCategory" FromRole="KeywordCategory" ToRole="Keyword" />
         </EntityType>
         <EntityType Name="Module">
@@ -895,8 +919,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="Question" Relationship="ParkInspectModel.FK_Question_Module" FromRole="Module" ToRole="Question" />
           <NavigationProperty Name="QuestionnaireModule" Relationship="ParkInspectModel.FK_QuestionnaireModule_Module" FromRole="Module" ToRole="QuestionnaireModule" />
         </EntityType>
@@ -908,8 +932,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <Property Name="SortId" Type="Int32" Nullable="false" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="ModuleId" Type="Int32" />
-          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="Module" Relationship="ParkInspectModel.FK_Question_Module" FromRole="Question" ToRole="Module" />
           <NavigationProperty Name="QuestionSort" Relationship="ParkInspectModel.FK_Question_QuestionSort" FromRole="Question" ToRole="QuestionSort" />
           <NavigationProperty Name="QuestionAnswer" Relationship="ParkInspectModel.FK_QuestionAnswer_Question" FromRole="Question" ToRole="QuestionAnswer" />
@@ -923,8 +947,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <Property Name="QuestionnaireId" Type="Int32" Nullable="false" />
           <Property Name="QuestionId" Type="Int32" Nullable="false" />
           <Property Name="Result" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="Question" Relationship="ParkInspectModel.FK_QuestionAnswer_Question" FromRole="QuestionAnswer" ToRole="Question" />
           <NavigationProperty Name="Questionnaire" Relationship="ParkInspectModel.FK_QuestionAnswer_Questionnaire" FromRole="QuestionAnswer" ToRole="Questionnaire" />
         </EntityType>
@@ -935,8 +959,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           </Key>
           <Property Name="QuestionId" Type="Int32" Nullable="false" />
           <Property Name="KeywordId" Type="Int32" Nullable="false" />
-          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="Keyword" Relationship="ParkInspectModel.FK_QuestionKeyword_Keyword" FromRole="QuestionKeyword" ToRole="Keyword" />
           <NavigationProperty Name="Question" Relationship="ParkInspectModel.FK_QuestionKeyword_Question" FromRole="QuestionKeyword" ToRole="Question" />
         </EntityType>
@@ -946,8 +970,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="InspectionId" Type="Int32" Nullable="false" />
-          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="Inspection" Relationship="ParkInspectModel.FK_Questionnaire_Inspection" FromRole="Questionnaire" ToRole="Inspection" />
           <NavigationProperty Name="QuestionAnswer" Relationship="ParkInspectModel.FK_QuestionAnswer_Questionnaire" FromRole="Questionnaire" ToRole="QuestionAnswer" />
           <NavigationProperty Name="QuestionnaireModule" Relationship="ParkInspectModel.FK_QuestionnaireModule_Questionnaire" FromRole="Questionnaire" ToRole="QuestionnaireModule" />
@@ -959,8 +983,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           </Key>
           <Property Name="ModuleId" Type="Int32" Nullable="false" />
           <Property Name="QuestionnaireId" Type="Int32" Nullable="false" />
-          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="Module" Relationship="ParkInspectModel.FK_QuestionnaireModule_Module" FromRole="QuestionnaireModule" ToRole="Module" />
           <NavigationProperty Name="Questionnaire" Relationship="ParkInspectModel.FK_QuestionnaireModule_Questionnaire" FromRole="QuestionnaireModule" ToRole="Questionnaire" />
         </EntityType>
@@ -970,8 +994,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Discription" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="Question" Relationship="ParkInspectModel.FK_Question_QuestionSort" FromRole="QuestionSort" ToRole="Question" />
         </EntityType>
         <EntityType Name="Region">
@@ -980,8 +1004,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Region1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="Employee" Relationship="ParkInspectModel.FK_Employee_Region" FromRole="Region" ToRole="Employee" />
           <NavigationProperty Name="Inspection" Relationship="ParkInspectModel.FK_Inspection_Region" FromRole="Region" ToRole="Inspection" />
         </EntityType>
@@ -995,8 +1019,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <Property Name="Date" Type="DateTime" Precision="0" />
           <Property Name="StartTime" Type="Time" Precision="0" />
           <Property Name="EndTime" Type="Time" Precision="0" />
-          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="Employee" Relationship="ParkInspectModel.FK_Availability_Employee" FromRole="Availability" ToRole="Employee" />
         </EntityType>
         <EntityType Name="WorkingHours">
@@ -1009,8 +1033,8 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <Property Name="Date" Type="DateTime" Precision="0" />
           <Property Name="StartTime" Type="Time" Precision="0" />
           <Property Name="EndTime" Type="Time" Precision="0" />
-          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="Employee" Relationship="ParkInspectModel.FK_WorkingHours_Employee" FromRole="WorkingHours" ToRole="Employee" />
         </EntityType>
         <Association Name="FK_Account_Employee">
@@ -1277,6 +1301,18 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Employee_Manager">
+          <End Type="ParkInspectModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="ParkInspectModel.Employee" Role="Employee1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee1">
+              <PropertyRef Name="ManagerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1327,10 +1363,11 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
           <EntitySetMapping Name="Employee">
             <EntityTypeMapping TypeName="ParkInspectModel.Employee">
               <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+                <ScalarProperty Name="IsManager" ColumnName="IsManager" />
+                <ScalarProperty Name="IsInspecter" ColumnName="IsInspecter" />
                 <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-                <ScalarProperty Name="Manager" ColumnName="Manager" />
-                <ScalarProperty Name="Inspecter" ColumnName="Inspecter" />
                 <ScalarProperty Name="EmployeeStatusId" ColumnName="EmployeeStatusId" />
                 <ScalarProperty Name="RegionId" ColumnName="RegionId" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
@@ -1537,7 +1574,7 @@ warning 6002: The table/view 'ParkInspect.dbo.WorkingHours' does not have a prim
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
