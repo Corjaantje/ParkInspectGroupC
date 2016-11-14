@@ -91,8 +91,14 @@
     </ApplicationDefinition>
     <Compile Include="Miscellaneous\IHavePassword.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
+    <Compile Include="Converter\EnumToBooleanConverter.cs" />
+    <Compile Include="Validation\EmailValidation.cs" />
+    <Compile Include="ViewModel\EmployeeCreationViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="View\EmployeeCreationView.xaml.cs">
+      <DependentUpon>EmployeeCreationView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
@@ -110,6 +116,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\LoginView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EmployeeCreationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -155,7 +165,12 @@
     <Resource Include="Image\Logo_WhiteBack.PNG" />
     <Folder Include="Image\" />
     <Folder Include="Miscellaneous\Commands\" />
-    <Folder Include="View\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ParkInspectGroupC.DOMAIN\ParkInspectGroupC.DOMAIN.csproj">
+      <Project>{D1CC6F15-9980-47B1-AC43-11502E5D3668}</Project>
+      <Name>ParkInspectGroupC.DOMAIN</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
