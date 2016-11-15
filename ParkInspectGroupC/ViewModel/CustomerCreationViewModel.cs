@@ -14,12 +14,12 @@ namespace ParkInspectGroupC.ViewModel
    public class CustomerCreationViewModel : ViewModelBase
     {
 
-        private string Customername;
-        private string Streetname;
-        private string Housenumber;
-        private string Location;
-        private string Phonenumber;
-        private string Customermail;
+        private string _customername;
+        private string _streetname;
+        private string _housenumber;
+        private string _location;
+        private string _phonenumber;
+        private string _customermail;
 
         
 
@@ -29,100 +29,100 @@ namespace ParkInspectGroupC.ViewModel
             AddCustomerCommand = new RelayCommand(addCustomer, canAddCustomer);
         }
 
-        public string customerName
+        public string Customername
         {
             get{
-                return Customername;
+                return _customername;
             }
 
             set{
-                Customername = value;
-                RaisePropertyChanged("customerName");
+                _customername = value;
+                RaisePropertyChanged("Customername");
             }
         }
 
-        public string streetName
+        public string Streetname
         {
             get
             {
-                return Streetname;
+                return _streetname;
             }
 
             set
             {
-                Streetname = value;
-                RaisePropertyChanged("streetName");
+                _streetname = value;
+                RaisePropertyChanged("Streetname");
             }
         }
 
-        public string houseNumber
+        public string Housenumber
         {
             get
             {
-                return Housenumber;
+                return _housenumber;
             }
 
             set
             {
-                Housenumber = value;
-                RaisePropertyChanged("houseNumber");
+                _housenumber = value;
+                RaisePropertyChanged("Housenumber");
             }
         }
 
 
-        public string customerLocation
+        public string Customerlocation
         {
             get
             {
-                return Location;
+                return _location;
             }
 
             set
             {
-                Location = value;
-                RaisePropertyChanged("customerLocation");
+                _location = value;
+                RaisePropertyChanged("Customerlocation");
             }
         }
 
-        public string phoneNumber
+        public string Phonenumber
         {
             get
             {
-                return Phonenumber;
+                return _phonenumber;
             }
 
             set
             {
-                Phonenumber = value;
-                RaisePropertyChanged("phoneNumber");
+                _phonenumber = value;
+                RaisePropertyChanged("Phonenumber");
                
             }
         }
 
 
-        public string customerMail
+        public string Customermail
         {
             get
             {
-                return Customermail;
+                return _customermail;
             }
 
             set
             {
-                Customermail = value;
-                RaisePropertyChanged("customerMail");
+                _customermail = value;
+                RaisePropertyChanged("Customermail");
             }
         }
 
         private bool canAddCustomer()
         {
 
-            if (string.IsNullOrWhiteSpace(customerName))
-                //|| string.IsNullOrWhiteSpace(streetName)
-                //|| string.IsNullOrWhiteSpace(houseNumber)
-                //|| string.IsNullOrWhiteSpace(customerLocation)
-                //|| string.IsNullOrWhiteSpace(phoneNumber)
-                //|| string.IsNullOrWhiteSpace(customerMail)) 
+            if (string.IsNullOrWhiteSpace(Customername)
+                || string.IsNullOrWhiteSpace(Streetname)
+                || string.IsNullOrWhiteSpace(Housenumber)
+                || string.IsNullOrWhiteSpace(Customerlocation)
+                || string.IsNullOrWhiteSpace(Phonenumber)
+                || string.IsNullOrWhiteSpace(Customermail)) 
                 {
                  return false;
             }
@@ -137,11 +137,11 @@ namespace ParkInspectGroupC.ViewModel
             {
                 var customer = new Customer()
                 {
-                    Name = Customername,
-                    Address = Streetname + " " + Housenumber,
-                    Location = Location,
-                    Phonenumber = Phonenumber,
-                    Email = Customermail
+                    Name = _customername,
+                    Address = _streetname + " " + _housenumber,
+                    Location = _location,
+                    Phonenumber = _phonenumber,
+                    Email = _customermail
 
                 };
 
