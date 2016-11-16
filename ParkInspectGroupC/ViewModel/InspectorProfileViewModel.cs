@@ -9,6 +9,13 @@ namespace ParkInspectGroupC.ViewModel
 {
    public class InspectorProfileViewModel
     {
+       Employee Emp;
+
+       public string Name
+       {
+           get;
+           set;
+       }
        public InspectorProfileViewModel() 
        { 
             //TODO The emp variable should be a parameter to this constructor
@@ -16,6 +23,8 @@ namespace ParkInspectGroupC.ViewModel
            {
                Emp = (from e in context.Employee where e.Id == 1 select e).FirstOrDefault(); 
            }
+           Name = Emp.FirstName + " " + Emp.Prefix + " " + Emp.SurName;
+           Console.WriteLine("Name: " + Name);
        }
 
     }
