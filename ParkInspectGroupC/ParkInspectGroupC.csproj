@@ -9,11 +9,12 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ParkInspectGroupC</RootNamespace>
     <AssemblyName>ParkInspectGroupC</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -90,6 +91,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Miscellaneous\IHavePassword.cs" />
+    <Compile Include="ViewModel\InspectorProfileViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="Converter\EnumToBooleanConverter.cs" />
     <Compile Include="Validation\EmailValidation.cs" />
@@ -98,6 +100,9 @@
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\EmployeeCreationView.xaml.cs">
       <DependentUpon>EmployeeCreationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\InspectorProfileView.xaml.cs">
+      <DependentUpon>InspectorProfileView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
@@ -115,6 +120,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\InspectorProfileView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\LoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -163,14 +172,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Image\Logo_WhiteBack.PNG" />
-    <Folder Include="Image\" />
-    <Folder Include="Miscellaneous\Commands\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ParkInspectGroupC.DOMAIN\ParkInspectGroupC.DOMAIN.csproj">
       <Project>{D1CC6F15-9980-47B1-AC43-11502E5D3668}</Project>
       <Name>ParkInspectGroupC.DOMAIN</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Miscellaneous\Commands\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
