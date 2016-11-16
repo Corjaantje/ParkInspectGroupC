@@ -15,7 +15,7 @@ namespace ParkInspectGroupC.DOMAIN
     public partial class Availability
     {
         public int EmployeeId { get; set; }
-        public Nullable<System.DateTime> Date { get; set; }
+        public System.DateTime Date { get; set; }
         public Nullable<System.TimeSpan> StartTime { get; set; }
         public Nullable<System.TimeSpan> EndTime { get; set; }
         public System.DateTime DateCreated { get; set; }
