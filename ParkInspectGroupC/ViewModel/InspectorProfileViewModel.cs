@@ -55,7 +55,12 @@ namespace ParkInspectGroupC.ViewModel
            Adress = Emp.Address + ", " + Emp.ZipCode + ", " + Emp.City;
            Email = Emp.Email;
            PhoneNumber = Emp.Phonenumber;
+           using (var context = new ParkInspectEntities())
+           {
+               Status = (from s in context.EmployeeStatus where s.Id.CompareTo(Emp.EmployeeStatusId) == 1 select s).FirstOrDefault().Description;
+           }
        }
+
 
     }
 }
