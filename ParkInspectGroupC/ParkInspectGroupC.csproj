@@ -90,10 +90,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converter\EnumToBooleanConverter.cs" />
+    <Compile Include="Converter\StatusToPathConverter.cs" />
     <Compile Include="Miscellaneous\IHavePassword.cs" />
     <Compile Include="ViewModel\InspectorProfileViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
-    <Compile Include="Converter\EnumToBooleanConverter.cs" />
     <Compile Include="Validation\EmailValidation.cs" />
     <Compile Include="ViewModel\EmployeeCreationViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -181,6 +182,17 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Miscellaneous\Commands\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\StatusImage\Ontslagen.png" />
+    <Resource Include="Image\StatusImage\Verlof.png" />
+    <Resource Include="Image\StatusImage\Beschikbaar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\StatusImage\succes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\StatusImage\Ziek.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
