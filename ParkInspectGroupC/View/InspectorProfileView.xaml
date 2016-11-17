@@ -11,6 +11,9 @@
         <Label Content="{Binding Path=PhoneNumber, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="430,133,0,0" VerticalAlignment="Top" Width="221"/>
         <Label Content="Label" HorizontalAlignment="Left" Margin="10,148,0,0" VerticalAlignment="Top" Width="350"/>
 
+        <Grid.Resources>
+            <converter:StatusToPathConverter x:Key="StatusToPathConverter"></converter:StatusToPathConverter>
+        </Grid.Resources>
         <Image Source="{Binding Status, Converter={StaticResource StatusToPathConverter}}" HorizontalAlignment="Left" Height="29" Margin="10,94,0,0" VerticalAlignment="Top" Width="31"/>
     </Grid>
 </Window>
