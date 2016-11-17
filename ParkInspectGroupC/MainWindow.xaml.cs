@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
+using ParkInspectGroupC.Miscellaneous;
 
 namespace ParkInspectGroupC
 {
@@ -17,7 +18,7 @@ namespace ParkInspectGroupC
     {
         public MainWindow()
         {
-            InitializeComponent();
-        }
+			InitializeComponent();
+		}
     }
 }

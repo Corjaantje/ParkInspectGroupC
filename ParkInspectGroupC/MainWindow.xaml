@@ -4,18 +4,23 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ParkInspectGroupC"
-		xmlns:ts="clr-namespace:ParkInspectGroupC.View"
-		xmlns:this="clr-namespace:ParkInspectGroupC.ViewModel"
+		xmlns:views="clr-namespace:ParkInspectGroupC.View"
+		xmlns:themes="clr-namespace:Simple.Wpf.Themes;assembly=Simple.Wpf.Themes"
+		Title="ParkInspect"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525"
+   
 		DataContext="{Binding Main, Source={StaticResource Locator}}">
-	<Grid>
-		<ts:SettingsView />
-		<ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="260,72,0,0" VerticalAlignment="Top" Width="120"/>
-		<Label x:Name="label" Content="{Binding Test}" HorizontalAlignment="Left" Margin="224,163,0,0" VerticalAlignment="Top"/>
-		<Calendar HorizontalAlignment="Left" Margin="81,141,0,0" VerticalAlignment="Top"/>
-		<Slider x:Name="slider" HorizontalAlignment="Left" Margin="101,111,0,0" VerticalAlignment="Top" Width="159"/>
-		<ToolBar x:Name="toolBar" HorizontalAlignment="Left" Margin="22,60,0,0" VerticalAlignment="Top" Width="238"/>
-		<Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="352,148,0,0" VerticalAlignment="Top" Width="75"/>
+	<Grid Background="{DynamicResource WindowBackgroundBrush}">
+		<DockPanel LastChildFill="True">
+			<WrapPanel DockPanel.Dock="Bottom" HorizontalAlignment="Left" VerticalAlignment="Center" >
+				<Label Content="Quick options:" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,5,5,5" />
+				<themes:Themes x:Name="ThemesControl" Margin="0,1,1,1" ItemsSource="{Binding Path=Themes}" SelectedItem="{Binding SelectedTheme}" Visibility="Hidden" Width="0" />
+				<ComboBox ItemsSource="{Binding Path=Themes, Mode=OneWay}" SelectedItem="{Binding Path=SelectedTheme, Mode= TwoWay}" DisplayMemberPath="Name" Margin="0,5,5,5" />
+				<!-- <Button Content="Save" Command="{Binding SaveCommand}" Margin="0,5,5,5" /> -->
+			</WrapPanel>
+			
+			<views:LoginView />
+		</DockPanel>
+		
 	</Grid>
 </Window>

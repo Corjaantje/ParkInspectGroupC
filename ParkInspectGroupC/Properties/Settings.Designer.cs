@@ -25,12 +25,13 @@ namespace ParkInspectGroupC.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::System.Uri CurrentTheme {
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string CurrentThemeUri {
             get {
-                return ((global::System.Uri)(this["CurrentTheme"]));
+                return ((string)(this["CurrentThemeUri"]));
             }
             set {
-                this["CurrentTheme"] = value;
+                this["CurrentThemeUri"] = value;
             }
         }
     }
