@@ -4,13 +4,8 @@
          xmlns:converter="clr-namespace:ParkInspectGroupC.Converter"
         DataContext="{Binding InspectorProfile, Source={StaticResource Locator}}"
         Title="InspectorProfileView" Height="322" Width="740.1">
+    
     <Grid>
-        <Label Content="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="24" Margin="10,104,0,0" VerticalAlignment="Top" Width="350"/>
-        <Label Content="{Binding Path=Adress, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="10,133,0,0" VerticalAlignment="Top" Width="350"/>
-        <Label Content="{Binding Path=Email, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="430,104,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.474,-0.769" Width="207"/>
-        <Label Content="{Binding Path=PhoneNumber, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="430,133,0,0" VerticalAlignment="Top" Width="221"/>
-        <Label Content="Label" HorizontalAlignment="Left" Margin="10,148,0,0" VerticalAlignment="Top" Width="350"/>
-
         <Grid.Resources>
             <converter:StatusToPathConverter x:Key="StatusToPathConverter"></converter:StatusToPathConverter>
         </Grid.Resources>
