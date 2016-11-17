@@ -1,6 +1,7 @@
 ﻿<Window x:Class="ParkInspectGroupC.View.InspectorProfileView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+         xmlns:converter="clr-namespace:ParkInspectGroupC.Converter"
         DataContext="{Binding InspectorProfile, Source={StaticResource Locator}}"
         Title="InspectorProfileView" Height="322" Width="740.1">
     <Grid>
@@ -10,5 +11,6 @@
         <Label Content="{Binding Path=PhoneNumber, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="430,133,0,0" VerticalAlignment="Top" Width="221"/>
         <Label Content="Label" HorizontalAlignment="Left" Margin="10,148,0,0" VerticalAlignment="Top" Width="350"/>
 
+        <Image Source="{Binding Status, Converter={StaticResource StatusToPathConverter}}" HorizontalAlignment="Left" Height="29" Margin="10,94,0,0" VerticalAlignment="Top" Width="31"/>
     </Grid>
 </Window>
