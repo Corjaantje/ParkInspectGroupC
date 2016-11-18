@@ -92,6 +92,8 @@ namespace ParkInspectGroupC.ViewModel
                    {
                        Manager = (from m in context.Employee where m.Id == Emp.ManagerId select m).FirstOrDefault();
                    }
+                    Inspections = (from insp in context.Inspection where insp.InspectorId == Emp.Id select new 
+                    { insp.Id, insp.Location, InspectionStatus = (from inspStat in context.InspectionStatus where inspStat.Id == insp.StatusId select inspStat).FirstOrDefault().Description}).ToList();
 
                    ManagerName = Manager.FirstName + " " + Manager.Prefix + " " + Manager.SurName;
                }
