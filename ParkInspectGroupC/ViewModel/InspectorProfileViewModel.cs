@@ -58,26 +58,52 @@ namespace ParkInspectGroupC.ViewModel
            get { return _managerName; }
            set { _managerName = value; RaisePropertyChanged("ManagerName"); }
        }
+
+       private IEnumerable<Inspection> _inspections;
+       public IEnumerable<Inspection> Inspections
+       {
+           get { return _inspections; }
+           set { _inspections = value; RaisePropertyChanged("Inspections"); }
+       }
        public InspectorProfileViewModel() 
        {
             //TODO The emp variable should be a parameter to this constructor
-           using (var context = new ParkInspectEntities())
+           try
            {
-               Emp = (from e in context.Employee where e.Id == 1 select e).FirstOrDefault();
+               using (var context = new ParkInspectEntities())
+               {
+                   Emp = (from e in context.Employee where e.Id == 3 select e).FirstOrDefault();
+               }
+               Name = Emp.FirstName + " " + Emp.Prefix + " " + Emp.SurName + "(" + Emp.Gender + ")";
+               Adress = Emp.Address + ", " + Emp.ZipCode + ", " + Emp.City;
+               Email = Emp.Email;
+               PhoneNumber = Emp.Phonenumber;
+               using (var context = new ParkInspectEntities())
+               {
+                   Status = (from s in context.EmployeeStatus where s.Id == Emp.EmployeeStatusId select s).FirstOrDefault().Description;
+               }
+               using(var context = new ParkInspectEntities())
+               {
+                   Inspections = (from insp in context.Inspection where insp.InspectorId == Emp.Id select insp).ToList();
+               }
+               try
+               {
+                   using (var context = new ParkInspectEntities())
+                   {
+                       Manager = (from m in context.Employee where m.Id == Emp.ManagerId select m).FirstOrDefault();
+                   }
+
+                   ManagerName = Manager.FirstName + " " + Manager.Prefix + " " + Manager.SurName;
+               }
+               catch (Exception e)
+               {
+                   ManagerName = "Deze medewerker heeft geen manager.";
+               }
            }
-           Name = Emp.FirstName + " " + Emp.Prefix + " " + Emp.SurName + "(" + Emp.Gender + ")";
-           Adress = Emp.Address + ", " + Emp.ZipCode + ", " + Emp.City;
-           Email = Emp.Email;
-           PhoneNumber = Emp.Phonenumber;
-           using (var context = new ParkInspectEntities())
+           catch (Exception e) 
            {
-               Status = (from s in context.EmployeeStatus where s.Id.CompareTo(Emp.EmployeeStatusId) == 1 select s).FirstOrDefault().Description;
+               Console.WriteLine("OOPS! something went wrong pulling data from the DataBase!");
            }
-           using (var context = new ParkInspectEntities())
-           {
-               Manager = (from m in context.Employee where m.Id.CompareTo(Emp.ManagerId) == 1 select m).FirstOrDefault();
-           }
-           ManagerName= Manager.FirstName + " " + Manager.Prefix + " " + Manager.SurName;
        }
 
 

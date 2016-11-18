@@ -16,7 +16,8 @@
         <Label Content="{Binding Path=Status, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="46,142,0,0" VerticalAlignment="Top" Width="182" Height="29" />
         <Image Source="{Binding Status, Converter={StaticResource StatusToPathConverter}}" HorizontalAlignment="Left" Height="29" Margin="10,142,0,0" VerticalAlignment="Top" Width="31"/>
         <Label Content="GebruikersProfiel" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <Label Content="Manager" HorizontalAlignment="Left" Margin="10,176,0,0" VerticalAlignment="Top" Width="60"/>
-        <Label Content="{Binding Path=Manager, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="75,176,0,0" VerticalAlignment="Top" Width="153"/>
+        <Label Content="Manager:" HorizontalAlignment="Left" Margin="10,176,0,0" VerticalAlignment="Top" Width="60"/>
+        <Label Content="{Binding Path=ManagerName, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="75,176,0,0" VerticalAlignment="Top" Width="285" Height="26"/>
+        <DataGrid HorizontalAlignment="Left" Height="84" Margin="11,207,0,0" VerticalAlignment="Top" Width="585" ItemsSource="{Binding Path=Inspections, UpdateSourceTrigger=PropertyChanged}"/>
     </Grid>
 </Window>
