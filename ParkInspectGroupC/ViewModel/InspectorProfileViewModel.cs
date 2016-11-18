@@ -44,6 +44,20 @@ namespace ParkInspectGroupC.ViewModel
            get { return _status; }
            set { _status = value; RaisePropertyChanged("Status"); }
        }
+
+       private Employee _manager;
+       public Employee Manager
+       {
+           get { return _manager; }
+           set { _manager = value; RaisePropertyChanged("Manager"); }
+       }
+
+       private string _managerName;
+       public string ManagerName
+       {
+           get { return _managerName; }
+           set { _managerName = value; RaisePropertyChanged("ManagerName"); }
+       }
        public InspectorProfileViewModel() 
        {
             //TODO The emp variable should be a parameter to this constructor
@@ -59,6 +73,11 @@ namespace ParkInspectGroupC.ViewModel
            {
                Status = (from s in context.EmployeeStatus where s.Id.CompareTo(Emp.EmployeeStatusId) == 1 select s).FirstOrDefault().Description;
            }
+           using (var context = new ParkInspectEntities())
+           {
+               Manager = (from m in context.Employee where m.Id.CompareTo(Emp.ManagerId) == 1 select m).FirstOrDefault();
+           }
+           ManagerName= Manager.FirstName + " " + Manager.Prefix + " " + Manager.SurName;
        }
 
 

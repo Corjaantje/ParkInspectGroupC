@@ -4,16 +4,19 @@
          xmlns:converter="clr-namespace:ParkInspectGroupC.Converter"
         DataContext="{Binding InspectorProfile, Source={StaticResource Locator}}"
         Title="InspectorProfileView" Height="322" Width="740.1">
-    
+
     <Grid>
         <Grid.Resources>
             <converter:StatusToPathConverter x:Key="StatusToPathConverter"></converter:StatusToPathConverter>
         </Grid.Resources>
-        <Label Content="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged }" HorizontalAlignment="Left" Height="30" Margin="10,24,0,0" VerticalAlignment="Top" Width="350" />
-        <Label Content="{Binding Path=Adress, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="10,59,0,0" VerticalAlignment="Top" Width="350"  Height="30"/>
-        <Label Content="{Binding Path=Email, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="365,25,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.474,-0.769" Width="286"  Height="29"/>
-        <Label Content="{Binding Path=PhoneNumber, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="365,59,0,0" VerticalAlignment="Top" Width="286"  Height="30"/>
-        <Label Content="{Binding Path=Status, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="46,94,0,0" VerticalAlignment="Top" Width="182" Height="29" />
-        <Image Source="{Binding Status, Converter={StaticResource StatusToPathConverter}}" HorizontalAlignment="Left" Height="29" Margin="10,94,0,0" VerticalAlignment="Top" Width="31"/>
+        <Label Content="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged }" HorizontalAlignment="Left" Height="30" Margin="10,72,0,0" VerticalAlignment="Top" Width="350" />
+        <Label Content="{Binding Path=Adress, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="10,107,0,0" VerticalAlignment="Top" Width="350"  Height="30"/>
+        <Label Content="{Binding Path=Email, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="365,73,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.474,-0.769" Width="286"  Height="29"/>
+        <Label Content="{Binding Path=PhoneNumber, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="365,107,0,0" VerticalAlignment="Top" Width="286"  Height="30"/>
+        <Label Content="{Binding Path=Status, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="46,142,0,0" VerticalAlignment="Top" Width="182" Height="29" />
+        <Image Source="{Binding Status, Converter={StaticResource StatusToPathConverter}}" HorizontalAlignment="Left" Height="29" Margin="10,142,0,0" VerticalAlignment="Top" Width="31"/>
+        <Label Content="GebruikersProfiel" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <Label Content="Manager" HorizontalAlignment="Left" Margin="10,176,0,0" VerticalAlignment="Top" Width="60"/>
+        <Label Content="{Binding Path=Manager, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="75,176,0,0" VerticalAlignment="Top" Width="153"/>
     </Grid>
 </Window>
