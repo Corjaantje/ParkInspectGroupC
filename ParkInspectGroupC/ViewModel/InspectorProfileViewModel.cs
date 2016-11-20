@@ -78,7 +78,7 @@ namespace ParkInspectGroupC.ViewModel
                 }
                 Name = Emp.FirstName + " " + Emp.Prefix + " " + Emp.SurName + " (" + Emp.Gender + ")";
                 Adress = Emp.Address + ", " + Emp.ZipCode + ", " + Emp.City;
-                Email = Emp.Email;
+                Email = Emp.Email;  
                 PhoneNumber = Emp.Phonenumber;
                 using (var context = new ParkInspectEntities())
                 {
