@@ -76,7 +76,7 @@ namespace ParkInspectGroupC.ViewModel
                 {
                     Emp = (from e in context.Employee where e.Id == 3 select e).FirstOrDefault();
                 }
-                Name = Emp.FirstName + " " + Emp.Prefix + " " + Emp.SurName + "(" + Emp.Gender + ")";
+                Name = Emp.FirstName + " " + Emp.Prefix + " " + Emp.SurName + " (" + Emp.Gender + ")";
                 Adress = Emp.Address + ", " + Emp.ZipCode + ", " + Emp.City;
                 Email = Emp.Email;
                 PhoneNumber = Emp.Phonenumber;
