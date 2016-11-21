@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ParkInspectGroupC.ViewModel
 {
-    class CustomerCreationViewModel
+   public class CustomerCreationViewModel
     {
     }
 }

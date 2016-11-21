@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ParkInspectGroupC.ViewModel
 {
-    class MapViewModel
+    public class MapViewModel
     {
     }
 }
