@@ -22,7 +22,14 @@
         <Label Content="GebruikersProfiel:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="26" Width="112"/>
         <Label Content="Manager:" HorizontalAlignment="Left" Margin="22,255,0,0" VerticalAlignment="Top" Width="60" Height="26"/>
         <Label Content="{Binding Path=ManagerName, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="3,255,0,0" VerticalAlignment="Top" Width="285" Height="26" Grid.Column="1"/>
-        <DataGrid HorizontalAlignment="Left" Height="84" Margin="10,345,0,0" VerticalAlignment="Top" Width="Auto" ItemsSource="{Binding Path=Inspections, UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2"/>
+        <DataGrid HorizontalAlignment="Left" Height="84" Margin="10,345,0,0" VerticalAlignment="Top" Width="Auto" ItemsSource="{Binding Path=Inspections, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" Grid.ColumnSpan="2">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Location}" Header="Locatie" />
+                <DataGridTextColumn Binding="{Binding InspectionStatus}" Header="Status" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+
         <Label Content="ContactInformatie" HorizontalAlignment="Left" Margin="10,55,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="26" Width="113"/>
         <Label Content="Algemene Informatie" HorizontalAlignment="Left" Margin="10,190,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="26" Width="130"/>
         <Label Content="Inspecties" HorizontalAlignment="Left" Margin="10,314,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="26" Width="66"/>
