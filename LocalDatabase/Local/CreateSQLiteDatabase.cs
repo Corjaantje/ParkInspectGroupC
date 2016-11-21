@@ -74,7 +74,7 @@ namespace LocalDatabase.Local
                 SQLiteConnection.CreateFile(dbName + ".sqlite");
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }
