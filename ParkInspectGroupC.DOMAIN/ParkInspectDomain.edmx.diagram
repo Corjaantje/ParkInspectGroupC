@@ -23,17 +23,13 @@
         <EntityTypeShape EntityType="ParkInspectModel.QuestionnaireModule" Width="1.5" PointX="15" PointY="11" />
         <EntityTypeShape EntityType="ParkInspectModel.QuestionSort" Width="1.5" PointX="10.5" PointY="4.75" />
         <EntityTypeShape EntityType="ParkInspectModel.Region" Width="1.5" PointX="0.75" PointY="9.5" />
-        <EntityTypeShape EntityType="ParkInspectModel.Availability" Width="1.5" PointX="5.25" PointY="13.375" />
-        <EntityTypeShape EntityType="ParkInspectModel.WorkingHours" Width="1.5" PointX="5.25" PointY="16.5" />
         <AssociationConnector Association="ParkInspectModel.FK_Account_Employee" />
         <AssociationConnector Association="ParkInspectModel.FK_Assignment_Customer" />
         <AssociationConnector Association="ParkInspectModel.FK_Assignment_Manager" />
         <AssociationConnector Association="ParkInspectModel.FK_Inspection_Assignment" />
-        <AssociationConnector Association="ParkInspectModel.FK_Availability_Employee" />
         <AssociationConnector Association="ParkInspectModel.FK_Employee_EmployeeStatus" />
         <AssociationConnector Association="ParkInspectModel.FK_Employee_Region" />
         <AssociationConnector Association="ParkInspectModel.FK_Inspection_Employee" />
-        <AssociationConnector Association="ParkInspectModel.FK_WorkingHours_Employee" />
         <AssociationConnector Association="ParkInspectModel.FK_Inspection_InspectionStatus" />
         <AssociationConnector Association="ParkInspectModel.FK_Inspection_Region" />
         <AssociationConnector Association="ParkInspectModel.FK_InspectionImages_Inspection" />
@@ -48,6 +44,10 @@
         <AssociationConnector Association="ParkInspectModel.FK_QuestionAnswer_Questionnaire" />
         <AssociationConnector Association="ParkInspectModel.FK_QuestionnaireModule_Questionnaire" />
         <AssociationConnector Association="ParkInspectModel.FK_Employee_Manager" />
+        <EntityTypeShape EntityType="ParkInspectModel.Availability" Width="1.5" PointX="5.25" PointY="13.25" />
+        <EntityTypeShape EntityType="ParkInspectModel.WorkingHour" Width="1.5" PointX="5.25" PointY="10.125" />
+        <AssociationConnector Association="ParkInspectModel.FK_Availability_Employee" />
+        <AssociationConnector Association="ParkInspectModel.FK_WorkingHours_Employee" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -79,7 +79,9 @@ namespace ParkInspectGroupC.ViewModel
 					}
 
 					// Username and Password are correct, continue the application.
-					LoginMessage = "Succes!";
+                    var emp = (from e in context.Employee where e.Id.CompareTo(acc.EmployeeId) == 0 select e).FirstOrDefault();
+					
+                    LoginMessage = "Succes!";
 				}
 
 			}

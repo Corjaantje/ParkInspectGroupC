@@ -12,7 +12,7 @@
 			 DataContext="{Binding EmployeeCreation, Source={StaticResource Locator}}">
 
 	<Viewbox>
-		<Grid Background="White">
+		<Grid>
 			<Grid.RowDefinitions>
 				<RowDefinition Height="Auto" />
 				<RowDefinition Height="Auto" />
