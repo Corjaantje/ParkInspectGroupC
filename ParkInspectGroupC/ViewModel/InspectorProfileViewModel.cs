@@ -66,6 +66,7 @@ namespace ParkInspectGroupC.ViewModel
             set { _inspections = value; RaisePropertyChanged("Inspections"); }
         }
 
+     
         String InspectionStatus;
         public InspectorProfileViewModel()
         {
@@ -99,12 +100,12 @@ namespace ParkInspectGroupC.ViewModel
 
                     ManagerName = Manager.FirstName + " " + Manager.Prefix + " " + Manager.SurName;
                 }
-                catch (Exception e)
+                catch
                 {
                     ManagerName = "Deze medewerker heeft geen manager.";
                 }
             }
-            catch (Exception e)
+            catch
             {
                 Console.WriteLine("OOPS! something went wrong pulling data from the DataBase!");
             }
