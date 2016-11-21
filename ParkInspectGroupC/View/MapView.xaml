@@ -4,6 +4,6 @@
                 xmlns:WindowsPresentation="clr-namespace:GMap.NET.WindowsPresentation;assembly=GMap.NET.WindowsPresentation"
         Title="MapView" Height="auto" Width="auto">
     <Grid>
-        <WindowsPresentation:GMapControl x:Name="gmap" HorizontalAlignment="Left" Height="299" Margin="10,10,0,0" VerticalAlignment="Top" Width="497" MaxZoom="18" MinZoom="2" Zoom="5"/>
+        <WindowsPresentation:GMapControl DataContext="{Binding Path=gmap}" x:Name="gmap" HorizontalAlignment="Left" Height="299" Margin="10,10,0,0" VerticalAlignment="Top" Width="497" MaxZoom="18" MinZoom="2" Zoom="5"/>
     </Grid>
 </Window>
