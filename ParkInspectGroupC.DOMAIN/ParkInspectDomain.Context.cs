@@ -43,7 +43,7 @@ namespace ParkInspectGroupC.DOMAIN
         public virtual DbSet<QuestionnaireModule> QuestionnaireModule { get; set; }
         public virtual DbSet<QuestionSort> QuestionSort { get; set; }
         public virtual DbSet<Region> Region { get; set; }
-        public virtual DbSet<Availability> Availability { get; set; }
-        public virtual DbSet<WorkingHours> WorkingHours { get; set; }
+        public virtual DbSet<Availability> Availabilities { get; set; }
+        public virtual DbSet<WorkingHour> WorkingHours { get; set; }
     }
 }
