@@ -97,11 +97,13 @@
     <Compile Include="Converter\EnumToBooleanConverter.cs" />
     <Compile Include="Converter\StatusToPathConverter.cs" />
     <Compile Include="Miscellaneous\IHavePassword.cs" />
+    <Compile Include="ViewModel\CustomerCreationViewModel.cs" />
     <Compile Include="ViewModel\InspectorProfileViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="Validation\EmailValidation.cs" />
     <Compile Include="ViewModel\EmployeeCreationViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\QuestionnaireViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\EmployeeCreationView.xaml.cs">
       <DependentUpon>EmployeeCreationView.xaml</DependentUpon>
@@ -111,6 +113,15 @@
     </Compile>
     <Compile Include="View\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\QuestionnaireModules\QuestionnaireCommentControl.xaml.cs">
+      <DependentUpon>QuestionnaireCommentControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\QuestionnaireModules\VehicleCountControl.xaml.cs">
+      <DependentUpon>VehicleCountControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\QuestionnaireView.xaml.cs">
+      <DependentUpon>QuestionnaireView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -136,6 +147,18 @@
     <Page Include="View\EmployeeCreationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\QuestionnaireModules\QuestionnaireCommentControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\QuestionnaireModules\VehicleCountControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\QuestionnaireView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
