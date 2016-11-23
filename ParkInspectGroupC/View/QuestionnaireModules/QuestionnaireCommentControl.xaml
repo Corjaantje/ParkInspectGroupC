@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="ParkInspectGroupC.View.QuestionnaireModules.QuestionnaireCommentControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ParkInspectGroupC.View.QuestionnaireModules"
+             mc:Ignorable="d" 
+             >
+    <Canvas HorizontalAlignment="Left" Height="161" VerticalAlignment="Top" Width="329"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+        <Rectangle Fill="#FFF4F4F5" Stroke="Black" Height="143" Canvas.Left="7" Canvas.Top="8" Width="314"/>
+        <Label x:Name="label" Content="Vragenlijst notities" HorizontalAlignment="Left" VerticalAlignment="Top" Width="164" Canvas.Left="17" Canvas.Top="8"/>
+        <Canvas x:Name="QuestionnaireEditingControls">
+            <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="26" Stroke="Black" VerticalAlignment="Top" Width="81" Canvas.Left="240" Canvas.Top="8"/>
+            <Button x:Name="button2" Content="▼" HorizontalAlignment="Left" VerticalAlignment="Top" Width="20" Canvas.Left="270" Canvas.Top="10" />
+            <Button x:Name="button2_Copy" Content="▲" HorizontalAlignment="Left" VerticalAlignment="Top" Width="20" Canvas.Left="245" Canvas.Top="10" />
+            <Button x:Name="button2_Copy1" Content="✖" HorizontalAlignment="Left" VerticalAlignment="Top" Width="20" Canvas.Left="295" Canvas.Top="10" />
+        </Canvas>
+        <TextBox x:Name="textBox" Height="103" TextWrapping="Wrap" Text="TextBox" Canvas.Top="39" Width="296" Canvas.Left="17"/>
+    </Canvas>
+</UserControl>
+
