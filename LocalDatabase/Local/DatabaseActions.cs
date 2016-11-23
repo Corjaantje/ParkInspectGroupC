@@ -17,7 +17,7 @@ namespace LocalDatabase
 
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }
@@ -36,7 +36,7 @@ namespace LocalDatabase
 
                 return datatable;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return datatable;
             }
