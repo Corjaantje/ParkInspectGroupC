@@ -23,7 +23,8 @@ Third party API's used:
 Version Management:
 
 	Latest: 
-		0.0.3 - Database update week 2 + Theme options
+		0.0.4 - Questionaire view and viewmodel added
 	Previous:
+		0.0.3 - Database update week 2 + Theme options
 		0.0.2 - Start of version management. Basic architecture layed out, database near completion.
 		0.0.1 - Project Start
