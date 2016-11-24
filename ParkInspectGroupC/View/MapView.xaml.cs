@@ -21,7 +21,17 @@ namespace ParkInspectGroupC.View
     {
         public MapView()
         {
+            Loaded += Window_Loaded;
             InitializeComponent();
+        }
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            gmap.MapProvider = GMap.NET.MapProviders.BingMapProvider.Instance;
+            GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerAndCache;
+            gmap.SetPositionByKeywords("Netherlands");
+            gmap.CenterCrossPen = null;
+            gmap.DragButton = MouseButton.Left;
+
         }
     }
 }
