@@ -2,8 +2,10 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                 xmlns:WindowsPresentation="clr-namespace:GMap.NET.WindowsPresentation;assembly=GMap.NET.WindowsPresentation"
-        Title="MapView" Height="auto" Width="auto">
+        Title="MapView" Width="540" Height="353"
+        DataContext="{Binding Map, Source={StaticResource Locator}}">
+
     <Grid>
-        <WindowsPresentation:GMapControl DataContext="{Binding Path=gmap}" x:Name="gmap" HorizontalAlignment="Left" Height="299" Margin="10,10,0,0" VerticalAlignment="Top" Width="497" MaxZoom="18" MinZoom="2" Zoom="5"/>
+        <WindowsPresentation:GMapControl x:Name="gmap" HorizontalAlignment="Left" Height="299" Margin="10,10,0,0" VerticalAlignment="Top" Width="512" MaxZoom="18" MinZoom="2" Zoom="5"/>
     </Grid>
 </Window>
