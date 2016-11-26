@@ -1,7 +1,8 @@
 ﻿CREATE TABLE [dbo].[QuestionSort]
 (
-	[Id] INT NOT NULL PRIMARY KEY, 
+	[Id] INT IDENTITY(1,1) NOT NULL, 
     [Description] VARCHAR(MAX) NOT NULL, 
     [DateCreated] DATETIME NOT NULL DEFAULT GETDATE(), 
-    [DateUpdated] DATETIME NOT NULL DEFAULT GETDATE()
+    [DateUpdated] DATETIME NOT NULL DEFAULT GETDATE(),
+	CONSTRAINT [PK_QuestionSort] PRIMARY KEY ([Id])
 )

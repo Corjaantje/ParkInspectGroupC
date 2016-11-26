@@ -88,7 +88,7 @@ namespace ParkInspectGroupC.ViewModel
                 using (var context = new ParkInspectEntities())
                 {
 
-                    Inspections = (from insp in context.Inspection where insp.InspectorId == Emp.Id select new 
+                    Inspections = (from insp in context.Inspections where insp.InspectorId == Emp.Id select new 
                     { insp.Id, insp.Location, InspectionStatus = (from inspStat in context.InspectionStatus where inspStat.Id == insp.StatusId select inspStat).FirstOrDefault().Description}).ToList();
                 }
                 try

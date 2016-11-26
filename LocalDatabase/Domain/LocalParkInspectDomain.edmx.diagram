@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6903674c31a040a3a43666339060b126" Name="Diagram1">
+        <EntityTypeShape EntityType="LocalParkInspectModel.Account" Width="1.5" PointX="5.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LocalParkInspectModel.Assignment" Width="1.5" PointX="8.25" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LocalParkInspectModel.Availability" Width="1.5" PointX="5.25" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LocalParkInspectModel.Customer" Width="1.5" PointX="6" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LocalParkInspectModel.Employee" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LocalParkInspectModel.EmployeeStatu" Width="1.5" PointX="0.75" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LocalParkInspectModel.Inspection" Width="1.5" PointX="10.5" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LocalParkInspectModel.InspectionImage" Width="1.5" PointX="12.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LocalParkInspectModel.InspectionStatu" Width="1.5" PointX="8.25" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LocalParkInspectModel.Keyword" Width="1.5" PointX="18" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LocalParkInspectModel.KeywordCategory" Width="1.5" PointX="15.75" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LocalParkInspectModel.Module" Width="1.5" PointX="12.75" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LocalParkInspectModel.Question" Width="1.5" PointX="15" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LocalParkInspectModel.Questionaire" Width="1.5" PointX="12.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LocalParkInspectModel.QuestionaireModule" Width="1.5" PointX="15" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LocalParkInspectModel.QuestionAnswer" Width="1.5" PointX="17.25" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LocalParkInspectModel.QuestionKeyword" Width="1.5" PointX="20.25" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LocalParkInspectModel.QuestionSort" Width="1.5" PointX="12.75" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LocalParkInspectModel.Region" Width="1.5" PointX="0.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LocalParkInspectModel.WorkingHour" Width="1.5" PointX="5.25" PointY="15.625" IsExpanded="true" />
+        <AssociationConnector Association="LocalParkInspectModel.FK_Account_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="LocalParkInspectModel.FK_Assignment_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="LocalParkInspectModel.FK_Assignment_1_0" ManuallyRouted="false" />
+        <AssociationConnector Association="LocalParkInspectModel.FK_Inspection_3_0" ManuallyRouted="false" />
+        <AssociationConnector Association="LocalParkInspectModel.FK_Availability_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="LocalParkInspectModel.FK_Employee_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="LocalParkInspectModel.FK_Employee_1_0" ManuallyRouted="false" />
+        <AssociationConnector Association="LocalParkInspectModel.FK_Employee_2_0" ManuallyRouted="false" />
+        <AssociationConnector Association="LocalParkInspectModel.FK_Inspection_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="LocalParkInspectModel.FK_WorkingHours_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="LocalParkInspectModel.FK_Inspection_1_0" ManuallyRouted="false" />
+        <AssociationConnector Association="LocalParkInspectModel.FK_Inspection_2_0" ManuallyRouted="false" />
+        <AssociationConnector Association="LocalParkInspectModel.FK_InspectionImage_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="LocalParkInspectModel.FK_Questionaire_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="LocalParkInspectModel.FK_Keyword_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="LocalParkInspectModel.FK_QuestionKeyword_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="LocalParkInspectModel.FK_Question_1_0" ManuallyRouted="false" />
+        <AssociationConnector Association="LocalParkInspectModel.FK_QuestionaireModule_1_0" ManuallyRouted="false" />
+        <AssociationConnector Association="LocalParkInspectModel.FK_Question_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="LocalParkInspectModel.FK_QuestionAnswer_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="LocalParkInspectModel.FK_QuestionKeyword_1_0" ManuallyRouted="false" />
+        <AssociationConnector Association="LocalParkInspectModel.FK_QuestionaireModule_0_0" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

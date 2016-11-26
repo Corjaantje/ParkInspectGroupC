@@ -59,6 +59,9 @@
     <Compile Include="Customer.cs">
       <DependentUpon>ParkInspectDomain.tt</DependentUpon>
     </Compile>
+    <Compile Include="C__RefactorLog.cs">
+      <DependentUpon>ParkInspectDomain.tt</DependentUpon>
+    </Compile>
     <Compile Include="Employee.cs">
       <DependentUpon>ParkInspectDomain.tt</DependentUpon>
     </Compile>

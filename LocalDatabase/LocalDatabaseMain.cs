@@ -1,4 +1,7 @@
-﻿using LocalDatabase.Local;
+﻿using LocalDatabase.Central;
+using LocalDatabase.Domain;
+using LocalDatabase.Local;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
 using System.IO;
@@ -30,7 +33,7 @@ namespace LocalDatabase
             else
             {
                 CreateSQLiteDatabase createDB = new CreateSQLiteDatabase();
-                db = createDB.Create(_sqliteActions, dbName); //When true database is created and thus exists, when false creating database failed
+                db = createDB.Create(_sqliteActions, dbName, false); //When true database is created and thus exists, when false creating database failed
                 _sqliteConnection = new SQLiteConnection("Data Source=" + dbName + ".sqlite;Version=3;");
             }
 
@@ -57,18 +60,57 @@ namespace LocalDatabase
         #endregion
 
         #region Database Sync Options
-        public string SyncCentralToLocal()//TODO
+        public bool SyncCentralToLocal()
         {
-            return "";
+            GetFromCentral sync = new GetFromCentral(_sqliteConnection, _sqliteActions);
+            return sync.Sync(dbName);
         }
-        
-        /*public Tuple<string, List<Record>, List<Record>> SyncLocalToCentral()//TODO
+        public List<SaveDeleteMessage> SyncLocalToCentralSaveDelete()
         {
-            //The SQL database needs te be more finished for this part because we need the Entity Model for this part
-            //Could do without but we do need to use Entity Framework
-            return "";
-        }*/
+            bool cont = true;
+            List<SaveDeleteMessage> messages = new List<SaveDeleteMessage>();
+            SaveToCentral syncSave = new SaveToCentral(_sqliteConnection, _sqliteActions);
+            DeleteToCentral syncDelete = new DeleteToCentral(_sqliteConnection, _sqliteActions);
+
+            //Save
+            SaveDeleteMessage _newSave = new SaveDeleteMessage();
+            _newSave.Action = "Opslaan";
+            if (syncSave.Save())
+            {
+                _newSave.Message = "Succes!";
+            }
+            else
+            {
+                _newSave.Message = "Failed! Stoppen met synchroniseren.";
+                cont = false;
+            }
+            messages.Add(_newSave);
+
+            if (!cont) return messages;
+
+            //Delete
+            SaveDeleteMessage _newDelete = new SaveDeleteMessage();
+            _newSave.Action = "Verwijderen";
+            List<string> _temp = syncDelete.Save();
+            if (_temp.Count == 0)
+            {
+                _newDelete.Message = "Succes!";
+                messages.Add(_newDelete);
+            }
+            else
+            {
+                _newDelete.Message = "Er zijn meldingen:";
+                messages.Add(_newDelete);
+                foreach (string m in _temp)
+                {
+                    SaveDeleteMessage _newTemp = new SaveDeleteMessage();
+                    _newTemp.Message = m;
+                    messages.Add(_newTemp);
+                }
+            }
+
+            return messages;
+        }
         #endregion
-            //Shit
     }
 }

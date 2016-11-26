@@ -59,9 +59,10 @@ namespace ParkInspectGroupC.ViewModel
 		public MainViewModel()
 		{
 			BackCommand = new RelayCommand(PerformBack, CanPerformBack);
-			CurrentView = new LoginView();
+            //CurrentView = new LoginView();
+            CurrentView = new DatabaseSyncView();
 
-			Themes = new List<Theme>
+            Themes = new List<Theme>
 			{
 				new Theme("No theme (default)", null),
 				new Theme("Expression Dark", new Uri("/ParkInspectGroupC;component/Themes/ExpressionDark.xaml", UriKind.Relative)),
