@@ -5,11 +5,13 @@ using GalaSoft.MvvmLight;
 using ParkInspectGroupC.Miscellaneous;
 using Simple.Wpf.Themes;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Markup.Localizer;
 using GalaSoft.MvvmLight.CommandWpf;
 using Microsoft.Practices.ServiceLocation;
+using ParkInspectGroupC.Factory;
 using ParkInspectGroupC.Properties;
 using ParkInspectGroupC.View;
 
@@ -24,7 +26,13 @@ namespace ParkInspectGroupC.ViewModel
 		    set { _currentView = value; RaisePropertyChanged("CurrentView"); }
 	    }
 
-	    public IEnumerable<Theme> Themes { get; private set; }
+	    //public IEnumerable<Theme> Themes { get; private set; }
+	    private ThemeFactory _themeFactory;
+
+	    public List<Theme> ThemeList
+	    {
+		    get { return _themeFactory.Themes; } 
+	    }
 
 	    private string _loadedTheme;
 	    public string LoadedTheme
@@ -61,30 +69,32 @@ namespace ParkInspectGroupC.ViewModel
 			BackCommand = new RelayCommand(PerformBack, CanPerformBack);
 			CurrentView = new LoginView();
 
-			Themes = new List<Theme>
-			{
-				new Theme("No theme (default)", null),
-				new Theme("Expression Dark", new Uri("/ParkInspectGroupC;component/Themes/ExpressionDark.xaml", UriKind.Relative)),
-				new Theme("Expression Light", new Uri("/ParkInspectGroupC;component/Themes/ExpressionLight.xaml", UriKind.Relative)),
-				new Theme("Shiny Blue", new Uri("/ParkInspectGroupC;component/Themes/ShinyBlue.xaml", UriKind.Relative)),
-				new Theme("Shiny Red", new Uri("/ParkInspectGroupC;component/Themes/ShinyRed.xaml", UriKind.Relative)),
-			};
+			//List<Theme> Themes = new List<Theme>
+			//{
+			//	new Theme("No theme (default)", null),
+			//	new Theme("Expression Dark", new Uri("/ParkInspectGroupC;component/Themes/ExpressionDark.xaml", UriKind.Relative)),
+			//	new Theme("Expression Light", new Uri("/ParkInspectGroupC;component/Themes/ExpressionLight.xaml", UriKind.Relative)),
+			//	new Theme("Shiny Blue", new Uri("/ParkInspectGroupC;component/Themes/ShinyBlue.xaml", UriKind.Relative)),
+			//	new Theme("Shiny Red", new Uri("/ParkInspectGroupC;component/Themes/ShinyRed.xaml", UriKind.Relative)),
+			//};
+
+			_themeFactory = new ThemeFactory();
 
 			LoadedTheme = Settings.Default.CurrentThemeUri;
 
 			if (string.IsNullOrWhiteSpace(_loadedTheme.Trim()))
 			{
-				SelectedTheme = Themes.FirstOrDefault();
+				SelectedTheme = ThemeList.FirstOrDefault();
 			}
 			else
 			{
-				foreach (var theme in Themes)
+				foreach (var theme in ThemeList)
 				{
 					if (string.Compare(_loadedTheme, theme.Name) == 0)
 					{
 						SelectedTheme = theme;
 						break;
-					}		
+					}
 				}
 			}
 		}
