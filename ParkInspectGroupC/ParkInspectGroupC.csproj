@@ -96,6 +96,7 @@
     </ApplicationDefinition>
     <Compile Include="Converter\EnumToBooleanConverter.cs" />
     <Compile Include="Converter\StatusToPathConverter.cs" />
+    <Compile Include="Factory\ThemeFactory.cs" />
     <Compile Include="Miscellaneous\IHavePassword.cs" />
     <Compile Include="Miscellaneous\Navigator.cs" />
     <Compile Include="ViewModel\CustomerCreationViewModel.cs" />
@@ -117,6 +118,9 @@
     </Compile>
     <Compile Include="View\MainWindow\NavigationMenu.xaml.cs">
       <DependentUpon>NavigationMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MainWindow\ThemeSelector.xaml.cs">
+      <DependentUpon>ThemeSelector.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\QuestionnaireModules\QuestionnaireCommentControl.xaml.cs">
       <DependentUpon>QuestionnaireCommentControl.xaml</DependentUpon>
@@ -140,6 +144,34 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Themes\BureauBlack.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\BureauBlue.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\ExpressionDark.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\ExpressionLight.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\ShinyBlue.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\ShinyRed.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\WhistlerBlue.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\InspectorProfileView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -153,6 +185,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\MainWindow\NavigationMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MainWindow\ThemeSelector.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
