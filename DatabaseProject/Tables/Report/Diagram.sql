@@ -1,0 +1,5 @@
+﻿CREATE TABLE [dbo].[Diagram]
+(
+	[Id] INT NOT NULL PRIMARY KEY, 
+    [File] VARCHAR(MAX) NOT NULL
+)
