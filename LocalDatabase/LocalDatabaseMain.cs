@@ -114,6 +114,28 @@ namespace LocalDatabase
 
             return messages;
         }
+        public Tuple<List<UpdateMessage>,SaveDeleteMessage> SyncLocalToCentralUpdate()
+        {
+            List<UpdateMessage> UpdateMessages = new List<UpdateMessage>();
+            UpdateToCentral UpdateSync = new UpdateToCentral(_sqliteConnection, _sqliteActions);
+
+            //Update
+            SaveDeleteMessage _newUpdate = new SaveDeleteMessage();
+            _newUpdate.Action = "Updaten";
+            _newUpdate.Date = DateTime.Now;
+            Tuple<bool, List<UpdateMessage>> Update = UpdateSync.Update();
+
+            if (Update.Item1)
+            {
+                _newUpdate.Message = "Succes! Er zijn "+ Update.Item2.Count + " conflicten gevonden.";
+            }
+            else
+            {
+                _newUpdate.Message = "Failed! Stoppen met synchroniseren.";
+            }
+
+            return Tuple.Create(UpdateMessages, _newUpdate);
+        }
         #endregion
     }
 }

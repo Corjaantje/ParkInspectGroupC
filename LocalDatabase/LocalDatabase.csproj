@@ -149,6 +149,7 @@
     <Compile Include="Local\DatabaseActions.cs" />
     <Compile Include="Local\DeleteToCentral.cs" />
     <Compile Include="Local\SaveToCentral.cs" />
+    <Compile Include="Local\UpdateToCentral.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

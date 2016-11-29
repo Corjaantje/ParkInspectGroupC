@@ -10,6 +10,8 @@ namespace LocalDatabase.Domain
         public int LocalId_Extra { get; set; }
         public int CentralId { get; set; }
         public int CentralId_Extra { get; set; }
+        public DateTime LocalId_DateTime { get; set; }
+        public DateTime CentralId_DateTime { get; set; }
         public DateTime LocalDateTime { get; set; }
         public DateTime CentralDateTime { get; set; }
         public string Message { get; set; }
