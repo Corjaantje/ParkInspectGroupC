@@ -365,6 +365,7 @@ namespace LocalDatabase.Local
                                 message.LocalDateTime = r.DateUpdated;
                                 message.CentralDateTime = region.DateUpdated;
                                 message.Message = "Er was een conflict bij deze region. Wat u wilt opslaan: '" + r.Region1 + "'. Wat centraal opgeslagen staat: '" + region.Region1 + "'.";
+                                UpdateList.Add(message);
                             }
                         }
                     }
@@ -414,6 +415,7 @@ namespace LocalDatabase.Local
                                 message.LocalDateTime = r.DateUpdated;
                                 message.CentralDateTime = central.DateUpdated;
                                 message.Message = "Er was een conflict bij deze werknemer status. Wat u wilt opslaan: '" + r.Description + "'. Wat centraal opgeslagen staat: '" + central.Description + "'.";
+                                UpdateList.Add(message);
                             }
                         }
                     }
@@ -476,6 +478,7 @@ namespace LocalDatabase.Local
                                 message.LocalDateTime = r.DateUpdated;
                                 message.CentralDateTime = central.DateUpdated;
                                 message.Message = "Er was een conflict bij deze werknemer. Open dit conflict om meer informatie te zien.";
+                                UpdateList.Add(message);
                             }
                         }
                     }
@@ -528,6 +531,7 @@ namespace LocalDatabase.Local
                                 message.LocalDateTime = r.DateUpdated;
                                 message.CentralDateTime = central.DateUpdated;
                                 message.Message = "Er was een conflict bij dit account. Open dit conflict om meer informatie te zien.";
+                                UpdateList.Add(message);
                             }
                         }
                     }
@@ -583,6 +587,7 @@ namespace LocalDatabase.Local
                                 message.LocalDateTime = r.DateUpdated;
                                 message.CentralDateTime = central.DateUpdated;
                                 message.Message = "Er was een conflict bij deze beschikbaarheid. Open dit conflict om meer informatie te zien.";
+                                UpdateList.Add(message);
                             }
                         }
                     }
@@ -638,6 +643,7 @@ namespace LocalDatabase.Local
                                 message.LocalDateTime = r.DateUpdated;
                                 message.CentralDateTime = central.DateUpdated;
                                 message.Message = "Er was een conflict bij deze gewerkte uren. Open dit conflict om meer informatie te zien.";
+                                UpdateList.Add(message);
                             }
                         }
                     }
@@ -691,6 +697,7 @@ namespace LocalDatabase.Local
                                 message.LocalDateTime = r.DateUpdated;
                                 message.CentralDateTime = central.DateUpdated;
                                 message.Message = "Er was een conflict bij deze klant. Open dit conflict om meer informatie te zien.";
+                                UpdateList.Add(message);
                             }
                         }
                     }
@@ -744,6 +751,7 @@ namespace LocalDatabase.Local
                                 message.LocalDateTime = r.DateUpdated;
                                 message.CentralDateTime = central.DateUpdated;
                                 message.Message = "Er was een conflict bij deze opdracht. Open dit conflict om meer informatie te zien.";
+                                UpdateList.Add(message);
                             }
                         }
                     }
@@ -793,6 +801,7 @@ namespace LocalDatabase.Local
                                 message.LocalDateTime = r.DateUpdated;
                                 message.CentralDateTime = central.DateUpdated;
                                 message.Message = "Er was een conflict bij deze inspectie status. Wat u wilt opslaan: '" + r.Description + "'. Wat centraal opgeslagen staat: '" + central.Description + "'.";
+                                UpdateList.Add(message);
                             }
                         }
                     }
@@ -848,6 +857,7 @@ namespace LocalDatabase.Local
                                 message.LocalDateTime = r.DateUpdated;
                                 message.CentralDateTime = central.DateUpdated;
                                 message.Message = "Er was een conflict bij deze inspectie. Open dit conflict om meer informatie te zien.";
+                                UpdateList.Add(message);
                             }
                         }
                     }
@@ -898,6 +908,7 @@ namespace LocalDatabase.Local
                                 message.LocalDateTime = r.DateUpdated;
                                 message.CentralDateTime = central.DateUpdated;
                                 message.Message = "Er was een conflict bij deze inspectie foto. Wat u wilt opslaan: '"+ r.File +"'. Wat centraal opgeslagen staat: '" + central.File + "'.";
+                                UpdateList.Add(message);
                             }
                         }
                     }
@@ -947,6 +958,7 @@ namespace LocalDatabase.Local
                                 message.LocalDateTime = r.DateUpdated;
                                 message.CentralDateTime = central.DateUpdated;
                                 message.Message = "Er was een conflict met deze keyword category. Wat u wilt opslaan: '" + r.Description + "'. Wat centraal opgeslagen staat: '" + central.Description + "'.";
+                                UpdateList.Add(message);
                             }
                         }
                     }
@@ -997,6 +1009,7 @@ namespace LocalDatabase.Local
                                 message.LocalDateTime = r.DateUpdated;
                                 message.CentralDateTime = central.DateUpdated;
                                 message.Message = "Er was een conflict met dit keyword. Wat u wilt opslaan: '" + r.Description + "'. Wat centraal opgeslagen staat: '" + central.Description + "'.";
+                                UpdateList.Add(message);
                             }
                         }
                     }
@@ -1048,6 +1061,7 @@ namespace LocalDatabase.Local
                                 message.LocalDateTime = r.DateUpdated;
                                 message.CentralDateTime = central.DateUpdated;
                                 message.Message = "Er was een conflict met deze module. Open dit conflict om meer informatie te zien.";
+                                UpdateList.Add(message);
                             }
                         }
                     }
@@ -1097,6 +1111,7 @@ namespace LocalDatabase.Local
                                 message.LocalDateTime = r.DateUpdated;
                                 message.CentralDateTime = central.DateUpdated;
                                 message.Message = "Er was een conflict met deze vraag soort. Wat u wilt opslaan: '" + r.Description + "'. Wat centraal opgeslagen staat: '" + central.Description + "'.";
+                                UpdateList.Add(message);
                             }
                         }
                     }
@@ -1148,6 +1163,7 @@ namespace LocalDatabase.Local
                                 message.LocalDateTime = r.DateUpdated;
                                 message.CentralDateTime = central.DateUpdated;
                                 message.Message = "Er was een conflict met deze vraag. Open dit conflict om meer informatie te zien.";
+                                UpdateList.Add(message);
                             }
                         }
                     }
@@ -1197,6 +1213,7 @@ namespace LocalDatabase.Local
                                 message.LocalDateTime = r.DateUpdated;
                                 message.CentralDateTime = central.DateUpdated;
                                 message.Message = "Er was een conflict met deze questionnaire. Open dit conflict om meer informatie te zien.";
+                                UpdateList.Add(message);
                             }
                         }
                     }
@@ -1251,6 +1268,7 @@ namespace LocalDatabase.Local
                                 message.LocalDateTime = r.DateUpdated;
                                 message.CentralDateTime = central.DateUpdated;
                                 message.Message = "Er was een conflict met dit antwoord op een vraag. Open dit conflict om meer informatie te zien.";
+                                UpdateList.Add(message);
                             }
                         }
                     }
@@ -1304,6 +1322,7 @@ namespace LocalDatabase.Local
                                 message.LocalDateTime = r.DateUpdated;
                                 message.CentralDateTime = central.DateUpdated;
                                 message.Message = "Er was een conflict met deze vragen module. Open dit conflict om meer informatie te zien.";
+                                UpdateList.Add(message);
                             }
                         }
                     }
@@ -1357,6 +1376,7 @@ namespace LocalDatabase.Local
                                 message.LocalDateTime = r.DateUpdated;
                                 message.CentralDateTime = central.DateUpdated;
                                 message.Message = "Er was een conflict met deze vraag keyword. Open dit conflict om meer informatie te zien.";
+                                UpdateList.Add(message);
                             }
                         }
                     }

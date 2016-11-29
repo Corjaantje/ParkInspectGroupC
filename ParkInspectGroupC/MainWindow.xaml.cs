@@ -24,18 +24,6 @@ namespace ParkInspectGroupC
 
             //Create local db
             LocalDatabaseMain ldb = new LocalDatabaseMain("ParkInspect");
-
-            //Start sync with central
-            //bool syncCToL = ldb.SyncCentralToLocal();
-            //MessageBox.Show("Sync was: " + syncCToL);//true = good, false = bad
-
-            //List<SaveDeleteMessage> syncTwo = ldb.SyncLocalToCentralSaveDelete();
-            //string syncLtoC = null;
-            //foreach (string m in syncTwo)
-            //{
-            //    syncLtoC += m + Environment.NewLine;
-            //}
-            //MessageBox.Show(syncLtoC);//true = good, false = bad
         }
     }
 }

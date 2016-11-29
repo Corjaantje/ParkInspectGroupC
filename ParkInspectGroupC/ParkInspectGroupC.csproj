@@ -121,6 +121,9 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\QuestionnaireViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="View\DatabaseSyncDialogs\DeleteDialog.xaml.cs">
+      <DependentUpon>DeleteDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\DatabaseSyncView.xaml.cs">
       <DependentUpon>DatabaseSyncView.xaml</DependentUpon>
     </Compile>
@@ -185,6 +188,10 @@
     <Page Include="Themes\WhistlerBlue.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\DatabaseSyncDialogs\DeleteDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\DatabaseSyncView.xaml">
       <SubType>Designer</SubType>

@@ -25,7 +25,7 @@
             <DataGrid Grid.Column="0" Grid.ColumnSpan="2" AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedUpdateMessage}" ItemsSource="{Binding theUpdateMessages}" Margin="5,5,5,5" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#FFF0E0E0" HeadersVisibility="Column">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Message" Binding="{Binding Message}" Width="*" />
-                    <DataGridTemplateColumn Width="70">
+                    <DataGridTemplateColumn Width="70" Header="Show">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Command="{Binding DataContext.ShowUpdateMessage, RelativeSource={RelativeSource AncestorType=DataGrid}}"
@@ -33,7 +33,7 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Width="70">
+                    <DataGridTemplateColumn Width="70" Header="Delete">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Command="{Binding DataContext.DeleteUpdateMessage, RelativeSource={RelativeSource AncestorType=DataGrid}}"
@@ -46,9 +46,9 @@
 
             <DataGrid Grid.Column="2" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding theSaveDeleteMessages}" Margin="5,5,5,5" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#FFF0E0E0" HeadersVisibility="Column">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Action" Binding="{Binding Action}" Width="100" />
+                    <DataGridTextColumn Header="Action" Binding="{Binding Action}" Width="110" />
                     <DataGridTextColumn Header="Message" Binding="{Binding Message}" Width="*" />
-                    <DataGridTextColumn Header="Date" Binding="{Binding Date}" Width="150" />
+                    <DataGridTextColumn Header="Date" Binding="{Binding Date}" Width="140" />
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

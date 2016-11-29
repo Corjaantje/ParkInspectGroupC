@@ -75,7 +75,7 @@ namespace LocalDatabase
 
             //Save
             SaveDeleteMessage _newSave = new SaveDeleteMessage();
-            _newSave.Action = "Opslaan";
+            _newSave.Action = "LtC Opslaan";
             _newSave.Date = DateTime.Now;
             if (syncSave.Save())
             {
@@ -92,7 +92,7 @@ namespace LocalDatabase
 
             //Delete
             SaveDeleteMessage _newDelete = new SaveDeleteMessage();
-            _newDelete.Action = "Verwijderen";
+            _newDelete.Action = "LtC Verwijderen";
             _newDelete.Date = DateTime.Now;
             List<string> _temp = syncDelete.Save();
             if (_temp.Count == 0)
@@ -121,13 +121,14 @@ namespace LocalDatabase
 
             //Update
             SaveDeleteMessage _newUpdate = new SaveDeleteMessage();
-            _newUpdate.Action = "Updaten";
+            _newUpdate.Action = "LtC Updaten";
             _newUpdate.Date = DateTime.Now;
             Tuple<bool, List<UpdateMessage>> Update = UpdateSync.Update();
 
             if (Update.Item1)
             {
                 _newUpdate.Message = "Succes! Er zijn "+ Update.Item2.Count + " conflicten gevonden.";
+                UpdateMessages = Update.Item2;
             }
             else
             {
@@ -136,6 +137,10 @@ namespace LocalDatabase
 
             return Tuple.Create(UpdateMessages, _newUpdate);
         }
+        #endregion
+
+        #region Database Sync Update Actions
+
         #endregion
     }
 }
