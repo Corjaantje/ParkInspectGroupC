@@ -59,6 +59,9 @@
     <Compile Include="Customer.cs">
       <DependentUpon>ParkInspectDomain.tt</DependentUpon>
     </Compile>
+    <Compile Include="Diagram.cs">
+      <DependentUpon>ParkInspectDomain.tt</DependentUpon>
+    </Compile>
     <Compile Include="Employee.cs">
       <DependentUpon>ParkInspectDomain.tt</DependentUpon>
     </Compile>
@@ -117,6 +120,12 @@
       <DependentUpon>ParkInspectDomain.tt</DependentUpon>
     </Compile>
     <Compile Include="Region.cs">
+      <DependentUpon>ParkInspectDomain.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Report.cs">
+      <DependentUpon>ParkInspectDomain.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReportSection.cs">
       <DependentUpon>ParkInspectDomain.tt</DependentUpon>
     </Compile>
     <Compile Include="WorkingHour.cs">

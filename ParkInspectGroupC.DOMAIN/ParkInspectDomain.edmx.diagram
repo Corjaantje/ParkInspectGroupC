@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="cbb9ca90c2fa411b9bc4db601f4febd2" Name="Diagram1" ZoomLevel="101">
+      <Diagram DiagramId="cbb9ca90c2fa411b9bc4db601f4febd2" Name="Diagram1" ZoomLevel="87">
         <EntityTypeShape EntityType="ParkInspectModel.Account" Width="1.5" PointX="5.25" PointY="6.25" />
         <EntityTypeShape EntityType="ParkInspectModel.Assignment" Width="1.5" PointX="8.25" PointY="9" />
         <EntityTypeShape EntityType="ParkInspectModel.Customer" Width="1.5" PointX="6" PointY="2.25" />
@@ -17,7 +17,7 @@
         <EntityTypeShape EntityType="ParkInspectModel.KeywordCategory" Width="1.5" PointX="10.5" PointY="15" />
         <EntityTypeShape EntityType="ParkInspectModel.Module" Width="1.5" PointX="10.5" PointY="1.375" />
         <EntityTypeShape EntityType="ParkInspectModel.Question" Width="1.5" PointX="12.75" PointY="2.625" />
-        <EntityTypeShape EntityType="ParkInspectModel.QuestionAnswer" Width="1.5" PointX="15" PointY="7.875" />
+        <EntityTypeShape EntityType="ParkInspectModel.QuestionAnswer" Width="1.5" PointX="15.125" PointY="7.125" />
         <EntityTypeShape EntityType="ParkInspectModel.QuestionKeyword" Width="1.5" PointX="15" PointY="3" />
         <EntityTypeShape EntityType="ParkInspectModel.Questionnaire" Width="1.5" PointX="12.75" PointY="10.875" />
         <EntityTypeShape EntityType="ParkInspectModel.QuestionnaireModule" Width="1.5" PointX="15" PointY="11" />
@@ -48,6 +48,14 @@
         <EntityTypeShape EntityType="ParkInspectModel.WorkingHour" Width="1.5" PointX="5.25" PointY="10.125" />
         <AssociationConnector Association="ParkInspectModel.FK_Availability_Employee" />
         <AssociationConnector Association="ParkInspectModel.FK_WorkingHours_Employee" />
+        <EntityTypeShape EntityType="ParkInspectModel.Diagram" Width="1.5" PointX="15.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ParkInspectModel.Report" Width="1.5" PointX="15.5" PointY="15.125" />
+        <EntityTypeShape EntityType="ParkInspectModel.ReportSection" Width="1.5" PointX="18" PointY="8.375" />
+        <AssociationConnector Association="ParkInspectModel.FK_Report_Employee" />
+        <AssociationConnector Association="ParkInspectModel.FK_ReportSection_Report" />
+        <AssociationConnector Association="ParkInspectModel.AssignmentReport" />
+        <AssociationConnector Association="ParkInspectModel.ReportSectionDiagram" />
+        <AssociationConnector Association="ParkInspectModel.ReportSectionInspectionImage" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

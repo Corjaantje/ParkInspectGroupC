@@ -23,6 +23,7 @@ namespace ParkInspectGroupC.DOMAIN
             this.Employees = new HashSet<Employee>();
             this.Availabilities = new HashSet<Availability>();
             this.WorkingHours = new HashSet<WorkingHour>();
+            this.Reports = new HashSet<Report>();
         }
     
         public int Id { get; set; }
@@ -58,5 +59,7 @@ namespace ParkInspectGroupC.DOMAIN
         public virtual ICollection<Availability> Availabilities { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WorkingHour> WorkingHours { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Report> Reports { get; set; }
     }
 }

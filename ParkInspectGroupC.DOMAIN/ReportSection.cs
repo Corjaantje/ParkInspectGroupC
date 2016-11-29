@@ -12,29 +12,24 @@ namespace ParkInspectGroupC.DOMAIN
     using System;
     using System.Collections.Generic;
     
-    public partial class Assignment
+    public partial class ReportSection
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Assignment()
+        public ReportSection()
         {
-            this.Inspection = new HashSet<Inspection>();
-            this.Reports = new HashSet<Report>();
+            this.Diagrams = new HashSet<Diagram>();
+            this.InspectionImages = new HashSet<InspectionImage>();
         }
     
         public int Id { get; set; }
-        public int CustomerId { get; set; }
-        public int ManagerId { get; set; }
-        public string Description { get; set; }
-        public Nullable<System.DateTime> StartDate { get; set; }
-        public Nullable<System.DateTime> EndDate { get; set; }
-        public System.DateTime DateCreated { get; set; }
-        public System.DateTime DateUpdated { get; set; }
+        public string Title { get; set; }
+        public string Summary { get; set; }
+        public int ReportId { get; set; }
     
-        public virtual Customer Customer { get; set; }
-        public virtual Employee Employee { get; set; }
+        public virtual Report Report { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Inspection> Inspection { get; set; }
+        public virtual ICollection<Diagram> Diagrams { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Report> Reports { get; set; }
+        public virtual ICollection<InspectionImage> InspectionImages { get; set; }
     }
 }

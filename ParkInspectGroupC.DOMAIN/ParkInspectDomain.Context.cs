@@ -45,5 +45,8 @@ namespace ParkInspectGroupC.DOMAIN
         public virtual DbSet<Region> Region { get; set; }
         public virtual DbSet<Availability> Availabilities { get; set; }
         public virtual DbSet<WorkingHour> WorkingHours { get; set; }
+        public virtual DbSet<Diagram> Diagrams { get; set; }
+        public virtual DbSet<Report> Reports { get; set; }
+        public virtual DbSet<ReportSection> ReportSections { get; set; }
     }
 }

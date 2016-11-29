@@ -12,21 +12,17 @@ namespace ParkInspectGroupC.DOMAIN
     using System;
     using System.Collections.Generic;
     
-    public partial class InspectionImage
+    public partial class Diagram
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public InspectionImage()
+        public Diagram()
         {
             this.ReportSections = new HashSet<ReportSection>();
         }
     
         public int Id { get; set; }
         public string File { get; set; }
-        public Nullable<int> InspectionId { get; set; }
-        public System.DateTime DateCreated { get; set; }
-        public System.DateTime DateUpdated { get; set; }
     
-        public virtual Inspection Inspection { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ReportSection> ReportSections { get; set; }
     }
