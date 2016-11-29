@@ -50,7 +50,7 @@ namespace ParkInspectGroupC.ViewModel.ReportCreation
 				SelectedEmployee = (from a in context.Employee where a.FirstName == "Jaqueline" select a).FirstOrDefault();
 
 
-				var assignmentList = (from a in context.Assignment where a.ManagerId == SelectedEmployee.Id select a).ToList();
+				var assignmentList = (from a in context.Assignment.Include("Customer") where a.ManagerId == SelectedEmployee.Id select a).ToList();
 				AssignmentList = new ObservableCollection<Assignment>(assignmentList);
 			}
 		}

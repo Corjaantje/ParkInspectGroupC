@@ -6,8 +6,9 @@
              xmlns:local="clr-namespace:ParkInspectGroupC.View.ReportCreation"
              mc:Ignorable="d"
 			 DataContext="{Binding Reports, Source={StaticResource Locator}}">
-	<Grid>
-		<Grid.RowDefinitions>
+	<StackPanel>
+		<Grid Margin="5">
+			<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
 			<RowDefinition Height="Auto" />
 			<RowDefinition Height="Auto" />
@@ -15,27 +16,28 @@
 			<RowDefinition Height="Auto" />
 		</Grid.RowDefinitions>  
 		<Grid.ColumnDefinitions>
+			<ColumnDefinition MaxWidth="100" />
 			<ColumnDefinition />
-			<ColumnDefinition MaxWidth="150" />
 		</Grid.ColumnDefinitions>
 
-		<Label Content="Titel" Grid.Row="0" Grid.Column="0" />
-		<TextBox Width="150" Grid.Column="1" Grid.Row="0" Margin="3" Text="{Binding ReportTitle}" />
+		<Label Content="Titel:" Grid.Row="0" Grid.Column="0"/>
+		<TextBox Width="250" Grid.Column="1" Grid.Row="0" Text="{Binding ReportTitle}" HorizontalAlignment="Left" Margin="3" />
 		
-		<Label Content="Omschijving" Grid.Row="1" Grid.Column="0" />
-		<ScrollViewer Grid.Column="1" Grid.Row="1" Margin="3" MinHeight="150" MaxHeight="150"  VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Hidden">
+		<Label Content="Omschijving:" Grid.Row="1" Grid.Column="0" />
+		<ScrollViewer Grid.Column="1" Grid.Row="1" Margin="3" MinWidth="250" Height="225" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Hidden" HorizontalAlignment="Left" >
 			<TextBox TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding ReportDescription}" />
 		</ScrollViewer>
 		
-		<Button Content="Genereer PDF" Grid.Row="2" Grid.ColumnSpan="2"/>
-		<ScrollViewer Grid.Row="3" Grid.ColumnSpan="2" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
+		<Button Content="Genereer PDF" Grid.Row="2" Margin="3" />
+		</Grid>
+		<ScrollViewer Grid.Row="3" Grid.ColumnSpan="2" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Visible">
 			<DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedAssignment, Mode=TwoWay}" ItemsSource="{Binding AssignmentList}" >
 				<DataGrid.Columns>
 					<DataGridTextColumn Header="Id" Binding="{Binding Id}" />
 					<DataGridTextColumn Header="Titel" Binding="{Binding Description}" />
 					<DataGridTextColumn Header="Klant" Binding="{Binding Customer.Name}" />
 					<DataGridTextColumn Header="Begin Datum" Binding="{Binding StartDate}" />
-					<DataGridTextColumn Header="Eind Datum" Binding="{Binding EndDate}" /> 
+					<DataGridTextColumn Header="Eind Datum" Binding="{Binding EndDate}" />
 					<DataGridTemplateColumn>
 						<DataGridTemplateColumn.CellTemplate>
 							<DataTemplate>
@@ -53,7 +55,8 @@
 				</DataGrid.Columns>
 			</DataGrid>
 		</ScrollViewer>
-		
+
 		<Button Grid.Row="4" Content="Opslaan" Margin="3" Command="{Binding SaveReport}" />
-	</Grid>
+	</StackPanel>
+	
 </UserControl>
