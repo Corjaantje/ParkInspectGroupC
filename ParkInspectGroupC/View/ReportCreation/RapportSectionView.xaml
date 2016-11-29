@@ -68,5 +68,6 @@
 		</ScrollViewer>
 		
 		<Button Grid.Row="7" Grid.Column="0" Content="Opslaan" Margin="3" />
-    </Grid>
+		<CheckBox x:Name="checkBox" Content="CheckBox" HorizontalAlignment="Left" Height="0" Margin="-142,6,0,0" Grid.Row="5" VerticalAlignment="Top" Width="2"/>
+	</Grid>
 </UserControl>
