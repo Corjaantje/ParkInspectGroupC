@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Diagnostics;
 
 namespace ParkInspectGroupC.ViewModel
 {
@@ -19,19 +20,26 @@ namespace ParkInspectGroupC.ViewModel
             LCSyncCommand = new RelayCommand(LocalToCentralSync);
             CLSyncCommand = new RelayCommand(LocalToCentralSync);
 
-            LocalToCentralSync();
+            theSaveDeleteMessages = new ObservableCollection<SaveDeleteMessage>();
         }
 
         private void LocalToCentralSync()
         {
             List<SaveDeleteMessage> message = SaveDelete().Result;
-            theSaveDeleteMessages = new ObservableCollection<SaveDeleteMessage>(message);
+            foreach (SaveDeleteMessage m in message)
+            {
+                theSaveDeleteMessages.Add(m);
+            }
         }
 
         private static async Task<List<SaveDeleteMessage>> SaveDelete()
         {
+            Debug.WriteLine("Starting Sync");
             LocalDatabaseMain ldb = new LocalDatabaseMain("ParkInspect");//Make the connection with the db
-            List<SaveDeleteMessage> message = await Task.Run(() => ldb.SyncLocalToCentralSaveDelete());//Start the sync
+            //List<SaveDeleteMessage> message = await Task.Run(() => ldb.SyncLocalToCentralSaveDelete());//Start the sync
+            List<SaveDeleteMessage> message = ldb.SyncLocalToCentralSaveDelete();
+            Debug.WriteLine("Sync Done");
+            Debug.WriteLine("Sync Stopping");
 
             return message;
         }

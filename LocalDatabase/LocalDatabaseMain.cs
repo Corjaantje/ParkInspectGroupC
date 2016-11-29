@@ -1,6 +1,7 @@
 ﻿using LocalDatabase.Central;
 using LocalDatabase.Domain;
 using LocalDatabase.Local;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
@@ -75,6 +76,7 @@ namespace LocalDatabase
             //Save
             SaveDeleteMessage _newSave = new SaveDeleteMessage();
             _newSave.Action = "Opslaan";
+            _newSave.Date = DateTime.Now;
             if (syncSave.Save())
             {
                 _newSave.Message = "Succes!";
@@ -90,7 +92,8 @@ namespace LocalDatabase
 
             //Delete
             SaveDeleteMessage _newDelete = new SaveDeleteMessage();
-            _newSave.Action = "Verwijderen";
+            _newDelete.Action = "Verwijderen";
+            _newDelete.Date = DateTime.Now;
             List<string> _temp = syncDelete.Save();
             if (_temp.Count == 0)
             {

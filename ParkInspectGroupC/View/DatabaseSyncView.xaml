@@ -19,9 +19,10 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <DataGrid Grid.Column="0" AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedUpdateMessage}" ItemsSource="{Binding theUpdateMessages}" Margin="5,5,5,5" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#FFF0E0E0" HeadersVisibility="Column">
+            <DataGrid Grid.Column="0" Grid.ColumnSpan="2" AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedUpdateMessage}" ItemsSource="{Binding theUpdateMessages}" Margin="5,5,5,5" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#FFF0E0E0" HeadersVisibility="Column">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Message" Binding="{Binding Message}" Width="*" />
                     <DataGridTemplateColumn Width="70">
@@ -43,10 +44,11 @@
                 </DataGrid.Columns>
             </DataGrid>
 
-            <DataGrid Grid.Column="1" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding theSaveDeleteMessages}" Margin="5,5,5,5" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#FFF0E0E0" HeadersVisibility="Column">
+            <DataGrid Grid.Column="2" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding theSaveDeleteMessages}" Margin="5,5,5,5" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#FFF0E0E0" HeadersVisibility="Column">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Action" Binding="{Binding Action}" Width="100" />
                     <DataGridTextColumn Header="Message" Binding="{Binding Message}" Width="*" />
+                    <DataGridTextColumn Header="Date" Binding="{Binding Date}" Width="150" />
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
