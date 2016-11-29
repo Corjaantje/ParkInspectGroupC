@@ -131,6 +131,15 @@
     <Compile Include="View\QuestionnaireView.xaml.cs">
       <DependentUpon>QuestionnaireView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ReportCreation\RapportSectionView.xaml.cs">
+      <DependentUpon>RapportSectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ReportCreation\ReportCreationView.xaml.cs">
+      <DependentUpon>ReportCreationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ReportCreation\ReportView.xaml.cs">
+      <DependentUpon>ReportView.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -203,6 +212,18 @@
     <Page Include="View\QuestionnaireView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ReportCreation\RapportSectionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ReportCreation\ReportCreationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ReportCreation\ReportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
