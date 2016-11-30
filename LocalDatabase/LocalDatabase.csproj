@@ -66,6 +66,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Central\GetCentralRecordDetails.cs" />
     <Compile Include="Central\GetFromCentral.cs" />
     <Compile Include="Domain\Account.cs">
       <DependentUpon>LocalParkInspectDomain.tt</DependentUpon>
@@ -148,6 +149,8 @@
     <Compile Include="Local\CreateSQLiteDatabase.cs" />
     <Compile Include="Local\DatabaseActions.cs" />
     <Compile Include="Local\DeleteToCentral.cs" />
+    <Compile Include="Local\GetLocalRecordDetails.cs" />
+    <Compile Include="Local\KeepLocal.cs" />
     <Compile Include="Local\SaveToCentral.cs" />
     <Compile Include="Local\UpdateToCentral.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

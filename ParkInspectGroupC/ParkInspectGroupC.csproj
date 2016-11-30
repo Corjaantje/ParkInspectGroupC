@@ -124,6 +124,9 @@
     <Compile Include="View\DatabaseSyncDialogs\DeleteDialog.xaml.cs">
       <DependentUpon>DeleteDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\DatabaseSyncDialogs\UpdateConflictDialog.xaml.cs">
+      <DependentUpon>UpdateConflictDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\DatabaseSyncView.xaml.cs">
       <DependentUpon>DatabaseSyncView.xaml</DependentUpon>
     </Compile>
@@ -190,6 +193,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\DatabaseSyncDialogs\DeleteDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DatabaseSyncDialogs\UpdateConflictDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -464,7 +464,14 @@ namespace LocalDatabase.Local
                                 central.EmployeeStatusId = Convert.ToInt32(r.EmployeeStatusId);
                                 central.IsInspecter = r.IsInspecter;
                                 central.IsManager = r.IsManager;
-                                central.ManagerId = Convert.ToInt32(r.ManagerId);
+                                if (r.ManagerId == null)
+                                {
+                                    central.ManagerId = null;
+                                }
+                                else
+                                {
+                                    central.ManagerId = Convert.ToInt32(r.ManagerId);
+                                }
                                 central.DateUpdated = DateTime.Now;
                                 context.SaveChanges();
                             }
@@ -843,7 +850,14 @@ namespace LocalDatabase.Local
                                 central.StartDate = r.StartDate;
                                 central.EndDate = r.EndDate;
                                 central.StatusId = Convert.ToInt32(r.StatusId);
-                                central.InspectorId = Convert.ToInt32(r.InspectorId);
+                                if (r.InspectorId == null)
+                                {
+                                    central.InspectorId = null;
+                                }
+                                else
+                                {
+                                    central.InspectorId = Convert.ToInt32(r.InspectorId);
+                                }
                                 central.DateUpdated = DateTime.Now;
                                 context.SaveChanges();
                             }
@@ -894,7 +908,14 @@ namespace LocalDatabase.Local
                             if (central.DateUpdated == r.DateUpdated)
                             {
                                 central.File = r.File;
-                                central.InspectionId = Convert.ToInt32(r.InspectionId);
+                                if (r.InspectionId == null)
+                                {
+                                    central.InspectionId = null;
+                                }
+                                else
+                                {
+                                    central.InspectionId = Convert.ToInt32(r.InspectionId);
+                                }
                                 central.DateUpdated = DateTime.Now;
                                 context.SaveChanges();
                             }
@@ -1149,7 +1170,14 @@ namespace LocalDatabase.Local
                             {
                                 central.SortId = Convert.ToInt32(r.SortId);
                                 central.Description = r.Description;
-                                central.ModuleId = Convert.ToInt32(r.ModuleId);
+                                if (r.ModuleId == null)
+                                {
+                                    central.ModuleId = null;
+                                }
+                                else
+                                {
+                                    central.ModuleId = Convert.ToInt32(r.ModuleId);
+                                }
                                 central.DateUpdated = DateTime.Now;
                                 context.SaveChanges();
                             }

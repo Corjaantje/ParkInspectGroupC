@@ -40,11 +40,23 @@ namespace ParkInspectGroupC.ViewModel
             theUpdateMessages = new ObservableCollection<UpdateMessage>();
         }
 
+        #region Conflict Buttons
         private void ShowUpdateMessageDialog()
         {
+            if (SelectedUpdateMessage != null)
+            {
+                UpdateConflictDialog window = new UpdateConflictDialog(SelectedUpdateMessage, ldb);
+                window.ShowDialog();
 
+                if (window.DialogResult.HasValue && window.DialogResult.Value)
+                {
+                    theUpdateMessages.Remove(theUpdateMessages.Where(i => i.LocalDatabaseName == SelectedUpdateMessage.LocalDatabaseName)
+                        .Where(i => i.LocalId == SelectedUpdateMessage.LocalId)
+                        .Single());
+                }
+                CentralToLocalSync();
+            }
         }
-
         private void DeleteUpdateMessageDialog()
         {
             if (SelectedUpdateMessage != null)
@@ -61,6 +73,7 @@ namespace ParkInspectGroupC.ViewModel
                 CentralToLocalSync();
             }
         }
+        #endregion
 
         #region Central to Local Sync
         private void CentralToLocalSync()
@@ -107,6 +120,8 @@ namespace ParkInspectGroupC.ViewModel
             {
                 theUpdateMessages.Add(m);
             }
+
+            CentralToLocalSync();
         }
         private static async Task<List<SaveDeleteMessage>> SaveDelete(LocalDatabaseMain ldb)
         {
