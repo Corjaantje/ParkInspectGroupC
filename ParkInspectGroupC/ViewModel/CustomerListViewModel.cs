@@ -13,6 +13,7 @@ namespace ParkInspectGroupC.ViewModel
     public class CustomerListViewModel : ViewModelBase
     {
         private ObservableCollection<Customer> _customers;
+        private ObservableCollection<Customer> _allCustomers;
         private string _searchString = "Search";
 
         public CustomerListViewModel()
@@ -26,20 +27,13 @@ namespace ParkInspectGroupC.ViewModel
 
                 foreach (var customer in customers)
                 {
-                    //if (SearchString != null &&  customer.Name.StartsWith(SearchString))
-                    //{
-                    //    searchedCustomers.Add(customer);
-                    //}
-
-                    //else
-                    //{
-                    //    searchedCustomers.Add(customer);
-                    //}
+        
                     searchedCustomers.Add(customer);
 
                 }
             }
 
+            _allCustomers = searchedCustomers;
             _customers = searchedCustomers;
         }
         public ObservableCollection<Customer> Customers
@@ -68,19 +62,14 @@ namespace ParkInspectGroupC.ViewModel
 
                 ObservableCollection<Customer> searchedCustomers = new ObservableCollection<Customer>();
 
-                using (var context = new ParkInspectEntities())
-                {
-                    List<Customer> customers = context.Customer.ToList();
-
-
-                    foreach (var customer in customers)
+                    foreach (var customer in _allCustomers)
                     {
                         if (SearchString != null && customer.Name.ToLower().Contains(SearchString.ToLower()))
                         {
                             searchedCustomers.Add(customer);
                         }
                     }
-                }
+                
 
                 _customers = searchedCustomers;
                 
