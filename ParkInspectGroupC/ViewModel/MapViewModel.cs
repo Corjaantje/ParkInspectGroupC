@@ -31,6 +31,26 @@ namespace ParkInspectGroupC.ViewModel
                 StrokeThickness = 1.5
             };
             markers = markers.Concat(new[] { marker });
+            point = new GMap.NET.PointLatLng(51.80438169999999, 5.760212799999977);
+            marker = new GMapMarker(point);
+            marker.Shape = new Ellipse
+            {
+                Width = 10,
+                Height = 10,
+                Stroke = Brushes.Black,
+                StrokeThickness = 1.5
+            };
+            markers = markers.Concat(new[] { marker });
+            point = new GMap.NET.PointLatLng(51.746216, 5.269114);
+            marker = new GMapMarker(point);
+            marker.Shape = new Ellipse
+            {
+                Width = 10,
+                Height = 10,
+                Stroke = Brushes.Black,
+                StrokeThickness = 1.5
+            };
+            markers = markers.Concat(new[] { marker });
             ShowInspectionsCommand = new RelayCommand(ShowInspections, CanShowInspections);
         }
         private void ShowInspections()
