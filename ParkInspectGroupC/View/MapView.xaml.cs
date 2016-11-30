@@ -1,5 +1,11 @@
-﻿using System;
+﻿using GMap.NET;
+using GMap.NET.ObjectModel;
+using GMap.NET.WindowsPresentation;
+using Microsoft.Practices.ServiceLocation;
+using ParkInspectGroupC.ViewModel;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,11 +25,15 @@ namespace ParkInspectGroupC.View
     /// </summary>
     public partial class MapView : Window
     {
+        MapViewModel vm;
         public MapView()
         {
+            
+         this.InitializeComponent();
             Loaded += Window_Loaded;
-            InitializeComponent();
         }
+
+       
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             gmap.MapProvider = GMap.NET.MapProviders.BingMapProvider.Instance;
@@ -31,6 +41,17 @@ namespace ParkInspectGroupC.View
             gmap.SetPositionByKeywords("Netherlands");
             gmap.CenterCrossPen = null;
             gmap.DragButton = MouseButton.Left;
+            vm = (MapViewModel)DataContext;
+            Add_Markers();
+        }
+
+
+        private void Add_Markers()
+        {
+            foreach (GMapMarker marker in vm.markers)
+            {
+                gmap.Markers.Add(marker);
+            }
 
         }
     }

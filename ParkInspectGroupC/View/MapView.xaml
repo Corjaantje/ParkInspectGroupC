@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                 xmlns:WindowsPresentation="clr-namespace:GMap.NET.WindowsPresentation;assembly=GMap.NET.WindowsPresentation"
         Title="MapView" Width="540" Height="399"
-        DataContext="{Binding Map, Source={StaticResource Locator}}">
+        DataContext="{Binding Map, UpdateSourceTrigger=PropertyChanged, Source={StaticResource Locator } }">
 
     <Grid>
         <WindowsPresentation:GMapControl x:Name="gmap" HorizontalAlignment="Left" Height="299" Margin="10,10,0,0" VerticalAlignment="Top" Width="512" MaxZoom="18" MinZoom="2" Zoom="7"/>

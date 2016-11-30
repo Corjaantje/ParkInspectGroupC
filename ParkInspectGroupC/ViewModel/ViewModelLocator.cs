@@ -48,6 +48,12 @@ namespace ParkInspectGroupC.ViewModel
             SimpleIoc.Default.Register<MapViewModel>();
         }
 
+        public MapViewModel _map
+        {
+            get;
+            set;
+        }
+
         public MainViewModel Main
         {
             get
@@ -59,7 +65,8 @@ namespace ParkInspectGroupC.ViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<MapViewModel>();
+                if (_map == null) { _map = ServiceLocator.Current.GetInstance<MapViewModel>(); }
+                return _map;
             }
         }
         
