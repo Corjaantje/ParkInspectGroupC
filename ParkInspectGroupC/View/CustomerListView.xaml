@@ -11,7 +11,7 @@
     <Grid Width="523" Background="White" Height="257">
 
 
-        <DataGrid AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Customers, UpdateSourceTrigger = PropertyChanged}" Margin="10,124,10,34" BorderBrush="#FF979494" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#FFF0E0E0" HeadersVisibility="Column">
+        <DataGrid AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Customers, UpdateSourceTrigger = PropertyChanged}" Margin="10,124,10,10" BorderBrush="#FF979494" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#FFF0E0E0" HeadersVisibility="Column">
             <DataGrid.Columns>
 
                 <DataGridTextColumn Header="#" Binding="{Binding Id}" Foreground="#FF1D1616" />
