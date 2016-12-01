@@ -109,7 +109,6 @@
     <Compile Include="Converter\StatusToPathConverter.cs" />
     <Compile Include="Factory\ThemeFactory.cs" />
     <Compile Include="Miscellaneous\IHavePassword.cs" />
-    <Compile Include="ViewModel\CustomerCreationViewModel_2.cs" />
     <Compile Include="Miscellaneous\Navigator.cs" />
     <Compile Include="ViewModel\CustomerCreationViewModel.cs" />
     <Compile Include="ViewModel\InspectorProfileViewModel.cs" />
@@ -131,7 +130,7 @@
     </Compile>
     <Compile Include="View\MapView.xaml.cs">
       <DependentUpon>MapView.xaml</DependentUpon>
-	  </Compile>
+    </Compile>
     <Compile Include="View\MainWindow\NavigationMenu.xaml.cs">
       <DependentUpon>NavigationMenu.xaml</DependentUpon>
     </Compile>
