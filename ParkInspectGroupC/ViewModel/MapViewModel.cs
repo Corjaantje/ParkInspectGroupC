@@ -16,6 +16,7 @@ namespace ParkInspectGroupC.ViewModel
         public ICommand ShowInspectionsCommand { get; set; }
         public GMapControl gmap { get; set; }
         public IEnumerable<GMapMarker> markers { get; set; }
+        public IEnumerable<GMapMarker> Markers { get; set; }
 
         public MapViewModel()
         {
