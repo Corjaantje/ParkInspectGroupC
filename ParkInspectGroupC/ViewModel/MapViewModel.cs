@@ -37,18 +37,35 @@ namespace ParkInspectGroupC.ViewModel
             point = new GMap.NET.PointLatLng(51.80438169999999, 5.760212799999977);
             marker = new GMapMarker(point);
             marker.Shape = new Ellipse
+
+            AddInspections(PInspections);
+        }
+
+        private void AddInspections(IEnumerable<Inspection> PInspections)
+        {
+            Markers = new List<GMapMarker>();
+            foreach (var insp in PInspections)
             {
-                Width = 10,
-                Height = 10,
-                Stroke = Brushes.Black,
-                StrokeThickness = 1.5
-            };
-            markers = markers.Concat(new[] { marker });
-            point = new GMap.NET.PointLatLng(51.746216, 5.269114);
-            marker = new GMapMarker(point);
+                using (var context = new ParkInspectEntities())
+                {
+                     frequency = (from i in context.Inspection
+                                     where i.Id == insp.Id
+                                     select i).Count();
+                    var Lat = (from c in context.Coordinates 
+                               where c.InspectionId == insp.Id 
+                               select c).FirstOrDefault().Latitude;
+                    var Long = (from c in context.Coordinates 
+                                where c.InspectionId == insp.Id 
+                                select c).FirstOrDefault().Longitude;
+                }
+            }
+            var point = new GMap.NET.PointLatLng(Lat,Long);
+            GMapMarker marker = new GMapMarker(point);
+            Markers = Markers.Concat(new[] { marker });
             marker.Shape = new Ellipse
             {
                 Width = 10,
+                Width = frequency * 10,
                 Height = 10,
                 Stroke = Brushes.Black,
                 StrokeThickness = 1.5
@@ -59,6 +76,7 @@ namespace ParkInspectGroupC.ViewModel
         private void ShowInspections()
         {
            
+            Markers = Markers.Concat(new[] { marker });
         }
 
         private bool CanShowInspections()
