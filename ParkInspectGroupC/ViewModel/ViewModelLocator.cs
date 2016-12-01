@@ -62,8 +62,7 @@ namespace ParkInspectGroupC.ViewModel
         {
             get
             {
-                if (_map == null) { _map = ServiceLocator.Current.GetInstance<MapViewModel>(); }
-                return _map;
+                return ServiceLocator.Current.GetInstance<MapViewModel>();
             }
         }
         
