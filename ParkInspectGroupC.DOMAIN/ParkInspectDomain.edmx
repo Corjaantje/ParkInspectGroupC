@@ -42,6 +42,16 @@
           <Property Name="DateCreated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
           <Property Name="DateUpdated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
+        <EntityType Name="Coordinate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Longitude" Type="float" Nullable="false" />
+          <Property Name="Latitude" Type="float" Nullable="false" />
+          <Property Name="Note" Type="varchar(max)" />
+          <Property Name="InspectionId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="Id" />
@@ -279,6 +289,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Coordinate_Inspection">
+          <End Role="Inspection" Type="Self.Inspection" Multiplicity="1" />
+          <End Role="Coordinate" Type="Self.Coordinate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inspection">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Coordinate">
+              <PropertyRef Name="InspectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Employee_EmployeeStatus">
           <End Role="EmployeeStatus" Type="Self.EmployeeStatus" Multiplicity="0..1" />
           <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
@@ -511,6 +533,7 @@
           <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Assignment" EntityType="Self.Assignment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Availability" EntityType="Self.Availability" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Coordinate" EntityType="Self.Coordinate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmployeeStatus" EntityType="Self.EmployeeStatus" Schema="dbo" store:Type="Tables" />
@@ -543,6 +566,10 @@
           <AssociationSet Name="FK_Availability_Employee" Association="Self.FK_Availability_Employee">
             <End Role="Employee" EntitySet="Employee" />
             <End Role="Availability" EntitySet="Availability" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Coordinate_Inspection" Association="Self.FK_Coordinate_Inspection">
+            <End Role="Inspection" EntitySet="Inspection" />
+            <End Role="Coordinate" EntitySet="Coordinate" />
           </AssociationSet>
           <AssociationSet Name="FK_Employee_EmployeeStatus" Association="Self.FK_Employee_EmployeeStatus">
             <End Role="EmployeeStatus" EntitySet="EmployeeStatus" />
@@ -738,6 +765,11 @@
             <End Role="Employee" EntitySet="Employee" />
             <End Role="WorkingHour" EntitySet="WorkingHours" />
           </AssociationSet>
+          <EntitySet Name="Coordinates" EntityType="ParkInspectModel.Coordinate" />
+          <AssociationSet Name="FK_Coordinate_Inspection" Association="ParkInspectModel.FK_Coordinate_Inspection">
+            <End Role="Inspection" EntitySet="Inspection" />
+            <End Role="Coordinate" EntitySet="Coordinates" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Account">
           <Key>
@@ -843,6 +875,7 @@
           <NavigationProperty Name="Region" Relationship="ParkInspectModel.FK_Inspection_Region" FromRole="Inspection" ToRole="Region" />
           <NavigationProperty Name="InspectionImage" Relationship="ParkInspectModel.FK_InspectionImages_Inspection" FromRole="Inspection" ToRole="InspectionImage" />
           <NavigationProperty Name="Questionnaire" Relationship="ParkInspectModel.FK_Questionnaire_Inspection" FromRole="Inspection" ToRole="Questionnaire" />
+          <NavigationProperty Name="Coordinates" Relationship="ParkInspectModel.FK_Coordinate_Inspection" FromRole="Inspection" ToRole="Coordinate" />
         </EntityType>
         <EntityType Name="InspectionImage">
           <Key>
@@ -1287,6 +1320,29 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Coordinate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Longitude" Type="Double" Nullable="false" />
+          <Property Name="Latitude" Type="Double" Nullable="false" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="InspectionId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Inspection" Relationship="ParkInspectModel.FK_Coordinate_Inspection" FromRole="Coordinate" ToRole="Inspection" />
+        </EntityType>
+        <Association Name="FK_Coordinate_Inspection">
+          <End Type="ParkInspectModel.Inspection" Role="Inspection" Multiplicity="1" />
+          <End Type="ParkInspectModel.Coordinate" Role="Coordinate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inspection">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Coordinate">
+              <PropertyRef Name="InspectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1531,6 +1587,17 @@
                 <ScalarProperty Name="StartTime" ColumnName="StartTime" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Coordinates">
+            <EntityTypeMapping TypeName="ParkInspectModel.Coordinate">
+              <MappingFragment StoreEntitySet="Coordinate">
+                <ScalarProperty Name="InspectionId" ColumnName="InspectionId" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

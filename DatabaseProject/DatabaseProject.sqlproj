@@ -81,6 +81,7 @@
     <Build Include="Tables\KeywordCategory.sql" />
     <Build Include="Tables\QuestionKeyword.sql" />
     <Build Include="Tables\InspectionImage.sql" />
+    <Build Include="Tables\Coordinate.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="DatabaseProject.refactorlog" />
