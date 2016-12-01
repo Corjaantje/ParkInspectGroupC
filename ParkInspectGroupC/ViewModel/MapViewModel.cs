@@ -19,6 +19,8 @@ namespace ParkInspectGroupC.ViewModel
         public IEnumerable<GMapMarker> Markers { get; set; }
 
         public MapViewModel()
+        int frequency;
+        public MapViewModel(IEnumerable<Inspection> PInspections)
         {
             var point = new GMap.NET.PointLatLng(52.855864177854, 9.140625);
             Console.WriteLine(point);
