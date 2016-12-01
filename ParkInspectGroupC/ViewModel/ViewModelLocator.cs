@@ -46,12 +46,9 @@ namespace ParkInspectGroupC.ViewModel
 			SimpleIoc.Default.Register<LoginViewModel>();
             SimpleIoc.Default.Register<CustomerCreationViewModel>();
             SimpleIoc.Default.Register<MapViewModel>();
-        }
-
-        public MapViewModel _map
-        {
-            get;
-            set;
+            SimpleIoc.Default.Register<QuestionnaireViewModel>();
+			SimpleIoc.Default.Register<EmployeeCreationViewModel>();
+			SimpleIoc.Default.Register<InspectorProfileViewModel>();
         }
 
         public MainViewModel Main
@@ -86,7 +83,26 @@ namespace ParkInspectGroupC.ViewModel
             }
         }
 
-        public static void Cleanup()
+        public QuestionnaireViewModel QuestionnaireViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<QuestionnaireViewModel>();
+            }
+        }
+
+	    public EmployeeCreationViewModel EmployeeCreation
+	    {
+		    get { return ServiceLocator.Current.GetInstance<EmployeeCreationViewModel>(); }
+	    }
+
+	    public InspectorProfileViewModel InspectorProfile
+	    {
+		    get { return ServiceLocator.Current.GetInstance<InspectorProfileViewModel>(); }
+	    }
+
+
+		public static void Cleanup()
         {
             // TODO Clear the ViewModels
         }
