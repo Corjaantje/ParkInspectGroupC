@@ -29,10 +29,10 @@
 		</ScrollViewer>
 		
 		<Button Content="Genereer PDF" Grid.Row="2" Margin="3" />
-		<Button Content="Nieuw deel" Grid.Row="2" Grid.Column="1" Margin="3" />
+		<Button Content="Nieuw deel" Grid.Row="2" Grid.Column="1" Margin="3" Command="{Binding CreateRepportSectionCommand}" />
 		</Grid>
 		<ScrollViewer Grid.Row="3" Grid.ColumnSpan="2" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Visible">
-			<DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedReport, Mode=TwoWay}" ItemsSource="{Binding ReportList}" >
+			<DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedReportSection, Mode=TwoWay}" ItemsSource="{Binding ReportSectionList}" >
 				<DataGrid.Columns>
 					<DataGridTextColumn Header="Id" Binding="{Binding Id}" />
 					<DataGridTextColumn Header="Titel" Binding="{Binding Title}" />
@@ -40,14 +40,14 @@
 					<DataGridTemplateColumn>
 						<DataGridTemplateColumn.CellTemplate>
 							<DataTemplate>
-								<Button Content="Open" />
+								<Button Content="Open" Command="{Binding DataContext.OpenReportSectionCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
 							</DataTemplate>
 						</DataGridTemplateColumn.CellTemplate>
 					</DataGridTemplateColumn>
 					<DataGridTemplateColumn>
 						<DataGridTemplateColumn.CellTemplate>
 							<DataTemplate>
-								<Button Content="Verwijder" />
+								<Button Content="Verwijder" Command="{Binding DataContext.DeleteReportSectionCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
 							</DataTemplate>
 						</DataGridTemplateColumn.CellTemplate>
 					</DataGridTemplateColumn>

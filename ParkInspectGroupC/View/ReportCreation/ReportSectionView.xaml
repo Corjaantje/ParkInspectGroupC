@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ParkInspectGroupC.View.ReportCreation"
-             mc:Ignorable="d" >
+             mc:Ignorable="d"
+			 DataContext="{Binding Reports, Source={StaticResource Locator}}">
     <Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
@@ -22,17 +23,17 @@
 		</Grid.ColumnDefinitions>
 		
 		<Label Grid.Row="1" Grid.Column="0" Content="Titel:" />
-		<TextBox Grid.Row="1" Grid.Column="1" Margin="3" />
+		<TextBox Grid.Row="1" Grid.Column="1" Margin="3" Text="{Binding ReportSectionTitle}" />
 		
 		<Label Grid.Row="2" Grid.Column="0" Content="Omschrijving" />
 		<ScrollViewer Grid.Column="1" Grid.Row="2" Margin="3" MinHeight="150" MaxHeight="150" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Hidden">
-			<TextBox TextWrapping="Wrap" AcceptsReturn="True" />
+			<TextBox TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding ReportSectionDescription}" />
 		</ScrollViewer>
 		
 		<Label Grid.Row="3" Grid.Column="0" Content="Afbeeldingen:" />
 		<Button Grid.Row="3" Grid.Column="1" Content="+" Background="Green" />
 		<ScrollViewer Grid.Row="4" Grid.ColumnSpan="2" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
-			<DataGrid AutoGenerateColumns="False" IsReadOnly="True">
+			<DataGrid AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding ReportSectionImages}">
 				<DataGrid.Columns>
 					<DataGridTextColumn Header="Id" />
 					<DataGridTextColumn Header="Titel" />
@@ -48,10 +49,10 @@
 			</DataGrid>
 		</ScrollViewer>
 
-		<Label Grid.Row="5" Grid.Column="0" Content="Afbeeldingen:" />
+		<Label Grid.Row="5" Grid.Column="0" Content="Diagrammen:" />
 		<Button Grid.Row="5" Grid.Column="1" Content="+" Background="Green" />
 		<ScrollViewer Grid.Row="6" Grid.ColumnSpan="2" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
-			<DataGrid AutoGenerateColumns="False" IsReadOnly="True">
+			<DataGrid AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding ReportSectionDiagrams}">
 				<DataGrid.Columns>
 					<DataGridTextColumn Header="Id" />
 					<DataGridTextColumn Header="Titel" />
@@ -67,7 +68,7 @@
 			</DataGrid>
 		</ScrollViewer>
 		
-		<Button Grid.Row="7" Grid.Column="0" Content="Opslaan" Margin="3" />
+		<Button Grid.Row="7" Grid.Column="0" Content="Opslaan" Margin="3" Visibility="Collapsed" />
 		<CheckBox x:Name="checkBox" Content="CheckBox" HorizontalAlignment="Left" Height="0" Margin="-142,6,0,0" Grid.Row="5" VerticalAlignment="Top" Width="2"/>
 	</Grid>
 </UserControl>
