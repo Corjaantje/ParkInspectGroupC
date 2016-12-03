@@ -30,14 +30,6 @@
           <Property Name="DateCreated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
           <Property Name="DateUpdated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
-        <EntityType Name="AssignmentReport">
-          <Key>
-            <PropertyRef Name="AssignmentId" />
-            <PropertyRef Name="ReportId" />
-          </Key>
-          <Property Name="AssignmentId" Type="int" Nullable="false" />
-          <Property Name="ReportId" Type="int" Nullable="false" />
-        </EntityType>
         <EntityType Name="Availability">
           <Key>
             <PropertyRef Name="EmployeeId" />
@@ -67,7 +59,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="File" Type="varchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="Employee">
@@ -238,17 +230,18 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="varchar(max)" Nullable="false" />
           <Property Name="Summary" Type="varchar(max)" />
           <Property Name="Date" Type="datetime" />
           <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="AssignmentId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ReportSection">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="varchar(max)" Nullable="false" />
           <Property Name="Summary" Type="varchar(max)" />
           <Property Name="ReportId" Type="int" Nullable="false" />
@@ -314,30 +307,6 @@
             </Principal>
             <Dependent Role="Assignment">
               <PropertyRef Name="ManagerId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AssignmentReport_Assignment">
-          <End Role="Assignment" Type="Self.Assignment" Multiplicity="1" />
-          <End Role="AssignmentReport" Type="Self.AssignmentReport" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Assignment">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AssignmentReport">
-              <PropertyRef Name="AssignmentId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AssignmentReport_Report">
-          <End Role="Report" Type="Self.Report" Multiplicity="1" />
-          <End Role="AssignmentReport" Type="Self.AssignmentReport" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Report">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AssignmentReport">
-              <PropertyRef Name="ReportId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -569,6 +538,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Report_Assignment">
+          <End Role="Assignment" Type="Self.Assignment" Multiplicity="1" />
+          <End Role="Report" Type="Self.Report" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Assignment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Report">
+              <PropertyRef Name="AssignmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Report_Employee">
           <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
           <End Role="Report" Type="Self.Report" Multiplicity="*" />
@@ -656,7 +637,6 @@
         <EntityContainer Name="ParkInspectModelStoreContainer">
           <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Assignment" EntityType="Self.Assignment" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AssignmentReport" EntityType="Self.AssignmentReport" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Availability" EntityType="Self.Availability" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Diagram" EntityType="Self.Diagram" Schema="dbo" store:Type="Tables" />
@@ -691,14 +671,6 @@
           <AssociationSet Name="FK_Assignment_Manager" Association="Self.FK_Assignment_Manager">
             <End Role="Employee" EntitySet="Employee" />
             <End Role="Assignment" EntitySet="Assignment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AssignmentReport_Assignment" Association="Self.FK_AssignmentReport_Assignment">
-            <End Role="Assignment" EntitySet="Assignment" />
-            <End Role="AssignmentReport" EntitySet="AssignmentReport" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AssignmentReport_Report" Association="Self.FK_AssignmentReport_Report">
-            <End Role="Report" EntitySet="Report" />
-            <End Role="AssignmentReport" EntitySet="AssignmentReport" />
           </AssociationSet>
           <AssociationSet Name="FK_Availability_Employee" Association="Self.FK_Availability_Employee">
             <End Role="Employee" EntitySet="Employee" />
@@ -775,6 +747,10 @@
           <AssociationSet Name="FK_QuestionnaireModule_Questionnaire" Association="Self.FK_QuestionnaireModule_Questionnaire">
             <End Role="Questionnaire" EntitySet="Questionnaire" />
             <End Role="QuestionnaireModule" EntitySet="QuestionnaireModule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Report_Assignment" Association="Self.FK_Report_Assignment">
+            <End Role="Assignment" EntitySet="Assignment" />
+            <End Role="Report" EntitySet="Report" />
           </AssociationSet>
           <AssociationSet Name="FK_Report_Employee" Association="Self.FK_Report_Employee">
             <End Role="Employee" EntitySet="Employee" />
@@ -923,26 +899,26 @@
             <End Role="WorkingHour" EntitySet="WorkingHours" />
           </AssociationSet>
           <EntitySet Name="Diagrams" EntityType="ParkInspectModel.Diagram" />
-          <EntitySet Name="Reports" EntityType="ParkInspectModel.Report" />
           <EntitySet Name="ReportSections" EntityType="ParkInspectModel.ReportSection" />
-          <AssociationSet Name="FK_Report_Employee" Association="ParkInspectModel.FK_Report_Employee">
-            <End Role="Employee" EntitySet="Employee" />
-            <End Role="Report" EntitySet="Reports" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ReportSection_Report" Association="ParkInspectModel.FK_ReportSection_Report">
-            <End Role="Report" EntitySet="Reports" />
-            <End Role="ReportSection" EntitySet="ReportSections" />
-          </AssociationSet>
-          <AssociationSet Name="AssignmentReport" Association="ParkInspectModel.AssignmentReport">
-            <End Role="Assignment" EntitySet="Assignment" />
-            <End Role="Report" EntitySet="Reports" />
-          </AssociationSet>
           <AssociationSet Name="ReportSectionDiagram" Association="ParkInspectModel.ReportSectionDiagram">
             <End Role="Diagram" EntitySet="Diagrams" />
             <End Role="ReportSection" EntitySet="ReportSections" />
           </AssociationSet>
           <AssociationSet Name="ReportSectionInspectionImage" Association="ParkInspectModel.ReportSectionInspectionImage">
             <End Role="InspectionImage" EntitySet="InspectionImage" />
+            <End Role="ReportSection" EntitySet="ReportSections" />
+          </AssociationSet>
+          <EntitySet Name="Reports" EntityType="ParkInspectModel.Report" />
+          <AssociationSet Name="FK_Report_Assignment" Association="ParkInspectModel.FK_Report_Assignment">
+            <End Role="Assignment" EntitySet="Assignment" />
+            <End Role="Report" EntitySet="Reports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Report_Employee" Association="ParkInspectModel.FK_Report_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Report" EntitySet="Reports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReportSection_Report" Association="ParkInspectModel.FK_ReportSection_Report">
+            <End Role="Report" EntitySet="Reports" />
             <End Role="ReportSection" EntitySet="ReportSections" />
           </AssociationSet>
         </EntityContainer>
@@ -974,7 +950,7 @@
           <NavigationProperty Name="Customer" Relationship="ParkInspectModel.FK_Assignment_Customer" FromRole="Assignment" ToRole="Customer" />
           <NavigationProperty Name="Employee" Relationship="ParkInspectModel.FK_Assignment_Manager" FromRole="Assignment" ToRole="Employee" />
           <NavigationProperty Name="Inspection" Relationship="ParkInspectModel.FK_Inspection_Assignment" FromRole="Assignment" ToRole="Inspection" />
-          <NavigationProperty Name="Reports" Relationship="ParkInspectModel.AssignmentReport" FromRole="Assignment" ToRole="Report" />
+          <NavigationProperty Name="Reports" Relationship="ParkInspectModel.FK_Report_Assignment" FromRole="Assignment" ToRole="Report" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -1505,6 +1481,26 @@
           <Property Name="File" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ReportSections" Relationship="ParkInspectModel.ReportSectionDiagram" FromRole="Diagram" ToRole="ReportSection" />
         </EntityType>
+        <EntityType Name="ReportSection">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ReportId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Diagrams" Relationship="ParkInspectModel.ReportSectionDiagram" FromRole="ReportSection" ToRole="Diagram" />
+          <NavigationProperty Name="InspectionImages" Relationship="ParkInspectModel.ReportSectionInspectionImage" FromRole="ReportSection" ToRole="InspectionImage" />
+          <NavigationProperty Name="Report" Relationship="ParkInspectModel.FK_ReportSection_Report" FromRole="ReportSection" ToRole="Report" />
+        </EntityType>
+        <Association Name="ReportSectionDiagram">
+          <End Type="ParkInspectModel.Diagram" Role="Diagram" Multiplicity="*" />
+          <End Type="ParkInspectModel.ReportSection" Role="ReportSection" Multiplicity="*" />
+        </Association>
+        <Association Name="ReportSectionInspectionImage">
+          <End Type="ParkInspectModel.InspectionImage" Role="InspectionImage" Multiplicity="*" />
+          <End Type="ParkInspectModel.ReportSection" Role="ReportSection" Multiplicity="*" />
+        </Association>
         <EntityType Name="Report">
           <Key>
             <PropertyRef Name="Id" />
@@ -1514,22 +1510,23 @@
           <Property Name="Summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Date" Type="DateTime" Precision="3" />
           <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="AssignmentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Assignment" Relationship="ParkInspectModel.FK_Report_Assignment" FromRole="Report" ToRole="Assignment" />
           <NavigationProperty Name="Employee" Relationship="ParkInspectModel.FK_Report_Employee" FromRole="Report" ToRole="Employee" />
           <NavigationProperty Name="ReportSections" Relationship="ParkInspectModel.FK_ReportSection_Report" FromRole="Report" ToRole="ReportSection" />
-          <NavigationProperty Name="Assignments" Relationship="ParkInspectModel.AssignmentReport" FromRole="Report" ToRole="Assignment" />
         </EntityType>
-        <EntityType Name="ReportSection">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="ReportId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Report" Relationship="ParkInspectModel.FK_ReportSection_Report" FromRole="ReportSection" ToRole="Report" />
-          <NavigationProperty Name="Diagrams" Relationship="ParkInspectModel.ReportSectionDiagram" FromRole="ReportSection" ToRole="Diagram" />
-          <NavigationProperty Name="InspectionImages" Relationship="ParkInspectModel.ReportSectionInspectionImage" FromRole="ReportSection" ToRole="InspectionImage" />
-        </EntityType>
+        <Association Name="FK_Report_Assignment">
+          <End Type="ParkInspectModel.Assignment" Role="Assignment" Multiplicity="1" />
+          <End Type="ParkInspectModel.Report" Role="Report" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Assignment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Report">
+              <PropertyRef Name="AssignmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Report_Employee">
           <End Type="ParkInspectModel.Employee" Role="Employee" Multiplicity="1" />
           <End Type="ParkInspectModel.Report" Role="Report" Multiplicity="*" />
@@ -1553,18 +1550,6 @@
               <PropertyRef Name="ReportId" />
             </Dependent>
           </ReferentialConstraint>
-        </Association>
-        <Association Name="AssignmentReport">
-          <End Type="ParkInspectModel.Assignment" Role="Assignment" Multiplicity="*" />
-          <End Type="ParkInspectModel.Report" Role="Report" Multiplicity="*" />
-        </Association>
-        <Association Name="ReportSectionDiagram">
-          <End Type="ParkInspectModel.Diagram" Role="Diagram" Multiplicity="*" />
-          <End Type="ParkInspectModel.ReportSection" Role="ReportSection" Multiplicity="*" />
-        </Association>
-        <Association Name="ReportSectionInspectionImage">
-          <End Type="ParkInspectModel.InspectionImage" Role="InspectionImage" Multiplicity="*" />
-          <End Type="ParkInspectModel.ReportSection" Role="ReportSection" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -1821,17 +1806,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Reports">
-            <EntityTypeMapping TypeName="ParkInspectModel.Report">
-              <MappingFragment StoreEntitySet="Report">
-                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="Summary" ColumnName="Summary" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ReportSections">
             <EntityTypeMapping TypeName="ParkInspectModel.ReportSection">
               <MappingFragment StoreEntitySet="ReportSection">
@@ -1842,14 +1816,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="AssignmentReport" TypeName="ParkInspectModel.AssignmentReport" StoreEntitySet="AssignmentReport">
-            <EndProperty Name="Report">
-              <ScalarProperty Name="Id" ColumnName="ReportId" />
-            </EndProperty>
-            <EndProperty Name="Assignment">
-              <ScalarProperty Name="Id" ColumnName="AssignmentId" />
-            </EndProperty>
-          </AssociationSetMapping>
           <AssociationSetMapping Name="ReportSectionDiagram" TypeName="ParkInspectModel.ReportSectionDiagram" StoreEntitySet="ReportSectionDiagram">
             <EndProperty Name="ReportSection">
               <ScalarProperty Name="Id" ColumnName="ReportSectionId" />
@@ -1866,6 +1832,18 @@
               <ScalarProperty Name="Id" ColumnName="InspectionImageId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Reports">
+            <EntityTypeMapping TypeName="ParkInspectModel.Report">
+              <MappingFragment StoreEntitySet="Report">
+                <ScalarProperty Name="AssignmentId" ColumnName="AssignmentId" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Summary" ColumnName="Summary" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

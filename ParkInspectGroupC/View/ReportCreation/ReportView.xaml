@@ -29,15 +29,14 @@
 		</ScrollViewer>
 		
 		<Button Content="Genereer PDF" Grid.Row="2" Margin="3" />
+		<Button Content="Nieuw deel" Grid.Row="2" Grid.Column="1" Margin="3" />
 		</Grid>
 		<ScrollViewer Grid.Row="3" Grid.ColumnSpan="2" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Visible">
-			<DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedAssignment, Mode=TwoWay}" ItemsSource="{Binding AssignmentList}" >
+			<DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedReport, Mode=TwoWay}" ItemsSource="{Binding ReportList}" >
 				<DataGrid.Columns>
 					<DataGridTextColumn Header="Id" Binding="{Binding Id}" />
-					<DataGridTextColumn Header="Titel" Binding="{Binding Description}" />
-					<DataGridTextColumn Header="Klant" Binding="{Binding Customer.Name}" />
-					<DataGridTextColumn Header="Begin Datum" Binding="{Binding StartDate}" />
-					<DataGridTextColumn Header="Eind Datum" Binding="{Binding EndDate}" />
+					<DataGridTextColumn Header="Titel" Binding="{Binding Title}" />
+					<DataGridTextColumn Header="Klant" Binding="{Binding }" />
 					<DataGridTemplateColumn>
 						<DataGridTemplateColumn.CellTemplate>
 							<DataTemplate>
@@ -56,7 +55,7 @@
 			</DataGrid>
 		</ScrollViewer>
 
-		<Button Grid.Row="4" Content="Opslaan" Margin="3" Command="{Binding SaveReport}" />
+		<Button Grid.Row="4" Content="Opslaan" Margin="3" Command="{Binding SaveReportCommand}" />
 	</StackPanel>
 	
 </UserControl>

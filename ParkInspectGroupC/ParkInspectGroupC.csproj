@@ -132,8 +132,11 @@
     <Compile Include="View\QuestionnaireView.xaml.cs">
       <DependentUpon>QuestionnaireView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ReportCreation\RapportSectionView.xaml.cs">
-      <DependentUpon>RapportSectionView.xaml</DependentUpon>
+    <Compile Include="View\ReportCreation\ReportAssignmentSelectionView.xaml.cs">
+      <DependentUpon>ReportAssignmentSelectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ReportCreation\ReportSectionView.xaml.cs">
+      <DependentUpon>ReportSectionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ReportCreation\ReportCreationView.xaml.cs">
       <DependentUpon>ReportCreationView.xaml</DependentUpon>
@@ -214,7 +217,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\ReportCreation\RapportSectionView.xaml">
+    <Page Include="View\ReportCreation\ReportAssignmentSelectionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ReportCreation\ReportSectionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

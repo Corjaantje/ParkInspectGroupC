@@ -8,6 +8,8 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using ParkInspectGroupC.DOMAIN;
+using ParkInspectGroupC.Miscellaneous;
+using ParkInspectGroupC.View.ReportCreation;
 
 namespace ParkInspectGroupC.ViewModel.ReportCreation
 {
@@ -19,11 +21,15 @@ namespace ParkInspectGroupC.ViewModel.ReportCreation
 		public ObservableCollection<ReportSection> ReportSectionList { get; set; }
 
 		public Assignment SelectedAssignment { get; set; }
-
+		public Report SelectedReport { get; set; }
 		public Employee SelectedEmployee { get; set; }
 
 		// Commands
-		public ICommand SaveReport { get; set; }
+		public ICommand SaveReportCommand { get; set; }
+		public ICommand OpenAssignmentCommand { get; set; }
+		public ICommand OpenReportCommand { get; set; }
+		public ICommand DeleteReportCommand { get; set; }
+		public ICommand CreateReportCommand { get; set; }
 
 		private string _reportTitle;
 		public string ReportTitle
@@ -42,7 +48,10 @@ namespace ParkInspectGroupC.ViewModel.ReportCreation
 
 		public ReportViewModel()
 		{
-			SaveReport = new RelayCommand(SaveReportCommand, CanSaveReport);
+			SaveReportCommand = new RelayCommand(SaveReport, CanSaveReport);
+			OpenAssignmentCommand = new RelayCommand(OpenAssignmentView);
+			OpenReportCommand = new RelayCommand(OpenRepport);
+			CreateReportCommand = new RelayCommand(CreateReport);
 
 			using (var context = new ParkInspectEntities())
 			{
@@ -55,7 +64,50 @@ namespace ParkInspectGroupC.ViewModel.ReportCreation
 			}
 		}
 
-		private void SaveReportCommand()
+		private void OpenAssignmentView()
+		{
+			using (var context = new ParkInspectEntities())
+			{
+				var reportList = (from a in context.Reports where a.AssignmentId == SelectedAssignment.Id select a).ToList();
+				ReportList = new ObservableCollection<Report>(reportList);
+			}
+
+			Navigator.SetNewView(new ReportCreationView());
+		}
+
+		private void CreateReport()
+		{
+			using (var context = new ParkInspectEntities())
+			{
+
+				Report report = new Report()
+				{
+					Title = "Tijdige titel",
+					Summary = "Tijdige samenvatting",
+					Date = DateTime.Today,
+					AssignmentId = this.SelectedAssignment.Id,
+					EmployeeId = SelectedEmployee.Id
+				};
+
+				context.Reports.Add(report);
+				context.SaveChanges();
+
+				ReportList.Add(report);
+			}
+		}
+
+		private void OpenRepport()
+		{
+			using (var context = new ParkInspectEntities())
+			{
+				var reportSectionList = (from a in context.ReportSections where a.ReportId == SelectedReport.Id select a ).ToList();
+				ReportSectionList = new ObservableCollection<ReportSection>(reportSectionList);
+			}
+
+			Navigator.SetNewView(new ReportView());
+		}
+
+		private void SaveReport()
 		{
 			
 		}

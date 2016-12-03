@@ -18,9 +18,9 @@ namespace ParkInspectGroupC.View.ReportCreation
 	/// <summary>
 	/// Interaction logic for RapportSectionView.xaml
 	/// </summary>
-	public partial class RapportSectionView : UserControl
+	public partial class ReportSectionView : UserControl
 	{
-		public RapportSectionView()
+		public ReportSectionView()
 		{
 			InitializeComponent();
 		}

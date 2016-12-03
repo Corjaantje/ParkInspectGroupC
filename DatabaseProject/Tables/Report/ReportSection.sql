@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[ReportSection]
 (
-	[Id] INT NOT NULL PRIMARY KEY, 
+	[Id] INT IDENTITY(1,1) NOT NULL PRIMARY KEY, 
     [Title] VARCHAR(MAX) NOT NULL, 
     [Summary] VARCHAR(MAX) NULL, 
     [ReportId] INT NOT NULL, 
