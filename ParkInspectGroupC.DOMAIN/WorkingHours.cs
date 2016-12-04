@@ -12,7 +12,7 @@ namespace ParkInspectGroupC.DOMAIN
     using System;
     using System.Collections.Generic;
     
-    public partial class WorkingHour
+    public partial class WorkingHours
     {
         public int EmployeeId { get; set; }
         public System.DateTime Date { get; set; }
