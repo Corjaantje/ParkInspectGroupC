@@ -14,16 +14,11 @@ namespace ParkInspectGroupC.DOMAIN
     
     public partial class Diagram
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Diagram()
-        {
-            this.ReportSections = new HashSet<ReportSection>();
-        }
-    
         public int Id { get; set; }
-        public string File { get; set; }
+        public int QuestionId { get; set; }
+        public int ReportSectionId { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ReportSection> ReportSections { get; set; }
+        public virtual Question Question { get; set; }
+        public virtual ReportSection ReportSection { get; set; }
     }
 }

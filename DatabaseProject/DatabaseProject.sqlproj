@@ -86,7 +86,6 @@
     <Build Include="Tables\Report\ReportSection.sql" />
     <Build Include="Tables\Report\Diagram.sql" />
     <Build Include="Tables\Report\ReportSectionInspectionImage.sql" />
-    <Build Include="Tables\Report\ReportSectionDiagram.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="DatabaseProject.refactorlog" />

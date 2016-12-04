@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="cbb9ca90c2fa411b9bc4db601f4febd2" Name="Diagram1" ZoomLevel="150">
+      <Diagram DiagramId="cbb9ca90c2fa411b9bc4db601f4febd2" Name="Diagram1" ZoomLevel="85">
         <EntityTypeShape EntityType="ParkInspectModel.Account" Width="1.5" PointX="5.25" PointY="6.25" />
         <EntityTypeShape EntityType="ParkInspectModel.Assignment" Width="1.5" PointX="8.125" PointY="10.125" />
         <EntityTypeShape EntityType="ParkInspectModel.Customer" Width="1.5" PointX="6" PointY="2.25" />
@@ -17,8 +17,8 @@
         <EntityTypeShape EntityType="ParkInspectModel.KeywordCategory" Width="1.5" PointX="10.5" PointY="15" />
         <EntityTypeShape EntityType="ParkInspectModel.Module" Width="1.5" PointX="10.5" PointY="1.375" />
         <EntityTypeShape EntityType="ParkInspectModel.Question" Width="1.5" PointX="12.75" PointY="2.625" />
-        <EntityTypeShape EntityType="ParkInspectModel.QuestionAnswer" Width="1.5" PointX="15.125" PointY="7.125" />
-        <EntityTypeShape EntityType="ParkInspectModel.QuestionKeyword" Width="1.5" PointX="15" PointY="3" />
+        <EntityTypeShape EntityType="ParkInspectModel.QuestionAnswer" Width="1.75" PointX="14.75" PointY="6.875" />
+        <EntityTypeShape EntityType="ParkInspectModel.QuestionKeyword" Width="1.5" PointX="18" PointY="11.875" />
         <EntityTypeShape EntityType="ParkInspectModel.Questionnaire" Width="1.5" PointX="12.75" PointY="10.875" />
         <EntityTypeShape EntityType="ParkInspectModel.QuestionnaireModule" Width="1.5" PointX="15" PointY="11" />
         <EntityTypeShape EntityType="ParkInspectModel.QuestionSort" Width="1.5" PointX="10.5" PointY="4.75" />
@@ -39,7 +39,7 @@
         <AssociationConnector Association="ParkInspectModel.FK_Question_Module" />
         <AssociationConnector Association="ParkInspectModel.FK_QuestionnaireModule_Module" />
         <AssociationConnector Association="ParkInspectModel.FK_Question_QuestionSort" />
-        <AssociationConnector Association="ParkInspectModel.FK_QuestionAnswer_Question" />
+        <AssociationConnector Association="ParkInspectModel.FK_QuestionAnswer_Question" ></AssociationConnector>
         <AssociationConnector Association="ParkInspectModel.FK_QuestionKeyword_Question" />
         <AssociationConnector Association="ParkInspectModel.FK_QuestionAnswer_Questionnaire" />
         <AssociationConnector Association="ParkInspectModel.FK_QuestionnaireModule_Questionnaire" />
@@ -48,14 +48,15 @@
         <EntityTypeShape EntityType="ParkInspectModel.WorkingHour" Width="1.5" PointX="5.25" PointY="10.125" />
         <AssociationConnector Association="ParkInspectModel.FK_Availability_Employee" />
         <AssociationConnector Association="ParkInspectModel.FK_WorkingHours_Employee" />
-        <EntityTypeShape EntityType="ParkInspectModel.Diagram" Width="1.5" PointX="15.75" PointY="0.75" />
-        <EntityTypeShape EntityType="ParkInspectModel.ReportSection" Width="1.5" PointX="18" PointY="8.375" />
-        <AssociationConnector Association="ParkInspectModel.ReportSectionDiagram" />
+        <EntityTypeShape EntityType="ParkInspectModel.ReportSection" Width="1.5" PointX="18.375" PointY="8.375" />
         <AssociationConnector Association="ParkInspectModel.ReportSectionInspectionImage" />
         <EntityTypeShape EntityType="ParkInspectModel.Report" Width="1.5" PointX="15.375" PointY="14.625" />
         <AssociationConnector Association="ParkInspectModel.FK_Report_Assignment" />
         <AssociationConnector Association="ParkInspectModel.FK_Report_Employee" />
         <AssociationConnector Association="ParkInspectModel.FK_ReportSection_Report" />
+        <EntityTypeShape EntityType="ParkInspectModel.Diagram" Width="1.5" PointX="20.625" PointY="5.75" />
+        <AssociationConnector Association="ParkInspectModel.FK_Diagram_QuestionId" />
+        <AssociationConnector Association="ParkInspectModel.FK_Diagram_ReportSection" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

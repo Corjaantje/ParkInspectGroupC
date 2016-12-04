@@ -23,11 +23,16 @@ namespace ParkInspectGroupC.ViewModel.ReportCreation
 		public ObservableCollection<ReportSection> ReportSectionList { get; set; }
 		public ObservableCollection<Diagram> ReportSectionDiagrams { get; set; }
 		public ObservableCollection<InspectionImage> ReportSectionImages { get; set; }
+		public ObservableCollection<Diagram> ReportSectionDiagramsQuestion { get; set; }
+		public ObservableCollection<InspectionImage> ReportSectionInspectionImage { get; set; }
 
 		public Assignment SelectedAssignment { get; set; }
 		public Report SelectedReport { get; set; }
 		public Employee SelectedEmployee { get; set; }
 		public ReportSection SelectedReportSection { get; set; }
+		public Question SelectedQuestionDiagram { get; set; }
+
+		private DiagramCreationView _dView;
 
 		// Commands
 		public ICommand SaveReportCommand { get; set; }
@@ -37,7 +42,11 @@ namespace ParkInspectGroupC.ViewModel.ReportCreation
 		public ICommand CreateReportCommand { get; set; }
 		public ICommand OpenReportSectionCommand { get; set; }
 		public ICommand DeleteReportSectionCommand { get; set; }
-		public ICommand CreateRepportSectionCommand { get; set; }
+		public ICommand CreateReportSectionCommand { get; set; }
+		public ICommand OpenReportSectionImagesWindowCommand { get; set; }
+		public ICommand OpenReportSectionDiagramWindowCommand { get; set; }
+		public ICommand ConfirmAddDiagramCommand { get; set; }
+		public ICommand CancelAddDiagramCommand { get; set; }
 
 		public string ReportSectionTitle
 		{
@@ -49,18 +58,20 @@ namespace ParkInspectGroupC.ViewModel.ReportCreation
 		{
 			get { return SelectedReportSection.Summary; }
 			set { SelectedReportSection.Summary = value; RaisePropertyChanged("ReportSectionDescription"); }
-		} 
+		}
 
+		private string _reportTitle;
 		public string ReportTitle
 		{
-			get { return SelectedReport.Title; }
-			set { SelectedReport.Title = value; RaisePropertyChanged("ReportTitle"); }
+			get { return _reportTitle; }
+			set { _reportTitle = value; RaisePropertyChanged("ReportTitle"); }
 		}
-		
+
+		private string _reportDescription;
 		public string ReportDescription
 		{
-			get { return SelectedReport.Summary; }
-			set { SelectedReport.Summary = value; RaisePropertyChanged("ReportDescription"); }
+			get { return _reportDescription; }
+			set { _reportDescription = value; RaisePropertyChanged("ReportDescription"); }
 		}
 
 		public ReportViewModel()
@@ -72,7 +83,8 @@ namespace ParkInspectGroupC.ViewModel.ReportCreation
 			CreateReportCommand = new RelayCommand(CreateReport);
 			OpenReportSectionCommand = new RelayCommand(OpenReportSection);
 			DeleteReportSectionCommand = new RelayCommand(DeleteRepportSection);
-			CreateRepportSectionCommand = new RelayCommand(CreateRepportSection);
+			CreateReportSectionCommand = new RelayCommand(CreateRepportSection);
+			OpenReportSectionDiagramWindowCommand = new RelayCommand(OpenReportSectionDiagram, CanOpenReportSectionDiagram);
 
 			using (var context = new ParkInspectEntities())
 			{
@@ -163,11 +175,12 @@ namespace ParkInspectGroupC.ViewModel.ReportCreation
 			{
 				var section = (from a in context.ReportSections where a.Id == SelectedReportSection.Id select a).FirstOrDefault();
 
-				//ReportSectionTitle = section.Title;
-				//ReportSectionDescription = section.Summary;
+				//var reportSectionDiagrams = (from a in context.Diagrams where a.Id == SelectedReport.Id select a).ToList();
+				//ReportSectionDiagrams = new ObservableCollection<Diagram>(reportSectionDiagrams);
+				//var reportSectionImages = (from a in )
 
-				//ReportSectionImages = new ObservableCollection<InspectionImage>(section.InspectionImages);
-				//ReportSectionDiagrams = new ObservableCollection<Diagram>(section.Diagrams);
+				ReportSectionImages = new ObservableCollection<InspectionImage>(section.InspectionImages);
+				ReportSectionDiagrams = new ObservableCollection<Diagram>(section.Diagrams);
 
 			}
 
@@ -225,6 +238,24 @@ namespace ParkInspectGroupC.ViewModel.ReportCreation
 				context.ReportSections.Remove(reportSection);
 				context.SaveChanges();
 				ReportSectionList.Remove(SelectedReportSection);
+			}
+		}
+
+		private void OpenReportSectionDiagram()
+		{
+			_dView = new DiagramCreationView();
+			_dView.Show();
+		}
+
+		private bool CanOpenReportSectionDiagram()
+		{
+			if (_dView.IsActive || _dView.IsEnabled)
+			{
+				return false;
+			}
+			else
+			{
+				return true;
 			}
 		}
 	}

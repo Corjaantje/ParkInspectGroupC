@@ -29,7 +29,7 @@
 		</ScrollViewer>
 		
 		<Button Content="Genereer PDF" Grid.Row="2" Margin="3" />
-		<Button Content="Nieuw deel" Grid.Row="2" Grid.Column="1" Margin="3" Command="{Binding CreateRepportSectionCommand}" />
+		<Button Content="Nieuw deel" Grid.Row="2" Grid.Column="1" Margin="3" Command="{Binding CreateReportSectionCommand}" />
 		</Grid>
 		<ScrollViewer Grid.Row="3" Grid.ColumnSpan="2" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Visible">
 			<DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedReportSection, Mode=TwoWay}" ItemsSource="{Binding ReportSectionList}" >

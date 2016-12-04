@@ -31,7 +31,7 @@
 		</ScrollViewer>
 		
 		<Label Grid.Row="3" Grid.Column="0" Content="Afbeeldingen:" />
-		<Button Grid.Row="3" Grid.Column="1" Content="+" Background="Green" />
+		<Button Grid.Row="3" Grid.Column="1" Content="+" Background="Green" Command="{Binding OpenReportSectionImagesWindow}" />
 		<ScrollViewer Grid.Row="4" Grid.ColumnSpan="2" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
 			<DataGrid AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding ReportSectionImages}">
 				<DataGrid.Columns>
@@ -50,7 +50,7 @@
 		</ScrollViewer>
 
 		<Label Grid.Row="5" Grid.Column="0" Content="Diagrammen:" />
-		<Button Grid.Row="5" Grid.Column="1" Content="+" Background="Green" />
+		<Button Grid.Row="5" Grid.Column="1" Content="+" Background="Green" Command="{Binding OpenReportSectionDiagramWindow}" />
 		<ScrollViewer Grid.Row="6" Grid.ColumnSpan="2" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
 			<DataGrid AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding ReportSectionDiagrams}">
 				<DataGrid.Columns>
