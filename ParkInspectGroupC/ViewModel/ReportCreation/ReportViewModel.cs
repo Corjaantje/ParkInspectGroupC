@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -23,16 +24,23 @@ namespace ParkInspectGroupC.ViewModel.ReportCreation
 		public ObservableCollection<ReportSection> ReportSectionList { get; set; }
 		public ObservableCollection<Diagram> ReportSectionDiagrams { get; set; }
 		public ObservableCollection<InspectionImage> ReportSectionImages { get; set; }
-		public ObservableCollection<Diagram> ReportSectionDiagramsQuestion { get; set; }
+
+		// Holds the quetions that could turn into a diagram.
+		public ObservableCollection<Question> ReportSectionDiagramsQuestion { get; set; }
+		// Holds the inspection images that could be exportered in the report.
 		public ObservableCollection<InspectionImage> ReportSectionInspectionImage { get; set; }
 
 		public Assignment SelectedAssignment { get; set; }
 		public Report SelectedReport { get; set; }
 		public Employee SelectedEmployee { get; set; }
 		public ReportSection SelectedReportSection { get; set; }
-		public Question SelectedQuestionDiagram { get; set; }
+		public Diagram SelectedReportSectionDiagram { get; set; }
+		public InspectionImage SelectedAddReportSectionInspectionImage { get; set; }
+		public Question SelectedAddReportSectionDiagram { get; set; }
+		public InspectionImage SelectedReportSectionImage { get; set; }
 
 		private DiagramCreationView _dView;
+		private InspectorImageCreationView _mView;
 
 		// Commands
 		public ICommand SaveReportCommand { get; set; }
@@ -47,6 +55,10 @@ namespace ParkInspectGroupC.ViewModel.ReportCreation
 		public ICommand OpenReportSectionDiagramWindowCommand { get; set; }
 		public ICommand ConfirmAddDiagramCommand { get; set; }
 		public ICommand CancelAddDiagramCommand { get; set; }
+		public ICommand DeleteReportSectionDiagramCommand { get; set; }
+		public ICommand ConfirmAddImageCommand { get; set; }
+		public ICommand CancelAddImageCommand { get; set; }
+		public ICommand DeleteReportSectionImageCommand { get; set; }
 
 		public string ReportSectionTitle
 		{
@@ -84,7 +96,14 @@ namespace ParkInspectGroupC.ViewModel.ReportCreation
 			OpenReportSectionCommand = new RelayCommand(OpenReportSection);
 			DeleteReportSectionCommand = new RelayCommand(DeleteRepportSection);
 			CreateReportSectionCommand = new RelayCommand(CreateRepportSection);
-			OpenReportSectionDiagramWindowCommand = new RelayCommand(OpenReportSectionDiagram, CanOpenReportSectionDiagram);
+			OpenReportSectionDiagramWindowCommand = new RelayCommand(OpenReportSectionDiagram);
+			OpenReportSectionImagesWindowCommand = new RelayCommand(OpenReportSectionImage);
+			ConfirmAddDiagramCommand = new RelayCommand(ConfirmAddReportSectionDiagram, CanConfirmAddReportSectionDiagram);
+			ConfirmAddImageCommand = new RelayCommand(ConfirmAddReportSectionImage, CanConfirmAddReportSectionImage);
+			DeleteReportSectionDiagramCommand = new RelayCommand(DeleteReportSectionDiagram);
+			CancelAddImageCommand = new RelayCommand(CancelAddReportSectionImage);
+			CancelAddDiagramCommand = new RelayCommand(CancelAddReportSectionDiagram);
+			DeleteReportSectionImageCommand = new RelayCommand(DeleteReportSectionImage);
 
 			using (var context = new ParkInspectEntities())
 			{
@@ -243,13 +262,38 @@ namespace ParkInspectGroupC.ViewModel.ReportCreation
 
 		private void OpenReportSectionDiagram()
 		{
-			_dView = new DiagramCreationView();
-			_dView.Show();
+			using (var context = new ParkInspectEntities())
+			{
+				List<Question> questions = new List<Question>();
+				List<Inspection> inspections = (from a in context.Inspection where a.AssignmentId == SelectedAssignment.Id select a).ToList();
+
+				foreach (var inspection in inspections)
+				{
+					var questionnaires = inspection.Questionnaire;
+					foreach (var questionaire in questionnaires)
+					{
+						var questionnaireModules = questionaire.QuestionnaireModule;
+						foreach (var questionnaireModule in questionnaireModules)
+						{
+							var tempQuestions = questionnaireModule.Module.Question;
+							foreach (var question in tempQuestions)
+							{
+								questions.Add(question);
+							}
+						}
+					}
+				}
+
+				ReportSectionDiagramsQuestion = new ObservableCollection<Question>(questions);
+			}
+
+			_mView = new InspectorImageCreationView();
+			_mView.Show();
 		}
 
 		private bool CanOpenReportSectionDiagram()
 		{
-			if (_dView.IsActive || _dView.IsEnabled)
+			if (_dView != null && (_dView.IsEnabled || _dView.IsActive))
 			{
 				return false;
 			}
@@ -257,6 +301,142 @@ namespace ParkInspectGroupC.ViewModel.ReportCreation
 			{
 				return true;
 			}
+		}
+
+		private bool CanOpenReportSectionImage()
+		{
+			if (_mView != null && (_mView.IsActive || _mView.IsEnabled))
+			{
+				return false;
+			}
+			else
+			{
+				return true;
+			}
+		}
+
+		private void CancelAddReportSectionDiagram()
+		{
+			_mView.Close();
+		}
+
+		private void ConfirmAddReportSectionDiagram()
+		{
+			using (var context = new ParkInspectEntities())
+			{
+				var diagram = new Diagram()
+				{
+					QuestionId = SelectedAddReportSectionDiagram.Id,
+					ReportSectionId = SelectedReportSection.Id
+				};
+
+				context.Diagrams.Add(diagram);
+				context.SaveChanges();
+				ReportSectionDiagrams.Add(diagram);
+			}
+
+			_mView.Close();
+		}
+
+		private void OpenReportSectionImage()
+		{
+			using (var context = new ParkInspectEntities())
+			{
+				List<InspectionImage> images = new List<InspectionImage>();
+
+				var inspections = (from a in context.Assignment where a.Id == SelectedAssignment.Id select a).ToList();
+
+				foreach (var inspection in inspections)
+				{
+					var inspectionImages =
+						(from a in context.InspectionImage where a.InspectionId == inspection.Id select a).ToList();
+					foreach (var inspectionImage in inspectionImages)
+					{
+						images.Add(inspectionImage);
+					}
+				}
+
+				ReportSectionInspectionImage = new ObservableCollection<InspectionImage>(images);
+			}
+
+			_dView = new DiagramCreationView();
+			_dView.Show();
+		}
+
+		private bool CanConfirmAddReportSectionDiagram()
+		{
+			if (SelectedAddReportSectionDiagram != null)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		private void ConfirmAddReportSectionImage()
+		{
+			using (var context = new ParkInspectEntities())
+			{
+				ReportSection section = (from a in context.ReportSections where a.Id == SelectedReportSection.Id select a).FirstOrDefault();
+				InspectionImage image =
+					(from a in context.InspectionImage where a.Id == SelectedAddReportSectionInspectionImage.Id select a)
+						.FirstOrDefault();
+				
+				section.InspectionImages.Add(image);
+
+				context.SaveChanges();
+
+				ReportSectionImages.Add(SelectedAddReportSectionInspectionImage);
+			}
+
+			_dView.Close();
+		}
+
+		private bool CanConfirmAddReportSectionImage()
+		{
+			if (SelectedAddReportSectionInspectionImage != null)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		private void CancelAddReportSectionImage()
+		{
+			_dView.Close();
+		}
+
+		private void DeleteReportSectionImage()
+		{
+			using (var context = new ParkInspectEntities())
+			{
+				var section = (from a in context.ReportSections where a.Id == SelectedReportSection.Id select a).FirstOrDefault();
+				var image =
+					(from a in context.InspectionImage where a.Id == SelectedReportSectionImage.Id select a).FirstOrDefault();
+
+				section.InspectionImages.Remove(image);
+				context.SaveChanges();
+
+				ReportSectionImages.Remove(SelectedReportSectionImage);
+			}
+		}
+
+		private void DeleteReportSectionDiagram()
+		{
+			using (var context = new ParkInspectEntities())
+			{
+				var diagram = (from a in context.Diagrams where a.Id == SelectedReportSectionDiagram.Id select a).FirstOrDefault();
+
+				context.Diagrams.Remove(diagram);
+				context.SaveChanges();
+			}
+
+			ReportSectionDiagrams.Remove(SelectedReportSectionDiagram);
 		}
 	}
 }

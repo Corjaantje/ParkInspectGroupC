@@ -36,7 +36,7 @@
 				<DataGrid.Columns>
 					<DataGridTextColumn Header="Id" Binding="{Binding Id}" />
 					<DataGridTextColumn Header="Titel" Binding="{Binding Title}" />
-					<DataGridTextColumn Header="Klant" Binding="{Binding }" />
+					<DataGridTextColumn Header="Klant" Binding="{Binding Report.Assignment.Customer.Name}" />
 					<DataGridTemplateColumn>
 						<DataGridTemplateColumn.CellTemplate>
 							<DataTemplate>

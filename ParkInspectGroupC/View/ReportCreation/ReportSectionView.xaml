@@ -31,17 +31,25 @@
 		</ScrollViewer>
 		
 		<Label Grid.Row="3" Grid.Column="0" Content="Afbeeldingen:" />
-		<Button Grid.Row="3" Grid.Column="1" Content="+" Background="Green" Command="{Binding OpenReportSectionImagesWindow}" />
+		<Button Grid.Row="3" Grid.Column="1" Content="+" Background="Green" Command="{Binding OpenReportSectionImagesWindowCommand}" />
 		<ScrollViewer Grid.Row="4" Grid.ColumnSpan="2" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
-			<DataGrid AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding ReportSectionImages}">
+			<DataGrid AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding ReportSectionImages}" SelectedItem="{Binding SelectedReportSectionImage}">
 				<DataGrid.Columns>
-					<DataGridTextColumn Header="Id" />
-					<DataGridTextColumn Header="Titel" />
-					<DataGridTextColumn Header="Preview" />
+					<DataGridTextColumn Header="Id" Binding="{Binding Id}" />
+					<DataGridTextColumn Header="Inspectie Id" Binding="{Binding Inspection.Id}"/>
+					<DataGridTextColumn Header="Location" Binding="{Binding Inspection.Location}"/>
+					<DataGridTextColumn Header="Date" Binding="{Binding DateCreated}"/>
 					<DataGridTemplateColumn>
 						<DataGridTemplateColumn.CellTemplate>
 							<DataTemplate>
-								<Button Content="Verwijder" />
+								<Button Content="Preview" />
+							</DataTemplate>
+						</DataGridTemplateColumn.CellTemplate>
+					</DataGridTemplateColumn>
+					<DataGridTemplateColumn>
+						<DataGridTemplateColumn.CellTemplate>
+							<DataTemplate>
+								<Button Content="Verwijder" Command="{Binding DataContext.DeleteReportSectionImageCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
 							</DataTemplate>
 						</DataGridTemplateColumn.CellTemplate>
 					</DataGridTemplateColumn>
@@ -50,17 +58,23 @@
 		</ScrollViewer>
 
 		<Label Grid.Row="5" Grid.Column="0" Content="Diagrammen:" />
-		<Button Grid.Row="5" Grid.Column="1" Content="+" Background="Green" Command="{Binding OpenReportSectionDiagramWindow}" />
+		<Button Grid.Row="5" Grid.Column="1" Content="+" Background="Green" Command="{Binding OpenReportSectionDiagramWindowCommand}" />
 		<ScrollViewer Grid.Row="6" Grid.ColumnSpan="2" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
-			<DataGrid AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding ReportSectionDiagrams}">
+			<DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedReportSectionDiagram, Mode=TwoWay}" ItemsSource="{Binding ReportSectionDiagrams}">
 				<DataGrid.Columns>
-					<DataGridTextColumn Header="Id" />
-					<DataGridTextColumn Header="Titel" />
-					<DataGridTextColumn Header="Preview" />
+					<DataGridTextColumn Header="Id" Binding="{Binding Id}" />
+					<DataGridTextColumn Header="Titel" Binding="{Binding Question.Description}" />
 					<DataGridTemplateColumn>
 						<DataGridTemplateColumn.CellTemplate>
 							<DataTemplate>
-								<Button Content="Verwijder" />
+								<Button Content="Preview" />
+							</DataTemplate>
+						</DataGridTemplateColumn.CellTemplate>
+					</DataGridTemplateColumn>
+					<DataGridTemplateColumn>
+						<DataGridTemplateColumn.CellTemplate>
+							<DataTemplate>
+								<Button Content="Verwijder" Command="{Binding DataContext.DeleteReportSectionDiagramCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
 							</DataTemplate>
 						</DataGridTemplateColumn.CellTemplate>
 					</DataGridTemplateColumn>
