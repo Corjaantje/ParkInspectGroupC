@@ -39,15 +39,10 @@ namespace ParkInspectGroupC.ViewModel
             double Long;
             Coordinate coord = null;
             Markers = new List<GMapMarker>();
-            foreach (var insp in PInspections)
+            try
             {
-                using (var context = new ParkInspectEntities())
+                foreach (var insp in PInspections)
                 {
-                     frequency = (from i in context.Inspection
-                                     where i.Id == insp.Id
-                                     select i).Count();
-                    var Lat = (from c in context.Coordinates 
-                               where c.InspectionId == insp.Id 
                     frequency = 0;
                     Lat = 0;
                     Long = 0;
@@ -59,23 +54,28 @@ namespace ParkInspectGroupC.ViewModel
                                  select c).FirstOrDefault();
                         frequency = (from c in context.Coordinates
                                      where c.Latitude == coord.Latitude && c.Longitude == coord.Longitude
+                                     select c).Count();
+                        Lat = (from c in context.Coordinates
+                               where c.InspectionId == insp.Id
                                select c).FirstOrDefault().Latitude;
-                    var Long = (from c in context.Coordinates 
-                                where c.InspectionId == insp.Id 
+                        Long = (from c in context.Coordinates
+                                where c.InspectionId == insp.Id
                                 select c).FirstOrDefault().Longitude;
+                    }
+                    var point = new GMap.NET.PointLatLng(Lat, Long);
+                    GMapMarker marker = new GMapMarker(point);
+                    marker.Shape = new Ellipse
+                    {
+                        Width = frequency *10,
+                        Height = frequency *10,
+                        Stroke = Brushes.Black,
+                        StrokeThickness = 1.5
+                    };
+                    Markers = Markers.Concat(new[] { marker });
                 }
             }
-            var point = new GMap.NET.PointLatLng(Lat,Long);
-            GMapMarker marker = new GMapMarker(point);
-            Markers = Markers.Concat(new[] { marker });
-            marker.Shape = new Ellipse
-            {
-                Width = frequency * 10,
-                Height = 10,
-                Stroke = Brushes.Black,
-                StrokeThickness = 1.5
-            };
-            Markers = Markers.Concat(new[] { marker });
+
+            catch(Exception){}
         }
 
         private bool CanShowInspections()
