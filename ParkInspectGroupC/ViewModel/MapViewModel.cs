@@ -45,6 +45,13 @@ namespace ParkInspectGroupC.ViewModel
                     Lat = 0;
                     Long = 0;
                     using (var context = new ParkInspectEntities())
+                    {
+                       
+                        coord = (from c in context.Coordinates
+                                 where c.InspectionId == insp.Id
+                                 select c).FirstOrDefault();
+                        frequency = (from c in context.Coordinates
+                                     where c.Latitude == coord.Latitude && c.Longitude == coord.Longitude
                                select c).FirstOrDefault().Latitude;
                     var Long = (from c in context.Coordinates 
                                 where c.InspectionId == insp.Id 
