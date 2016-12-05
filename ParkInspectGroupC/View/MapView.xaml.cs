@@ -48,7 +48,7 @@ namespace ParkInspectGroupC.View
 
         private void Add_Markers()
         {
-            foreach (GMapMarker marker in vm.markers)
+            foreach (GMapMarker marker in vm.Markers)
             {
                 gmap.Markers.Add(marker);
             }
