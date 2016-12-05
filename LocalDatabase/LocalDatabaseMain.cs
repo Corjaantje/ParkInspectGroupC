@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace LocalDatabase
 {
@@ -61,10 +62,19 @@ namespace LocalDatabase
         #endregion
 
         #region Database Sync Options
-        public bool SyncCentralToLocal()
+        public async Task<bool> SyncCentralToLocal()
         {
-            GetFromCentral sync = new GetFromCentral(_sqliteConnection, _sqliteActions);
-            return sync.Sync(dbName);
+            Task<bool> refresh = Task.Run(() =>
+            {
+                GetFromCentral sync = new GetFromCentral(_sqliteConnection, _sqliteActions);
+                bool r = sync.Sync(dbName);
+
+                return r;
+            }
+            );
+
+            bool result = await refresh;
+            return result;
         }
         public List<SaveDeleteMessage> SyncLocalToCentralSaveDelete()
         {

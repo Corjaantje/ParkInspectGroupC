@@ -76,38 +76,53 @@ namespace ParkInspectGroupC.ViewModel
         #endregion
 
         #region Central to Local Sync
-        private void CentralToLocalSync()
+        private async void CentralToLocalSync()
         {
-            if (theUpdateMessages.Count == 0)
-            {
-                //Start sync with central
-                Debug.WriteLine("CentralToLocal: Starting Sync");
-                bool syncCToL = ldb.SyncCentralToLocal();
+            SaveDeleteMessage _message = new SaveDeleteMessage();
+            _message.Action = "CtL Synchroniseren";
 
-                SaveDeleteMessage _message = new SaveDeleteMessage();
-                _message.Action = "CtL Synchroniseren";
-                _message.Date = DateTime.Now;
-                if (syncCToL)
+            Task task = Task.Run(() => 
+            {
+                if (theUpdateMessages.Count == 0)
                 {
-                    _message.Message = "Succes!";
+                    //Start sync with central
+                    Debug.WriteLine("CentralToLocal: Starting Sync");
+                    Task<bool> syncCToL = ldb.SyncCentralToLocal();
+
+                    _message.Date = DateTime.Now;
+                    if (syncCToL.Result)
+                    {
+                        _message.Message = "Succes!";
+                    }
+                    else
+                    {
+                        _message.Message = "Failed!";
+                    }
+                    Debug.WriteLine("CentralToLocal: Done Sync");
+                    Debug.WriteLine("CentralToLocal: Stopping Sync");
                 }
-                else
-                {
-                    _message.Message = "Failed!";
-                }
-                theSaveDeleteMessages.Add(_message);
-                Debug.WriteLine("CentralToLocal: Done Sync");
-                Debug.WriteLine("CentralToLocal: Stopping Sync");
-            }
+            });
+
+            await task;
+            theSaveDeleteMessages.Add(_message);
         }
         #endregion
 
         #region Local to Central Sync
-        private void LocalToCentralSync()
+        private async void LocalToCentralSync()
         {
-            List<SaveDeleteMessage> SaveDeleteMessage = SaveDelete(ldb).Result;
-            Tuple<List<UpdateMessage>, SaveDeleteMessage> UpdateMessages = Update(ldb).Result;
-            List<UpdateMessage> UpdateMessage = UpdateMessages.Item1;
+            List<SaveDeleteMessage> SaveDeleteMessage = null;
+            Tuple<List<UpdateMessage>, SaveDeleteMessage> UpdateMessages = null;
+            List<UpdateMessage> UpdateMessage = null;
+
+            Task task = Task.Run(() =>
+            {
+                SaveDeleteMessage = SaveDelete(ldb).Result;
+                UpdateMessages = Update(ldb).Result;
+                UpdateMessage = UpdateMessages.Item1;
+            });
+
+            await task;
 
             foreach (SaveDeleteMessage m in SaveDeleteMessage)
             {
@@ -125,21 +140,33 @@ namespace ParkInspectGroupC.ViewModel
         }
         private static async Task<List<SaveDeleteMessage>> SaveDelete(LocalDatabaseMain ldb)
         {
-            Debug.WriteLine("SaveDelete: Starting Sync");
-            //List<SaveDeleteMessage> message = await Task.Run(() => ldb.SyncLocalToCentralSaveDelete());//Start the sync
-            List<SaveDeleteMessage> message = ldb.SyncLocalToCentralSaveDelete();
-            Debug.WriteLine("SaveDelete: Sync Done");
-            Debug.WriteLine("SaveDelete: Sync Stopping");
+            List<SaveDeleteMessage> message = null;
+
+            Task task = Task.Run(() =>
+            {
+                Debug.WriteLine("SaveDelete: Starting Sync");
+                message = ldb.SyncLocalToCentralSaveDelete();
+                Debug.WriteLine("SaveDelete: Sync Done");
+                Debug.WriteLine("SaveDelete: Sync Stopping");
+            });
+
+            await task;
 
             return message;
         }
         private static async Task<Tuple<List<UpdateMessage>, SaveDeleteMessage>> Update(LocalDatabaseMain ldb)
         {
-            Debug.WriteLine("Update: Starting Sync");
-            //List<SaveDeleteMessage> message = await Task.Run(() => ldb.SyncLocalToCentralSaveDelete());//Start the sync
-            Tuple<List<UpdateMessage>,SaveDeleteMessage> UpdateMessages = ldb.SyncLocalToCentralUpdate(); ;
-            Debug.WriteLine("Update: Sync Done");
-            Debug.WriteLine("Update: Sync Stopping");
+            Tuple<List<UpdateMessage>, SaveDeleteMessage> UpdateMessages = null;
+
+            Task task = Task.Run(() =>
+            {
+                Debug.WriteLine("Update: Starting Sync");
+                UpdateMessages = ldb.SyncLocalToCentralUpdate();
+                Debug.WriteLine("Update: Sync Done");
+                Debug.WriteLine("Update: Sync Stopping");
+            });
+
+            await task;
 
             return UpdateMessages;
         }
