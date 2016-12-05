@@ -26,6 +26,11 @@ namespace ParkInspectGroupC.ViewModel
 
         private void AddInspections(IEnumerable<Inspection> PInspections)
         {
+
+            int frequency;
+            double Lat;
+            double Long;
+            Coordinate coord = null;
             Markers = new List<GMapMarker>();
             foreach (var insp in PInspections)
             {
@@ -36,6 +41,10 @@ namespace ParkInspectGroupC.ViewModel
                                      select i).Count();
                     var Lat = (from c in context.Coordinates 
                                where c.InspectionId == insp.Id 
+                    frequency = 0;
+                    Lat = 0;
+                    Long = 0;
+                    using (var context = new ParkInspectEntities())
                                select c).FirstOrDefault().Latitude;
                     var Long = (from c in context.Coordinates 
                                 where c.InspectionId == insp.Id 
