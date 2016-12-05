@@ -48,7 +48,11 @@ namespace ParkInspectGroupC.ViewModel
             SimpleIoc.Default.Register<QuestionnaireViewModel>();
 			SimpleIoc.Default.Register<EmployeeCreationViewModel>();
 			SimpleIoc.Default.Register<InspectorProfileViewModel>();
+<<<<<<< HEAD
             SimpleIoc.Default.Register<DatabaseSyncViewModel>();
+=======
+            SimpleIoc.Default.Register<CustomerListViewModel>();
+>>>>>>> refs/remotes/origin/master
         }
 
         public MainViewModel Main
@@ -93,11 +97,20 @@ namespace ParkInspectGroupC.ViewModel
 		    get { return ServiceLocator.Current.GetInstance<InspectorProfileViewModel>(); }
 	    }
 
+<<<<<<< HEAD
         public DatabaseSyncViewModel DatabaseSync
         {
             get { return ServiceLocator.Current.GetInstance<DatabaseSyncViewModel>(); }
         }
 
+=======
+        public CustomerListViewModel CustomerList
+        {
+            get { return ServiceLocator.Current.GetInstance<CustomerListViewModel>(); }
+        }
+
+
+>>>>>>> refs/remotes/origin/master
 
         public static void Cleanup()
         {

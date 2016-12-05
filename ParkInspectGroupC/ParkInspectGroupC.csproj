@@ -110,10 +110,15 @@
     </ApplicationDefinition>
     <Compile Include="Converter\EnumToBooleanConverter.cs" />
     <Compile Include="Converter\StatusToPathConverter.cs" />
+    <Compile Include="Factory\ThemeFactory.cs" />
     <Compile Include="Miscellaneous\IHavePassword.cs" />
     <Compile Include="Miscellaneous\Navigator.cs" />
     <Compile Include="ViewModel\CustomerCreationViewModel.cs" />
+<<<<<<< HEAD
     <Compile Include="ViewModel\DatabaseSyncViewModel.cs" />
+=======
+    <Compile Include="ViewModel\CustomerListViewModel.cs" />
+>>>>>>> refs/remotes/origin/master
     <Compile Include="ViewModel\InspectorProfileViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="Validation\EmailValidation.cs" />
@@ -141,6 +146,9 @@
     </Compile>
     <Compile Include="View\MainWindow\NavigationMenu.xaml.cs">
       <DependentUpon>NavigationMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MainWindow\ThemeSelector.xaml.cs">
+      <DependentUpon>ThemeSelector.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\QuestionnaireModules\QuestionnaireCommentControl.xaml.cs">
       <DependentUpon>QuestionnaireCommentControl.xaml</DependentUpon>
@@ -192,6 +200,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+<<<<<<< HEAD
     <Page Include="View\DatabaseSyncDialogs\DeleteDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -204,6 +213,8 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+=======
+>>>>>>> refs/remotes/origin/master
     <Page Include="View\InspectorProfileView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -217,6 +228,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\MainWindow\NavigationMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MainWindow\ThemeSelector.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
