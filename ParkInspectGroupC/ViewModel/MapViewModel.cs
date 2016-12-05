@@ -18,16 +18,9 @@ namespace ParkInspectGroupC.ViewModel
         public IEnumerable<GMapMarker> Markers { get; set; }
 
         
-        public MapViewModel(
-           // IEnumerable<Inspection> PInspections
-            )
+        public MapViewModel(IEnumerable<Inspection> PInspections)
         {
-            IEnumerable<Inspection> PInspections = null;
-            using (var context = new ParkInspectEntities())
-            {
-                PInspections = (from i in context.Inspection   //Dummy data, solely used for testing
-                               select i).ToList();                      //TODO delete this and make the list come in throug parameter
-            }
+            
             AddInspections(PInspections);
         }
 
