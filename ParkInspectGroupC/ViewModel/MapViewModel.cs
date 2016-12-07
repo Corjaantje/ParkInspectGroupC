@@ -3,6 +3,7 @@ using GMap.NET.WindowsPresentation;
 using ParkInspectGroupC.DOMAIN;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,10 +18,21 @@ namespace ParkInspectGroupC.ViewModel
         public ICommand ShowInspectionsCommand { get; set; }
         public IEnumerable<GMapMarker> Markers { get; set; }
 
-        
-        public MapViewModel(IEnumerable<Inspection> PInspections)
+        //This is the actual constructor
+        //public MapViewModel(IEnumerable<Inspection> PInspections)
+        //{  AddInspections(PInspections);
+        //}
+
+        //This is a debug constructor!
+        public MapViewModel()
         {
-            
+            Debug.WriteLine("Open screen");
+            IEnumerable<Inspection> PInspections = null;
+            using (var context = new ParkInspectEntities())
+            {
+                PInspections = (from c in context.Inspection
+                    select c).ToList();
+            }
             AddInspections(PInspections);
         }
 

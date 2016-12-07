@@ -6,7 +6,11 @@
         DataContext="{Binding Map, UpdateSourceTrigger=PropertyChanged, Source={StaticResource Locator } }">
 
     <Grid>
-        <WindowsPresentation:GMapControl x:Name="gmap" HorizontalAlignment="Left" Height="299" Margin="10,10,0,0" VerticalAlignment="Top" Width="512" MaxZoom="18" MinZoom="2" Zoom="7"/>
-        <Button Content="Toon alle inspecties" HorizontalAlignment="Left" Margin="10,314,0,0" VerticalAlignment="Top" Width="157" Height="44" Command="{Binding Path=ShowInspectionsCommand}"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="61*"/>
+            <ColumnDefinition Width="471*"/>
+        </Grid.ColumnDefinitions>
+        <WindowsPresentation:GMapControl x:Name="gmap" HorizontalAlignment="Left" Height="299" Margin="10,10,0,0" VerticalAlignment="Top" Width="512" MaxZoom="18" MinZoom="2" Zoom="7" Grid.ColumnSpan="2"/>
+        <Button Content="Toon alle inspecties" HorizontalAlignment="Left" Margin="10,314,0,0" VerticalAlignment="Top" Width="157" Height="44" Command="{Binding Path=ShowInspectionsCommand}" Grid.ColumnSpan="2"/>
     </Grid>
 </Window>

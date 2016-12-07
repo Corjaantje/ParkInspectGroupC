@@ -1,5 +1,4 @@
 ﻿using GMap.NET;
-using GMap.NET.ObjectModel;
 using GMap.NET.WindowsPresentation;
 using Microsoft.Practices.ServiceLocation;
 using ParkInspectGroupC.ViewModel;
