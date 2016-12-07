@@ -171,6 +171,23 @@ namespace LocalDatabase.Central
 
             return msg;
         }
+        public string GetCoordinate(UpdateMessage message)
+        {
+            string msg = null;
+
+            using (var context = new ParkInspectEntities())
+            {
+                ParkInspectGroupC.DOMAIN.Coordinate record = (from x in context.Coordinates where x.Id == message.CentralId select x).First();
+
+                msg = "Coordinaat nummer: " + record.Id.ToString() + Environment.NewLine +
+                     "Longitude: " + record.Longitude + Environment.NewLine +
+                     "Latitude: " + record.Latitude + Environment.NewLine +
+                     "Note: " + record.Note + Environment.NewLine +
+                     "Opdracht nummer: " + record.InspectionId.ToString() + Environment.NewLine;
+            }
+
+            return msg;
+        }
         public string GetInspectionImage(UpdateMessage message)
         {
             string msg = null;

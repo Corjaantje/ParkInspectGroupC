@@ -56,6 +56,9 @@ namespace LocalDatabase.Local
             action = InspectionImage();
             _temp.Add(action);
 
+            action = Coordinate();
+            _temp.Add(action);
+
             action = Inspection();
             _temp.Add(action);
 
@@ -419,6 +422,38 @@ namespace LocalDatabase.Local
             catch (Exception)
             {
                 return "Kon de foto niet verwijderen! Wordt de foto die u wou weggooien nog ergens gebruikt?";
+            }
+        }
+        private string Coordinate()
+        {
+            try
+            {
+                List<Domain.Coordinate> list = new List<Domain.Coordinate>();
+
+                using (var localcontext = new LocalParkInspectEntities())
+                {
+                    list = localcontext.Coordinates.Where(r => r.ExistsInCentral == 3).ToList();
+                }
+
+                if (list.Count > 0)
+                {
+                    using (var context = new ParkInspectEntities())
+                    {
+                        foreach (Domain.Coordinate r in list)
+                        {
+                            ParkInspectGroupC.DOMAIN.Coordinate _new = new ParkInspectGroupC.DOMAIN.Coordinate();
+                            _new.Id = Convert.ToInt32(r.Id);
+                            context.Coordinates.Attach(_new);
+                            context.Coordinates.Remove(_new);
+                        }
+                        context.SaveChanges();
+                    }
+                }
+                return "true";
+            }
+            catch (Exception)
+            {
+                return "Kon de coordinaten niet verwijderen! Worden de coordinaten die u wou weggooien nog ergens gebruikt?";
             }
         }
         private string Inspection()

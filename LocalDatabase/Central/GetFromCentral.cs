@@ -4,6 +4,7 @@ using ParkInspectGroupC.DOMAIN;
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,6 +43,7 @@ namespace LocalDatabase.Central
                                 "DROP TABLE Keyword;" +
                                 "DROP TABLE KeywordCategory;" +
                                 "DROP TABLE InspectionImage;" +
+                                "DROP TABLE Coordinate;" +
                                 "DROP TABLE Inspection;" +
                                 "DROP TABLE InspectionStatus;" +
                                 "DROP TABLE Assignment;" +
@@ -58,6 +60,7 @@ namespace LocalDatabase.Central
             }
             catch (Exception)
             {
+                Debug.WriteLine("Clear goes wrong!");
                 return false;
             }
         }
@@ -98,6 +101,9 @@ namespace LocalDatabase.Central
             if (!action) return false;
 
             action = GetInspection();
+            if (!action) return false;
+
+            action = GetCoordinate();
             if (!action) return false;
 
             action = GetInspectionImage();
@@ -563,6 +569,46 @@ namespace LocalDatabase.Central
                         _new.ExistsInCentral = 1;
 
                         localContext.InspectionImages.Add(_new);
+                    }
+                    localContext.SaveChanges();
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        private bool GetCoordinate()
+        {
+            List<ParkInspectGroupC.DOMAIN.Coordinate> list = new List<ParkInspectGroupC.DOMAIN.Coordinate>();
+
+            try
+            {
+                using (var context = new ParkInspectEntities())
+                {
+                    foreach (ParkInspectGroupC.DOMAIN.Coordinate r in context.Coordinates)
+                    {
+                        list.Add(r);
+                    }
+                }
+
+                using (var localContext = new LocalParkInspectEntities())
+                {
+                    foreach (ParkInspectGroupC.DOMAIN.Coordinate r in list)
+                    {
+                        Domain.Coordinate _new = new Domain.Coordinate();
+                        _new.Id = r.Id;
+                        _new.Longitude = r.Longitude;
+                        _new.Latitude = r.Latitude;
+                        _new.Note = r.Note;
+                        _new.InspectionId = r.InspectionId;
+                        _new.DateCreated = r.DateCreated;
+                        _new.DateUpdated = r.DateUpdated;
+                        _new.ExistsInCentral = 1;
+
+                        localContext.Coordinates.Add(_new);
                     }
                     localContext.SaveChanges();
                 }

@@ -17,6 +17,7 @@ namespace LocalDatabase.Domain
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Inspection()
         {
+            this.Coordinates = new HashSet<Coordinate>();
             this.InspectionImages = new HashSet<InspectionImage>();
             this.Questionaires = new HashSet<Questionaire>();
         }
@@ -34,6 +35,8 @@ namespace LocalDatabase.Domain
         public int ExistsInCentral { get; set; }
     
         public virtual Assignment Assignment { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Coordinate> Coordinates { get; set; }
         public virtual Employee Employee { get; set; }
         public virtual Region Region { get; set; }
         public virtual InspectionStatu InspectionStatu { get; set; }

@@ -187,6 +187,9 @@ namespace LocalDatabase
                 case "Inspection":
                     msg = glrd.GetInspection(message);
                     break;
+                case "Coordinate":
+                    msg = glrd.GetCoordinate(message);
+                    break;
                 case "InspectionImage":
                     msg = glrd.GetInspectionImage(message);
                     break;
@@ -229,64 +232,67 @@ namespace LocalDatabase
             switch (message.LocalDatabaseName)
             {
                 case "Region":
-                    msg = glrd.GetEmployee(message);
+                    msg = glrd.GetRegion(message);
                     break;
                 case "EmployeeStatus":
-                    msg = glrd.GetEmployee(message);
+                    msg = glrd.GetEmployeeStatus(message);
                     break;
                 case "Employee":
                     msg = glrd.GetEmployee(message);
                     break;
                 case "Account":
-                    msg = glrd.GetEmployee(message);
+                    msg = glrd.GetAccount(message);
                     break;
                 case "Availability":
-                    msg = glrd.GetEmployee(message);
+                    msg = glrd.GetAvailability(message);
                     break;
                 case "WorkingHours":
-                    msg = glrd.GetEmployee(message);
+                    msg = glrd.GetWorkingHours(message);
                     break;
                 case "Customer":
-                    msg = glrd.GetEmployee(message);
+                    msg = glrd.GetCustomer(message);
                     break;
                 case "Assignment":
-                    msg = glrd.GetEmployee(message);
+                    msg = glrd.GetAssignment(message);
                     break;
                 case "InspectionStatus":
-                    msg = glrd.GetEmployee(message);
+                    msg = glrd.GetInspectionStatus(message);
                     break;
                 case "Inspection":
-                    msg = glrd.GetEmployee(message);
+                    msg = glrd.GetInspection(message);
+                    break;
+                case "Coordinate":
+                    msg = glrd.GetCoordinate(message);
                     break;
                 case "InspectionImage":
-                    msg = glrd.GetEmployee(message);
+                    msg = glrd.GetInspectionImage(message);
                     break;
                 case "KeywordCategory":
-                    msg = glrd.GetEmployee(message);
+                    msg = glrd.GetKeywordCategory(message);
                     break;
                 case "Keyword":
-                    msg = glrd.GetEmployee(message);
+                    msg = glrd.GetKeyword(message);
                     break;
                 case "Module":
-                    msg = glrd.GetEmployee(message);
+                    msg = glrd.GetModule(message);
                     break;
                 case "QuestionSort":
-                    msg = glrd.GetEmployee(message);
+                    msg = glrd.GetQuestionSort(message);
                     break;
                 case "Question":
-                    msg = glrd.GetEmployee(message);
+                    msg = glrd.GetQuestion(message);
                     break;
                 case "Questionaire":
-                    msg = glrd.GetEmployee(message);
+                    msg = glrd.GetQuestionaire(message);
                     break;
                 case "QuestionAnswer":
-                    msg = glrd.GetEmployee(message);
+                    msg = glrd.GetQuestionAnswer(message);
                     break;
                 case "QuestionaireModule":
-                    msg = glrd.GetEmployee(message);
+                    msg = glrd.GetQuestionaireModule(message);
                     break;
                 case "QuestionKeyword":
-                    msg = glrd.GetEmployee(message);
+                    msg = glrd.GetQuestionKeyword(message);
                     break;
             }
 
@@ -327,6 +333,9 @@ namespace LocalDatabase
                     break;
                 case "Inspection":
                     kl.Inspection(message);
+                    break;
+                case "Coordinate":
+                    kl.Coordinate(message);
                     break;
                 case "InspectionImage":
                     kl.InspectionImage(message);

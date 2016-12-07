@@ -174,6 +174,21 @@ namespace LocalDatabase.Local
             }
             #endregion
 
+            #region Coordinate Table
+            action = Coordinate();
+            if (action.Item1)
+            {
+                foreach (var item in action.Item2)
+                {
+                    UpdateMessages.Add(item);
+                }
+            }
+            else
+            {
+                return Tuple.Create(false, UpdateMessages);
+            }
+            #endregion
+
             #region InspectionImage Table
             action = InspectionImage();
             if (action.Item1)
@@ -871,6 +886,59 @@ namespace LocalDatabase.Local
                                 message.LocalDateTime = r.DateUpdated;
                                 message.CentralDateTime = central.DateUpdated;
                                 message.Message = "Er was een conflict bij deze inspectie. Open dit conflict om meer informatie te zien.";
+                                UpdateList.Add(message);
+                            }
+                        }
+                    }
+                }
+                return Tuple.Create(true, UpdateList);
+            }
+            catch (Exception)
+            {
+                return Tuple.Create(false, UpdateList);
+            }
+        }
+        private Tuple<bool, List<UpdateMessage>> Coordinate()
+        {
+            List<UpdateMessage> UpdateList = new List<UpdateMessage>();
+            try
+            {
+                List<Domain.Coordinate> list = new List<Domain.Coordinate>();
+
+                using (var localcontext = new LocalParkInspectEntities())
+                {
+                    list = localcontext.Coordinates.Where(r => r.ExistsInCentral == 2).ToList();
+                }
+
+                if (list.Count > 0)
+                {
+                    using (var context = new ParkInspectEntities())
+                    {
+                        foreach (Domain.Coordinate r in list)
+                        {
+                            int _id = Convert.ToInt32(r.Id);
+                            ParkInspectGroupC.DOMAIN.Coordinate central = (from x in context.Coordinates where x.Id == _id select x).First();
+
+                            //Check for database concurrency
+                            if (central.DateUpdated == r.DateUpdated)
+                            {
+                                central.Longitude = r.Longitude;
+                                central.Latitude = r.Latitude;
+                                central.Note = r.Note;
+                                central.InspectionId = Convert.ToInt32(r.InspectionId);
+                                central.DateUpdated = DateTime.Now;
+                                context.SaveChanges();
+                            }
+                            else
+                            {
+                                UpdateMessage message = new UpdateMessage();
+                                message.LocalDatabaseName = "Coordinate";
+                                message.CentralDatabaseName = "Coordinate";
+                                message.LocalId = Convert.ToInt32(r.Id);
+                                message.CentralId = central.Id;
+                                message.LocalDateTime = r.DateUpdated;
+                                message.CentralDateTime = central.DateUpdated;
+                                message.Message = "Er was een conflict bij deze coordinaten. Open dit conflict om meer informatie te zien.";
                                 UpdateList.Add(message);
                             }
                         }

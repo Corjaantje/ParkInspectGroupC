@@ -7,20 +7,21 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ParkInspectGroupC.DOMAIN
+namespace LocalDatabase.Domain
 {
     using System;
     using System.Collections.Generic;
     
     public partial class Coordinate
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         public double Longitude { get; set; }
         public double Latitude { get; set; }
         public string Note { get; set; }
-        public int InspectionId { get; set; }
+        public Nullable<long> InspectionId { get; set; }
         public System.DateTime DateCreated { get; set; }
         public System.DateTime DateUpdated { get; set; }
+        public int ExistsInCentral { get; set; }
     
         public virtual Inspection Inspection { get; set; }
     }

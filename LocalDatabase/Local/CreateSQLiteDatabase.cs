@@ -51,6 +51,9 @@ namespace LocalDatabase.Local
                 createdbfile = Inspection(_sqliteActions, _connection);
                 if (!createdbfile) return false;
 
+                createdbfile = Coordinate(_sqliteActions, _connection);
+                if (!createdbfile) return false;
+
                 createdbfile = InspectionImage(_sqliteActions, _connection);
                 if (!createdbfile) return false;
 
@@ -274,6 +277,23 @@ namespace LocalDatabase.Local
                 "FOREIGN KEY(StatusId) REFERENCES InspectionStatus(Id)," +
                 "FOREIGN KEY(RegionId) REFERENCES Region(Id)," +
                 "FOREIGN KEY(InspectorId) REFERENCES Employee(Id)" +
+                ")";
+
+            bool action = _sqliteActions.CUD(_connection, sql);
+            return action;
+        }
+        private bool Coordinate(DatabaseActions _sqliteActions, SQLiteConnection _connection)
+        {
+            string sql = "CREATE TABLE Coordinate (" +
+                "Id INTEGER PRIMARY KEY NOT NULL," +
+                "Longitude FLOAT NOT NULL," +
+                "Latitude FLOAT NOT NULL," +
+                "Note VARCHAR(255) NULL," +
+                "InspectionId INTEGER NULL," +
+                "DateCreated datetime DEFAULT CURRENT_TIMESTAMP NOT NULL," +
+                "DateUpdated datetime DEFAULT CURRENT_TIMESTAMP NOT NULL," +
+                "ExistsInCentral INT NOT NULL," +
+                "FOREIGN KEY(InspectionId) REFERENCES Inspection(Id)" +
                 ")";
 
             bool action = _sqliteActions.CUD(_connection, sql);

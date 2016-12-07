@@ -28,6 +28,7 @@ namespace LocalDatabase.Domain
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<Assignment> Assignments { get; set; }
         public virtual DbSet<Availability> Availabilities { get; set; }
+        public virtual DbSet<Coordinate> Coordinates { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<EmployeeStatu> EmployeeStatus { get; set; }

@@ -52,6 +52,9 @@ namespace LocalDatabase.Local
             action = InspectionStatus();
             if (!action) return false;
 
+            action = Coordinate();
+            if (!action) return false;
+
             action = Inspection();
             if (!action) return false;
 
@@ -497,6 +500,43 @@ namespace LocalDatabase.Local
                             _new.DateUpdated = r.DateUpdated;
 
                             context.Inspections.Add(_new);
+                        }
+                        context.SaveChanges();
+                    }
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        private bool Coordinate()
+        {
+            try
+            {
+                List<Domain.Coordinate> list = new List<Domain.Coordinate>();
+
+                using (var localcontext = new LocalParkInspectEntities())
+                {
+                    list = localcontext.Coordinates.Where(r => r.ExistsInCentral == 0).ToList();
+                }
+
+                if (list.Count > 0)
+                {
+                    using (var context = new ParkInspectEntities())
+                    {
+                        foreach (Domain.Coordinate r in list)
+                        {
+                            ParkInspectGroupC.DOMAIN.Coordinate _new = new ParkInspectGroupC.DOMAIN.Coordinate();
+                            _new.Longitude = r.Longitude;
+                            _new.Latitude = r.Latitude;
+                            _new.Note = r.Note;
+                            _new.InspectionId = GetInspectionId(Convert.ToInt32(r.InspectionId));
+                            _new.DateCreated = r.DateCreated;
+                            _new.DateUpdated = r.DateUpdated;
+
+                            context.Coordinates.Add(_new);
                         }
                         context.SaveChanges();
                     }

@@ -57,6 +57,8 @@
           <Property Name="Latitude" Type="float" Nullable="false" />
           <Property Name="Note" Type="varchar(max)" />
           <Property Name="InspectionId" Type="int" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -1343,6 +1345,8 @@
           <Property Name="Latitude" Type="Double" Nullable="false" />
           <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="InspectionId" Type="Int32" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Inspection" Relationship="ParkInspectModel.FK_Coordinate_Inspection" FromRole="Coordinate" ToRole="Inspection" />
         </EntityType>
         <Association Name="FK_Coordinate_Inspection">
@@ -1614,6 +1618,8 @@
           <EntitySetMapping Name="Coordinates">
             <EntityTypeMapping TypeName="ParkInspectModel.Coordinate">
               <MappingFragment StoreEntitySet="Coordinate">
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
                 <ScalarProperty Name="InspectionId" ColumnName="InspectionId" />
                 <ScalarProperty Name="Note" ColumnName="Note" />
                 <ScalarProperty Name="Latitude" ColumnName="Latitude" />

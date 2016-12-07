@@ -4,12 +4,11 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="7e5bfea720ee43008c2ce66a7f460cc6" Name="Diagram1" ZoomLevel="47">
+      <Diagram DiagramId="7e5bfea720ee43008c2ce66a7f460cc6" Name="Diagram1" ZoomLevel="93">
         <EntityTypeShape EntityType="ParkInspectModel.C__RefactorLog" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ParkInspectModel.Account" Width="1.5" PointX="5.25" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ParkInspectModel.Assignment" Width="1.5" PointX="8.25" PointY="10.625" IsExpanded="true" />
         <EntityTypeShape EntityType="ParkInspectModel.Availability" Width="1.5" PointX="5.25" PointY="15" IsExpanded="true" />
-        <EntityTypeShape EntityType="ParkInspectModel.Coordinate" Width="1.5" PointX="12.75" PointY="8.125" IsExpanded="true" />
         <EntityTypeShape EntityType="ParkInspectModel.Customer" Width="1.5" PointX="6" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ParkInspectModel.Employee" Width="1.5" PointX="3" PointY="9.125" IsExpanded="true" />
         <EntityTypeShape EntityType="ParkInspectModel.EmployeeStatu" Width="1.5" PointX="0.75" PointY="8.25" IsExpanded="true" />
@@ -32,7 +31,6 @@
         <AssociationConnector Association="ParkInspectModel.FK_Assignment_Manager" ManuallyRouted="false" />
         <AssociationConnector Association="ParkInspectModel.FK_Inspection_Assignment" ManuallyRouted="false" />
         <AssociationConnector Association="ParkInspectModel.FK_Availability_Employee" ManuallyRouted="false" />
-        <AssociationConnector Association="ParkInspectModel.FK_Coordinate_Inspection" ManuallyRouted="false" />
         <AssociationConnector Association="ParkInspectModel.FK_Employee_EmployeeStatus" ManuallyRouted="false" />
         <AssociationConnector Association="ParkInspectModel.FK_Employee_Manager" ManuallyRouted="false" />
         <AssociationConnector Association="ParkInspectModel.FK_Employee_Region" ManuallyRouted="false" />
@@ -51,6 +49,7 @@
         <AssociationConnector Association="ParkInspectModel.FK_QuestionKeyword_Question" ManuallyRouted="false" />
         <AssociationConnector Association="ParkInspectModel.FK_QuestionAnswer_Questionnaire" ManuallyRouted="false" />
         <AssociationConnector Association="ParkInspectModel.FK_QuestionnaireModule_Questionnaire" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ParkInspectModel.Coordinate" Width="1.5" PointX="9.375" PointY="5.75" />
         <AssociationConnector Association="ParkInspectModel.FK_Coordinate_Inspection" />
       </Diagram>
     </edmx:Diagrams>

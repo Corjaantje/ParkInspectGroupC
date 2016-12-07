@@ -265,6 +265,33 @@ namespace LocalDatabase.Local
                 return false;
             }
         }
+        public bool Coordinate(UpdateMessage message)
+        {
+            try
+            {
+                using (var context = new LocalParkInspectEntities())
+                {
+                    Domain.Coordinate r = (from x in context.Coordinates where x.Id == message.LocalId select x).First();
+
+                    using (var centralContext = new ParkInspectEntities())
+                    {
+                        ParkInspectGroupC.DOMAIN.Coordinate central = (from x in centralContext.Coordinates where x.Id == r.Id select x).First();
+
+                        central.Longitude = r.Longitude;
+                        central.Latitude = r.Latitude;
+                        central.Note = r.Note;
+                        central.InspectionId = Convert.ToInt32(r.InspectionId);
+                        central.DateUpdated = DateTime.Now;
+                        centralContext.SaveChanges();
+                    }
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
         public bool Inspection(UpdateMessage message)
         {
             try

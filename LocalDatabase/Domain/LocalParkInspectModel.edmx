@@ -45,6 +45,19 @@
           <Property Name="DateUpdated" Type="datetime" Nullable="false" />
           <Property Name="ExistsInCentral" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Coordinate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="integer" Nullable="false" />
+          <Property Name="Longitude" Type="real" Nullable="false" />
+          <Property Name="Latitude" Type="real" Nullable="false" />
+          <Property Name="Note" Type="varchar" MaxLength="255" />
+          <Property Name="InspectionId" Type="integer" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+          <Property Name="ExistsInCentral" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="Id" />
@@ -299,6 +312,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Coordinate_0_0">
+          <End Role="Inspection" Type="Self.Inspection" Multiplicity="0..1" />
+          <End Role="Coordinate" Type="Self.Coordinate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inspection">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Coordinate">
+              <PropertyRef Name="InspectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Employee_0_0">
           <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
           <End Role="Employee1" Type="Self.Employee" Multiplicity="*" />
@@ -519,6 +544,7 @@
           <EntitySet Name="Account" EntityType="Self.Account" store:Type="Tables" />
           <EntitySet Name="Assignment" EntityType="Self.Assignment" store:Type="Tables" />
           <EntitySet Name="Availability" EntityType="Self.Availability" store:Type="Tables" />
+          <EntitySet Name="Coordinate" EntityType="Self.Coordinate" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" store:Type="Tables" />
           <EntitySet Name="Employee" EntityType="Self.Employee" store:Type="Tables" />
           <EntitySet Name="EmployeeStatus" EntityType="Self.EmployeeStatus" store:Type="Tables" />
@@ -551,6 +577,10 @@
           <AssociationSet Name="FK_Availability_0_0" Association="Self.FK_Availability_0_0">
             <End Role="Employee" EntitySet="Employee" />
             <End Role="Availability" EntitySet="Availability" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Coordinate_0_0" Association="Self.FK_Coordinate_0_0">
+            <End Role="Inspection" EntitySet="Inspection" />
+            <End Role="Coordinate" EntitySet="Coordinate" />
           </AssociationSet>
           <AssociationSet Name="FK_Employee_0_0" Association="Self.FK_Employee_0_0">
             <End Role="Employee" EntitySet="Employee" />
@@ -675,6 +705,20 @@
           <Property Name="ExistsInCentral" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Employee" Relationship="Self.FK_Availability_0_0" FromRole="Availability" ToRole="Employee" />
         </EntityType>
+        <EntityType Name="Coordinate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Longitude" Type="Double" Nullable="false" />
+          <Property Name="Latitude" Type="Double" Nullable="false" />
+          <Property Name="Note" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="InspectionId" Type="Int64" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
+          <Property Name="ExistsInCentral" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Inspection" Relationship="Self.FK_Coordinate_0_0" FromRole="Coordinate" ToRole="Inspection" />
+        </EntityType>
         <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="Id" />
@@ -749,6 +793,7 @@
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
           <Property Name="ExistsInCentral" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Assignment" Relationship="Self.FK_Inspection_3_0" FromRole="Inspection" ToRole="Assignment" />
+          <NavigationProperty Name="Coordinates" Relationship="Self.FK_Coordinate_0_0" FromRole="Inspection" ToRole="Coordinate" />
           <NavigationProperty Name="Employee" Relationship="Self.FK_Inspection_0_0" FromRole="Inspection" ToRole="Employee" />
           <NavigationProperty Name="Region" Relationship="Self.FK_Inspection_1_0" FromRole="Inspection" ToRole="Region" />
           <NavigationProperty Name="InspectionStatu" Relationship="Self.FK_Inspection_2_0" FromRole="Inspection" ToRole="InspectionStatus" />
@@ -980,6 +1025,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Coordinate_0_0">
+          <End Role="Inspection" Type="Self.Inspection" Multiplicity="0..1" />
+          <End Role="Coordinate" Type="Self.Coordinate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inspection">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Coordinate">
+              <PropertyRef Name="InspectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Employee_0_0">
           <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
           <End Role="Employee1" Type="Self.Employee" Multiplicity="*" />
@@ -1188,6 +1245,7 @@
           <EntitySet Name="Accounts" EntityType="Self.Account" />
           <EntitySet Name="Assignments" EntityType="Self.Assignment" />
           <EntitySet Name="Availabilities" EntityType="Self.Availability" />
+          <EntitySet Name="Coordinates" EntityType="Self.Coordinate" />
           <EntitySet Name="Customers" EntityType="Self.Customer" />
           <EntitySet Name="Employees" EntityType="Self.Employee" />
           <EntitySet Name="EmployeeStatus" EntityType="Self.EmployeeStatu" />
@@ -1224,6 +1282,10 @@
           <AssociationSet Name="FK_Availability_0_0" Association="Self.FK_Availability_0_0">
             <End Role="Employee" EntitySet="Employees" />
             <End Role="Availability" EntitySet="Availabilities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Coordinate_0_0" Association="Self.FK_Coordinate_0_0">
+            <End Role="Inspection" EntitySet="Inspections" />
+            <End Role="Coordinate" EntitySet="Coordinates" />
           </AssociationSet>
           <AssociationSet Name="FK_Employee_0_0" Association="Self.FK_Employee_0_0">
             <End Role="Employee" EntitySet="Employees" />
@@ -1336,6 +1398,20 @@
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="StartTime" ColumnName="StartTime" />
                 <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="ExistsInCentral" ColumnName="ExistsInCentral" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Coordinates">
+            <EntityTypeMapping TypeName="LocalParkInspectModel.Coordinate">
+              <MappingFragment StoreEntitySet="Coordinate">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="InspectionId" ColumnName="InspectionId" />
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
                 <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
                 <ScalarProperty Name="ExistsInCentral" ColumnName="ExistsInCentral" />
