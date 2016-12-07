@@ -45,6 +45,7 @@ namespace ParkInspectGroupC.ViewModel
             SimpleIoc.Default.Register<MainViewModel>();
 			SimpleIoc.Default.Register<LoginViewModel>();
             SimpleIoc.Default.Register<CustomerCreationViewModel>();
+            SimpleIoc.Default.Register<MapViewModel>();
             SimpleIoc.Default.Register<QuestionnaireViewModel>();
 			SimpleIoc.Default.Register<EmployeeCreationViewModel>();
 			SimpleIoc.Default.Register<InspectorProfileViewModel>();
@@ -56,6 +57,13 @@ namespace ParkInspectGroupC.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
+            }
+        }
+        public MapViewModel Map
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<MapViewModel>();
             }
         }
         

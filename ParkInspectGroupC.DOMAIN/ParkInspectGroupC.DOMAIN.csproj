@@ -56,6 +56,9 @@
     <Compile Include="Availability.cs">
       <DependentUpon>ParkInspectDomain.tt</DependentUpon>
     </Compile>
+    <Compile Include="Coordinate.cs">
+      <DependentUpon>ParkInspectDomain.tt</DependentUpon>
+    </Compile>
     <Compile Include="Customer.cs">
       <DependentUpon>ParkInspectDomain.tt</DependentUpon>
     </Compile>

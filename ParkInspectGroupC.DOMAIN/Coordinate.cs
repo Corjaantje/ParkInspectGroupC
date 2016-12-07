@@ -15,24 +15,22 @@ namespace ParkInspectGroupC.DOMAIN
 using System;
     using System.Collections.Generic;
     
-public partial class QuestionAnswer
+public partial class Coordinate
 {
 
-    public int QuestionnaireId { get; set; }
+    public int Id { get; set; }
 
-    public int QuestionId { get; set; }
+    public double Longitude { get; set; }
 
-    public string Result { get; set; }
+    public double Latitude { get; set; }
 
-    public System.DateTime DateCreated { get; set; }
+    public string Note { get; set; }
 
-    public System.DateTime DateUpdated { get; set; }
+    public int InspectionId { get; set; }
 
 
 
-    public virtual Question Question { get; set; }
-
-    public virtual Questionnaire Questionnaire { get; set; }
+    public virtual Inspection Inspection { get; set; }
 
 }
 

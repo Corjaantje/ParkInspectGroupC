@@ -48,6 +48,13 @@
         <AssociationConnector Association="ParkInspectModel.FK_QuestionKeyword_Question" />
         <AssociationConnector Association="ParkInspectModel.FK_QuestionAnswer_Questionnaire" />
         <AssociationConnector Association="ParkInspectModel.FK_QuestionnaireModule_Questionnaire" />
+        <AssociationConnector Association="ParkInspectModel.FK_Employee_Manager" />
+        <EntityTypeShape EntityType="ParkInspectModel.Availability" Width="1.5" PointX="5.25" PointY="13.25" />
+        <EntityTypeShape EntityType="ParkInspectModel.WorkingHour" Width="1.5" PointX="5.25" PointY="10.125" />
+        <AssociationConnector Association="ParkInspectModel.FK_Availability_Employee" />
+        <AssociationConnector Association="ParkInspectModel.FK_WorkingHours_Employee" />
+        <EntityTypeShape EntityType="ParkInspectModel.Coordinate" Width="1.5" PointX="12.75" PointY="18.5" />
+        <AssociationConnector Association="ParkInspectModel.FK_Coordinate_Inspection" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
