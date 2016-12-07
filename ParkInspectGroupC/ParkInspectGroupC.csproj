@@ -111,6 +111,7 @@
     <Compile Include="Miscellaneous\IHavePassword.cs" />
     <Compile Include="Miscellaneous\Navigator.cs" />
     <Compile Include="ViewModel\CustomerCreationViewModel.cs" />
+    <Compile Include="ViewModel\CustomerListViewModel.cs" />
     <Compile Include="ViewModel\InspectorProfileViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="Validation\EmailValidation.cs" />
