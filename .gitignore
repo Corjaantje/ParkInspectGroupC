@@ -3,6 +3,7 @@
 
 #Custom added by the software Architect and Version Control Mananger
 App.config
+App.xaml
 DatabaseProject.jfm
 
 # User-specific files
@@ -254,3 +255,4 @@ paket-files/
 # JetBrains Rider
 .idea/
 *.sln.iml
+DatabaseProject/DatabaseProject.jfm

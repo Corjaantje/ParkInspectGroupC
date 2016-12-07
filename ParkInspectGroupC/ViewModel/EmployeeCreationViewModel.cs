@@ -19,10 +19,10 @@ namespace ParkInspectGroupC.ViewModel
 			// Retreive abailable data from database.
 			using (var context = new ParkInspectEntities())
 			{
-				var regionList = context.Region.ToList();
+				var regionList = context.Regions.ToList();
 				AvailableRegions = new ObservableCollection<Region>(regionList);
 
-				var managerList = (from m in context.Employee where m.IsManager == true select m);
+				var managerList = (from m in context.Employees where m.IsManager == true select m);
 				AvailableManagers = new ObservableCollection<Employee>(managerList);
 			}
 		}
@@ -49,9 +49,9 @@ namespace ParkInspectGroupC.ViewModel
 				if (!string.IsNullOrWhiteSpace(Prefix))
 					nEmployee.Prefix = this.Prefix;
 
-				nEmployee.Region = (from r in context.Region where r.Id == SelectedRegion.Id select r).FirstOrDefault();
-				nEmployee.Manager = (from m in context.Employee where m.Id == SelectedManager.Id select m).FirstOrDefault();
-
+				nEmployee.Region = (from r in context.Regions where r.Id == SelectedRegion.Id select r).FirstOrDefault();
+				nEmployee.Manager = (from m in context.Employees where m.Id == SelectedManager.Id select m).FirstOrDefault();
+                
 				var nAccount = new Account
 				{
 					Username = this.Username,
@@ -60,8 +60,8 @@ namespace ParkInspectGroupC.ViewModel
 					Employee = nEmployee
 				};
 
-				context.Employee.Add(nEmployee);
-				context.Account.Add(nAccount);
+				context.Employees.Add(nEmployee);
+				context.Accounts.Add(nAccount);
 				context.SaveChanges();
 			}
 		}

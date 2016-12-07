@@ -15,25 +15,19 @@ namespace ParkInspectGroupC.DOMAIN
 using System;
     using System.Collections.Generic;
     
-    public partial class Assignment
+    public partial class InspectionStatu
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Assignment()
+        public InspectionStatu()
         {
             this.Inspections = new HashSet<Inspection>();
         }
     
         public int Id { get; set; }
-        public int CustomerId { get; set; }
-        public int ManagerId { get; set; }
         public string Description { get; set; }
-        public Nullable<System.DateTime> StartDate { get; set; }
-        public Nullable<System.DateTime> EndDate { get; set; }
         public System.DateTime DateCreated { get; set; }
         public System.DateTime DateUpdated { get; set; }
     
-        public virtual Customer Customer { get; set; }
-        public virtual Employee Employee { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Inspection> Inspections { get; set; }
     }

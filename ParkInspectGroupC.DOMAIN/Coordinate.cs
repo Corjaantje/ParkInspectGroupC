@@ -12,8 +12,14 @@ namespace ParkInspectGroupC.DOMAIN
     using System;
     using System.Collections.Generic;
     
-    public partial class C__RefactorLog
+    public partial class Coordinate
     {
-        public System.Guid OperationKey { get; set; }
+        public int Id { get; set; }
+        public double Longitude { get; set; }
+        public double Latitude { get; set; }
+        public string Note { get; set; }
+        public int InspectionId { get; set; }
+    
+        public virtual Inspection Inspection { get; set; }
     }
 }

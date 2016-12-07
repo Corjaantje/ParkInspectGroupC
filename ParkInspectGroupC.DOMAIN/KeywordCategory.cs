@@ -15,32 +15,20 @@ namespace ParkInspectGroupC.DOMAIN
 using System;
     using System.Collections.Generic;
     
-public partial class KeywordCategory
-{
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public KeywordCategory()
+    public partial class KeywordCategory
     {
-
-        this.Keyword = new HashSet<Keyword>();
-
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public KeywordCategory()
+        {
+            this.Keywords = new HashSet<Keyword>();
+        }
+    
+        public int Id { get; set; }
+        public string Description { get; set; }
+        public System.DateTime DateCreated { get; set; }
+        public System.DateTime DateUpdated { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Keyword> Keywords { get; set; }
     }
-
-
-    public int Id { get; set; }
-
-    public string Description { get; set; }
-
-    public System.DateTime DateCreated { get; set; }
-
-    public System.DateTime DateUpdated { get; set; }
-
-
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<Keyword> Keyword { get; set; }
-
-}
-
 }
