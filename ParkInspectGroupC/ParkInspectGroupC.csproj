@@ -114,11 +114,8 @@
     <Compile Include="Miscellaneous\IHavePassword.cs" />
     <Compile Include="Miscellaneous\Navigator.cs" />
     <Compile Include="ViewModel\CustomerCreationViewModel.cs" />
-<<<<<<< HEAD
     <Compile Include="ViewModel\DatabaseSyncViewModel.cs" />
-=======
     <Compile Include="ViewModel\CustomerListViewModel.cs" />
->>>>>>> refs/remotes/origin/master
     <Compile Include="ViewModel\InspectorProfileViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="Validation\EmailValidation.cs" />
@@ -200,7 +197,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-<<<<<<< HEAD
     <Page Include="View\DatabaseSyncDialogs\DeleteDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -213,8 +209,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-=======
->>>>>>> refs/remotes/origin/master
     <Page Include="View\InspectorProfileView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
