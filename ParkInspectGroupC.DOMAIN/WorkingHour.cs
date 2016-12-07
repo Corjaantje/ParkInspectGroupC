@@ -12,20 +12,15 @@ namespace ParkInspectGroupC.DOMAIN
     using System;
     using System.Collections.Generic;
     
-    public partial class KeywordCategory
+    public partial class WorkingHour
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public KeywordCategory()
-        {
-            this.Keywords = new HashSet<Keyword>();
-        }
-    
-        public int Id { get; set; }
-        public string Description { get; set; }
+        public int EmployeeId { get; set; }
+        public System.DateTime Date { get; set; }
+        public Nullable<System.TimeSpan> StartTime { get; set; }
+        public Nullable<System.TimeSpan> EndTime { get; set; }
         public System.DateTime DateCreated { get; set; }
         public System.DateTime DateUpdated { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Keyword> Keywords { get; set; }
+        public virtual Employee Employee { get; set; }
     }
 }

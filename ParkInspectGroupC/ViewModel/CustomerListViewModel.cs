@@ -22,7 +22,7 @@ namespace ParkInspectGroupC.ViewModel
 
             using (var context = new ParkInspectEntities())
             {
-                List<Customer> customers = context.Customer.ToList();
+                List<Customer> customers = context.Customers.ToList();
 
 
                 foreach (var customer in customers)

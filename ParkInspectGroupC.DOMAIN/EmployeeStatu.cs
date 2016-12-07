@@ -12,12 +12,12 @@ namespace ParkInspectGroupC.DOMAIN
     using System;
     using System.Collections.Generic;
     
-    public partial class KeywordCategory
+    public partial class EmployeeStatu
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public KeywordCategory()
+        public EmployeeStatu()
         {
-            this.Keywords = new HashSet<Keyword>();
+            this.Employees = new HashSet<Employee>();
         }
     
         public int Id { get; set; }
@@ -26,6 +26,6 @@ namespace ParkInspectGroupC.DOMAIN
         public System.DateTime DateUpdated { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Keyword> Keywords { get; set; }
+        public virtual ICollection<Employee> Employees { get; set; }
     }
 }

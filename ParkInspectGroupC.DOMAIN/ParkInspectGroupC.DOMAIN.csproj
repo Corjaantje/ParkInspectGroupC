@@ -37,14 +37,33 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
     <EntityDeploy Include="ParkInspectDomain.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ParkInspectDomain.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="packages.config" />
     <None Include="ParkInspectDomain.edmx.diagram">
       <DependentUpon>ParkInspectDomain.edmx</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account.cs">
@@ -62,10 +81,13 @@
     <Compile Include="Customer.cs">
       <DependentUpon>ParkInspectDomain.tt</DependentUpon>
     </Compile>
+    <Compile Include="C__RefactorLog.cs">
+      <DependentUpon>ParkInspectDomain.tt</DependentUpon>
+    </Compile>
     <Compile Include="Employee.cs">
       <DependentUpon>ParkInspectDomain.tt</DependentUpon>
     </Compile>
-    <Compile Include="EmployeeStatus.cs">
+    <Compile Include="EmployeeStatu.cs">
       <DependentUpon>ParkInspectDomain.tt</DependentUpon>
     </Compile>
     <Compile Include="Inspection.cs">
@@ -74,7 +96,7 @@
     <Compile Include="InspectionImage.cs">
       <DependentUpon>ParkInspectDomain.tt</DependentUpon>
     </Compile>
-    <Compile Include="InspectionStatus.cs">
+    <Compile Include="InspectionStatu.cs">
       <DependentUpon>ParkInspectDomain.tt</DependentUpon>
     </Compile>
     <Compile Include="Keyword.cs">
@@ -122,40 +144,21 @@
     <Compile Include="Region.cs">
       <DependentUpon>ParkInspectDomain.tt</DependentUpon>
     </Compile>
-    <Compile Include="WorkingHours.cs">
+    <Compile Include="WorkingHour.cs">
       <DependentUpon>ParkInspectDomain.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Security" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="ParkInspectDomain.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ParkInspectDomain.Context.cs</LastGenOutput>
       <DependentUpon>ParkInspectDomain.edmx</DependentUpon>
+      <LastGenOutput>ParkInspectDomain.Context.cs</LastGenOutput>
     </Content>
     <Content Include="ParkInspectDomain.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ParkInspectDomain.edmx</DependentUpon>
       <LastGenOutput>ParkInspectDomain.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
