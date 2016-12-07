@@ -17,7 +17,7 @@
 		</Grid.RowDefinitions>  
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition MaxWidth="100" />
-			<ColumnDefinition />
+			<ColumnDefinition MaxWidth="500" />
 		</Grid.ColumnDefinitions>
 
 		<Label Content="Titel:" Grid.Row="0" Grid.Column="0"/>
@@ -25,10 +25,10 @@
 		
 		<Label Content="Omschijving:" Grid.Row="1" Grid.Column="0" />
 		<ScrollViewer Grid.Column="1" Grid.Row="1" Margin="3" MinWidth="250" Height="225" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Hidden" HorizontalAlignment="Left" >
-			<TextBox TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding ReportDescription}" />
+			<TextBox TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding ReportDescription}"  />
 		</ScrollViewer>
 		
-		<Button Content="Genereer PDF" Grid.Row="2" Margin="3" />
+		<Button Content="Genereer PDF" Grid.Row="2" Margin="3" Command="{Binding GenerateReportCommand}" />
 		<Button Content="Nieuw deel" Grid.Row="2" Grid.Column="1" Margin="3" Command="{Binding CreateReportSectionCommand}" />
 		</Grid>
 		<ScrollViewer Grid.Row="3" Grid.ColumnSpan="2" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Visible">

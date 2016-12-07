@@ -10,6 +10,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using Microsoft.Win32;
 using ParkInspectGroupC.DOMAIN;
 using ParkInspectGroupC.Miscellaneous;
 using ParkInspectGroupC.View.ReportCreation;
@@ -59,6 +60,7 @@ namespace ParkInspectGroupC.ViewModel.ReportCreation
 		public ICommand ConfirmAddImageCommand { get; set; }
 		public ICommand CancelAddImageCommand { get; set; }
 		public ICommand DeleteReportSectionImageCommand { get; set; }
+		public ICommand GenerateReportCommand { get; set; }
 
 		public string ReportSectionTitle
 		{
@@ -104,6 +106,8 @@ namespace ParkInspectGroupC.ViewModel.ReportCreation
 			CancelAddImageCommand = new RelayCommand(CancelAddReportSectionImage);
 			CancelAddDiagramCommand = new RelayCommand(CancelAddReportSectionDiagram);
 			DeleteReportSectionImageCommand = new RelayCommand(DeleteReportSectionImage);
+			GenerateReportCommand = new RelayCommand(GenerateReport);
+
 
 			using (var context = new ParkInspectEntities())
 			{
@@ -214,6 +218,8 @@ namespace ParkInspectGroupC.ViewModel.ReportCreation
 				using (var context = new ParkInspectEntities())
 				{
 					var report = (from a in context.Reports where a.Id == SelectedReport.Id select a).FirstOrDefault();
+
+					context.ReportSections.RemoveRange(report.ReportSections);
 
 					context.Reports.Remove(report);
 					context.SaveChanges();
@@ -437,6 +443,25 @@ namespace ParkInspectGroupC.ViewModel.ReportCreation
 			}
 
 			ReportSectionDiagrams.Remove(SelectedReportSectionDiagram);
+		}
+
+		private void GenerateReport()
+		{
+			var fileDialog = new SaveFileDialog();
+			fileDialog.DefaultExt = ".pdf";
+			fileDialog.Filter = "PNG Bestanden (*.pdf)|*.pdf";
+
+			Nullable<bool> result = fileDialog.ShowDialog();
+
+			if (result == true)
+			{
+				string fileName = fileDialog.FileName.ToString();
+				string filePath = fileDialog.FileName.ToString();
+
+				PdfGenerator generator = new PdfGenerator();
+				generator.GeneratePdf(SelectedReport, fileName, filePath);
+			}
+
 		}
 	}
 }
