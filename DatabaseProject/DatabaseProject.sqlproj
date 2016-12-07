@@ -121,4 +121,7 @@
   <ItemGroup>
     <None Include="PostDeployment\KeywordPost.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="PostDeployment\InspectionPost.sql" />
+  </ItemGroup>
 </Project>

@@ -30,7 +30,7 @@ namespace ParkInspectGroupC.ViewModel
             IEnumerable<Inspection> PInspections = null;
             using (var context = new ParkInspectEntities())
             {
-                PInspections = (from c in context.Inspection
+                PInspections = (from c in context.Inspections
                     select c).ToList();
             }
             AddInspections(PInspections);

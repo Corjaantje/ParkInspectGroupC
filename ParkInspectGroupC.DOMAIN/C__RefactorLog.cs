@@ -12,16 +12,8 @@ namespace ParkInspectGroupC.DOMAIN
     using System;
     using System.Collections.Generic;
     
-    public partial class Account
+    public partial class C__RefactorLog
     {
-        public int Id { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public string UserGuid { get; set; }
-        public int EmployeeId { get; set; }
-        public System.DateTime DateCreated { get; set; }
-        public System.DateTime DateUpdated { get; set; }
-    
-        public virtual Employee Employee { get; set; }
+        public System.Guid OperationKey { get; set; }
     }
 }

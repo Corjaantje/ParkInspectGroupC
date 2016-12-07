@@ -29,4 +29,7 @@ where not exists (select 1 from Region where Id = 8);
 insert Region(Id, Region) select 9, 'Lelystad'
 where not exists (select 1 from Region where Id = 9);
 
+insert Region(Id, Region) select 10, 's-Hertogenbosch'
+where not exists (select 1 from Region where Id = 10);
+
 SET IDENTITY_INSERT [Region] OFF;
