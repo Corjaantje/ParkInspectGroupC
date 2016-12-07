@@ -12,12 +12,12 @@ namespace ParkInspectGroupC.DOMAIN
     using System;
     using System.Collections.Generic;
     
-    public partial class InspectionStatus
+    public partial class InspectionStatu
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public InspectionStatus()
+        public InspectionStatu()
         {
-            this.Inspection = new HashSet<Inspection>();
+            this.Inspections = new HashSet<Inspection>();
         }
     
         public int Id { get; set; }
@@ -26,6 +26,6 @@ namespace ParkInspectGroupC.DOMAIN
         public System.DateTime DateUpdated { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Inspection> Inspection { get; set; }
+        public virtual ICollection<Inspection> Inspections { get; set; }
     }
 }

@@ -82,10 +82,14 @@
     <Build Include="Tables\KeywordCategory.sql" />
     <Build Include="Tables\QuestionKeyword.sql" />
     <Build Include="Tables\InspectionImage.sql" />
+<<<<<<< HEAD
     <Build Include="Tables\Report\Report.sql" />
     <Build Include="Tables\Report\ReportSection.sql" />
     <Build Include="Tables\Report\Diagram.sql" />
     <Build Include="Tables\Report\ReportSectionInspectionImage.sql" />
+=======
+    <Build Include="Tables\Coordinate.sql" />
+>>>>>>> origin/develop
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="DatabaseProject.refactorlog" />
@@ -124,5 +128,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="PostDeployment\KeywordPost.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PostDeployment\InspectionPost.sql" />
   </ItemGroup>
 </Project>

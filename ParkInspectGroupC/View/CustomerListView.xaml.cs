@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace ParkInspectGroupC.View
 {
     /// <summary>
-    /// Interaction logic for CustomerCreationView.xaml
+    /// Interaction logic for CustomerListView.xaml
     /// </summary>
-    public partial class CustomerCreationView : UserControl
+    public partial class CustomerListView : UserControl
     {
-        public CustomerCreationView()
+        public CustomerListView()
         {
             InitializeComponent();
         }

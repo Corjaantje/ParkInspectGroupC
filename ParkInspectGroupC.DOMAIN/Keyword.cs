@@ -17,7 +17,7 @@ namespace ParkInspectGroupC.DOMAIN
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Keyword()
         {
-            this.QuestionKeyword = new HashSet<QuestionKeyword>();
+            this.QuestionKeywords = new HashSet<QuestionKeyword>();
         }
     
         public int Id { get; set; }
@@ -28,6 +28,6 @@ namespace ParkInspectGroupC.DOMAIN
     
         public virtual KeywordCategory KeywordCategory { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<QuestionKeyword> QuestionKeyword { get; set; }
+        public virtual ICollection<QuestionKeyword> QuestionKeywords { get; set; }
     }
 }

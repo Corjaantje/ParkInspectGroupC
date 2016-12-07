@@ -17,8 +17,9 @@ namespace ParkInspectGroupC.DOMAIN
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Inspection()
         {
-            this.InspectionImage = new HashSet<InspectionImage>();
-            this.Questionnaire = new HashSet<Questionnaire>();
+            this.Coordinates = new HashSet<Coordinate>();
+            this.InspectionImages = new HashSet<InspectionImage>();
+            this.Questionnaires = new HashSet<Questionnaire>();
         }
     
         public int Id { get; set; }
@@ -33,12 +34,14 @@ namespace ParkInspectGroupC.DOMAIN
         public System.DateTime DateUpdated { get; set; }
     
         public virtual Assignment Assignment { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Coordinate> Coordinates { get; set; }
         public virtual Employee Employee { get; set; }
-        public virtual InspectionStatus InspectionStatus { get; set; }
+        public virtual InspectionStatu InspectionStatu { get; set; }
         public virtual Region Region { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<InspectionImage> InspectionImage { get; set; }
+        public virtual ICollection<InspectionImage> InspectionImages { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Questionnaire> Questionnaire { get; set; }
+        public virtual ICollection<Questionnaire> Questionnaires { get; set; }
     }
 }

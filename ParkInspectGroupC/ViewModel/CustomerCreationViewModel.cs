@@ -145,7 +145,7 @@ namespace ParkInspectGroupC.ViewModel
 
                 };
 
-                context.Customer.Add(customer);
+                context.Customers.Add(customer);
                 context.SaveChanges();
                 Console.WriteLine("TEST geslaagd");
             }
