@@ -75,7 +75,7 @@ namespace ParkInspectGroupC.ViewModel
             {
                 using (var context = new ParkInspectEntities())
                 {
-                    Emp = (from e in context.Employees where e.Id == 3 select e).FirstOrDefault();
+                    Emp = (from e in context.Employee where e.Id == 3 select e).FirstOrDefault();
                 }
                 Name = Emp.FirstName + " " + Emp.Prefix + " " + Emp.SurName + " (" + Emp.Gender + ")";
                 Adress = Emp.Address + ", " + Emp.ZipCode + ", " + Emp.City;
@@ -88,14 +88,14 @@ namespace ParkInspectGroupC.ViewModel
                 using (var context = new ParkInspectEntities())
                 {
 
-                    Inspections = (from insp in context.Inspections where insp.InspectorId == Emp.Id select new 
+                    Inspections = (from insp in context.Inspection where insp.InspectorId == Emp.Id select new 
                     { insp.Id, insp.Location, InspectionStatus = (from inspStat in context.InspectionStatus where inspStat.Id == insp.StatusId select inspStat).FirstOrDefault().Description}).ToList();
                 }
                 try
                 {
                     using (var context = new ParkInspectEntities())
                     {
-                        Manager = (from m in context.Employees where m.Id == Emp.ManagerId select m).FirstOrDefault();
+                        Manager = (from m in context.Employee where m.Id == Emp.ManagerId select m).FirstOrDefault();
                     }
 
                     ManagerName = Manager.FirstName + " " + Manager.Prefix + " " + Manager.SurName;

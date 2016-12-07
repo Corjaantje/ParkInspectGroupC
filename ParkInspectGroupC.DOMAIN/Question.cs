@@ -17,14 +17,9 @@ namespace ParkInspectGroupC.DOMAIN
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Question()
         {
-<<<<<<< HEAD
             this.QuestionAnswer = new HashSet<QuestionAnswer>();
             this.QuestionKeyword = new HashSet<QuestionKeyword>();
             this.Diagrams = new HashSet<Diagram>();
-=======
-            this.QuestionAnswers = new HashSet<QuestionAnswer>();
-            this.QuestionKeywords = new HashSet<QuestionKeyword>();
->>>>>>> origin/develop
         }
     
         public int Id { get; set; }
@@ -37,14 +32,10 @@ namespace ParkInspectGroupC.DOMAIN
         public virtual Module Module { get; set; }
         public virtual QuestionSort QuestionSort { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<QuestionAnswer> QuestionAnswers { get; set; }
+        public virtual ICollection<QuestionAnswer> QuestionAnswer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-<<<<<<< HEAD
         public virtual ICollection<QuestionKeyword> QuestionKeyword { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Diagram> Diagrams { get; set; }
-=======
-        public virtual ICollection<QuestionKeyword> QuestionKeywords { get; set; }
->>>>>>> origin/develop
     }
 }

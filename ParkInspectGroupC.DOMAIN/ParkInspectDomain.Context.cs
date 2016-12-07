@@ -25,27 +25,25 @@ namespace ParkInspectGroupC.DOMAIN
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<C__RefactorLog> C__RefactorLog { get; set; }
-        public virtual DbSet<Account> Accounts { get; set; }
-        public virtual DbSet<Assignment> Assignments { get; set; }
+        public virtual DbSet<Account> Account { get; set; }
+        public virtual DbSet<Assignment> Assignment { get; set; }
+        public virtual DbSet<Customer> Customer { get; set; }
+        public virtual DbSet<Employee> Employee { get; set; }
+        public virtual DbSet<EmployeeStatus> EmployeeStatus { get; set; }
+        public virtual DbSet<Inspection> Inspection { get; set; }
+        public virtual DbSet<InspectionImage> InspectionImage { get; set; }
+        public virtual DbSet<InspectionStatus> InspectionStatus { get; set; }
+        public virtual DbSet<Keyword> Keyword { get; set; }
+        public virtual DbSet<KeywordCategory> KeywordCategory { get; set; }
+        public virtual DbSet<Module> Module { get; set; }
+        public virtual DbSet<Question> Question { get; set; }
+        public virtual DbSet<QuestionAnswer> QuestionAnswer { get; set; }
+        public virtual DbSet<QuestionKeyword> QuestionKeyword { get; set; }
+        public virtual DbSet<Questionnaire> Questionnaire { get; set; }
+        public virtual DbSet<QuestionnaireModule> QuestionnaireModule { get; set; }
+        public virtual DbSet<QuestionSort> QuestionSort { get; set; }
+        public virtual DbSet<Region> Region { get; set; }
         public virtual DbSet<Availability> Availabilities { get; set; }
-        public virtual DbSet<Coordinate> Coordinates { get; set; }
-        public virtual DbSet<Customer> Customers { get; set; }
-        public virtual DbSet<Employee> Employees { get; set; }
-        public virtual DbSet<EmployeeStatu> EmployeeStatus { get; set; }
-        public virtual DbSet<Inspection> Inspections { get; set; }
-        public virtual DbSet<InspectionImage> InspectionImages { get; set; }
-        public virtual DbSet<InspectionStatu> InspectionStatus { get; set; }
-        public virtual DbSet<Keyword> Keywords { get; set; }
-        public virtual DbSet<KeywordCategory> KeywordCategories { get; set; }
-        public virtual DbSet<Module> Modules { get; set; }
-        public virtual DbSet<Question> Questions { get; set; }
-        public virtual DbSet<QuestionAnswer> QuestionAnswers { get; set; }
-        public virtual DbSet<QuestionKeyword> QuestionKeywords { get; set; }
-        public virtual DbSet<Questionnaire> Questionnaires { get; set; }
-        public virtual DbSet<QuestionnaireModule> QuestionnaireModules { get; set; }
-        public virtual DbSet<QuestionSort> QuestionSorts { get; set; }
-        public virtual DbSet<Region> Regions { get; set; }
         public virtual DbSet<WorkingHour> WorkingHours { get; set; }
         public virtual DbSet<ReportSection> ReportSections { get; set; }
         public virtual DbSet<Report> Reports { get; set; }
