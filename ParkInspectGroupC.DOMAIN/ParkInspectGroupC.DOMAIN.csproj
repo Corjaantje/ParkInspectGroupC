@@ -87,7 +87,7 @@
     <Compile Include="Employee.cs">
       <DependentUpon>ParkInspectDomain.tt</DependentUpon>
     </Compile>
-    <Compile Include="EmployeeStatu.cs">
+    <Compile Include="EmployeeStatus.cs">
       <DependentUpon>ParkInspectDomain.tt</DependentUpon>
     </Compile>
     <Compile Include="Inspection.cs">
@@ -96,7 +96,7 @@
     <Compile Include="InspectionImage.cs">
       <DependentUpon>ParkInspectDomain.tt</DependentUpon>
     </Compile>
-    <Compile Include="InspectionStatu.cs">
+    <Compile Include="InspectionStatus.cs">
       <DependentUpon>ParkInspectDomain.tt</DependentUpon>
     </Compile>
     <Compile Include="Keyword.cs">

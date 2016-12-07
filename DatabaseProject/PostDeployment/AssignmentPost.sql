@@ -17,4 +17,4 @@ where not exists (select 1 from Assignment where Id = 4);
 insert Assignment(Id, CustomerId, ManagerId, Description, StartDate, EndDate) select 5, 7, 5, 'Parkeerplaats staat meestal leeg, wil graag weten hoe dat komt.', '2017-01-10', '2017-02-09'
 where not exists (select 1 from Assignment where Id = 5);
 
-SET IDENTITY_INSERT [Assignment] ON;
+SET IDENTITY_INSERT [Assignment] OFF;

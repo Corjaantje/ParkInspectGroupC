@@ -51,6 +51,7 @@
         <AssociationConnector Association="ParkInspectModel.FK_QuestionKeyword_Question" ManuallyRouted="false" />
         <AssociationConnector Association="ParkInspectModel.FK_QuestionAnswer_Questionnaire" ManuallyRouted="false" />
         <AssociationConnector Association="ParkInspectModel.FK_QuestionnaireModule_Questionnaire" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkInspectModel.FK_Coordinate_Inspection" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

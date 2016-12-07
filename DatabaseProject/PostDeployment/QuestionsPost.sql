@@ -1,6 +1,8 @@
 ﻿print 'Questions and Module scripts aan het uitvoeren :)';
 
 --QuestionSort
+SET IDENTITY_INSERT [QuestionSort] ON;
+
 insert QuestionSort(Id, Description) select 1, 'DATE'
 where not exists (select 1 from QuestionSort where Id = 1);
 
@@ -13,8 +15,11 @@ where not exists (select 1 from QuestionSort where Id = 3);
 insert QuestionSort(Id, Description) select 4, 'BOOL'
 where not exists (select 1 from QuestionSort where Id = 4);
 
+SET IDENTITY_INSERT [QuestionSort] OFF;
 
 --Modules
+SET IDENTITY_INSERT [Module] ON;
+
 insert Module(Id, Name, Description) select 1, 'Parkeerproblemen', 'Vragen over parkeerproblemen.'
 where not exists (select 1 from Module where Id = 1);
 
@@ -30,8 +35,11 @@ where not exists (select 1 from Module where Id = 4);
 insert Module(Id, Name, Description) select 5, 'Calamiteiten', 'Vragen over calamiteiten.'
 where not exists (select 1 from Module where Id = 5);
 
+SET IDENTITY_INSERT [Module] OFF;
 
 -- Questionnaire
+SET IDENTITY_INSERT [Questionnaire] ON;
+
 insert Questionnaire(Id, InspectionId) select 1, 1
 where not exists (select 1 from Questionnaire where Id = 1);
 
@@ -44,8 +52,10 @@ where not exists (select 1 from Questionnaire where Id = 3);
 insert Questionnaire(Id, InspectionId) select 4, 2
 where not exists (select 1 from Questionnaire where Id = 4);
 
+SET IDENTITY_INSERT [Questionnaire] OFF;
 
 -- QuestionnaireModule
+
 insert QuestionnaireModule(ModuleId, QuestionnaireId) select 3, 1
 where not exists (select 1 from QuestionnaireModule where ModuleId = 3 and QuestionnaireId = 1);
 
@@ -60,6 +70,8 @@ where not exists (select 1 from QuestionnaireModule where ModuleId = 2 and Quest
 
 
 --Questions
+SET IDENTITY_INSERT [Question] ON;
+
 insert Question(Id,SortId, Description, ModuleId) select 1, 2, 'Wat is de breedte van een parkeervak in CM?', 2
 where not exists (select 1 from Question where Id = 1);
 
@@ -87,7 +99,10 @@ where not exists (select 1 from Question where Id = 8);
 insert Question(Id,SortId, Description, ModuleId) select 9, 3, 'Op welke dag is het parkeerplaats het meest bezet?', 4
 where not exists (select 1 from Question where Id = 9);
 
+SET IDENTITY_INSERT [Question] OFF;
+
 -- QuestionAnswer
+
 insert QuestionAnswer(QuestionnaireId,QuestionId, Result)select 1, 3, '20'
 where not exists (select 1 from QuestionAnswer where QuestionnaireId = 1 and QuestionId = 3);
 
@@ -108,6 +123,3 @@ where not exists (select 1 from QuestionAnswer where QuestionnaireId = 2 and Que
 
 insert QuestionAnswer(QuestionnaireId,QuestionId, Result)select 2, 4, '4'
 where not exists (select 1 from QuestionAnswer where QuestionnaireId = 2 and QuestionId = 4);
-
-
-

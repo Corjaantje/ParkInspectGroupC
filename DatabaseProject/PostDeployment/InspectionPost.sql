@@ -1,5 +1,7 @@
 ﻿print 'Inspection script aan het uitvoeren :)';
 
+SET IDENTITY_INSERT [Inspection] ON;
+
 insert Inspection(Id, AssignmentId, RegionId, Location, StartDate, EndDate, StatusId, InspectorId) select 1, 1, 1, 'Haaren', '2016-12-02 00:00:00.000', '2016-12-31 00:00:00.000', 3, 1
 where not exists(select 1 from Inspection where Id = 1);
 
@@ -17,3 +19,5 @@ where not exists(select 1 from Inspection where Id = 5);
 
 insert Inspection(Id, AssignmentId, RegionId, Location, StartDate, EndDate, StatusId, InspectorId) select 6, 5, 2, 'Tilburg', '2016-12-02 00:00:00.000', '2017-01-11 00:00:00.000', 4, 5
 where not exists(select 1 from Inspection where Id = 6);
+
+SET IDENTITY_INSERT [Inspection] OFF;
