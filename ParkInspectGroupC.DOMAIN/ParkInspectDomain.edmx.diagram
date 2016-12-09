@@ -57,6 +57,11 @@
         <EntityTypeShape EntityType="ParkInspectModel.Diagram" Width="1.5" PointX="20.625" PointY="5.75" />
         <AssociationConnector Association="ParkInspectModel.FK_Diagram_QuestionId" />
         <AssociationConnector Association="ParkInspectModel.FK_Diagram_ReportSection" />
+        <EntityTypeShape EntityType="ParkInspectModel.Coordinate" Width="1.5" PointX="12.75" PointY="18.5" />
+        <EntityTypeShape EntityType="ParkInspectModel.Message" Width="1.5" PointX="5.25" PointY="16.875" />
+        <AssociationConnector Association="ParkInspectModel.FK_Coordinate_Inspection" />
+        <AssociationConnector Association="ParkInspectModel.FK_Message_Receiver" />
+        <AssociationConnector Association="ParkInspectModel.FK_Message_Sender" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

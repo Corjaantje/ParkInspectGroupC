@@ -56,6 +56,9 @@
     <Compile Include="Availability.cs">
       <DependentUpon>ParkInspectDomain.tt</DependentUpon>
     </Compile>
+    <Compile Include="Coordinate.cs">
+      <DependentUpon>ParkInspectDomain.tt</DependentUpon>
+    </Compile>
     <Compile Include="Customer.cs">
       <DependentUpon>ParkInspectDomain.tt</DependentUpon>
     </Compile>
@@ -81,6 +84,9 @@
       <DependentUpon>ParkInspectDomain.tt</DependentUpon>
     </Compile>
     <Compile Include="KeywordCategory.cs">
+      <DependentUpon>ParkInspectDomain.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Message.cs">
       <DependentUpon>ParkInspectDomain.tt</DependentUpon>
     </Compile>
     <Compile Include="Module.cs">

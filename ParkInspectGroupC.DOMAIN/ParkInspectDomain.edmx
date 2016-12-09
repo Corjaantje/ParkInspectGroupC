@@ -42,6 +42,16 @@
           <Property Name="DateCreated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
           <Property Name="DateUpdated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
+        <EntityType Name="Coordinate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Longitude" Type="float" Nullable="false" />
+          <Property Name="Latitude" Type="float" Nullable="false" />
+          <Property Name="Note" Type="varchar(max)" />
+          <Property Name="InspectionId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="Id" />
@@ -146,6 +156,17 @@
           <Property Name="Description" Type="varchar(max)" />
           <Property Name="DateCreated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
           <Property Name="DateUpdated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SenderId" Type="int" Nullable="false" />
+          <Property Name="ReceiverId" Type="int" Nullable="false" />
+          <Property Name="Message" Type="varchar(max)" Nullable="false" />
+          <Property Name="Read" Type="bit" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Module">
           <Key>
@@ -315,6 +336,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Coordinate_Inspection">
+          <End Role="Inspection" Type="Self.Inspection" Multiplicity="1" />
+          <End Role="Coordinate" Type="Self.Coordinate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inspection">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Coordinate">
+              <PropertyRef Name="InspectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Diagram_QuestionId">
           <End Role="Question" Type="Self.Question" Multiplicity="1" />
           <End Role="Diagram" Type="Self.Diagram" Multiplicity="*" />
@@ -444,6 +477,30 @@
             </Principal>
             <Dependent Role="Keyword">
               <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Message_Receiver">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Message" Type="Self.Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="ReceiverId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Message_Sender">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Message" Type="Self.Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="SenderId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -631,6 +688,7 @@
           <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Assignment" EntityType="Self.Assignment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Availability" EntityType="Self.Availability" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Coordinate" EntityType="Self.Coordinate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Diagram" EntityType="Self.Diagram" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
@@ -640,6 +698,7 @@
           <EntitySet Name="InspectionStatus" EntityType="Self.InspectionStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Keyword" EntityType="Self.Keyword" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KeywordCategory" EntityType="Self.KeywordCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Message" EntityType="Self.Message" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Module" EntityType="Self.Module" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Question" EntityType="Self.Question" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="QuestionAnswer" EntityType="Self.QuestionAnswer" Schema="dbo" store:Type="Tables" />
@@ -667,6 +726,10 @@
           <AssociationSet Name="FK_Availability_Employee" Association="Self.FK_Availability_Employee">
             <End Role="Employee" EntitySet="Employee" />
             <End Role="Availability" EntitySet="Availability" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Coordinate_Inspection" Association="Self.FK_Coordinate_Inspection">
+            <End Role="Inspection" EntitySet="Inspection" />
+            <End Role="Coordinate" EntitySet="Coordinate" />
           </AssociationSet>
           <AssociationSet Name="FK_Diagram_QuestionId" Association="Self.FK_Diagram_QuestionId">
             <End Role="Question" EntitySet="Question" />
@@ -711,6 +774,14 @@
           <AssociationSet Name="FK_Keyword_KeywordCategory" Association="Self.FK_Keyword_KeywordCategory">
             <End Role="KeywordCategory" EntitySet="KeywordCategory" />
             <End Role="Keyword" EntitySet="Keyword" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Message_Receiver" Association="Self.FK_Message_Receiver">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Message" EntitySet="Message" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Message_Sender" Association="Self.FK_Message_Sender">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Message" EntitySet="Message" />
           </AssociationSet>
           <AssociationSet Name="FK_Question_Module" Association="Self.FK_Question_Module">
             <End Role="Module" EntitySet="Module" />
@@ -917,6 +988,20 @@
             <End Role="ReportSection" EntitySet="ReportSections" />
             <End Role="Diagram" EntitySet="Diagrams" />
           </AssociationSet>
+          <EntitySet Name="Coordinates" EntityType="ParkInspectModel.Coordinate" />
+          <EntitySet Name="Messages" EntityType="ParkInspectModel.Message" />
+          <AssociationSet Name="FK_Coordinate_Inspection" Association="ParkInspectModel.FK_Coordinate_Inspection">
+            <End Role="Inspection" EntitySet="Inspection" />
+            <End Role="Coordinate" EntitySet="Coordinates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Message_Receiver" Association="ParkInspectModel.FK_Message_Receiver">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Message" EntitySet="Messages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Message_Sender" Association="ParkInspectModel.FK_Message_Sender">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Message" EntitySet="Messages" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Account">
           <Key>
@@ -993,6 +1078,8 @@
           <NavigationProperty Name="Availabilities" Relationship="ParkInspectModel.FK_Availability_Employee" FromRole="Employee" ToRole="Availability" />
           <NavigationProperty Name="WorkingHours" Relationship="ParkInspectModel.FK_WorkingHours_Employee" FromRole="Employee" ToRole="WorkingHour" />
           <NavigationProperty Name="Reports" Relationship="ParkInspectModel.FK_Report_Employee" FromRole="Employee" ToRole="Report" />
+          <NavigationProperty Name="Messages" Relationship="ParkInspectModel.FK_Message_Receiver" FromRole="Employee" ToRole="Message" />
+          <NavigationProperty Name="Messages1" Relationship="ParkInspectModel.FK_Message_Sender" FromRole="Employee" ToRole="Message" />
         </EntityType>
         <EntityType Name="EmployeeStatus">
           <Key>
@@ -1024,6 +1111,7 @@
           <NavigationProperty Name="Region" Relationship="ParkInspectModel.FK_Inspection_Region" FromRole="Inspection" ToRole="Region" />
           <NavigationProperty Name="InspectionImage" Relationship="ParkInspectModel.FK_InspectionImages_Inspection" FromRole="Inspection" ToRole="InspectionImage" />
           <NavigationProperty Name="Questionnaire" Relationship="ParkInspectModel.FK_Questionnaire_Inspection" FromRole="Inspection" ToRole="Questionnaire" />
+          <NavigationProperty Name="Coordinates" Relationship="ParkInspectModel.FK_Coordinate_Inspection" FromRole="Inspection" ToRole="Coordinate" />
         </EntityType>
         <EntityType Name="InspectionImage">
           <Key>
@@ -1570,6 +1658,66 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Coordinate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Longitude" Type="Double" Nullable="false" />
+          <Property Name="Latitude" Type="Double" Nullable="false" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="InspectionId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Inspection" Relationship="ParkInspectModel.FK_Coordinate_Inspection" FromRole="Coordinate" ToRole="Inspection" />
+        </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SenderId" Type="Int32" Nullable="false" />
+          <Property Name="ReceiverId" Type="Int32" Nullable="false" />
+          <Property Name="Message1" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Read" Type="Boolean" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Receiver" Relationship="ParkInspectModel.FK_Message_Receiver" FromRole="Message" ToRole="Employee" />
+          <NavigationProperty Name="Sender" Relationship="ParkInspectModel.FK_Message_Sender" FromRole="Message" ToRole="Employee" />
+        </EntityType>
+        <Association Name="FK_Coordinate_Inspection">
+          <End Type="ParkInspectModel.Inspection" Role="Inspection" Multiplicity="1" />
+          <End Type="ParkInspectModel.Coordinate" Role="Coordinate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inspection">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Coordinate">
+              <PropertyRef Name="InspectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Message_Receiver">
+          <End Type="ParkInspectModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="ParkInspectModel.Message" Role="Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="ReceiverId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Message_Sender">
+          <End Type="ParkInspectModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="ParkInspectModel.Message" Role="Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="SenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1852,6 +2000,29 @@
               <MappingFragment StoreEntitySet="Diagram">
                 <ScalarProperty Name="ReportSectionId" ColumnName="ReportSectionId" />
                 <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Coordinates">
+            <EntityTypeMapping TypeName="ParkInspectModel.Coordinate">
+              <MappingFragment StoreEntitySet="Coordinate">
+                <ScalarProperty Name="InspectionId" ColumnName="InspectionId" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Messages">
+            <EntityTypeMapping TypeName="ParkInspectModel.Message">
+              <MappingFragment StoreEntitySet="Message">
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Read" ColumnName="Read" />
+                <ScalarProperty Name="Message1" ColumnName="Message" />
+                <ScalarProperty Name="ReceiverId" ColumnName="ReceiverId" />
+                <ScalarProperty Name="SenderId" ColumnName="SenderId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
