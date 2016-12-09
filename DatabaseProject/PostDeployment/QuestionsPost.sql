@@ -108,6 +108,3 @@ where not exists (select 1 from QuestionAnswer where QuestionnaireId = 2 and Que
 
 insert QuestionAnswer(QuestionnaireId,QuestionId, Result)select 2, 4, '4'
 where not exists (select 1 from QuestionAnswer where QuestionnaireId = 2 and QuestionId = 4);
-
-
-

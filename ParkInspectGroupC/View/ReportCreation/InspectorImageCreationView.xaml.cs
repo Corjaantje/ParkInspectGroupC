@@ -12,16 +12,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace ParkInspectGroupC.View
+namespace ParkInspectGroupC.View.ReportCreation
 {
-    /// <summary>
-    /// Interaction logic for CustomerListView.xaml
-    /// </summary>
-    public partial class CustomerListView : UserControl
-    {
-        public CustomerListView()
-        {
-            InitializeComponent();
-        }
-    }
+	/// <summary>
+	/// Interaction logic for DiagramCreationWindow.xaml
+	/// </summary>
+	public partial class InspectorImageCreationView : Window
+	{
+		public InspectorImageCreationView()
+		{
+			InitializeComponent();
+		}
+	}
 }

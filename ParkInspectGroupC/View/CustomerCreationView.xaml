@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ParkInspectGroupC.View"
-        xmlns:validation="clr-namespace:ParkInspectGroupC.Validation"
         mc:Ignorable="d"
         DataContext="{Binding CustomerCreation, Source={StaticResource Locator}}"
         x:Name="This">
@@ -31,14 +30,7 @@
         <Label x:Name="label6" Content="Phonenumber:" HorizontalAlignment="Left" Margin="28,122,0,0" Grid.Row="1" VerticalAlignment="Top"/>
         <TextBox x:Name="textBox4" HorizontalAlignment="Left" Height="23" Margin="121,122,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding Path = phoneNumber, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="270"/>
         <Label x:Name="label7" Content="Email:" HorizontalAlignment="Left" Margin="28,153,0,0" Grid.Row="1" VerticalAlignment="Top" RenderTransformOrigin="0.403,0.182"/>
-        <TextBox x:Name="textBox5" HorizontalAlignment="Left" Height="23" Margin="105,155,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="286">
-        <TextBox.Text>
-            <Binding Path="customerMail" UpdateSourceTrigger="PropertyChanged">
-                <Binding.ValidationRules>
-                    <validation:EmailValidation />
-                </Binding.ValidationRules>
-            </Binding>
-            </TextBox.Text>
-        </TextBox>
+        <TextBox x:Name="textBox5" HorizontalAlignment="Left" Height="23" Margin="105,155,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding Path = customerMail, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="286"/>
+
     </Grid>
 </UserControl>

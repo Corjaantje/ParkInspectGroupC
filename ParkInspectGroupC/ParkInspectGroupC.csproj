@@ -56,14 +56,32 @@
       <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="GMap.NET.Core, Version=1.7.5.0, Culture=neutral, PublicKeyToken=b85b9027b614afef, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\GMap.NET.Presentation.1.7.5\lib\net40\GMap.NET.Core.dll</HintPath>
+    <Reference Include="itext.barcodes, Version=7.0.1.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.7.0.1\lib\net40\itext.barcodes.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="GMap.NET.WindowsPresentation, Version=1.7.5.0, Culture=neutral, PublicKeyToken=b85b9027b614afef, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\GMap.NET.Presentation.1.7.5\lib\net40\GMap.NET.WindowsPresentation.dll</HintPath>
+    <Reference Include="itext.forms, Version=7.0.1.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.7.0.1\lib\net40\itext.forms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="itext.io, Version=7.0.1.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.7.0.1\lib\net40\itext.io.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="itext.kernel, Version=7.0.1.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.7.0.1\lib\net40\itext.kernel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="itext.layout, Version=7.0.1.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.7.0.1\lib\net40\itext.layout.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="itext.pdfa, Version=7.0.1.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.7.0.1\lib\net40\itext.pdfa.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="itext.sign, Version=7.0.1.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.7.0.1\lib\net40\itext.sign.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="LocalDatabase">
@@ -109,15 +127,15 @@
     <Compile Include="Factory\ThemeFactory.cs" />
     <Compile Include="Miscellaneous\IHavePassword.cs" />
     <Compile Include="Miscellaneous\Navigator.cs" />
+    <Compile Include="Miscellaneous\PDFGenerator.cs" />
     <Compile Include="ViewModel\CustomerCreationViewModel.cs" />
-    <Compile Include="ViewModel\CustomerListViewModel.cs" />
     <Compile Include="ViewModel\InspectorProfileViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="Validation\EmailValidation.cs" />
     <Compile Include="ViewModel\EmployeeCreationViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\MapViewModel.cs" />
     <Compile Include="ViewModel\QuestionnaireViewModel.cs" />
+    <Compile Include="ViewModel\ReportCreation\ReportViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\EmployeeCreationView.xaml.cs">
       <DependentUpon>EmployeeCreationView.xaml</DependentUpon>
@@ -127,9 +145,6 @@
     </Compile>
     <Compile Include="View\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\MapView.xaml.cs">
-      <DependentUpon>MapView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainWindow\NavigationMenu.xaml.cs">
       <DependentUpon>NavigationMenu.xaml</DependentUpon>
@@ -145,6 +160,24 @@
     </Compile>
     <Compile Include="View\QuestionnaireView.xaml.cs">
       <DependentUpon>QuestionnaireView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ReportCreation\InspectorImageCreationView.xaml.cs">
+      <DependentUpon>InspectorImageCreationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ReportCreation\DiagramCreationView.xaml.cs">
+      <DependentUpon>DiagramCreationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ReportCreation\ReportAssignmentSelectionView.xaml.cs">
+      <DependentUpon>ReportAssignmentSelectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ReportCreation\ReportSectionView.xaml.cs">
+      <DependentUpon>ReportSectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ReportCreation\ReportCreationView.xaml.cs">
+      <DependentUpon>ReportCreationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ReportCreation\ReportView.xaml.cs">
+      <DependentUpon>ReportView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -199,10 +232,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\MapView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\MainWindow\NavigationMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -222,6 +251,30 @@
     <Page Include="View\QuestionnaireView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ReportCreation\InspectorImageCreationView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ReportCreation\DiagramCreationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ReportCreation\ReportAssignmentSelectionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ReportCreation\ReportSectionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ReportCreation\ReportCreationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ReportCreation\ReportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -250,9 +303,7 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -287,8 +338,6 @@
     <Resource Include="Image\StatusImage\Ziek.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Gmaps\GMap.NET.Core.dll" />
-    <Content Include="Gmaps\GMap.NET.WindowsPresentation.dll" />
     <Resource Include="Image\arrow-back-128.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

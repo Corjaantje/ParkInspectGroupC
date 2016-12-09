@@ -15,6 +15,7 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
+using ParkInspectGroupC.ViewModel.ReportCreation;
 
 namespace ParkInspectGroupC.ViewModel
 {
@@ -45,11 +46,10 @@ namespace ParkInspectGroupC.ViewModel
             SimpleIoc.Default.Register<MainViewModel>();
 			SimpleIoc.Default.Register<LoginViewModel>();
             SimpleIoc.Default.Register<CustomerCreationViewModel>();
-            SimpleIoc.Default.Register<MapViewModel>();
             SimpleIoc.Default.Register<QuestionnaireViewModel>();
 			SimpleIoc.Default.Register<EmployeeCreationViewModel>();
 			SimpleIoc.Default.Register<InspectorProfileViewModel>();
-            SimpleIoc.Default.Register<CustomerListViewModel>();
+			SimpleIoc.Default.Register<ReportViewModel>();
         }
 
         public MainViewModel Main
@@ -57,13 +57,6 @@ namespace ParkInspectGroupC.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
-            }
-        }
-        public MapViewModel Map
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<MapViewModel>();
             }
         }
         
@@ -101,14 +94,11 @@ namespace ParkInspectGroupC.ViewModel
 		    get { return ServiceLocator.Current.GetInstance<InspectorProfileViewModel>(); }
 	    }
 
-        public CustomerListViewModel CustomerList
-        {
-            get { return ServiceLocator.Current.GetInstance<CustomerListViewModel>(); }
-        }
-
-
-
-        public static void Cleanup()
+	    public ReportViewModel Reports
+	    {
+		    get { return ServiceLocator.Current.GetInstance<ReportViewModel>(); }
+	    }
+		public static void Cleanup()
         {
             // TODO Clear the ViewModels
         }

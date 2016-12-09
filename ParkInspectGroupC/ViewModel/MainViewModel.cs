@@ -14,6 +14,7 @@ using Microsoft.Practices.ServiceLocation;
 using ParkInspectGroupC.Factory;
 using ParkInspectGroupC.Properties;
 using ParkInspectGroupC.View;
+using ParkInspectGroupC.View.ReportCreation;
 
 namespace ParkInspectGroupC.ViewModel
 {

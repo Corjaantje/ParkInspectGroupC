@@ -364,4 +364,81 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="File" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="83dea981-f1d6-40db-9785-ca71b50fafcb" ChangeDateTime="11/28/2016 14:42:40">
+    <Property Name="ElementName" Value="[dbo].[FK_ReportSection_ToTable]" />
+    <Property Name="ElementType" Value="SqlForeignKeyConstraint" />
+    <Property Name="ParentElementName" Value="[dbo].[ReportSection]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[FK_ReportSection_Diagram]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="8dbfc0f6-5608-450c-b3cb-fd90899cab7e" ChangeDateTime="11/28/2016 14:43:35">
+    <Property Name="ElementName" Value="[dbo].[ReportSectionInspectionImage].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ReportSectionInspectionImage]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ReportSectioniD" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="38181cdb-c3b8-4ec4-822c-348abb65c956" ChangeDateTime="11/28/2016 14:43:42">
+    <Property Name="ElementName" Value="[dbo].[ReportSectionInspectionImage].[ReportSectioniD]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ReportSectionInspectionImage]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ReportSectionId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="341982fb-a9bf-4aa3-8b1e-795cef2fa918" ChangeDateTime="11/28/2016 14:45:26">
+    <Property Name="ElementName" Value="[dbo].[ReportSectionDiagram].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ReportSectionDiagram]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ReportSectionId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="a9c3858a-ab54-434e-832a-49b218841114" ChangeDateTime="11/28/2016 14:51:01">
+    <Property Name="ElementName" Value="[dbo].[AssignmentReport].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[AssignmentReport]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="AssignmentIsd" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="5c09060a-81d4-4ec5-97e2-99bb6444fd27" ChangeDateTime="11/28/2016 14:51:04">
+    <Property Name="ElementName" Value="[dbo].[AssignmentReport].[AssignmentIsd]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[AssignmentReport]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="AssignmentId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="c9d2a6fd-dc4a-4eb9-93e5-40f0a90dbb98" ChangeDateTime="11/28/2016 14:54:18">
+    <Property Name="ElementName" Value="[dbo].[Report].[CustomeriD]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Report]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CustomerId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="f10eb4e9-e556-4d61-8256-b5bdc1b8b017" ChangeDateTime="12/04/2016 11:34:34">
+    <Property Name="ElementName" Value="[dbo].[DiagramQuestion].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[DiagramQuestion]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DiagramId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="6da1605e-6e75-4e3b-8edb-971fc2d785e9" ChangeDateTime="12/04/2016 11:34:44">
+    <Property Name="ElementName" Value="[dbo].[DiagramQuestion].[QuestioNId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[DiagramQuestion]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="QuestionId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="a593d9c8-de74-4e32-aa85-8ff2c5f822ca" ChangeDateTime="12/04/2016 11:35:52">
+    <Property Name="ElementName" Value="[dbo].[Diagram].[File]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Diagram]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="QuestionId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="2b02b718-c817-4712-9719-e5053a0e0e4c" ChangeDateTime="12/04/2016 11:38:50">
+    <Property Name="ElementName" Value="[dbo].[FK_Diagram_ReportSecton]" />
+    <Property Name="ElementType" Value="SqlForeignKeyConstraint" />
+    <Property Name="ParentElementName" Value="[dbo].[Diagram]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[FK_Diagram_ReportSection]" />
+  </Operation>
 </Operations>
