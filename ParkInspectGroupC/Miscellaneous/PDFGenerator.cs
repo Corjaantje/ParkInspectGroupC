@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using iText.IO.Font;
 using iText.Kernel.Font;
+using iText.Kernel.Geom;
 using iText.Kernel.Pdf;
 using iText.Layout;
 using iText.Layout.Element;
@@ -24,7 +25,7 @@ namespace ParkInspectGroupC.Miscellaneous
 		{
 			var writer = new PdfWriter(filename);
 			var pdf = new PdfDocument(writer);
-			var document = new Document(pdf);
+			var document = new Document(pdf, PageSize.A4);
 
 			// Title page
 			document.Add(new Paragraph(report.Title));
