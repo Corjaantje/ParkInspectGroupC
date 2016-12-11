@@ -1,19 +1,16 @@
 ﻿using GalaSoft.MvvmLight;
-using ParkInspectGroupC.DOMAIN;
-
 using GalaSoft.MvvmLight.Command;
 using ParkInspectGroupC.DOMAIN;
 using ParkInspectGroupC.Miscellaneous;
 using ParkInspectGroupC.View;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-
 using System.Windows.Input;
-
 
 namespace ParkInspectGroupC.ViewModel
 {
@@ -22,7 +19,7 @@ namespace ParkInspectGroupC.ViewModel
         private ObservableCollection<Customer> _customers;
         private ObservableCollection<Customer> _allCustomers;
         private string _searchString = "Search";
-	private Customer _selectedCustomer;
+        private Customer _selectedCustomer;
         public ICommand DeleteCustomerCommand { get; set; }
         public ICommand AddCustomerCommand { get; set; }
 
@@ -32,21 +29,23 @@ namespace ParkInspectGroupC.ViewModel
 
             using (var context = new ParkInspectEntities())
             {
-		List<Customer> customers = context.Customers.ToList();
-		List<Customer> customers = context.Customer.ToList();
+                List<Customer> customers = context.Customers.ToList();
+
 
                 foreach (var customer in customers)
                 {
-			searchedCustomers.Add(customer);
+
+                    searchedCustomers.Add(customer);
+
                 }
             }
 
             _allCustomers = searchedCustomers;
             _customers = searchedCustomers;
-	    DeleteCustomerCommand = new RelayCommand(deleteCustomer, canDelete);
+            DeleteCustomerCommand = new RelayCommand(deleteCustomer, canDelete);
             AddCustomerCommand = new RelayCommand(openAddWindow);
 
-	}
+        }
         public ObservableCollection<Customer> Customers
         {
             get
@@ -61,34 +60,6 @@ namespace ParkInspectGroupC.ViewModel
             }
         }
 
-	public string SearchString
-        {
-            get{
-                return _searchString;
-            }
-
-            set{
-                _searchString = value;
-                
-
-                ObservableCollection<Customer> searchedCustomers = new ObservableCollection<Customer>();
-
-                    foreach (var customer in _allCustomers)
-                    {
-                        if (SearchString != null && customer.Name.ToLower().Contains(SearchString.ToLower()))
-                        {
-                            searchedCustomers.Add(customer);
-                        }
-                    }
-                
-
-                _customers = searchedCustomers;
-                
-
-                Console.WriteLine(_searchString);
-                RaisePropertyChanged("Customers");
-            }
-        }
 
         public Customer SelectedCustomer
         {
@@ -134,13 +105,13 @@ namespace ParkInspectGroupC.ViewModel
             using (var context = new ParkInspectEntities())
             {
 
-                List<Customer> customers = context.Customer.ToList();
+                List<Customer> customers = context.Customers.ToList();
 
                 foreach (var customer in customers)
                 {
                     if (customer.Id == SelectedCustomer.Id)
                     {
-                        context.Customer.Remove(customer);
+                        context.Customers.Remove(customer);
 
                     }
                 }
@@ -162,5 +133,5 @@ namespace ParkInspectGroupC.ViewModel
             Navigator.SetNewView(new CustomerCreationView());
         }
 
-	}
+    }
 }
