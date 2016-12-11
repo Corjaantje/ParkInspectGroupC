@@ -147,7 +147,7 @@ namespace LocalDatabase.Central
             {
                 using (var context = new ParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.Region r in context.Region)
+                    foreach (ParkInspectGroupC.DOMAIN.Region r in context.Regions)
                     {
                         list.Add(r);
                     }
@@ -178,13 +178,13 @@ namespace LocalDatabase.Central
         }
         private bool GetEmployeeStatus()
         {
-            List<ParkInspectGroupC.DOMAIN.EmployeeStatus> list = new List<ParkInspectGroupC.DOMAIN.EmployeeStatus>();
+            List<ParkInspectGroupC.DOMAIN.EmployeeStatu> list = new List<ParkInspectGroupC.DOMAIN.EmployeeStatu>();
 
             try
             {
                 using (var context = new ParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.EmployeeStatus r in context.EmployeeStatus)
+                    foreach (ParkInspectGroupC.DOMAIN.EmployeeStatu r in context.EmployeeStatus)
                     {
                         list.Add(r);
                     }
@@ -192,7 +192,7 @@ namespace LocalDatabase.Central
 
                 using (var localContext = new LocalParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.EmployeeStatus r in list)
+                    foreach (ParkInspectGroupC.DOMAIN.EmployeeStatu r in list)
                     {
                         Domain.EmployeeStatu _new = new Domain.EmployeeStatu();
                         _new.Id = r.Id;
@@ -221,7 +221,7 @@ namespace LocalDatabase.Central
             {
                 using (var context = new ParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.Employee r in context.Employee)
+                    foreach (ParkInspectGroupC.DOMAIN.Employee r in context.Employees)
                     {
                         list.Add(r);
                     }
@@ -271,7 +271,7 @@ namespace LocalDatabase.Central
             {
                 using (var context = new ParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.Account r in context.Account)
+                    foreach (ParkInspectGroupC.DOMAIN.Account r in context.Accounts)
                     {
                         list.Add(r);
                     }
@@ -389,7 +389,7 @@ namespace LocalDatabase.Central
             {
                 using (var context = new ParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.Customer r in context.Customer)
+                    foreach (ParkInspectGroupC.DOMAIN.Customer r in context.Customers)
                     {
                         list.Add(r);
                     }
@@ -430,7 +430,7 @@ namespace LocalDatabase.Central
             {
                 using (var context = new ParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.Assignment r in context.Assignment)
+                    foreach (ParkInspectGroupC.DOMAIN.Assignment r in context.Assignments)
                     {
                         list.Add(r);
                     }
@@ -465,13 +465,13 @@ namespace LocalDatabase.Central
         }
         private bool GetInspectionStatus()
         {
-            List<ParkInspectGroupC.DOMAIN.InspectionStatus> list = new List<ParkInspectGroupC.DOMAIN.InspectionStatus>();
+            List<ParkInspectGroupC.DOMAIN.InspectionStatu> list = new List<ParkInspectGroupC.DOMAIN.InspectionStatu>();
 
             try
             {
                 using (var context = new ParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.InspectionStatus r in context.InspectionStatus)
+                    foreach (ParkInspectGroupC.DOMAIN.InspectionStatu r in context.InspectionStatus)
                     {
                         list.Add(r);
                     }
@@ -479,7 +479,7 @@ namespace LocalDatabase.Central
 
                 using (var localContext = new LocalParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.InspectionStatus r in list)
+                    foreach (ParkInspectGroupC.DOMAIN.InspectionStatu r in list)
                     {
                         Domain.InspectionStatu _new = new Domain.InspectionStatu();
                         _new.Id = r.Id;
@@ -551,7 +551,7 @@ namespace LocalDatabase.Central
             {
                 using (var context = new ParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.InspectionImage r in context.InspectionImage)
+                    foreach (ParkInspectGroupC.DOMAIN.InspectionImage r in context.InspectionImages)
                     {
                         list.Add(r);
                     }
@@ -628,7 +628,7 @@ namespace LocalDatabase.Central
             {
                 using (var context = new ParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.KeywordCategory r in context.KeywordCategory)
+                    foreach (ParkInspectGroupC.DOMAIN.KeywordCategory r in context.KeywordCategories)
                     {
                         list.Add(r);
                     }
@@ -665,7 +665,7 @@ namespace LocalDatabase.Central
             {
                 using (var context = new ParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.Keyword r in context.Keyword)
+                    foreach (ParkInspectGroupC.DOMAIN.Keyword r in context.Keywords)
                     {
                         list.Add(r);
                     }
@@ -855,7 +855,7 @@ namespace LocalDatabase.Central
             {
                 using (var context = new ParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.QuestionAnswer r in context.QuestionAnswer)
+                    foreach (ParkInspectGroupC.DOMAIN.QuestionAnswer r in context.QuestionAnswers)
                     {
                         list.Add(r);
                     }
@@ -893,7 +893,7 @@ namespace LocalDatabase.Central
             {
                 using (var context = new ParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.QuestionnaireModule r in context.QuestionnaireModule)
+                    foreach (ParkInspectGroupC.DOMAIN.QuestionnaireModule r in context.QuestionnaireModules)
                     {
                         list.Add(r);
                     }
@@ -930,7 +930,7 @@ namespace LocalDatabase.Central
             {
                 using (var context = new ParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.QuestionKeyword r in context.QuestionKeyword)
+                    foreach (ParkInspectGroupC.DOMAIN.QuestionKeyword r in context.QuestionKeywords)
                     {
                         list.Add(r);
                     }

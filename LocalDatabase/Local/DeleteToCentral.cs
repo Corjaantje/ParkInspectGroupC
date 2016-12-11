@@ -121,8 +121,8 @@ namespace LocalDatabase.Local
                             ParkInspectGroupC.DOMAIN.QuestionKeyword _new = new ParkInspectGroupC.DOMAIN.QuestionKeyword();
                             _new.KeywordId = Convert.ToInt32(r.KeywordId);
                             _new.QuestionId = Convert.ToInt32(r.QuestionId);
-                            context.QuestionKeyword.Attach(_new);
-                            context.QuestionKeyword.Remove(_new);
+                            context.QuestionKeywords.Attach(_new);
+                            context.QuestionKeywords.Remove(_new);
                         }
                         context.SaveChanges();
                     }
@@ -154,8 +154,8 @@ namespace LocalDatabase.Local
                             ParkInspectGroupC.DOMAIN.QuestionnaireModule _new = new ParkInspectGroupC.DOMAIN.QuestionnaireModule();
                             _new.ModuleId = Convert.ToInt32(r.ModuleId);
                             _new.QuestionnaireId = Convert.ToInt32(r.QuestionaireId);
-                            context.QuestionnaireModule.Attach(_new);
-                            context.QuestionnaireModule.Remove(_new);
+                            context.QuestionnaireModules.Attach(_new);
+                            context.QuestionnaireModules.Remove(_new);
                         }
                         context.SaveChanges();
                     }
@@ -187,8 +187,8 @@ namespace LocalDatabase.Local
                             ParkInspectGroupC.DOMAIN.QuestionAnswer _new = new ParkInspectGroupC.DOMAIN.QuestionAnswer();
                             _new.QuestionId = Convert.ToInt32(r.QuestionId);
                             _new.QuestionnaireId = Convert.ToInt32(r.QuestionnaireId);
-                            context.QuestionAnswer.Attach(_new);
-                            context.QuestionAnswer.Remove(_new);
+                            context.QuestionAnswers.Attach(_new);
+                            context.QuestionAnswers.Remove(_new);
                         }
                         context.SaveChanges();
                     }
@@ -347,8 +347,8 @@ namespace LocalDatabase.Local
                         {
                             ParkInspectGroupC.DOMAIN.Keyword _new = new ParkInspectGroupC.DOMAIN.Keyword();
                             _new.Id = Convert.ToInt32(r.Id);
-                            context.Keyword.Attach(_new);
-                            context.Keyword.Remove(_new);
+                            context.Keywords.Attach(_new);
+                            context.Keywords.Remove(_new);
                         }
                         context.SaveChanges();
                     }
@@ -379,8 +379,8 @@ namespace LocalDatabase.Local
                         {
                             ParkInspectGroupC.DOMAIN.KeywordCategory _new = new ParkInspectGroupC.DOMAIN.KeywordCategory();
                             _new.Id = Convert.ToInt32(r.Id);
-                            context.KeywordCategory.Attach(_new);
-                            context.KeywordCategory.Remove(_new);
+                            context.KeywordCategories.Attach(_new);
+                            context.KeywordCategories.Remove(_new);
                         }
                         context.SaveChanges();
                     }
@@ -411,8 +411,8 @@ namespace LocalDatabase.Local
                         {
                             ParkInspectGroupC.DOMAIN.InspectionImage _new = new ParkInspectGroupC.DOMAIN.InspectionImage();
                             _new.Id = Convert.ToInt32(r.Id);
-                            context.InspectionImage.Attach(_new);
-                            context.InspectionImage.Remove(_new);
+                            context.InspectionImages.Attach(_new);
+                            context.InspectionImages.Remove(_new);
                         }
                         context.SaveChanges();
                     }
@@ -505,7 +505,7 @@ namespace LocalDatabase.Local
                     {
                         foreach (Domain.InspectionStatu r in list)
                         {
-                            ParkInspectGroupC.DOMAIN.InspectionStatus _new = new ParkInspectGroupC.DOMAIN.InspectionStatus();
+                            ParkInspectGroupC.DOMAIN.InspectionStatu _new = new ParkInspectGroupC.DOMAIN.InspectionStatu();
                             _new.Id = Convert.ToInt32(r.Id);
                             context.InspectionStatus.Attach(_new);
                             context.InspectionStatus.Remove(_new);
@@ -539,8 +539,8 @@ namespace LocalDatabase.Local
                         {
                             ParkInspectGroupC.DOMAIN.Assignment _new = new ParkInspectGroupC.DOMAIN.Assignment();
                             _new.Id = Convert.ToInt32(r.Id);
-                            context.Assignment.Attach(_new);
-                            context.Assignment.Remove(_new);
+                            context.Assignments.Attach(_new);
+                            context.Assignments.Remove(_new);
                         }
                         context.SaveChanges();
                     }
@@ -571,8 +571,8 @@ namespace LocalDatabase.Local
                         {
                             ParkInspectGroupC.DOMAIN.Customer _new = new ParkInspectGroupC.DOMAIN.Customer();
                             _new.Id = Convert.ToInt32(r.Id);
-                            context.Customer.Attach(_new);
-                            context.Customer.Remove(_new);
+                            context.Customers.Attach(_new);
+                            context.Customers.Remove(_new);
                         }
                         context.SaveChanges();
                     }
@@ -669,8 +669,8 @@ namespace LocalDatabase.Local
                         {
                             ParkInspectGroupC.DOMAIN.Account _new = new ParkInspectGroupC.DOMAIN.Account();
                             _new.Id = Convert.ToInt32(r.Id);
-                            context.Account.Attach(_new);
-                            context.Account.Remove(_new);
+                            context.Accounts.Attach(_new);
+                            context.Accounts.Remove(_new);
                         }
                         context.SaveChanges();
                     }
@@ -701,8 +701,8 @@ namespace LocalDatabase.Local
                         {
                             ParkInspectGroupC.DOMAIN.Employee _new = new ParkInspectGroupC.DOMAIN.Employee();
                             _new.Id = Convert.ToInt32(r.Id);
-                            context.Employee.Attach(_new);
-                            context.Employee.Remove(_new);
+                            context.Employees.Attach(_new);
+                            context.Employees.Remove(_new);
                         }
                         context.SaveChanges();
                     }
@@ -731,7 +731,7 @@ namespace LocalDatabase.Local
                     {
                         foreach (Domain.EmployeeStatu r in list)
                         {
-                            ParkInspectGroupC.DOMAIN.EmployeeStatus _new = new ParkInspectGroupC.DOMAIN.EmployeeStatus();
+                            ParkInspectGroupC.DOMAIN.EmployeeStatu _new = new ParkInspectGroupC.DOMAIN.EmployeeStatu();
                             _new.Id = Convert.ToInt32(r.Id);
                             context.EmployeeStatus.Attach(_new);
                             context.EmployeeStatus.Remove(_new);
@@ -765,8 +765,8 @@ namespace LocalDatabase.Local
                         {
                             ParkInspectGroupC.DOMAIN.Region _new = new ParkInspectGroupC.DOMAIN.Region();
                             _new.Id = Convert.ToInt32(r.Id);
-                            context.Region.Attach(_new);
-                            context.Region.Remove(_new);
+                            context.Regions.Attach(_new);
+                            context.Regions.Remove(_new);
                         }
                         context.SaveChanges();
                     }

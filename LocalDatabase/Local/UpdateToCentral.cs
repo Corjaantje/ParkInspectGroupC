@@ -361,7 +361,7 @@ namespace LocalDatabase.Local
                         foreach (Domain.Region r in list)
                         {
                             int _id = Convert.ToInt32(r.Id);
-                            ParkInspectGroupC.DOMAIN.Region region = (from x in context.Region where x.Id == _id select x).First();
+                            ParkInspectGroupC.DOMAIN.Region region = (from x in context.Regions where x.Id == _id select x).First();
 
                             //Check for database concurrency
                             if (region.DateUpdated == r.DateUpdated)
@@ -411,7 +411,7 @@ namespace LocalDatabase.Local
                         foreach (Domain.EmployeeStatu r in list)
                         {
                             int _id = Convert.ToInt32(r.Id);
-                            ParkInspectGroupC.DOMAIN.EmployeeStatus central = (from x in context.EmployeeStatus where x.Id == _id select x).First();
+                            ParkInspectGroupC.DOMAIN.EmployeeStatu central = (from x in context.EmployeeStatus where x.Id == _id select x).First();
 
                             //Check for database concurrency
                             if (central.DateUpdated == r.DateUpdated)
@@ -461,7 +461,7 @@ namespace LocalDatabase.Local
                         foreach (Domain.Employee r in list)
                         {
                             int _id = Convert.ToInt32(r.Id);
-                            ParkInspectGroupC.DOMAIN.Employee central = (from x in context.Employee where x.Id == _id select x).First();
+                            ParkInspectGroupC.DOMAIN.Employee central = (from x in context.Employees where x.Id == _id select x).First();
 
                             //Check for database concurrency
                             if (central.DateUpdated == r.DateUpdated)
@@ -531,7 +531,7 @@ namespace LocalDatabase.Local
                         foreach (Domain.Account r in list)
                         {
                             int _id = Convert.ToInt32(r.Id);
-                            ParkInspectGroupC.DOMAIN.Account central = (from x in context.Account where x.Id == _id select x).First();
+                            ParkInspectGroupC.DOMAIN.Account central = (from x in context.Accounts where x.Id == _id select x).First();
 
                             //Check for database concurrency
                             if (central.DateUpdated == r.DateUpdated)
@@ -696,7 +696,7 @@ namespace LocalDatabase.Local
                         foreach (Domain.Customer r in list)
                         {
                             int _id = Convert.ToInt32(r.Id);
-                            ParkInspectGroupC.DOMAIN.Customer central = (from x in context.Customer where x.Id == _id select x).First();
+                            ParkInspectGroupC.DOMAIN.Customer central = (from x in context.Customers where x.Id == _id select x).First();
 
                             //Check for database concurrency
                             if (central.DateUpdated == r.DateUpdated)
@@ -750,7 +750,7 @@ namespace LocalDatabase.Local
                         foreach (Domain.Assignment r in list)
                         {
                             int _id = Convert.ToInt32(r.Id);
-                            ParkInspectGroupC.DOMAIN.Assignment central = (from x in context.Assignment where x.Id == _id select x).First();
+                            ParkInspectGroupC.DOMAIN.Assignment central = (from x in context.Assignments where x.Id == _id select x).First();
 
                             //Check for database concurrency
                             if (central.DateUpdated == r.DateUpdated)
@@ -804,7 +804,7 @@ namespace LocalDatabase.Local
                         foreach (Domain.InspectionStatu r in list)
                         {
                             int _id = Convert.ToInt32(r.Id);
-                            ParkInspectGroupC.DOMAIN.InspectionStatus central = (from x in context.InspectionStatus where x.Id == _id select x).First();
+                            ParkInspectGroupC.DOMAIN.InspectionStatu central = (from x in context.InspectionStatus where x.Id == _id select x).First();
 
                             //Check for database concurrency
                             if (central.DateUpdated == r.DateUpdated)
@@ -970,7 +970,7 @@ namespace LocalDatabase.Local
                         foreach (Domain.InspectionImage r in list)
                         {
                             int _id = Convert.ToInt32(r.Id);
-                            ParkInspectGroupC.DOMAIN.InspectionImage central = (from x in context.InspectionImage where x.Id == _id select x).First();
+                            ParkInspectGroupC.DOMAIN.InspectionImage central = (from x in context.InspectionImages where x.Id == _id select x).First();
 
                             //Check for database concurrency
                             if (central.DateUpdated == r.DateUpdated)
@@ -1028,7 +1028,7 @@ namespace LocalDatabase.Local
                         foreach (Domain.KeywordCategory r in list)
                         {
                             int _id = Convert.ToInt32(r.Id);
-                            ParkInspectGroupC.DOMAIN.KeywordCategory central = (from x in context.KeywordCategory where x.Id == _id select x).First();
+                            ParkInspectGroupC.DOMAIN.KeywordCategory central = (from x in context.KeywordCategories where x.Id == _id select x).First();
 
                             //Check for database concurrency
                             if (central.DateUpdated == r.DateUpdated)
@@ -1078,7 +1078,7 @@ namespace LocalDatabase.Local
                         foreach (Domain.Keyword r in list)
                         {
                             int _id = Convert.ToInt32(r.Id);
-                            ParkInspectGroupC.DOMAIN.Keyword central = (from x in context.Keyword where x.Id == _id select x).First();
+                            ParkInspectGroupC.DOMAIN.Keyword central = (from x in context.Keywords where x.Id == _id select x).First();
 
                             //Check for database concurrency
                             if (central.DateUpdated == r.DateUpdated)
@@ -1341,7 +1341,7 @@ namespace LocalDatabase.Local
                         {
                             int _id = Convert.ToInt32(r.QuestionnaireId);
                             int _questionId = Convert.ToInt32(r.QuestionId);
-                            ParkInspectGroupC.DOMAIN.QuestionAnswer central = (from x in context.QuestionAnswer where x.QuestionnaireId == _id select x).Where(x => x.QuestionId == _questionId).First();
+                            ParkInspectGroupC.DOMAIN.QuestionAnswer central = (from x in context.QuestionAnswers where x.QuestionnaireId == _id select x).Where(x => x.QuestionId == _questionId).First();
 
                             //Check for database concurrency
                             if (central.DateUpdated == r.DateUpdated)
@@ -1396,7 +1396,7 @@ namespace LocalDatabase.Local
                         {
                             int _id = Convert.ToInt32(r.ModuleId);
                             int _questionId = Convert.ToInt32(r.QuestionaireId);
-                            ParkInspectGroupC.DOMAIN.QuestionnaireModule central = (from x in context.QuestionnaireModule where x.QuestionnaireId == _questionId select x).Where(x => x.ModuleId == _id).First();
+                            ParkInspectGroupC.DOMAIN.QuestionnaireModule central = (from x in context.QuestionnaireModules where x.QuestionnaireId == _questionId select x).Where(x => x.ModuleId == _id).First();
 
                             //Check for database concurrency
                             if (central.DateUpdated == r.DateUpdated)
@@ -1450,7 +1450,7 @@ namespace LocalDatabase.Local
                         {
                             int _id = Convert.ToInt32(r.QuestionId);
                             int _KeywordId = Convert.ToInt32(r.KeywordId);
-                            ParkInspectGroupC.DOMAIN.QuestionKeyword central = (from x in context.QuestionKeyword where x.QuestionId == _id select x).Where(x => x.KeywordId == _KeywordId).First();
+                            ParkInspectGroupC.DOMAIN.QuestionKeyword central = (from x in context.QuestionKeywords where x.QuestionId == _id select x).Where(x => x.KeywordId == _KeywordId).First();
 
                             //Check for database concurrency
                             if (central.DateUpdated == r.DateUpdated)

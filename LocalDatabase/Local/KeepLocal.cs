@@ -20,7 +20,7 @@ namespace LocalDatabase.Local
 
                     using (var centralContext = new ParkInspectEntities())
                     {
-                        ParkInspectGroupC.DOMAIN.Region central = (from x in centralContext.Region where x.Id == r.Id select x).First();
+                        ParkInspectGroupC.DOMAIN.Region central = (from x in centralContext.Regions where x.Id == r.Id select x).First();
 
                         central.Region1 = r.Region1;
                         central.DateUpdated = DateTime.Now;
@@ -44,7 +44,7 @@ namespace LocalDatabase.Local
 
                     using (var centralContext = new ParkInspectEntities())
                     {
-                        ParkInspectGroupC.DOMAIN.EmployeeStatus central = (from x in centralContext.EmployeeStatus where x.Id == r.Id select x).First();
+                        ParkInspectGroupC.DOMAIN.EmployeeStatu central = (from x in centralContext.EmployeeStatus where x.Id == r.Id select x).First();
 
                         central.Description = r.Description;
                         central.DateUpdated = DateTime.Now;
@@ -68,7 +68,7 @@ namespace LocalDatabase.Local
 
                     using (var centralContext = new ParkInspectEntities())
                     {
-                        ParkInspectGroupC.DOMAIN.Employee central = (from x in centralContext.Employee where x.Id == r.Id select x).First();
+                        ParkInspectGroupC.DOMAIN.Employee central = (from x in centralContext.Employees where x.Id == r.Id select x).First();
 
                         central.FirstName = r.FirstName;
                         central.Prefix = r.Prefix;
@@ -97,7 +97,7 @@ namespace LocalDatabase.Local
                 }
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }
@@ -112,7 +112,7 @@ namespace LocalDatabase.Local
 
                     using (var centralContext = new ParkInspectEntities())
                     {
-                        ParkInspectGroupC.DOMAIN.Account central = (from x in centralContext.Account where x.Id == r.Id select x).First();
+                        ParkInspectGroupC.DOMAIN.Account central = (from x in centralContext.Accounts where x.Id == r.Id select x).First();
 
                         central.Username = r.Username;
                         central.Password = r.Password;
@@ -195,7 +195,7 @@ namespace LocalDatabase.Local
 
                     using (var centralContext = new ParkInspectEntities())
                     {
-                        ParkInspectGroupC.DOMAIN.Customer central = (from x in centralContext.Customer where x.Id == r.Id select x).First();
+                        ParkInspectGroupC.DOMAIN.Customer central = (from x in centralContext.Customers where x.Id == r.Id select x).First();
 
                         central.Name = r.Name;
                         central.Address = r.Address;
@@ -223,7 +223,7 @@ namespace LocalDatabase.Local
 
                     using (var centralContext = new ParkInspectEntities())
                     {
-                        ParkInspectGroupC.DOMAIN.Assignment central = (from x in centralContext.Assignment where x.Id == r.Id select x).First();
+                        ParkInspectGroupC.DOMAIN.Assignment central = (from x in centralContext.Assignments where x.Id == r.Id select x).First();
 
                         central.CustomerId = Convert.ToInt32(r.CustomerId);
                         central.ManagerId = Convert.ToInt32(r.ManagerId);
@@ -251,7 +251,7 @@ namespace LocalDatabase.Local
 
                     using (var centralContext = new ParkInspectEntities())
                     {
-                        ParkInspectGroupC.DOMAIN.InspectionStatus central = (from x in centralContext.InspectionStatus where x.Id == r.Id select x).First();
+                        ParkInspectGroupC.DOMAIN.InspectionStatu central = (from x in centralContext.InspectionStatus where x.Id == r.Id select x).First();
 
                         central.Description = r.Description;
                         central.DateUpdated = DateTime.Now;
@@ -339,7 +339,7 @@ namespace LocalDatabase.Local
 
                     using (var centralContext = new ParkInspectEntities())
                     {
-                        ParkInspectGroupC.DOMAIN.InspectionImage central = (from x in centralContext.InspectionImage where x.Id == r.Id select x).First();
+                        ParkInspectGroupC.DOMAIN.InspectionImage central = (from x in centralContext.InspectionImages where x.Id == r.Id select x).First();
 
                         central.File = r.File;
                         if (r.InspectionId == null)
@@ -371,7 +371,7 @@ namespace LocalDatabase.Local
 
                     using (var centralContext = new ParkInspectEntities())
                     {
-                        ParkInspectGroupC.DOMAIN.KeywordCategory central = (from x in centralContext.KeywordCategory where x.Id == r.Id select x).First();
+                        ParkInspectGroupC.DOMAIN.KeywordCategory central = (from x in centralContext.KeywordCategories where x.Id == r.Id select x).First();
 
                         central.Description = r.Description;
                         central.DateUpdated = DateTime.Now;
@@ -395,7 +395,7 @@ namespace LocalDatabase.Local
 
                     using (var centralContext = new ParkInspectEntities())
                     {
-                        ParkInspectGroupC.DOMAIN.Keyword central = (from x in centralContext.Keyword where x.Id == r.Id select x).First();
+                        ParkInspectGroupC.DOMAIN.Keyword central = (from x in centralContext.Keywords where x.Id == r.Id select x).First();
 
                         central.CategoryId = Convert.ToInt32(r.CategoryId);
                         central.Description = r.Description;
@@ -529,7 +529,7 @@ namespace LocalDatabase.Local
                     {
                         int _id = Convert.ToInt32(r.QuestionnaireId);
                         int _questionId = Convert.ToInt32(r.QuestionId);
-                        ParkInspectGroupC.DOMAIN.QuestionAnswer central = (from x in centralContext.QuestionAnswer where x.QuestionnaireId == _id select x).Where(x => x.QuestionId == _questionId).First();
+                        ParkInspectGroupC.DOMAIN.QuestionAnswer central = (from x in centralContext.QuestionAnswers where x.QuestionnaireId == _id select x).Where(x => x.QuestionId == _questionId).First();
 
                         central.QuestionnaireId = Convert.ToInt32(r.QuestionnaireId);
                         central.QuestionId = Convert.ToInt32(r.QuestionId);
@@ -557,7 +557,7 @@ namespace LocalDatabase.Local
                     {
                         int _id = Convert.ToInt32(r.ModuleId);
                         int _questionId = Convert.ToInt32(r.QuestionaireId);
-                        ParkInspectGroupC.DOMAIN.QuestionnaireModule central = (from x in centralContext.QuestionnaireModule where x.QuestionnaireId == _questionId select x).Where(x => x.ModuleId == _id).First();
+                        ParkInspectGroupC.DOMAIN.QuestionnaireModule central = (from x in centralContext.QuestionnaireModules where x.QuestionnaireId == _questionId select x).Where(x => x.ModuleId == _id).First();
 
                         central.QuestionnaireId = Convert.ToInt32(r.QuestionaireId);
                         central.ModuleId = Convert.ToInt32(r.ModuleId);
@@ -584,7 +584,7 @@ namespace LocalDatabase.Local
                     {
                         int _id = Convert.ToInt32(r.QuestionId);
                         int _KeywordId = Convert.ToInt32(r.KeywordId);
-                        ParkInspectGroupC.DOMAIN.QuestionKeyword central = (from x in centralContext.QuestionKeyword where x.QuestionId == _id select x).Where(x => x.KeywordId == _KeywordId).First();
+                        ParkInspectGroupC.DOMAIN.QuestionKeyword central = (from x in centralContext.QuestionKeywords where x.QuestionId == _id select x).Where(x => x.KeywordId == _KeywordId).First();
 
                         central.QuestionId = Convert.ToInt32(r.QuestionId);
                         central.KeywordId = Convert.ToInt32(r.KeywordId);

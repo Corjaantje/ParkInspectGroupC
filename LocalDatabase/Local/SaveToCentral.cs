@@ -113,7 +113,7 @@ namespace LocalDatabase.Local
                             _new.DateCreated = r.DateCreated;
                             _new.DateUpdated = r.DateUpdated;
 
-                            context.Region.Add(_new);
+                            context.Regions.Add(_new);
                         }
                         context.SaveChanges();
                     }
@@ -142,7 +142,7 @@ namespace LocalDatabase.Local
                     {
                         foreach (Domain.EmployeeStatu r in list)
                         {
-                            ParkInspectGroupC.DOMAIN.EmployeeStatus _new = new ParkInspectGroupC.DOMAIN.EmployeeStatus();
+                            ParkInspectGroupC.DOMAIN.EmployeeStatu _new = new ParkInspectGroupC.DOMAIN.EmployeeStatu();
                             _new.Description = r.Description;
                             _new.DateCreated = r.DateCreated;
                             _new.DateUpdated = r.DateUpdated;
@@ -238,7 +238,7 @@ namespace LocalDatabase.Local
                                 _new.ManagerId = managerId;
                             }
 
-                            context.Employee.Add(_new);
+                            context.Employees.Add(_new);
                         }
                         context.SaveChanges();
                     }
@@ -275,7 +275,7 @@ namespace LocalDatabase.Local
                             _new.DateCreated = r.DateCreated;
                             _new.DateUpdated = r.DateUpdated;
 
-                            context.Account.Add(_new);
+                            context.Accounts.Add(_new);
                         }
                         context.SaveChanges();
                     }
@@ -387,7 +387,7 @@ namespace LocalDatabase.Local
                             _new.DateCreated = r.DateCreated;
                             _new.DateUpdated = r.DateUpdated;
 
-                            context.Customer.Add(_new);
+                            context.Customers.Add(_new);
                         }
                         context.SaveChanges();
                     }
@@ -425,7 +425,7 @@ namespace LocalDatabase.Local
                             _new.DateCreated = r.DateCreated;
                             _new.DateUpdated = r.DateUpdated;
 
-                            context.Assignment.Add(_new);
+                            context.Assignments.Add(_new);
                         }
                         context.SaveChanges();
                     }
@@ -454,7 +454,7 @@ namespace LocalDatabase.Local
                     {
                         foreach (Domain.InspectionStatu r in list)
                         {
-                            ParkInspectGroupC.DOMAIN.InspectionStatus _new = new ParkInspectGroupC.DOMAIN.InspectionStatus();
+                            ParkInspectGroupC.DOMAIN.InspectionStatu _new = new ParkInspectGroupC.DOMAIN.InspectionStatu();
                             _new.Description = r.Description;
                             _new.DateCreated = r.DateCreated;
                             _new.DateUpdated = r.DateUpdated;
@@ -571,7 +571,7 @@ namespace LocalDatabase.Local
                             _new.DateCreated = r.DateCreated;
                             _new.DateUpdated = r.DateUpdated;
 
-                            context.InspectionImage.Add(_new);
+                            context.InspectionImages.Add(_new);
                         }
                         context.SaveChanges();
                     }
@@ -605,7 +605,7 @@ namespace LocalDatabase.Local
                             _new.DateCreated = r.DateCreated;
                             _new.DateUpdated = r.DateUpdated;
 
-                            context.KeywordCategory.Add(_new);
+                            context.KeywordCategories.Add(_new);
                         }
                         context.SaveChanges();
                     }
@@ -640,7 +640,7 @@ namespace LocalDatabase.Local
                             _new.DateCreated = r.DateCreated;
                             _new.DateUpdated = r.DateUpdated;
 
-                            context.Keyword.Add(_new);
+                            context.Keywords.Add(_new);
                         }
                         context.SaveChanges();
                     }
@@ -816,7 +816,7 @@ namespace LocalDatabase.Local
                             _new.DateCreated = r.DateCreated;
                             _new.DateUpdated = r.DateUpdated;
 
-                            context.QuestionAnswer.Add(_new);
+                            context.QuestionAnswers.Add(_new);
                         }
                         context.SaveChanges();
                     }
@@ -851,7 +851,7 @@ namespace LocalDatabase.Local
                             _new.DateCreated = r.DateCreated;
                             _new.DateUpdated = r.DateUpdated;
 
-                            context.QuestionnaireModule.Add(_new);
+                            context.QuestionnaireModules.Add(_new);
                         }
                         context.SaveChanges();
                     }
@@ -886,7 +886,7 @@ namespace LocalDatabase.Local
                             _new.DateCreated = r.DateCreated;
                             _new.DateUpdated = r.DateUpdated;
 
-                            context.QuestionKeyword.Add(_new);
+                            context.QuestionKeywords.Add(_new);
                         }
                         context.SaveChanges();
                     }
@@ -911,7 +911,7 @@ namespace LocalDatabase.Local
                 object oReg = get.Rows[0][0];
                 string regionName = oReg.ToString();
 
-                ParkInspectGroupC.DOMAIN.Region r = context.Region.Where(x => x.Region1 == regionName).First();
+                ParkInspectGroupC.DOMAIN.Region r = context.Regions.Where(x => x.Region1 == regionName).First();
                 id = r.Id;
             }
             return id;
@@ -926,7 +926,7 @@ namespace LocalDatabase.Local
                 object oEm = get.Rows[0][0];
                 string text = oEm.ToString();
 
-                ParkInspectGroupC.DOMAIN.EmployeeStatus r = context.EmployeeStatus.Where(x => x.Description == text).First();
+                ParkInspectGroupC.DOMAIN.EmployeeStatu r = context.EmployeeStatus.Where(x => x.Description == text).First();
                 id = r.Id;
             }
             return id;
@@ -941,7 +941,7 @@ namespace LocalDatabase.Local
                 object oDate = get.Rows[0][0];
                 DateTime lastDateAdded = (DateTime)oDate;
 
-                ParkInspectGroupC.DOMAIN.Employee r = context.Employee.Where(x => x.DateCreated == lastDateAdded).First();
+                ParkInspectGroupC.DOMAIN.Employee r = context.Employees.Where(x => x.DateCreated == lastDateAdded).First();
                 id = r.Id;
             }
             return id;
@@ -956,7 +956,7 @@ namespace LocalDatabase.Local
                 object oDate = get.Rows[0][0];
                 DateTime lastDateAdded = (DateTime)oDate;
 
-                ParkInspectGroupC.DOMAIN.Customer r = context.Customer.Where(x => x.DateCreated == lastDateAdded).First();
+                ParkInspectGroupC.DOMAIN.Customer r = context.Customers.Where(x => x.DateCreated == lastDateAdded).First();
                 id = r.Id;
             }
             return id;
@@ -971,7 +971,7 @@ namespace LocalDatabase.Local
                 object oDate = get.Rows[0][0];
                 DateTime lastDateAdded = (DateTime)oDate;
 
-                ParkInspectGroupC.DOMAIN.Assignment r = context.Assignment.Where(x => x.DateCreated == lastDateAdded).First();
+                ParkInspectGroupC.DOMAIN.Assignment r = context.Assignments.Where(x => x.DateCreated == lastDateAdded).First();
                 id = r.Id;
             }
             return id;
@@ -986,7 +986,7 @@ namespace LocalDatabase.Local
                 object oDate = get.Rows[0][0];
                 DateTime lastDateAdded = (DateTime)oDate;
 
-                ParkInspectGroupC.DOMAIN.InspectionStatus r = context.InspectionStatus.Where(x => x.DateCreated == lastDateAdded).First();
+                ParkInspectGroupC.DOMAIN.InspectionStatu r = context.InspectionStatus.Where(x => x.DateCreated == lastDateAdded).First();
                 id = r.Id;
             }
             return id;
@@ -1016,7 +1016,7 @@ namespace LocalDatabase.Local
                 object oDate = get.Rows[0][0];
                 DateTime lastDateAdded = (DateTime)oDate;
 
-                ParkInspectGroupC.DOMAIN.KeywordCategory r = context.KeywordCategory.Where(x => x.DateCreated == lastDateAdded).First();
+                ParkInspectGroupC.DOMAIN.KeywordCategory r = context.KeywordCategories.Where(x => x.DateCreated == lastDateAdded).First();
                 id = r.Id;
             }
             return id;
@@ -1031,7 +1031,7 @@ namespace LocalDatabase.Local
                 object oDate = get.Rows[0][0];
                 DateTime lastDateAdded = (DateTime)oDate;
 
-                ParkInspectGroupC.DOMAIN.Keyword r = context.Keyword.Where(x => x.DateCreated == lastDateAdded).First();
+                ParkInspectGroupC.DOMAIN.Keyword r = context.Keywords.Where(x => x.DateCreated == lastDateAdded).First();
                 id = r.Id;
             }
             return id;

@@ -66,8 +66,6 @@ namespace ParkInspectGroupC.ViewModel
             set { _inspections = value; RaisePropertyChanged("Inspections"); }
         }
 
-     
-        String InspectionStatus;
         public InspectorProfileViewModel()
         {
             //TODO The emp variable should be a parameter to this constructor
@@ -75,7 +73,7 @@ namespace ParkInspectGroupC.ViewModel
             {
                 using (var context = new ParkInspectEntities())
                 {
-                    Emp = (from e in context.Employee where e.Id == 3 select e).FirstOrDefault();
+                    Emp = (from e in context.Employees where e.Id == 3 select e).FirstOrDefault();
                 }
                 Name = Emp.FirstName + " " + Emp.Prefix + " " + Emp.SurName + " (" + Emp.Gender + ")";
                 Adress = Emp.Address + ", " + Emp.ZipCode + ", " + Emp.City;
@@ -95,7 +93,7 @@ namespace ParkInspectGroupC.ViewModel
                 {
                     using (var context = new ParkInspectEntities())
                     {
-                        Manager = (from m in context.Employee where m.Id == Emp.ManagerId select m).FirstOrDefault();
+                        Manager = (from m in context.Employees where m.Id == Emp.ManagerId select m).FirstOrDefault();
                     }
 
                     ManagerName = Manager.FirstName + " " + Manager.Prefix + " " + Manager.SurName;

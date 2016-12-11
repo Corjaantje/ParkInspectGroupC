@@ -13,7 +13,7 @@ namespace LocalDatabase.Central
 
             using (var context = new ParkInspectEntities())
             {
-                ParkInspectGroupC.DOMAIN.Region record = (from x in context.Region where x.Id == message.CentralId select x).First();
+                ParkInspectGroupC.DOMAIN.Region record = (from x in context.Regions where x.Id == message.CentralId select x).First();
 
                 msg = "Regio: " + record.Region1;
             }
@@ -26,7 +26,7 @@ namespace LocalDatabase.Central
 
             using (var context = new ParkInspectEntities())
             {
-                ParkInspectGroupC.DOMAIN.EmployeeStatus record = (from x in context.EmployeeStatus where x.Id == message.CentralId select x).First();
+                ParkInspectGroupC.DOMAIN.EmployeeStatu record = (from x in context.EmployeeStatus where x.Id == message.CentralId select x).First();
 
                 msg = "Status: " + record.Description;
             }
@@ -39,7 +39,7 @@ namespace LocalDatabase.Central
 
             using (var context = new ParkInspectEntities())
             {
-                ParkInspectGroupC.DOMAIN.Employee record = (from x in context.Employee where x.Id == message.CentralId select x).First();
+                ParkInspectGroupC.DOMAIN.Employee record = (from x in context.Employees where x.Id == message.CentralId select x).First();
 
                 msg = "Voornaam: " + record.FirstName + Environment.NewLine +
                     "Tussenvoegsel: " + record.Prefix + Environment.NewLine +
@@ -51,7 +51,7 @@ namespace LocalDatabase.Central
                     "Telefoon: " + record.Phonenumber + Environment.NewLine +
                     "E-mail: " + record.Email + Environment.NewLine +
                     "Regio: " + record.Region.Region1 + Environment.NewLine +
-                    "Status: " + record.EmployeeStatus.Description + Environment.NewLine +
+                    "Status: " + record.EmployeeStatu.Description + Environment.NewLine +
                     "Is Inspecteur: " + record.IsInspecter.ToString() + Environment.NewLine +
                     "Is Manager: " + record.IsManager.ToString() + Environment.NewLine +
                     "Manager: " + record.ManagerId.ToString() + Environment.NewLine;
@@ -65,7 +65,7 @@ namespace LocalDatabase.Central
 
             using (var context = new ParkInspectEntities())
             {
-                ParkInspectGroupC.DOMAIN.Account record = (from x in context.Account where x.Id == message.CentralId select x).First();
+                ParkInspectGroupC.DOMAIN.Account record = (from x in context.Accounts where x.Id == message.CentralId select x).First();
 
                 msg = "Gebruikersnaam: " + record.Username + Environment.NewLine +
                     "Werknemer: " + record.Employee.FirstName + " " + record.Employee.Prefix + " " + record.Employee.SurName + Environment.NewLine;
@@ -111,7 +111,7 @@ namespace LocalDatabase.Central
 
             using (var context = new ParkInspectEntities())
             {
-                ParkInspectGroupC.DOMAIN.Customer record = (from x in context.Customer where x.Id == message.CentralId select x).First();
+                ParkInspectGroupC.DOMAIN.Customer record = (from x in context.Customers where x.Id == message.CentralId select x).First();
 
                 msg = "Naam: " + record.Name + Environment.NewLine +
                     "Adres: " + record.Address + Environment.NewLine +
@@ -128,7 +128,7 @@ namespace LocalDatabase.Central
 
             using (var context = new ParkInspectEntities())
             {
-                ParkInspectGroupC.DOMAIN.Assignment record = (from x in context.Assignment where x.Id == message.CentralId select x).First();
+                ParkInspectGroupC.DOMAIN.Assignment record = (from x in context.Assignments where x.Id == message.CentralId select x).First();
 
                 msg = "Klant: " + record.Customer.Name + Environment.NewLine +
                     "Manager: " + record.Employee.FirstName + " " + record.Employee.Prefix + " " + record.Employee.SurName + Environment.NewLine +
@@ -145,7 +145,7 @@ namespace LocalDatabase.Central
 
             using (var context = new ParkInspectEntities())
             {
-                ParkInspectGroupC.DOMAIN.InspectionStatus record = (from x in context.InspectionStatus where x.Id == message.CentralId select x).First();
+                ParkInspectGroupC.DOMAIN.InspectionStatu record = (from x in context.InspectionStatus where x.Id == message.CentralId select x).First();
 
                 msg = "Beschrijving: " + record.Description + Environment.NewLine;
             }
@@ -194,7 +194,7 @@ namespace LocalDatabase.Central
 
             using (var context = new ParkInspectEntities())
             {
-                ParkInspectGroupC.DOMAIN.InspectionImage record = (from x in context.InspectionImage where x.Id == message.CentralId select x).First();
+                ParkInspectGroupC.DOMAIN.InspectionImage record = (from x in context.InspectionImages where x.Id == message.CentralId select x).First();
 
                 msg = "Bestand: " + record.File + Environment.NewLine +
                     "Opdracht nummer: " + record.InspectionId.ToString() + Environment.NewLine;
@@ -208,7 +208,7 @@ namespace LocalDatabase.Central
 
             using (var context = new ParkInspectEntities())
             {
-                ParkInspectGroupC.DOMAIN.KeywordCategory record = (from x in context.KeywordCategory where x.Id == message.CentralId select x).First();
+                ParkInspectGroupC.DOMAIN.KeywordCategory record = (from x in context.KeywordCategories where x.Id == message.CentralId select x).First();
 
                 msg = "Beschrijving: " + record.Description;
             }
@@ -221,7 +221,7 @@ namespace LocalDatabase.Central
 
             using (var context = new ParkInspectEntities())
             {
-                ParkInspectGroupC.DOMAIN.Keyword record = (from x in context.Keyword where x.Id == message.CentralId select x).First();
+                ParkInspectGroupC.DOMAIN.Keyword record = (from x in context.Keywords where x.Id == message.CentralId select x).First();
 
                 msg = "Beschrijving: " + record.Description + Environment.NewLine +
                     "Categorie: " + record.KeywordCategory.Description + Environment.NewLine;
@@ -291,7 +291,7 @@ namespace LocalDatabase.Central
 
             using (var context = new ParkInspectEntities())
             {
-                ParkInspectGroupC.DOMAIN.QuestionAnswer record = (from x in context.QuestionAnswer where x.QuestionnaireId == message.CentralId select x).Where(x => x.QuestionId == message.CentralId_Extra).First();
+                ParkInspectGroupC.DOMAIN.QuestionAnswer record = (from x in context.QuestionAnswers where x.QuestionnaireId == message.CentralId select x).Where(x => x.QuestionId == message.CentralId_Extra).First();
 
                 msg = "Questionnaire nummer: " + record.QuestionnaireId.ToString() + Environment.NewLine +
                     "Vraag nummer: " + record.QuestionId.ToString() + Environment.NewLine +
@@ -306,7 +306,7 @@ namespace LocalDatabase.Central
 
             using (var context = new ParkInspectEntities())
             {
-                ParkInspectGroupC.DOMAIN.QuestionnaireModule record = (from x in context.QuestionnaireModule where x.QuestionnaireId == message.CentralId select x).Where(x => x.ModuleId == message.CentralId_Extra).First();
+                ParkInspectGroupC.DOMAIN.QuestionnaireModule record = (from x in context.QuestionnaireModules where x.QuestionnaireId == message.CentralId select x).Where(x => x.ModuleId == message.CentralId_Extra).First();
 
                 msg = "Module: " + record.Module.Name + Environment.NewLine +
                     "Questionnaire nummer: " + record.QuestionnaireId.ToString();
@@ -320,7 +320,7 @@ namespace LocalDatabase.Central
 
             using (var context = new ParkInspectEntities())
             {
-                ParkInspectGroupC.DOMAIN.QuestionKeyword record = (from x in context.QuestionKeyword where x.QuestionId == message.CentralId select x).Where(x => x.KeywordId == message.CentralId_Extra).First();
+                ParkInspectGroupC.DOMAIN.QuestionKeyword record = (from x in context.QuestionKeywords where x.QuestionId == message.CentralId select x).Where(x => x.KeywordId == message.CentralId_Extra).First();
 
                 msg = "Vraag nummer: " + record.QuestionId.ToString() + Environment.NewLine +
                     "Keyword: " + record.Keyword.Description;

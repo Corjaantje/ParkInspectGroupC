@@ -17,12 +17,12 @@ namespace ParkInspectGroupC.DOMAIN
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Employee()
         {
-            this.Account = new HashSet<Account>();
-            this.Assignment = new HashSet<Assignment>();
-            this.Employees = new HashSet<Employee>();
+            this.Accounts = new HashSet<Account>();
+            this.Assignments = new HashSet<Assignment>();
             this.Availabilities = new HashSet<Availability>();
-            this.WorkingHours = new HashSet<WorkingHour>();
+            this.Employee1 = new HashSet<Employee>();
             this.Inspections = new HashSet<Inspection>();
+            this.WorkingHours = new HashSet<WorkingHour>();
         }
     
         public int Id { get; set; }
@@ -37,26 +37,26 @@ namespace ParkInspectGroupC.DOMAIN
         public string Email { get; set; }
         public Nullable<int> RegionId { get; set; }
         public Nullable<int> EmployeeStatusId { get; set; }
-        public System.DateTime DateCreated { get; set; }
-        public System.DateTime DateUpdated { get; set; }
         public bool IsInspecter { get; set; }
         public bool IsManager { get; set; }
         public Nullable<int> ManagerId { get; set; }
+        public System.DateTime DateCreated { get; set; }
+        public System.DateTime DateUpdated { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Account> Account { get; set; }
+        public virtual ICollection<Account> Accounts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Assignment> Assignment { get; set; }
-        public virtual EmployeeStatus EmployeeStatus { get; set; }
-        public virtual Region Region { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Employee> Employees { get; set; }
-        public virtual Employee Manager { get; set; }
+        public virtual ICollection<Assignment> Assignments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Availability> Availabilities { get; set; }
+        public virtual EmployeeStatu EmployeeStatu { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<WorkingHour> WorkingHours { get; set; }
+        public virtual ICollection<Employee> Employee1 { get; set; }
+        public virtual Employee Manager { get; set; }
+        public virtual Region Region { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Inspection> Inspections { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WorkingHour> WorkingHours { get; set; }
     }
 }
