@@ -130,7 +130,7 @@ namespace ParkInspectGroupC.ViewModel
 
         public void openAddWindow()
         {
-            Navigator.SetNewView(new CustomerCreationView());
+            //Navigator.SetNewView(new CustomerCreationView());
         }
 
     }
