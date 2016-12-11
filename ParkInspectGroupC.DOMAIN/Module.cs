@@ -17,8 +17,8 @@ namespace ParkInspectGroupC.DOMAIN
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Module()
         {
-            this.Question = new HashSet<Question>();
-            this.QuestionnaireModule = new HashSet<QuestionnaireModule>();
+            this.Questions = new HashSet<Question>();
+            this.QuestionnaireModules = new HashSet<QuestionnaireModule>();
         }
     
         public int Id { get; set; }
@@ -29,8 +29,8 @@ namespace ParkInspectGroupC.DOMAIN
         public System.DateTime DateUpdated { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Question> Question { get; set; }
+        public virtual ICollection<Question> Questions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<QuestionnaireModule> QuestionnaireModule { get; set; }
+        public virtual ICollection<QuestionnaireModule> QuestionnaireModules { get; set; }
     }
 }

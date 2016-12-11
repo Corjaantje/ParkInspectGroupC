@@ -8,6 +8,8 @@ using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using ParkInspectGroupC.Miscellaneous;
+using LocalDatabase;
+using LocalDatabase.Domain;
 
 namespace ParkInspectGroupC
 {
@@ -19,6 +21,9 @@ namespace ParkInspectGroupC
         public MainWindow()
         {
 			InitializeComponent();
-		}
+
+            //Create local db
+            LocalDatabaseMain ldb = new LocalDatabaseMain("ParkInspect");
+        }
     }
 }

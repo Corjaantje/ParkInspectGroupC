@@ -1,0 +1,1663 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="LocalParkInspectModel.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="data source=C:\Users\rogie\Source\Repos\ParkInspectGroupC\ParkInspectGroupC\bin\Debug\ParkInspect.sqlite" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="integer" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserGuid" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EmployeeId" Type="integer" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+          <Property Name="ExistsInCentral" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Assignment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="integer" Nullable="false" />
+          <Property Name="CustomerId" Type="integer" Nullable="false" />
+          <Property Name="ManagerId" Type="integer" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="255" />
+          <Property Name="StartDate" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+          <Property Name="ExistsInCentral" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Availability">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+            <PropertyRef Name="Date" />
+          </Key>
+          <Property Name="EmployeeId" Type="integer" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="StartTime" Type="datetime" />
+          <Property Name="EndTime" Type="datetime" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+          <Property Name="ExistsInCentral" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Coordinate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="integer" Nullable="false" />
+          <Property Name="Longitude" Type="real" Nullable="false" />
+          <Property Name="Latitude" Type="real" Nullable="false" />
+          <Property Name="Note" Type="varchar" MaxLength="255" />
+          <Property Name="InspectionId" Type="integer" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+          <Property Name="ExistsInCentral" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="integer" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="50" />
+          <Property Name="Location" Type="varchar" MaxLength="50" />
+          <Property Name="Phonenumber" Type="varchar" MaxLength="15" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+          <Property Name="ExistsInCentral" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="integer" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Prefix" Type="varchar" MaxLength="10" />
+          <Property Name="SurName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Gender" Type="char" MaxLength="2147483647" />
+          <Property Name="City" Type="varchar" MaxLength="20" />
+          <Property Name="Address" Type="varchar" MaxLength="50" />
+          <Property Name="ZipCode" Type="varchar" MaxLength="10" />
+          <Property Name="Phonenumber" Type="varchar" MaxLength="15" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="RegionId" Type="integer" />
+          <Property Name="EmployeeStatusId" Type="integer" />
+          <Property Name="IsInspecter" Type="bit" Nullable="false" />
+          <Property Name="IsManager" Type="bit" Nullable="false" />
+          <Property Name="ManagerId" Type="integer" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+          <Property Name="ExistsInCentral" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EmployeeStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="integer" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+          <Property Name="ExistsInCentral" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Inspection">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="integer" Nullable="false" />
+          <Property Name="AssignmentId" Type="integer" Nullable="false" />
+          <Property Name="RegionId" Type="integer" Nullable="false" />
+          <Property Name="Location" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" Nullable="false" />
+          <Property Name="StatusId" Type="integer" Nullable="false" />
+          <Property Name="InspectorId" Type="integer" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+          <Property Name="ExistsInCentral" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InspectionImage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="integer" Nullable="false" />
+          <Property Name="File" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="InspectionId" Type="integer" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+          <Property Name="ExistsInCentral" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InspectionStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="integer" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+          <Property Name="ExistsInCentral" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Keyword">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="integer" Nullable="false" />
+          <Property Name="CategoryId" Type="integer" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+          <Property Name="ExistsInCentral" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="KeywordCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="integer" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+          <Property Name="ExistsInCentral" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Module">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="integer" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Note" Type="varchar" MaxLength="255" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+          <Property Name="ExistsInCentral" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="integer" Nullable="false" />
+          <Property Name="SortId" Type="integer" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="ModuleId" Type="integer" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+          <Property Name="ExistsInCentral" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Questionaire">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="integer" Nullable="false" />
+          <Property Name="InspectionId" Type="integer" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+          <Property Name="ExistsInCentral" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="QuestionaireModule">
+          <Key>
+            <PropertyRef Name="ModuleId" />
+            <PropertyRef Name="QuestionaireId" />
+          </Key>
+          <Property Name="ModuleId" Type="integer" Nullable="false" />
+          <Property Name="QuestionaireId" Type="integer" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+          <Property Name="ExistsInCentral" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="QuestionAnswer">
+          <Key>
+            <PropertyRef Name="QuestionnaireId" />
+            <PropertyRef Name="QuestionId" />
+          </Key>
+          <Property Name="QuestionnaireId" Type="integer" Nullable="false" />
+          <Property Name="QuestionId" Type="integer" Nullable="false" />
+          <Property Name="Result" Type="varchar" MaxLength="255" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+          <Property Name="ExistsInCentral" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="QuestionKeyword">
+          <Key>
+            <PropertyRef Name="QuestionId" />
+            <PropertyRef Name="KeywordId" />
+          </Key>
+          <Property Name="QuestionId" Type="integer" Nullable="false" />
+          <Property Name="KeywordId" Type="integer" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+          <Property Name="ExistsInCentral" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="QuestionSort">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="integer" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+          <Property Name="ExistsInCentral" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Region">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="integer" Nullable="false" />
+          <Property Name="Region" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+          <Property Name="ExistsInCentral" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkingHours">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+            <PropertyRef Name="Date" />
+          </Key>
+          <Property Name="EmployeeId" Type="integer" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="StartTime" Type="datetime" />
+          <Property Name="EndTime" Type="datetime" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+          <Property Name="ExistsInCentral" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Account_0_0">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Assignment_0_0">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Assignment" Type="Self.Assignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Assignment">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Assignment_1_0">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Assignment" Type="Self.Assignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Assignment">
+              <PropertyRef Name="ManagerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Availability_0_0">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Availability" Type="Self.Availability" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Availability">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Coordinate_0_0">
+          <End Role="Inspection" Type="Self.Inspection" Multiplicity="0..1" />
+          <End Role="Coordinate" Type="Self.Coordinate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inspection">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Coordinate">
+              <PropertyRef Name="InspectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_0_0">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Employee1" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee1">
+              <PropertyRef Name="ManagerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_1_0">
+          <End Role="EmployeeStatus" Type="Self.EmployeeStatus" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeeStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="EmployeeStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_2_0">
+          <End Role="Region" Type="Self.Region" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="RegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inspection_0_0">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Inspection" Type="Self.Inspection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Inspection">
+              <PropertyRef Name="InspectorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inspection_1_0">
+          <End Role="Region" Type="Self.Region" Multiplicity="1" />
+          <End Role="Inspection" Type="Self.Inspection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Inspection">
+              <PropertyRef Name="RegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inspection_2_0">
+          <End Role="InspectionStatus" Type="Self.InspectionStatus" Multiplicity="1" />
+          <End Role="Inspection" Type="Self.Inspection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InspectionStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Inspection">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inspection_3_0">
+          <End Role="Assignment" Type="Self.Assignment" Multiplicity="1" />
+          <End Role="Inspection" Type="Self.Inspection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Assignment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Inspection">
+              <PropertyRef Name="AssignmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InspectionImage_0_0">
+          <End Role="Inspection" Type="Self.Inspection" Multiplicity="0..1" />
+          <End Role="InspectionImage" Type="Self.InspectionImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inspection">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InspectionImage">
+              <PropertyRef Name="InspectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Keyword_0_0">
+          <End Role="KeywordCategory" Type="Self.KeywordCategory" Multiplicity="1" />
+          <End Role="Keyword" Type="Self.Keyword" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KeywordCategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Keyword">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Question_0_0">
+          <End Role="QuestionSort" Type="Self.QuestionSort" Multiplicity="1" />
+          <End Role="Question" Type="Self.Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuestionSort">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Question">
+              <PropertyRef Name="SortId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Question_1_0">
+          <End Role="Module" Type="Self.Module" Multiplicity="0..1" />
+          <End Role="Question" Type="Self.Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Module">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Question">
+              <PropertyRef Name="ModuleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Questionaire_0_0">
+          <End Role="Inspection" Type="Self.Inspection" Multiplicity="1" />
+          <End Role="Questionaire" Type="Self.Questionaire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inspection">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Questionaire">
+              <PropertyRef Name="InspectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuestionaireModule_0_0">
+          <End Role="Questionaire" Type="Self.Questionaire" Multiplicity="1" />
+          <End Role="QuestionaireModule" Type="Self.QuestionaireModule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Questionaire">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QuestionaireModule">
+              <PropertyRef Name="QuestionaireId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuestionaireModule_1_0">
+          <End Role="Module" Type="Self.Module" Multiplicity="1" />
+          <End Role="QuestionaireModule" Type="Self.QuestionaireModule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Module">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QuestionaireModule">
+              <PropertyRef Name="ModuleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuestionAnswer_0_0">
+          <End Role="Question" Type="Self.Question" Multiplicity="1" />
+          <End Role="QuestionAnswer" Type="Self.QuestionAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QuestionAnswer">
+              <PropertyRef Name="QuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuestionKeyword_0_0">
+          <End Role="Keyword" Type="Self.Keyword" Multiplicity="1" />
+          <End Role="QuestionKeyword" Type="Self.QuestionKeyword" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Keyword">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QuestionKeyword">
+              <PropertyRef Name="KeywordId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuestionKeyword_1_0">
+          <End Role="Question" Type="Self.Question" Multiplicity="1" />
+          <End Role="QuestionKeyword" Type="Self.QuestionKeyword" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QuestionKeyword">
+              <PropertyRef Name="QuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkingHours_0_0">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="WorkingHours" Type="Self.WorkingHours" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkingHours">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LocalParkInspectModelStoreContainer">
+          <EntitySet Name="Account" EntityType="Self.Account" store:Type="Tables" />
+          <EntitySet Name="Assignment" EntityType="Self.Assignment" store:Type="Tables" />
+          <EntitySet Name="Availability" EntityType="Self.Availability" store:Type="Tables" />
+          <EntitySet Name="Coordinate" EntityType="Self.Coordinate" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" store:Type="Tables" />
+          <EntitySet Name="EmployeeStatus" EntityType="Self.EmployeeStatus" store:Type="Tables" />
+          <EntitySet Name="Inspection" EntityType="Self.Inspection" store:Type="Tables" />
+          <EntitySet Name="InspectionImage" EntityType="Self.InspectionImage" store:Type="Tables" />
+          <EntitySet Name="InspectionStatus" EntityType="Self.InspectionStatus" store:Type="Tables" />
+          <EntitySet Name="Keyword" EntityType="Self.Keyword" store:Type="Tables" />
+          <EntitySet Name="KeywordCategory" EntityType="Self.KeywordCategory" store:Type="Tables" />
+          <EntitySet Name="Module" EntityType="Self.Module" store:Type="Tables" />
+          <EntitySet Name="Question" EntityType="Self.Question" store:Type="Tables" />
+          <EntitySet Name="Questionaire" EntityType="Self.Questionaire" store:Type="Tables" />
+          <EntitySet Name="QuestionaireModule" EntityType="Self.QuestionaireModule" store:Type="Tables" />
+          <EntitySet Name="QuestionAnswer" EntityType="Self.QuestionAnswer" store:Type="Tables" />
+          <EntitySet Name="QuestionKeyword" EntityType="Self.QuestionKeyword" store:Type="Tables" />
+          <EntitySet Name="QuestionSort" EntityType="Self.QuestionSort" store:Type="Tables" />
+          <EntitySet Name="Region" EntityType="Self.Region" store:Type="Tables" />
+          <EntitySet Name="WorkingHours" EntityType="Self.WorkingHours" store:Type="Tables" />
+          <AssociationSet Name="FK_Account_0_0" Association="Self.FK_Account_0_0">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Assignment_0_0" Association="Self.FK_Assignment_0_0">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Assignment" EntitySet="Assignment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Assignment_1_0" Association="Self.FK_Assignment_1_0">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Assignment" EntitySet="Assignment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Availability_0_0" Association="Self.FK_Availability_0_0">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Availability" EntitySet="Availability" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Coordinate_0_0" Association="Self.FK_Coordinate_0_0">
+            <End Role="Inspection" EntitySet="Inspection" />
+            <End Role="Coordinate" EntitySet="Coordinate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_0_0" Association="Self.FK_Employee_0_0">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Employee1" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_1_0" Association="Self.FK_Employee_1_0">
+            <End Role="EmployeeStatus" EntitySet="EmployeeStatus" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_2_0" Association="Self.FK_Employee_2_0">
+            <End Role="Region" EntitySet="Region" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inspection_0_0" Association="Self.FK_Inspection_0_0">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Inspection" EntitySet="Inspection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inspection_1_0" Association="Self.FK_Inspection_1_0">
+            <End Role="Region" EntitySet="Region" />
+            <End Role="Inspection" EntitySet="Inspection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inspection_2_0" Association="Self.FK_Inspection_2_0">
+            <End Role="InspectionStatus" EntitySet="InspectionStatus" />
+            <End Role="Inspection" EntitySet="Inspection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inspection_3_0" Association="Self.FK_Inspection_3_0">
+            <End Role="Assignment" EntitySet="Assignment" />
+            <End Role="Inspection" EntitySet="Inspection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InspectionImage_0_0" Association="Self.FK_InspectionImage_0_0">
+            <End Role="Inspection" EntitySet="Inspection" />
+            <End Role="InspectionImage" EntitySet="InspectionImage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Keyword_0_0" Association="Self.FK_Keyword_0_0">
+            <End Role="KeywordCategory" EntitySet="KeywordCategory" />
+            <End Role="Keyword" EntitySet="Keyword" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Question_0_0" Association="Self.FK_Question_0_0">
+            <End Role="QuestionSort" EntitySet="QuestionSort" />
+            <End Role="Question" EntitySet="Question" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Question_1_0" Association="Self.FK_Question_1_0">
+            <End Role="Module" EntitySet="Module" />
+            <End Role="Question" EntitySet="Question" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Questionaire_0_0" Association="Self.FK_Questionaire_0_0">
+            <End Role="Inspection" EntitySet="Inspection" />
+            <End Role="Questionaire" EntitySet="Questionaire" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuestionaireModule_0_0" Association="Self.FK_QuestionaireModule_0_0">
+            <End Role="Questionaire" EntitySet="Questionaire" />
+            <End Role="QuestionaireModule" EntitySet="QuestionaireModule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuestionaireModule_1_0" Association="Self.FK_QuestionaireModule_1_0">
+            <End Role="Module" EntitySet="Module" />
+            <End Role="QuestionaireModule" EntitySet="QuestionaireModule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuestionAnswer_0_0" Association="Self.FK_QuestionAnswer_0_0">
+            <End Role="Question" EntitySet="Question" />
+            <End Role="QuestionAnswer" EntitySet="QuestionAnswer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuestionKeyword_0_0" Association="Self.FK_QuestionKeyword_0_0">
+            <End Role="Keyword" EntitySet="Keyword" />
+            <End Role="QuestionKeyword" EntitySet="QuestionKeyword" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuestionKeyword_1_0" Association="Self.FK_QuestionKeyword_1_0">
+            <End Role="Question" EntitySet="Question" />
+            <End Role="QuestionKeyword" EntitySet="QuestionKeyword" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkingHours_0_0" Association="Self.FK_WorkingHours_0_0">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="WorkingHours" EntitySet="WorkingHours" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LocalParkInspectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserGuid" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmployeeId" Type="Int64" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
+          <Property Name="ExistsInCentral" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Account_0_0" FromRole="Account" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Assignment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="CustomerId" Type="Int64" Nullable="false" />
+          <Property Name="ManagerId" Type="Int64" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="StartDate" Type="DateTime" />
+          <Property Name="EndDate" Type="DateTime" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
+          <Property Name="ExistsInCentral" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Assignment_0_0" FromRole="Assignment" ToRole="Customer" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Assignment_1_0" FromRole="Assignment" ToRole="Employee" />
+          <NavigationProperty Name="Inspections" Relationship="Self.FK_Inspection_3_0" FromRole="Assignment" ToRole="Inspection" />
+        </EntityType>
+        <EntityType Name="Availability">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+            <PropertyRef Name="Date" />
+          </Key>
+          <Property Name="EmployeeId" Type="Int64" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="StartTime" Type="DateTime" />
+          <Property Name="EndTime" Type="DateTime" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
+          <Property Name="ExistsInCentral" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Availability_0_0" FromRole="Availability" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Coordinate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Longitude" Type="Double" Nullable="false" />
+          <Property Name="Latitude" Type="Double" Nullable="false" />
+          <Property Name="Note" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="InspectionId" Type="Int64" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
+          <Property Name="ExistsInCentral" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Inspection" Relationship="Self.FK_Coordinate_0_0" FromRole="Coordinate" ToRole="Inspection" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Phonenumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
+          <Property Name="ExistsInCentral" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Assignments" Relationship="Self.FK_Assignment_0_0" FromRole="Customer" ToRole="Assignment" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Prefix" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="SurName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Gender" Type="String" MaxLength="2147483647" FixedLength="true" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ZipCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Phonenumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RegionId" Type="Int64" />
+          <Property Name="EmployeeStatusId" Type="Int64" />
+          <Property Name="IsInspecter" Type="Boolean" Nullable="false" />
+          <Property Name="IsManager" Type="Boolean" Nullable="false" />
+          <Property Name="ManagerId" Type="Int64" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
+          <Property Name="ExistsInCentral" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK_Account_0_0" FromRole="Employee" ToRole="Account" />
+          <NavigationProperty Name="Assignments" Relationship="Self.FK_Assignment_1_0" FromRole="Employee" ToRole="Assignment" />
+          <NavigationProperty Name="Availabilities" Relationship="Self.FK_Availability_0_0" FromRole="Employee" ToRole="Availability" />
+          <NavigationProperty Name="Employee1" Relationship="Self.FK_Employee_0_0" FromRole="Employee" ToRole="Employee1" />
+          <NavigationProperty Name="Employee2" Relationship="Self.FK_Employee_0_0" FromRole="Employee1" ToRole="Employee" />
+          <NavigationProperty Name="EmployeeStatu" Relationship="Self.FK_Employee_1_0" FromRole="Employee" ToRole="EmployeeStatus" />
+          <NavigationProperty Name="Region" Relationship="Self.FK_Employee_2_0" FromRole="Employee" ToRole="Region" />
+          <NavigationProperty Name="Inspections" Relationship="Self.FK_Inspection_0_0" FromRole="Employee" ToRole="Inspection" />
+          <NavigationProperty Name="WorkingHours" Relationship="Self.FK_WorkingHours_0_0" FromRole="Employee" ToRole="WorkingHours" />
+        </EntityType>
+        <EntityType Name="EmployeeStatu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
+          <Property Name="ExistsInCentral" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_Employee_1_0" FromRole="EmployeeStatus" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Inspection">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="AssignmentId" Type="Int64" Nullable="false" />
+          <Property Name="RegionId" Type="Int64" Nullable="false" />
+          <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" />
+          <Property Name="StatusId" Type="Int64" Nullable="false" />
+          <Property Name="InspectorId" Type="Int64" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
+          <Property Name="ExistsInCentral" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Assignment" Relationship="Self.FK_Inspection_3_0" FromRole="Inspection" ToRole="Assignment" />
+          <NavigationProperty Name="Coordinates" Relationship="Self.FK_Coordinate_0_0" FromRole="Inspection" ToRole="Coordinate" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Inspection_0_0" FromRole="Inspection" ToRole="Employee" />
+          <NavigationProperty Name="Region" Relationship="Self.FK_Inspection_1_0" FromRole="Inspection" ToRole="Region" />
+          <NavigationProperty Name="InspectionStatu" Relationship="Self.FK_Inspection_2_0" FromRole="Inspection" ToRole="InspectionStatus" />
+          <NavigationProperty Name="InspectionImages" Relationship="Self.FK_InspectionImage_0_0" FromRole="Inspection" ToRole="InspectionImage" />
+          <NavigationProperty Name="Questionaires" Relationship="Self.FK_Questionaire_0_0" FromRole="Inspection" ToRole="Questionaire" />
+        </EntityType>
+        <EntityType Name="InspectionImage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="File" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="InspectionId" Type="Int64" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
+          <Property Name="ExistsInCentral" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Inspection" Relationship="Self.FK_InspectionImage_0_0" FromRole="InspectionImage" ToRole="Inspection" />
+        </EntityType>
+        <EntityType Name="InspectionStatu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
+          <Property Name="ExistsInCentral" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Inspections" Relationship="Self.FK_Inspection_2_0" FromRole="InspectionStatus" ToRole="Inspection" />
+        </EntityType>
+        <EntityType Name="Keyword">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="CategoryId" Type="Int64" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
+          <Property Name="ExistsInCentral" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="KeywordCategory" Relationship="Self.FK_Keyword_0_0" FromRole="Keyword" ToRole="KeywordCategory" />
+          <NavigationProperty Name="QuestionKeywords" Relationship="Self.FK_QuestionKeyword_0_0" FromRole="Keyword" ToRole="QuestionKeyword" />
+        </EntityType>
+        <EntityType Name="KeywordCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
+          <Property Name="ExistsInCentral" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Keywords" Relationship="Self.FK_Keyword_0_0" FromRole="KeywordCategory" ToRole="Keyword" />
+        </EntityType>
+        <EntityType Name="Module">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Note" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
+          <Property Name="ExistsInCentral" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Questions" Relationship="Self.FK_Question_1_0" FromRole="Module" ToRole="Question" />
+          <NavigationProperty Name="QuestionaireModules" Relationship="Self.FK_QuestionaireModule_1_0" FromRole="Module" ToRole="QuestionaireModule" />
+        </EntityType>
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="SortId" Type="Int64" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ModuleId" Type="Int64" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
+          <Property Name="ExistsInCentral" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Module" Relationship="Self.FK_Question_1_0" FromRole="Question" ToRole="Module" />
+          <NavigationProperty Name="QuestionSort" Relationship="Self.FK_Question_0_0" FromRole="Question" ToRole="QuestionSort" />
+          <NavigationProperty Name="QuestionAnswers" Relationship="Self.FK_QuestionAnswer_0_0" FromRole="Question" ToRole="QuestionAnswer" />
+          <NavigationProperty Name="QuestionKeywords" Relationship="Self.FK_QuestionKeyword_1_0" FromRole="Question" ToRole="QuestionKeyword" />
+        </EntityType>
+        <EntityType Name="Questionaire">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="InspectionId" Type="Int64" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
+          <Property Name="ExistsInCentral" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Inspection" Relationship="Self.FK_Questionaire_0_0" FromRole="Questionaire" ToRole="Inspection" />
+          <NavigationProperty Name="QuestionaireModules" Relationship="Self.FK_QuestionaireModule_0_0" FromRole="Questionaire" ToRole="QuestionaireModule" />
+        </EntityType>
+        <EntityType Name="QuestionaireModule">
+          <Key>
+            <PropertyRef Name="ModuleId" />
+            <PropertyRef Name="QuestionaireId" />
+          </Key>
+          <Property Name="ModuleId" Type="Int64" Nullable="false" />
+          <Property Name="QuestionaireId" Type="Int64" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
+          <Property Name="ExistsInCentral" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Module" Relationship="Self.FK_QuestionaireModule_1_0" FromRole="QuestionaireModule" ToRole="Module" />
+          <NavigationProperty Name="Questionaire" Relationship="Self.FK_QuestionaireModule_0_0" FromRole="QuestionaireModule" ToRole="Questionaire" />
+        </EntityType>
+        <EntityType Name="QuestionAnswer">
+          <Key>
+            <PropertyRef Name="QuestionnaireId" />
+            <PropertyRef Name="QuestionId" />
+          </Key>
+          <Property Name="QuestionnaireId" Type="Int64" Nullable="false" />
+          <Property Name="QuestionId" Type="Int64" Nullable="false" />
+          <Property Name="Result" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
+          <Property Name="ExistsInCentral" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Question" Relationship="Self.FK_QuestionAnswer_0_0" FromRole="QuestionAnswer" ToRole="Question" />
+        </EntityType>
+        <EntityType Name="QuestionKeyword">
+          <Key>
+            <PropertyRef Name="QuestionId" />
+            <PropertyRef Name="KeywordId" />
+          </Key>
+          <Property Name="QuestionId" Type="Int64" Nullable="false" />
+          <Property Name="KeywordId" Type="Int64" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
+          <Property Name="ExistsInCentral" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Keyword" Relationship="Self.FK_QuestionKeyword_0_0" FromRole="QuestionKeyword" ToRole="Keyword" />
+          <NavigationProperty Name="Question" Relationship="Self.FK_QuestionKeyword_1_0" FromRole="QuestionKeyword" ToRole="Question" />
+        </EntityType>
+        <EntityType Name="QuestionSort">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
+          <Property Name="ExistsInCentral" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Questions" Relationship="Self.FK_Question_0_0" FromRole="QuestionSort" ToRole="Question" />
+        </EntityType>
+        <EntityType Name="Region">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Region1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
+          <Property Name="ExistsInCentral" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_Employee_2_0" FromRole="Region" ToRole="Employee" />
+          <NavigationProperty Name="Inspections" Relationship="Self.FK_Inspection_1_0" FromRole="Region" ToRole="Inspection" />
+        </EntityType>
+        <EntityType Name="WorkingHour">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+            <PropertyRef Name="Date" />
+          </Key>
+          <Property Name="EmployeeId" Type="Int64" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="StartTime" Type="DateTime" />
+          <Property Name="EndTime" Type="DateTime" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
+          <Property Name="ExistsInCentral" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_WorkingHours_0_0" FromRole="WorkingHours" ToRole="Employee" />
+        </EntityType>
+        <Association Name="FK_Account_0_0">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Assignment_0_0">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Assignment" Type="Self.Assignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Assignment">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Assignment_1_0">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Assignment" Type="Self.Assignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Assignment">
+              <PropertyRef Name="ManagerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inspection_3_0">
+          <End Role="Assignment" Type="Self.Assignment" Multiplicity="1" />
+          <End Role="Inspection" Type="Self.Inspection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Assignment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Inspection">
+              <PropertyRef Name="AssignmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Availability_0_0">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Availability" Type="Self.Availability" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Availability">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Coordinate_0_0">
+          <End Role="Inspection" Type="Self.Inspection" Multiplicity="0..1" />
+          <End Role="Coordinate" Type="Self.Coordinate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inspection">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Coordinate">
+              <PropertyRef Name="InspectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_0_0">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Employee1" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee1">
+              <PropertyRef Name="ManagerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_1_0">
+          <End Role="EmployeeStatus" Type="Self.EmployeeStatu" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeeStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="EmployeeStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_2_0">
+          <End Role="Region" Type="Self.Region" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="RegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inspection_0_0">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Inspection" Type="Self.Inspection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Inspection">
+              <PropertyRef Name="InspectorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkingHours_0_0">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="WorkingHours" Type="Self.WorkingHour" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkingHours">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inspection_1_0">
+          <End Role="Region" Type="Self.Region" Multiplicity="1" />
+          <End Role="Inspection" Type="Self.Inspection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Inspection">
+              <PropertyRef Name="RegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inspection_2_0">
+          <End Role="InspectionStatus" Type="Self.InspectionStatu" Multiplicity="1" />
+          <End Role="Inspection" Type="Self.Inspection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InspectionStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Inspection">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InspectionImage_0_0">
+          <End Role="Inspection" Type="Self.Inspection" Multiplicity="0..1" />
+          <End Role="InspectionImage" Type="Self.InspectionImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inspection">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InspectionImage">
+              <PropertyRef Name="InspectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Questionaire_0_0">
+          <End Role="Inspection" Type="Self.Inspection" Multiplicity="1" />
+          <End Role="Questionaire" Type="Self.Questionaire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inspection">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Questionaire">
+              <PropertyRef Name="InspectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Keyword_0_0">
+          <End Role="KeywordCategory" Type="Self.KeywordCategory" Multiplicity="1" />
+          <End Role="Keyword" Type="Self.Keyword" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KeywordCategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Keyword">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuestionKeyword_0_0">
+          <End Role="Keyword" Type="Self.Keyword" Multiplicity="1" />
+          <End Role="QuestionKeyword" Type="Self.QuestionKeyword" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Keyword">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QuestionKeyword">
+              <PropertyRef Name="KeywordId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Question_1_0">
+          <End Role="Module" Type="Self.Module" Multiplicity="0..1" />
+          <End Role="Question" Type="Self.Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Module">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Question">
+              <PropertyRef Name="ModuleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuestionaireModule_1_0">
+          <End Role="Module" Type="Self.Module" Multiplicity="1" />
+          <End Role="QuestionaireModule" Type="Self.QuestionaireModule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Module">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QuestionaireModule">
+              <PropertyRef Name="ModuleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Question_0_0">
+          <End Role="QuestionSort" Type="Self.QuestionSort" Multiplicity="1" />
+          <End Role="Question" Type="Self.Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuestionSort">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Question">
+              <PropertyRef Name="SortId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuestionAnswer_0_0">
+          <End Role="Question" Type="Self.Question" Multiplicity="1" />
+          <End Role="QuestionAnswer" Type="Self.QuestionAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QuestionAnswer">
+              <PropertyRef Name="QuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuestionKeyword_1_0">
+          <End Role="Question" Type="Self.Question" Multiplicity="1" />
+          <End Role="QuestionKeyword" Type="Self.QuestionKeyword" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QuestionKeyword">
+              <PropertyRef Name="QuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuestionaireModule_0_0">
+          <End Role="Questionaire" Type="Self.Questionaire" Multiplicity="1" />
+          <End Role="QuestionaireModule" Type="Self.QuestionaireModule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Questionaire">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QuestionaireModule">
+              <PropertyRef Name="QuestionaireId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LocalParkInspectEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="Self.Account" />
+          <EntitySet Name="Assignments" EntityType="Self.Assignment" />
+          <EntitySet Name="Availabilities" EntityType="Self.Availability" />
+          <EntitySet Name="Coordinates" EntityType="Self.Coordinate" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="EmployeeStatus" EntityType="Self.EmployeeStatu" />
+          <EntitySet Name="Inspections" EntityType="Self.Inspection" />
+          <EntitySet Name="InspectionImages" EntityType="Self.InspectionImage" />
+          <EntitySet Name="InspectionStatus" EntityType="Self.InspectionStatu" />
+          <EntitySet Name="Keywords" EntityType="Self.Keyword" />
+          <EntitySet Name="KeywordCategories" EntityType="Self.KeywordCategory" />
+          <EntitySet Name="Modules" EntityType="Self.Module" />
+          <EntitySet Name="Questions" EntityType="Self.Question" />
+          <EntitySet Name="Questionaires" EntityType="Self.Questionaire" />
+          <EntitySet Name="QuestionaireModules" EntityType="Self.QuestionaireModule" />
+          <EntitySet Name="QuestionAnswers" EntityType="Self.QuestionAnswer" />
+          <EntitySet Name="QuestionKeywords" EntityType="Self.QuestionKeyword" />
+          <EntitySet Name="QuestionSorts" EntityType="Self.QuestionSort" />
+          <EntitySet Name="Regions" EntityType="Self.Region" />
+          <EntitySet Name="WorkingHours" EntityType="Self.WorkingHour" />
+          <AssociationSet Name="FK_Account_0_0" Association="Self.FK_Account_0_0">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Account" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Assignment_0_0" Association="Self.FK_Assignment_0_0">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Assignment" EntitySet="Assignments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Assignment_1_0" Association="Self.FK_Assignment_1_0">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Assignment" EntitySet="Assignments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inspection_3_0" Association="Self.FK_Inspection_3_0">
+            <End Role="Assignment" EntitySet="Assignments" />
+            <End Role="Inspection" EntitySet="Inspections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Availability_0_0" Association="Self.FK_Availability_0_0">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Availability" EntitySet="Availabilities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Coordinate_0_0" Association="Self.FK_Coordinate_0_0">
+            <End Role="Inspection" EntitySet="Inspections" />
+            <End Role="Coordinate" EntitySet="Coordinates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_0_0" Association="Self.FK_Employee_0_0">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Employee1" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_1_0" Association="Self.FK_Employee_1_0">
+            <End Role="EmployeeStatus" EntitySet="EmployeeStatus" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_2_0" Association="Self.FK_Employee_2_0">
+            <End Role="Region" EntitySet="Regions" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inspection_0_0" Association="Self.FK_Inspection_0_0">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Inspection" EntitySet="Inspections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkingHours_0_0" Association="Self.FK_WorkingHours_0_0">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="WorkingHours" EntitySet="WorkingHours" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inspection_1_0" Association="Self.FK_Inspection_1_0">
+            <End Role="Region" EntitySet="Regions" />
+            <End Role="Inspection" EntitySet="Inspections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inspection_2_0" Association="Self.FK_Inspection_2_0">
+            <End Role="InspectionStatus" EntitySet="InspectionStatus" />
+            <End Role="Inspection" EntitySet="Inspections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InspectionImage_0_0" Association="Self.FK_InspectionImage_0_0">
+            <End Role="Inspection" EntitySet="Inspections" />
+            <End Role="InspectionImage" EntitySet="InspectionImages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Questionaire_0_0" Association="Self.FK_Questionaire_0_0">
+            <End Role="Inspection" EntitySet="Inspections" />
+            <End Role="Questionaire" EntitySet="Questionaires" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Keyword_0_0" Association="Self.FK_Keyword_0_0">
+            <End Role="KeywordCategory" EntitySet="KeywordCategories" />
+            <End Role="Keyword" EntitySet="Keywords" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuestionKeyword_0_0" Association="Self.FK_QuestionKeyword_0_0">
+            <End Role="Keyword" EntitySet="Keywords" />
+            <End Role="QuestionKeyword" EntitySet="QuestionKeywords" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Question_1_0" Association="Self.FK_Question_1_0">
+            <End Role="Module" EntitySet="Modules" />
+            <End Role="Question" EntitySet="Questions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuestionaireModule_1_0" Association="Self.FK_QuestionaireModule_1_0">
+            <End Role="Module" EntitySet="Modules" />
+            <End Role="QuestionaireModule" EntitySet="QuestionaireModules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Question_0_0" Association="Self.FK_Question_0_0">
+            <End Role="QuestionSort" EntitySet="QuestionSorts" />
+            <End Role="Question" EntitySet="Questions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuestionAnswer_0_0" Association="Self.FK_QuestionAnswer_0_0">
+            <End Role="Question" EntitySet="Questions" />
+            <End Role="QuestionAnswer" EntitySet="QuestionAnswers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuestionKeyword_1_0" Association="Self.FK_QuestionKeyword_1_0">
+            <End Role="Question" EntitySet="Questions" />
+            <End Role="QuestionKeyword" EntitySet="QuestionKeywords" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuestionaireModule_0_0" Association="Self.FK_QuestionaireModule_0_0">
+            <End Role="Questionaire" EntitySet="Questionaires" />
+            <End Role="QuestionaireModule" EntitySet="QuestionaireModules" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LocalParkInspectModelStoreContainer" CdmEntityContainer="LocalParkInspectEntities">
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="LocalParkInspectModel.Account">
+              <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserGuid" ColumnName="UserGuid" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="ExistsInCentral" ColumnName="ExistsInCentral" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Assignments">
+            <EntityTypeMapping TypeName="LocalParkInspectModel.Assignment">
+              <MappingFragment StoreEntitySet="Assignment">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="ExistsInCentral" ColumnName="ExistsInCentral" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Availabilities">
+            <EntityTypeMapping TypeName="LocalParkInspectModel.Availability">
+              <MappingFragment StoreEntitySet="Availability">
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="ExistsInCentral" ColumnName="ExistsInCentral" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Coordinates">
+            <EntityTypeMapping TypeName="LocalParkInspectModel.Coordinate">
+              <MappingFragment StoreEntitySet="Coordinate">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="InspectionId" ColumnName="InspectionId" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="ExistsInCentral" ColumnName="ExistsInCentral" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="LocalParkInspectModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Phonenumber" ColumnName="Phonenumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="ExistsInCentral" ColumnName="ExistsInCentral" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="LocalParkInspectModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Prefix" ColumnName="Prefix" />
+                <ScalarProperty Name="SurName" ColumnName="SurName" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="Phonenumber" ColumnName="Phonenumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+                <ScalarProperty Name="EmployeeStatusId" ColumnName="EmployeeStatusId" />
+                <ScalarProperty Name="IsInspecter" ColumnName="IsInspecter" />
+                <ScalarProperty Name="IsManager" ColumnName="IsManager" />
+                <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="ExistsInCentral" ColumnName="ExistsInCentral" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeStatus">
+            <EntityTypeMapping TypeName="LocalParkInspectModel.EmployeeStatu">
+              <MappingFragment StoreEntitySet="EmployeeStatus">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="ExistsInCentral" ColumnName="ExistsInCentral" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inspections">
+            <EntityTypeMapping TypeName="LocalParkInspectModel.Inspection">
+              <MappingFragment StoreEntitySet="Inspection">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AssignmentId" ColumnName="AssignmentId" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="InspectorId" ColumnName="InspectorId" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="ExistsInCentral" ColumnName="ExistsInCentral" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InspectionImages">
+            <EntityTypeMapping TypeName="LocalParkInspectModel.InspectionImage">
+              <MappingFragment StoreEntitySet="InspectionImage">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="File" ColumnName="File" />
+                <ScalarProperty Name="InspectionId" ColumnName="InspectionId" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="ExistsInCentral" ColumnName="ExistsInCentral" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InspectionStatus">
+            <EntityTypeMapping TypeName="LocalParkInspectModel.InspectionStatu">
+              <MappingFragment StoreEntitySet="InspectionStatus">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="ExistsInCentral" ColumnName="ExistsInCentral" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Keywords">
+            <EntityTypeMapping TypeName="LocalParkInspectModel.Keyword">
+              <MappingFragment StoreEntitySet="Keyword">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="ExistsInCentral" ColumnName="ExistsInCentral" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KeywordCategories">
+            <EntityTypeMapping TypeName="LocalParkInspectModel.KeywordCategory">
+              <MappingFragment StoreEntitySet="KeywordCategory">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="ExistsInCentral" ColumnName="ExistsInCentral" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Modules">
+            <EntityTypeMapping TypeName="LocalParkInspectModel.Module">
+              <MappingFragment StoreEntitySet="Module">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="ExistsInCentral" ColumnName="ExistsInCentral" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Questions">
+            <EntityTypeMapping TypeName="LocalParkInspectModel.Question">
+              <MappingFragment StoreEntitySet="Question">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SortId" ColumnName="SortId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="ExistsInCentral" ColumnName="ExistsInCentral" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Questionaires">
+            <EntityTypeMapping TypeName="LocalParkInspectModel.Questionaire">
+              <MappingFragment StoreEntitySet="Questionaire">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="InspectionId" ColumnName="InspectionId" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="ExistsInCentral" ColumnName="ExistsInCentral" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuestionaireModules">
+            <EntityTypeMapping TypeName="LocalParkInspectModel.QuestionaireModule">
+              <MappingFragment StoreEntitySet="QuestionaireModule">
+                <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+                <ScalarProperty Name="QuestionaireId" ColumnName="QuestionaireId" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="ExistsInCentral" ColumnName="ExistsInCentral" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuestionAnswers">
+            <EntityTypeMapping TypeName="LocalParkInspectModel.QuestionAnswer">
+              <MappingFragment StoreEntitySet="QuestionAnswer">
+                <ScalarProperty Name="QuestionnaireId" ColumnName="QuestionnaireId" />
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+                <ScalarProperty Name="Result" ColumnName="Result" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="ExistsInCentral" ColumnName="ExistsInCentral" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuestionKeywords">
+            <EntityTypeMapping TypeName="LocalParkInspectModel.QuestionKeyword">
+              <MappingFragment StoreEntitySet="QuestionKeyword">
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+                <ScalarProperty Name="KeywordId" ColumnName="KeywordId" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="ExistsInCentral" ColumnName="ExistsInCentral" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuestionSorts">
+            <EntityTypeMapping TypeName="LocalParkInspectModel.QuestionSort">
+              <MappingFragment StoreEntitySet="QuestionSort">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="ExistsInCentral" ColumnName="ExistsInCentral" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Regions">
+            <EntityTypeMapping TypeName="LocalParkInspectModel.Region">
+              <MappingFragment StoreEntitySet="Region">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Region1" ColumnName="Region" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="ExistsInCentral" ColumnName="ExistsInCentral" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkingHours">
+            <EntityTypeMapping TypeName="LocalParkInspectModel.WorkingHour">
+              <MappingFragment StoreEntitySet="WorkingHours">
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="ExistsInCentral" ColumnName="ExistsInCentral" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

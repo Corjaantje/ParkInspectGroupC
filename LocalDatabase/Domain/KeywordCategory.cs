@@ -7,25 +7,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ParkInspectGroupC.DOMAIN
+namespace LocalDatabase.Domain
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class InspectionStatus
+    public partial class KeywordCategory
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public InspectionStatus()
+        public KeywordCategory()
         {
-            this.Inspection = new HashSet<Inspection>();
+            this.Keywords = new HashSet<Keyword>();
         }
     
-        public int Id { get; set; }
+        public long Id { get; set; }
         public string Description { get; set; }
         public System.DateTime DateCreated { get; set; }
         public System.DateTime DateUpdated { get; set; }
+        public int ExistsInCentral { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Inspection> Inspection { get; set; }
+        public virtual ICollection<Keyword> Keywords { get; set; }
     }
 }

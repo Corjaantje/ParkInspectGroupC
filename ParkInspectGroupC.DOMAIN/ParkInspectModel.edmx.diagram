@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="852d44a9f4fe421682b7505ab4287b51" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="ParkInspectModel.C__RefactorLog" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkInspectModel.Account" Width="1.5" PointX="5.25" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkInspectModel.Assignment" Width="1.5" PointX="8.25" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkInspectModel.Availability" Width="1.5" PointX="5.25" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkInspectModel.Coordinate" Width="1.5" PointX="12.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkInspectModel.Customer" Width="1.5" PointX="6" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkInspectModel.Employee" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkInspectModel.EmployeeStatu" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkInspectModel.Inspection" Width="1.5" PointX="10.5" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkInspectModel.InspectionImage" Width="1.5" PointX="12.75" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkInspectModel.InspectionStatu" Width="1.5" PointX="8.25" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkInspectModel.Keyword" Width="1.5" PointX="12.75" PointY="22.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkInspectModel.KeywordCategory" Width="1.5" PointX="10.5" PointY="22.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkInspectModel.Module" Width="1.5" PointX="12.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkInspectModel.Question" Width="1.5" PointX="12.75" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkInspectModel.QuestionAnswer" Width="1.5" PointX="15" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkInspectModel.QuestionKeyword" Width="1.5" PointX="15" PointY="18.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkInspectModel.Questionnaire" Width="1.5" PointX="12.75" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkInspectModel.QuestionnaireModule" Width="1.5" PointX="15" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkInspectModel.QuestionSort" Width="1.5" PointX="10.5" PointY="18.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkInspectModel.Region" Width="1.5" PointX="0.75" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkInspectModel.WorkingHour" Width="1.5" PointX="5.25" PointY="18.375" IsExpanded="true" />
+        <AssociationConnector Association="ParkInspectModel.FK_Account_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkInspectModel.FK_Assignment_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkInspectModel.FK_Assignment_Manager" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkInspectModel.FK_Inspection_Assignment" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkInspectModel.FK_Availability_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkInspectModel.FK_Coordinate_Inspection" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkInspectModel.FK_Employee_EmployeeStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkInspectModel.FK_Employee_Manager" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkInspectModel.FK_Employee_Region" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkInspectModel.FK_Inspection_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkInspectModel.FK_WorkingHours_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkInspectModel.FK_Inspection_InspectionStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkInspectModel.FK_Inspection_Region" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkInspectModel.FK_InspectionImages_Inspection" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkInspectModel.FK_Questionnaire_Inspection" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkInspectModel.FK_Keyword_KeywordCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkInspectModel.FK_QuestionKeyword_Keyword" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkInspectModel.FK_Question_Module" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkInspectModel.FK_QuestionnaireModule_Module" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkInspectModel.FK_Question_QuestionSort" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkInspectModel.FK_QuestionAnswer_Question" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkInspectModel.FK_QuestionKeyword_Question" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkInspectModel.FK_QuestionAnswer_Questionnaire" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkInspectModel.FK_QuestionnaireModule_Questionnaire" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

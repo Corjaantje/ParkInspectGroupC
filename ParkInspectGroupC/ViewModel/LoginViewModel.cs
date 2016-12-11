@@ -59,7 +59,7 @@ namespace ParkInspectGroupC.ViewModel
 
 				using(var context = new ParkInspectEntities())
 				{
-					var acc = (from a in context.Account where a.Username.CompareTo(Username) == 0 select a).FirstOrDefault();
+					var acc = (from a in context.Accounts where a.Username.CompareTo(Username) == 0 select a).FirstOrDefault();
 
 					// Account does not excist.
 					if (acc == null)
@@ -79,7 +79,7 @@ namespace ParkInspectGroupC.ViewModel
 					}
 
 					// Username and Password are correct, continue the application.
-                    var emp = (from e in context.Employee where e.Id.CompareTo(acc.EmployeeId) == 0 select e).FirstOrDefault();
+                    var emp = (from e in context.Employees where e.Id.CompareTo(acc.EmployeeId) == 0 select e).FirstOrDefault();
 					
                     LoginMessage = "Succes!";
 				}

@@ -17,7 +17,7 @@ namespace ParkInspectGroupC.DOMAIN
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Assignment()
         {
-            this.Inspection = new HashSet<Inspection>();
+            this.Inspections = new HashSet<Inspection>();
         }
     
         public int Id { get; set; }
@@ -32,6 +32,6 @@ namespace ParkInspectGroupC.DOMAIN
         public virtual Customer Customer { get; set; }
         public virtual Employee Employee { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Inspection> Inspection { get; set; }
+        public virtual ICollection<Inspection> Inspections { get; set; }
     }
 }
