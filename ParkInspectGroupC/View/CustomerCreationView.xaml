@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="ParkInspectGroupC.View.CustomerCreationView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ParkInspectGroupC.View"
+        xmlns:validation="clr-namespace:ParkInspectGroupC.Validation"
+        mc:Ignorable="d"
+        DataContext="{Binding CustomerCreation, Source={StaticResource Locator}}"
+        x:Name="This">
+
+
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="27*"/>
+            <RowDefinition Height="133*"/>
+        </Grid.RowDefinitions>
+        <Image x:Name="image" HorizontalAlignment="Left" Height="52" VerticalAlignment="Top" Width="100" Source="/Image/Logo_WhiteBack.png"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="54" VerticalAlignment="Top" Width="517">
+            <Label x:Name="label" Content="Klant aanmaken" HorizontalAlignment="Left" Height="34" Margin="183,9,0,0" VerticalAlignment="Top" Width="306" FontFamily="Arial Black" FontSize="24"/>
+        </Border>
+        <Button x:Name="button" Content="Submit" HorizontalAlignment="Left" Margin="432,235,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Command="{Binding Path = AddCustomerCommand}"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="105,12,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding Path = customerName, UpdateSourceTrigger = PropertyChanged}" VerticalAlignment="Top" Width="286"/>
+        <Label x:Name="label2" Content="Name:" HorizontalAlignment="Left" Margin="28,10,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Label x:Name="label3" Content="Street:" HorizontalAlignment="Left" Margin="29,41,0,0" Grid.Row="1" VerticalAlignment="Top" RenderTransformOrigin="-0.063,-0.489"/>
+        <Label x:Name="label4" Content="Housenumber" HorizontalAlignment="Left" Margin="306,41,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="23" Margin="397,44,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding Path = houseNumber, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="75"/>
+        <TextBox x:Name="textBox2" HorizontalAlignment="Left" Height="23" Margin="105,44,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding Path = streetName, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="183"/>
+        <Label x:Name="label5" Content="Location:" HorizontalAlignment="Left" Margin="29,79,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox3" HorizontalAlignment="Left" Height="23" Margin="105,82,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding Path = customerLocation, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="286"/>
+        <Label x:Name="label6" Content="Phonenumber:" HorizontalAlignment="Left" Margin="28,122,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox4" HorizontalAlignment="Left" Height="23" Margin="121,122,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding Path = phoneNumber, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="270"/>
+        <Label x:Name="label7" Content="Email:" HorizontalAlignment="Left" Margin="28,153,0,0" Grid.Row="1" VerticalAlignment="Top" RenderTransformOrigin="0.403,0.182"/>
+        <TextBox x:Name="textBox5" HorizontalAlignment="Left" Height="23" Margin="105,155,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="286">
+        <TextBox.Text>
+            <Binding Path="customerMail" UpdateSourceTrigger="PropertyChanged">
+                <Binding.ValidationRules>
+                    <validation:EmailValidation />
+                </Binding.ValidationRules>
+            </Binding>
+            </TextBox.Text>
+        </TextBox>
+    </Grid>
+</UserControl>

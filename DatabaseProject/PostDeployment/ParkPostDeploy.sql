@@ -1,0 +1,11 @@
+﻿:r .\RegionPost.sql
+:r .\EmployeeStatusPost.sql
+:r .\KeywordPost.sql
+:r .\EmployeePost.sql
+:r .\AccountPost.sql
+:r .\CustomerPost.sql
+:r .\InspectionStatusPost.sql
+:r .\AssignmentPost.sql
+:r .\WorkingHoursPost.sql
+:r .\InspectionPost.sql
+:r .\QuestionsPost.sql
