@@ -3,6 +3,7 @@ using GalaSoft.MvvmLight.Command;
 using LocalDatabase.Domain;
 using ParkInspectGroupC.Encryption;
 using ParkInspectGroupC.Miscellaneous;
+using ParkInspectGroupC.View;
 using System.Linq;
 using System.Windows.Input;
 
@@ -10,8 +11,8 @@ namespace ParkInspectGroupC.ViewModel
 {
     public class LoginViewModel : ViewModelBase
 	{
-
-		public ICommand LoginCommand { get; set; }
+        public Employee LoginEmployee { get; set; }
+        public ICommand LoginCommand { get; set; }
 
 		private string _loginMessage;
 		public string LoginMessage
@@ -76,8 +77,18 @@ namespace ParkInspectGroupC.ViewModel
 
 					// Username and Password are correct, continue the application.
                     var emp = (from e in context.Employee where e.Id.CompareTo(acc.EmployeeId) == 0 select e).FirstOrDefault();
-					
+                    LoginEmployee = emp;
                     LoginMessage = "Succes!";
+                    // inspector or manager??
+                    if (emp.IsManager)
+                    {
+                        Navigator.SetNewView(new ManagerDashboardView());
+                    }
+                    else
+                    {
+                        Navigator.SetNewView(new DashboardView());
+                    }
+
 				}
 
 			}
