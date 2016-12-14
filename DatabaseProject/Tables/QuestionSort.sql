@@ -1,7 +1,0 @@
-﻿CREATE TABLE [dbo].[QuestionSort]
-(
-	[Id] INT NOT NULL PRIMARY KEY, 
-    [Description] VARCHAR(MAX) NOT NULL, 
-    [DateCreated] DATETIME NOT NULL DEFAULT GETDATE(), 
-    [DateUpdated] DATETIME NOT NULL DEFAULT GETDATE()
-)
