@@ -34,5 +34,17 @@ namespace ParkInspectGroupC.Properties {
                 this["CurrentThemeUri"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool CanSync {
+            get {
+                return ((bool)(this["CanSync"]));
+            }
+            set {
+                this["CanSync"] = value;
+            }
+        }
     }
 }

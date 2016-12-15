@@ -85,8 +85,8 @@ namespace ParkInspectGroupC.ViewModel
             {
                 if (theUpdateMessages.Count == 0)
                 {
+                    Properties.Settings.Default.CanSync = true;
                     //Start sync with central
-                    Debug.WriteLine("CentralToLocal: Starting Sync");
                     Task<bool> syncCToL = ldb.SyncCentralToLocal();
 
                     _message.Date = DateTime.Now;
@@ -98,8 +98,10 @@ namespace ParkInspectGroupC.ViewModel
                     {
                         _message.Message = "Failed!";
                     }
-                    Debug.WriteLine("CentralToLocal: Done Sync");
-                    Debug.WriteLine("CentralToLocal: Stopping Sync");
+                }
+                else
+                {
+                    Properties.Settings.Default.CanSync = false;
                 }
             });
 
@@ -144,10 +146,7 @@ namespace ParkInspectGroupC.ViewModel
 
             Task task = Task.Run(() =>
             {
-                Debug.WriteLine("SaveDelete: Starting Sync");
                 message = ldb.SyncLocalToCentralSaveDelete();
-                Debug.WriteLine("SaveDelete: Sync Done");
-                Debug.WriteLine("SaveDelete: Sync Stopping");
             });
 
             await task;
@@ -160,10 +159,7 @@ namespace ParkInspectGroupC.ViewModel
 
             Task task = Task.Run(() =>
             {
-                Debug.WriteLine("Update: Starting Sync");
                 UpdateMessages = ldb.SyncLocalToCentralUpdate();
-                Debug.WriteLine("Update: Sync Done");
-                Debug.WriteLine("Update: Sync Stopping");
             });
 
             await task;

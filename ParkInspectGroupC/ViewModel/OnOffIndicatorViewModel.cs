@@ -10,12 +10,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using ParkInspectGroupC.Miscellaneous;
+using System.ComponentModel;
+using System.Timers;
 
 namespace ParkInspectGroupC.ViewModel
 {
     public class OnOffIndicatorViewModel : ViewModelBase
     {
         LocalDatabaseMain ldb = new LocalDatabaseMain("ParkInspect");
+        private static Timer BackgroundWorkerTimer;
+        BackgroundWorker worker;
+        private bool online = false;
         private string _OnOffIndicator;
         public string OnOffIndicator
         {
@@ -31,8 +36,21 @@ namespace ParkInspectGroupC.ViewModel
         public OnOffIndicatorViewModel()
         {
             CheckConnection();
-        }
 
+            //Setup backgroundworker
+            worker = new BackgroundWorker()
+            {
+                WorkerSupportsCancellation = true
+            };
+            worker.DoWork += worker_DoWork;
+
+            //Setup timer that fires the backgroundworker when timer ends
+            //BackgroundWorkerTimer = new Timer(3600000);//An hour, standard
+            BackgroundWorkerTimer = new Timer(20000);//20 seconds, Testing setting, you can set it sorter but when the timer start hits 0 it start again and does not wait for the worker to complete, thus it is possible that 2 workers are running at the same time when setting on less than 20 seconds
+            BackgroundWorkerTimer.Elapsed += BackgroundWorkerTimer_Elapsed;
+            BackgroundWorkerTimer.Enabled = true;
+        }
+   
         private async void CheckConnection()
         {
             Task task = Task.Run(() =>
@@ -59,6 +77,17 @@ namespace ParkInspectGroupC.ViewModel
             });
 
             await task;
+        }
+        private void worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            CheckConnection();
+        }
+        private void BackgroundWorkerTimer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            if (Properties.Settings.Default.CanSync)
+            {
+                worker.RunWorkerAsync();
+            }
         }
     }
 }
