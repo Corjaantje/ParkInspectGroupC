@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System;
 using ParkInspectGroupC.View.DatabaseSyncDialogs;
 using System.Linq;
+using ParkInspectGroupC.Miscellaneous;
 
 namespace ParkInspectGroupC.ViewModel
 {

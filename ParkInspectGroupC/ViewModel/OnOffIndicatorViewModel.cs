@@ -12,6 +12,10 @@ using System.Windows.Media;
 using ParkInspectGroupC.Miscellaneous;
 using System.ComponentModel;
 using System.Timers;
+using System.Windows.Input;
+using GalaSoft.MvvmLight.Command;
+using ParkInspectGroupC.View;
+using System.Windows.Controls;
 
 namespace ParkInspectGroupC.ViewModel
 {
@@ -20,6 +24,7 @@ namespace ParkInspectGroupC.ViewModel
         LocalDatabaseMain ldb = new LocalDatabaseMain("ParkInspect");
         private static Timer BackgroundWorkerTimer;
         BackgroundWorker worker;
+        public ICommand GoTo { get; set; }
         private string _OnOffIndicator;
         public string OnOffIndicator
         {
@@ -48,9 +53,15 @@ namespace ParkInspectGroupC.ViewModel
             BackgroundWorkerTimer = new Timer(20000);//20 seconds, Testing setting, you can set it sorter but when the timer start hits 0 it start again and does not wait for the worker to complete, thus it is possible that 2 workers are running at the same time when setting on less than 20 seconds
             BackgroundWorkerTimer.Elapsed += BackgroundWorkerTimer_Elapsed;
             BackgroundWorkerTimer.Enabled = true;
+
+            GoTo = new RelayCommand(GoToView);
         }
-   
-        private async void CheckConnection()
+
+        public void GoToView()
+        {
+            Navigator.SetNewView(new DatabaseSyncView());
+        }
+        public async void CheckConnection()
         {
             Task task = Task.Run(() =>
             {
