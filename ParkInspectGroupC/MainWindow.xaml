@@ -12,8 +12,11 @@
 	<Grid Background="{DynamicResource WindowBackgroundBrush}">
 		<DockPanel LastChildFill="True">
 			<viewsm:NavigationMenu DockPanel.Dock="Top" />
-			<viewsm:ThemeSelector DockPanel.Dock="Bottom" />
-			<ContentControl Content="{Binding CurrentView}" />
+            <Grid DockPanel.Dock="Bottom">
+                <viewsm:ThemeSelector Width="400" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="0,0,0,0" />
+                <viewsm:OnOffIndicator VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" Margin="0,0,0,5"/>
+            </Grid>
+            <ContentControl Content="{Binding CurrentView}" />
 		</DockPanel>
 		
 	</Grid>
