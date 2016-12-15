@@ -85,23 +85,25 @@ namespace ParkInspectGroupC.ViewModel
             {
                 if (theUpdateMessages.Count == 0)
                 {
-                    Properties.Settings.Default.CanSync = true;
-                    //Start sync with central
-                    Task<bool> syncCToL = ldb.SyncCentralToLocal();
-
                     _message.Date = DateTime.Now;
-                    if (syncCToL.Result)
+                    if (Properties.Settings.Default.OnOffline)
                     {
-                        _message.Message = "Succes!";
+                        //Start sync with central
+                        Task<bool> syncCToL = ldb.SyncCentralToLocal();
+                        
+                        if (syncCToL.Result)
+                        {
+                            _message.Message = "Succes!";
+                        }
+                        else
+                        {
+                            _message.Message = "Failed!";
+                        }
                     }
                     else
                     {
-                        _message.Message = "Failed!";
+                        _message.Message = "Kon niet gaan synchroniseren want er is geen verbinding met de centrale database!";
                     }
-                }
-                else
-                {
-                    Properties.Settings.Default.CanSync = false;
                 }
             });
 

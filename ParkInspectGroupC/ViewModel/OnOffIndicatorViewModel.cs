@@ -20,7 +20,6 @@ namespace ParkInspectGroupC.ViewModel
         LocalDatabaseMain ldb = new LocalDatabaseMain("ParkInspect");
         private static Timer BackgroundWorkerTimer;
         BackgroundWorker worker;
-        private bool online = false;
         private string _OnOffIndicator;
         public string OnOffIndicator
         {
@@ -65,13 +64,17 @@ namespace ParkInspectGroupC.ViewModel
                     try
                     {
                         conn.Open();
+                        Properties.Settings.Default.OnOffline = true;
                         OnOffIndicator = "Online";
                         IndicatorColor = (Brush)bc.ConvertFrom("LightGreen");
+                        Debug.WriteLine("Online (Azure connection)");
                     }
                     catch
                     {
+                        Properties.Settings.Default.OnOffline = false;
                         OnOffIndicator = "Offline";
                         IndicatorColor = (Brush)bc.ConvertFrom("Red");
+                        Debug.WriteLine("Offline  (Azure connection)");
                     }
                 }
             });
@@ -80,14 +83,12 @@ namespace ParkInspectGroupC.ViewModel
         }
         private void worker_DoWork(object sender, DoWorkEventArgs e)
         {
+            Debug.WriteLine("Checking azure connection...");
             CheckConnection();
         }
         private void BackgroundWorkerTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            if (Properties.Settings.Default.CanSync)
-            {
-                worker.RunWorkerAsync();
-            }
+            worker.RunWorkerAsync();
         }
     }
 }

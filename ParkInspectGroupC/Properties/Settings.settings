@@ -5,7 +5,7 @@
     <Setting Name="CurrentThemeUri" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="CanSync" Type="System.Boolean" Scope="User">
+    <Setting Name="OnOffline" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
