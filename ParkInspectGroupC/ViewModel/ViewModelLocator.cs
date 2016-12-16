@@ -15,6 +15,7 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
+using ParkInspectGroupC.ViewModel.QuestionnaireModuleViewModels;
 
 namespace ParkInspectGroupC.ViewModel
 {
@@ -51,6 +52,8 @@ namespace ParkInspectGroupC.ViewModel
 			SimpleIoc.Default.Register<InspectorProfileViewModel>();
             SimpleIoc.Default.Register<DatabaseSyncViewModel>();
             SimpleIoc.Default.Register<CustomerListViewModel>();
+
+            RegisterQuestionnaireModuleViewModels();
         }
 
         public MainViewModel Main
@@ -117,5 +120,32 @@ namespace ParkInspectGroupC.ViewModel
         {
             // TODO Clear the ViewModels
         }
+
+
+        /* The following are ViewModels used for UserControls in the QuestionnaireView (QuestionnaireModules)
+        * As one needs to be added per QuestionnaireModule, this will eventually clutter up the ViewModelLocator
+        * These ViewModels will be centralised elsewhere at a later point in time, but need to be accessed through the VMC until then.
+        * THESE CANNOT be used as normal views.
+        * */
+        #region QuestionnaireModules
+        private void RegisterQuestionnaireModuleViewModels()
+        {
+            SimpleIoc.Default.Register<VehicleCountControlVM>();
+            SimpleIoc.Default.Register<QuestionnaireCommentControlVM>();
+        }
+
+        public VehicleCountControlVM VehicleCountControlVM
+        {
+            get { return ServiceLocator.Current.GetInstance<VehicleCountControlVM>(); }
+        }
+
+        public QuestionnaireCommentControlVM QuestionnaireCommentControlVM
+        {
+            get { return ServiceLocator.Current.GetInstance<QuestionnaireCommentControlVM>(); }
+        }
+
+        #endregion
+
+
     }
 }
