@@ -9,6 +9,7 @@ using GalaSoft.MvvmLight.CommandWpf;
 using ParkInspectGroupC.Factory;
 using ParkInspectGroupC.Properties;
 using ParkInspectGroupC.View;
+using ParkInspectGroupC.View.ReportCreation;
 
 namespace ParkInspectGroupC.ViewModel
 {
@@ -63,7 +64,7 @@ namespace ParkInspectGroupC.ViewModel
         {
             BackCommand = new RelayCommand(PerformBack, CanPerformBack);
             //CurrentView = new LoginView();
-            CurrentView = new DatabaseSyncView();
+            CurrentView = new ReportAssignmentSelectionView();
 
             //List<Theme> Themes = new List<Theme>
             //{
