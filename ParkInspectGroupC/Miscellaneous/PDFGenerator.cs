@@ -39,19 +39,21 @@ namespace ParkInspectGroupC.Miscellaneous
 		{
 			Report loadedReport;
 			List<ReportSection> loadedReportSections;
+		    Employee loadedEmployee;
 			using (var context = new ParkInspectEntities())
 			{
 				loadedReport = (from a in context.Report where a.Id == report.Id select a).First();
 				loadedReportSections = (from a in context.ReportSection where a.ReportId == report.Id select a).ToList();
+			    loadedEmployee = (from a in context.Employee where a.Id == employee.Id select a).First();
 			}
 
 			Document document = new Document();
-			document.Info.Title = report.Title;
-			document.Info.Author = employee.FirstName + " " + employee.SurName;
+			document.Info.Title = loadedReport.Title;
+			document.Info.Author = loadedEmployee.FirstName + " " + loadedEmployee.SurName;
 
 			this.DefineStyles(document);
-			this.DefineCover(document, report, employee);
-			this.DefineSummary(document, report);
+			this.DefineCover(document, loadedReport, loadedEmployee);
+			this.DefineSummary(document, loadedReport);
 
 			// ReportSection
 			foreach (var section in loadedReportSections)

@@ -35,9 +35,8 @@
 			<DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedReportSection, Mode=TwoWay}" ItemsSource="{Binding ReportSectionList}" >
 				<DataGrid.Columns>
 					<DataGridTextColumn Header="Id" Binding="{Binding Id}" />
-					<DataGridTextColumn Header="Titel" Binding="{Binding Title}" />
-					<DataGridTextColumn Header="Klant" Binding="{Binding Report.Assignment.Customer.Name}" />
-					<DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Titel" Binding="{Binding Title}" />
+                    <DataGridTemplateColumn>
 						<DataGridTemplateColumn.CellTemplate>
 							<DataTemplate>
 								<Button Content="Open" Command="{Binding DataContext.OpenReportSectionCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" />

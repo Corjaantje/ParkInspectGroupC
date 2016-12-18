@@ -15,6 +15,7 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
+using ParkInspectGroupC.Miscellaneous;
 using ParkInspectGroupC.ViewModel.ReportCreation;
 
 namespace ParkInspectGroupC.ViewModel
@@ -54,6 +55,7 @@ namespace ParkInspectGroupC.ViewModel
             SimpleIoc.Default.Register<CustomerListViewModel>();
             SimpleIoc.Default.Register<DiagramPreviewViewModel>();
             SimpleIoc.Default.Register<ReportViewModel>();
+            SimpleIoc.Default.Register<DiagramPlotter>();
         }
 
         public MainViewModel Main
@@ -71,7 +73,7 @@ namespace ParkInspectGroupC.ViewModel
 
         public DiagramPreviewViewModel DiagramPreview
         {
-            get { return ServiceLocator.Current.GetInstance<DiagramPreviewViewModel>(); }
+            get { return new DiagramPreviewViewModel(Reports.SelectedReport, Reports.SelectedReportSectionDiagram); }
         }
 
         public MapViewModel Map

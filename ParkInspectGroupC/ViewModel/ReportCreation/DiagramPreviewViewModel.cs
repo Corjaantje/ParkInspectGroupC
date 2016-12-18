@@ -8,8 +8,8 @@ using GalaSoft.MvvmLight;
 using Microsoft.Practices.ServiceLocation;
 using OxyPlot;
 using OxyPlot.Axes;
-using ParkInspectGroupC.DOMAIN;
 using OxyPlot.Series;
+using ParkInspectGroupC.DOMAIN;
 using ParkInspectGroupC.Miscellaneous;
 
 namespace ParkInspectGroupC.ViewModel.ReportCreation

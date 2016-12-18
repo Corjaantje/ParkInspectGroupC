@@ -209,8 +209,11 @@ namespace ParkInspectGroupC.ViewModel.ReportCreation
 				//ReportSectionDiagrams = new ObservableCollection<Diagram>(reportSectionDiagrams);
 				//var reportSectionImages = (from a in )
 
+			    var Diagrams =
+			        (from a in context.Diagram.Include("Question") where a.ReportSectionId == section.Id select a).ToList();
+
 				ReportSectionImages = new ObservableCollection<InspectionImage>(section.InspectionImage);
-				ReportSectionDiagrams = new ObservableCollection<Diagram>(section.Diagram);
+				ReportSectionDiagrams = new ObservableCollection<Diagram>(Diagrams);
 
 			}
 
@@ -459,6 +462,8 @@ namespace ParkInspectGroupC.ViewModel.ReportCreation
 
 		private void GenerateReport()
 		{
+            SaveReport();
+
 			var fileDialog = new SaveFileDialog();
 			fileDialog.DefaultExt = ".pdf";
 			fileDialog.Filter = "PNG Bestanden (*.pdf)|*.pdf";
