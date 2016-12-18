@@ -226,7 +226,12 @@ namespace ParkInspectGroupC.ViewModel.ReportCreation
 				{
 					var report = (from a in context.Report where a.Id == SelectedReport.Id select a).FirstOrDefault();
 
-					context.ReportSection.RemoveRange(report.ReportSection);
+                    foreach (var section in report.ReportSection)
+                    {
+                        context.Diagram.RemoveRange(section.Diagram);
+                    }
+
+                    context.ReportSection.RemoveRange(report.ReportSection);
 
 					context.Report.Remove(report);
 					context.SaveChanges();
