@@ -120,9 +120,12 @@
     <Compile Include="Factory\ThemeFactory.cs" />
     <Compile Include="Miscellaneous\IHavePassword.cs" />
     <Compile Include="Miscellaneous\Navigator.cs" />
+    <Compile Include="ViewModel\AssignmentOverviewViewModel.cs" />
     <Compile Include="ViewModel\CustomerCreationViewModel.cs" />
     <Compile Include="ViewModel\DatabaseSyncViewModel.cs" />
     <Compile Include="ViewModel\CustomerListViewModel.cs" />
+    <Compile Include="ViewModel\EditAssignmentViewModel.cs" />
+    <Compile Include="ViewModel\InspectionViewModel.cs" />
     <Compile Include="ViewModel\InspectorProfileViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="Validation\EmailValidation.cs" />
@@ -130,8 +133,18 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MapViewModel.cs" />
     <Compile Include="ViewModel\OnOffIndicatorViewModel.cs" />
+    <Compile Include="ViewModel\NewAssignmentViewModel.cs" />
     <Compile Include="ViewModel\QuestionnaireViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="View\AssignmentOverview.xaml.cs">
+      <DependentUpon>AssignmentOverview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CustomerCreationView.xaml.cs">
+      <DependentUpon>CustomerCreationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CustomerListView.xaml.cs">
+      <DependentUpon>CustomerListView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\DatabaseSyncDialogs\DeleteDialog.xaml.cs">
       <DependentUpon>DeleteDialog.xaml</DependentUpon>
     </Compile>
@@ -141,8 +154,14 @@
     <Compile Include="View\DatabaseSyncView.xaml.cs">
       <DependentUpon>DatabaseSyncView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\EditAssignmentView.xaml.cs">
+      <DependentUpon>EditAssignmentView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\EmployeeCreationView.xaml.cs">
       <DependentUpon>EmployeeCreationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\InspectionView.xaml.cs">
+      <DependentUpon>InspectionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\InspectorProfileView.xaml.cs">
       <DependentUpon>InspectorProfileView.xaml</DependentUpon>
@@ -161,6 +180,9 @@
     </Compile>
     <Compile Include="View\MainWindow\ThemeSelector.xaml.cs">
       <DependentUpon>ThemeSelector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\NewAssignmentView.xaml.cs">
+      <DependentUpon>NewAssignmentView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\QuestionnaireModules\QuestionnaireCommentControl.xaml.cs">
       <DependentUpon>QuestionnaireCommentControl.xaml</DependentUpon>
@@ -212,6 +234,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\AssignmentOverview.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\CustomerCreationView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\CustomerListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\DatabaseSyncDialogs\DeleteDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -223,6 +257,14 @@
     <Page Include="View\DatabaseSyncView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EditAssignmentView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\InspectionView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\InspectorProfileView.xaml">
       <SubType>Designer</SubType>
@@ -251,6 +293,10 @@
     <Page Include="View\MainWindow\ThemeSelector.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\NewAssignmentView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\QuestionnaireModules\QuestionnaireCommentControl.xaml">
       <Generator>MSBuild:Compile</Generator>
