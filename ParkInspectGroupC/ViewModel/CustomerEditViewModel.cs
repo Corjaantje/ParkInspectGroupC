@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
 
+
 namespace ParkInspectGroupC.ViewModel
 {
     public class CustomerEditViewModel
@@ -25,18 +26,19 @@ namespace ParkInspectGroupC.ViewModel
 
         public CustomerEditViewModel(CustomerListViewModel customerList)
         {
+       
             EditCustomerCommand = new RelayCommand(editCustomer, canEditCustomer);
             this._customerList = customerList;
-            Customername = customerList.SelectedCustomer.Name;
+            CustomerName = customerList.SelectedCustomer.Name;
             string[] array = customerList.SelectedCustomer.Address.Split(' ');
-            Streetname = array[0];
-            Housenumber = array[1];
-            Customerlocation = customerList.SelectedCustomer.Location;
-            Phonenumber = customerList.SelectedCustomer.Phonenumber;
-            Customermail = customerList.SelectedCustomer.Email;
+            StreetName = array[0];
+            HouseNumber = array[1];
+            CustomerLocation = customerList.SelectedCustomer.Location;
+            PhoneNumber = customerList.SelectedCustomer.Phonenumber;
+            CustomerMail = customerList.SelectedCustomer.Email;
         }
 
-        public string Customername
+        public string CustomerName
         {
             get
             {
@@ -46,11 +48,11 @@ namespace ParkInspectGroupC.ViewModel
             set
             {
                 _customername = value;
-                RaisePropertyChanged("Customername");
+                RaisePropertyChanged("CustomerName");
             }
         }
 
-        public string Streetname
+        public string StreetName
         {
             get
             {
@@ -60,11 +62,11 @@ namespace ParkInspectGroupC.ViewModel
             set
             {
                 _streetname = value;
-                RaisePropertyChanged("Streetname");
+                RaisePropertyChanged("StreetName");
             }
         }
 
-        public string Housenumber
+        public string HouseNumber
         {
             get
             {
@@ -74,12 +76,12 @@ namespace ParkInspectGroupC.ViewModel
             set
             {
                 _housenumber = value;
-                RaisePropertyChanged("Housenumber");
+                RaisePropertyChanged("HouseNumber");
             }
         }
 
 
-        public string Customerlocation
+        public string CustomerLocation
         {
             get
             {
@@ -89,11 +91,11 @@ namespace ParkInspectGroupC.ViewModel
             set
             {
                 _location = value;
-                RaisePropertyChanged("Customerlocation");
+                RaisePropertyChanged("CustomerLocation");
             }
         }
 
-        public string Phonenumber
+        public string PhoneNumber
         {
             get
             {
@@ -103,13 +105,13 @@ namespace ParkInspectGroupC.ViewModel
             set
             {
                 _phonenumber = value;
-                RaisePropertyChanged("Phonenumber");
+                RaisePropertyChanged("PhoneNumber");
 
             }
         }
 
 
-        public string Customermail
+        public string CustomerMail
         {
             get
             {
@@ -119,19 +121,19 @@ namespace ParkInspectGroupC.ViewModel
             set
             {
                 _customermail = value;
-                RaisePropertyChanged("Customermail");
+                RaisePropertyChanged("CustomerMail");
             }
         }
 
         private bool canEditCustomer()
         {
 
-            if (string.IsNullOrWhiteSpace(Customername)
-                || string.IsNullOrWhiteSpace(Streetname)
-                || string.IsNullOrWhiteSpace(Housenumber)
-                || string.IsNullOrWhiteSpace(Customerlocation)
-                || string.IsNullOrWhiteSpace(Phonenumber)
-                || string.IsNullOrWhiteSpace(Customermail))
+            if (string.IsNullOrWhiteSpace(CustomerName)
+                || string.IsNullOrWhiteSpace(StreetName)
+                || string.IsNullOrWhiteSpace(HouseNumber)
+                || string.IsNullOrWhiteSpace(CustomerLocation)
+                || string.IsNullOrWhiteSpace(PhoneNumber)
+                || string.IsNullOrWhiteSpace(CustomerMail))
             {
                 return false;
             }
@@ -149,11 +151,11 @@ namespace ParkInspectGroupC.ViewModel
                 {
                     if(customer.Id == _customerList.SelectedCustomer.Id)
                     {
-                        customer.Name = Customername;
-                        customer.Address = Streetname + " " + Housenumber;
-                        customer.Location = Customerlocation;
-                        customer.Phonenumber = Phonenumber;
-                        customer.Email = Customermail;
+                        customer.Name = CustomerName;
+                        customer.Address = StreetName + " " + HouseNumber;
+                        customer.Location = CustomerLocation;
+                        customer.Phonenumber = PhoneNumber;
+                        customer.Email = CustomerMail;
                     }
                 }
 

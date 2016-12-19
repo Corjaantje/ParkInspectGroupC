@@ -1,17 +1,16 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using ParkInspectGroupC.DOMAIN;
+using LocalDatabase.Domain;
 using ParkInspectGroupC.Miscellaneous;
 using ParkInspectGroupC.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+
 
 namespace ParkInspectGroupC.ViewModel
 {
@@ -29,7 +28,7 @@ namespace ParkInspectGroupC.ViewModel
         {
             ObservableCollection<Customer> searchedCustomers = new ObservableCollection<Customer>();
 
-            using (var context = new ParkInspectEntities())
+            using (var context = new LocalParkInspectEntities())
             {
                 List<Customer> customers = context.Customer.ToList();
 
@@ -105,7 +104,7 @@ namespace ParkInspectGroupC.ViewModel
 
         public void deleteCustomer()
         {
-            using (var context = new ParkInspectEntities())
+            using (var context = new LocalParkInspectEntities())
             {
 
                 List<Customer> customers = context.Customer.ToList();
