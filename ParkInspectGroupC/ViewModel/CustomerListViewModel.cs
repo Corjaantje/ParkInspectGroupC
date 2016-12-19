@@ -1,10 +1,17 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using ParkInspectGroupC.DOMAIN;
+using ParkInspectGroupC.Miscellaneous;
+using ParkInspectGroupC.View;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
-using LocalDatabase.Domain;
 
 namespace ParkInspectGroupC.ViewModel
 {
@@ -16,12 +23,13 @@ namespace ParkInspectGroupC.ViewModel
         private Customer _selectedCustomer;
         public ICommand DeleteCustomerCommand { get; set; }
         public ICommand AddCustomerCommand { get; set; }
+        public ICommand EditCustomerCommand { get; set; }
 
         public CustomerListViewModel()
         {
             ObservableCollection<Customer> searchedCustomers = new ObservableCollection<Customer>();
 
-            using (var context = new LocalParkInspectEntities())
+            using (var context = new ParkInspectEntities())
             {
                 List<Customer> customers = context.Customer.ToList();
 
@@ -38,6 +46,7 @@ namespace ParkInspectGroupC.ViewModel
             _customers = searchedCustomers;
             DeleteCustomerCommand = new RelayCommand(deleteCustomer, canDelete);
             AddCustomerCommand = new RelayCommand(openAddWindow);
+            EditCustomerCommand = new RelayCommand(openEditWindow);
 
         }
         public ObservableCollection<Customer> Customers
@@ -96,7 +105,7 @@ namespace ParkInspectGroupC.ViewModel
 
         public void deleteCustomer()
         {
-            using (var context = new LocalParkInspectEntities())
+            using (var context = new ParkInspectEntities())
             {
 
                 List<Customer> customers = context.Customer.ToList();
@@ -124,8 +133,21 @@ namespace ParkInspectGroupC.ViewModel
 
         public void openAddWindow()
         {
-            //Navigator.SetNewView(new CustomerCreationView());
+            Navigator.SetNewView(new CustomerCreationView());
         }
 
+        public void openEditWindow()
+        {
+            if(SelectedCustomer != null)
+            {
+                Navigator.SetNewView(new CustomerEditView());
+            }
+
+            else
+            {
+                MessageBox.Show("Selecteer eerst een klant aub");
+            }
+            
+        }
     }
 }
