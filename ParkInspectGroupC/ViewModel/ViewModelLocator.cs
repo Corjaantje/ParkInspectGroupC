@@ -51,6 +51,7 @@ namespace ParkInspectGroupC.ViewModel
 			SimpleIoc.Default.Register<InspectorProfileViewModel>();
             SimpleIoc.Default.Register<DatabaseSyncViewModel>();
             SimpleIoc.Default.Register<CustomerListViewModel>();
+            SimpleIoc.Default.Register<CustomerEditViewModel>();
         }
 
         public MainViewModel Main
@@ -109,6 +110,14 @@ namespace ParkInspectGroupC.ViewModel
         public CustomerListViewModel CustomerList
         {
             get { return ServiceLocator.Current.GetInstance<CustomerListViewModel>(); }
+        }
+
+        public CustomerEditViewModel CustomerEdit
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<CustomerEditViewModel>();
+            }
         }
 
 
