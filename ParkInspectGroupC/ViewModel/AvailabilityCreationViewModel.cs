@@ -5,6 +5,7 @@ using ParkInspectGroupC.Miscellaneous;
 using ParkInspectGroupC.View;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -28,7 +29,7 @@ namespace ParkInspectGroupC.ViewModel
             set { _eTime = value; RaisePropertyChanged("eTime"); }
         }
         private DateTime _date;
-        //[Column(TypeName = "DateTime2")]
+        [Column(TypeName = "DateTime")]
         public DateTime Date
         {
             get { return _date; }
@@ -53,6 +54,8 @@ namespace ParkInspectGroupC.ViewModel
         {
             this.SelectedInspector = selectedInspector;
             SaveCommand = new RelayCommand(Save, CanSave);
+            eTime = DateTime.Now.ToString();
+            //sTime = DateTime.Now.ToString();
         }
 
         private void Save()
@@ -70,20 +73,19 @@ namespace ParkInspectGroupC.ViewModel
                 context.Availability.Add(availability);
                 context.SaveChanges();
             }
-            Navigator.SetNewView(new InspectorsListView());
+            Navigator.Back();
         }
 
         private bool CanSave()
         {
-            TimeSpan time1;
-            TimeSpan time2;
-            if (Date == null || !TimeSpan.TryParse(sTime, out time1) || !TimeSpan.TryParse(eTime, out time2))
+            if (Date == null || string.IsNullOrWhiteSpace(sTime))
             {
                 return false;
             }
             try
             {
-                //StartTime = TimeSpan.ParseExact(sTime, "hh:mm:ss", System.Globalization.CultureInfo.CurrentCulture);
+                string date = DateTime.Now.Date.ToString();
+                StartTime = DateTime.ParseExact(date + " "+ sTime, "dd-mm-yyyy hh:mm:ss", System.Globalization.CultureInfo.CurrentCulture);
                 //EndTime = TimeSpan.ParseExact(eTime, "hh:mm:ss", System.Globalization.CultureInfo.CurrentCulture);
             }
             catch (Exception e)

@@ -72,7 +72,7 @@ namespace ParkInspectGroupC.ViewModel
                 context.SaveChanges();
             }
 
-            Navigator.SetNewView(new InspectorsListView());
+            Navigator.Back();
         }
 
         private bool CanSaveChanges()

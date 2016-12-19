@@ -79,8 +79,9 @@ namespace ParkInspectGroupC.ViewModel
                     var emp = (from e in context.Employee where e.Id.CompareTo(acc.EmployeeId) == 0 select e).FirstOrDefault();
                     LoginEmployee = emp;
                     LoginMessage = "Succes!";
-                    // inspector or manager??
-                    if (emp.IsManager)
+                    
+                    // inspector or manager. misschien op een andere manier doen??
+                    if (LoginEmployee.IsManager)
                     {
                         Navigator.SetNewView(new ManagerDashboardView());
                     }

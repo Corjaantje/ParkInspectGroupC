@@ -20,6 +20,7 @@ namespace ParkInspectGroupC.ViewModel
         public ObservableCollection<object> AssignmentList { get; set; }
         public ObservableCollection<Availability> ManagerAvailability { get; set; }
         public ICommand ShowInspectorListCommand { get; set; }
+        public ICommand AddAccountCommand { get; set; }
         public ManagerDashboardViewModel(Employee manager)
         {
             Manager = manager;
@@ -35,11 +36,17 @@ namespace ParkInspectGroupC.ViewModel
                 ManagerAvailability = new ObservableCollection<Availability>(mAvailability);
             }
             ShowInspectorListCommand = new RelayCommand(ShowInspectorList);
+            AddAccountCommand = new RelayCommand(ShowAddAccount);
         }
 
         private void ShowInspectorList()
         {
             Navigator.SetNewView(new InspectorsListView());
+        }
+
+        private void ShowAddAccount()
+        {
+            Navigator.SetNewView(new EmployeeCreationView());
         }
     }
 }

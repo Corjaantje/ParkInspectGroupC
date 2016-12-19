@@ -25,6 +25,7 @@ namespace ParkInspectGroupC.ViewModel
             set
             {
                 _selectedInspector = value; RaisePropertyChanged("SelectedInspector");
+                // Show availability datagrid of the selectedinspector
                 if (value != null)
                 {
                     using (var context = new LocalParkInspectEntities())
@@ -37,16 +38,15 @@ namespace ParkInspectGroupC.ViewModel
             }
         }
 
-        public ICommand ShowEditInspectorCommand { get; set; }
-        public ICommand ShowEditAvailabilityCommand { get; set; }
         public ObservableCollection<Employee> InspectorsList { get; set; }
-
         private ObservableCollection<Availability> _inspectorAvailability;
         public ObservableCollection<Availability> InspectorAvailability
         {
             get { return _inspectorAvailability; }
             set { _inspectorAvailability = value; RaisePropertyChanged("InspectorAvailability"); }
         }
+        public ICommand ShowEditInspectorCommand { get; set; }
+        public ICommand ShowEditAvailabilityCommand { get; set; }
         public InspectorListViewModel()
         {
             ShowAvailability = false;
@@ -62,6 +62,7 @@ namespace ParkInspectGroupC.ViewModel
         private void ShowEditView()
         {
             Navigator.SetNewView(new InspectorEditView());
+            ShowAvailability = false;
         }
 
         private bool CanShowEditView()
@@ -76,6 +77,7 @@ namespace ParkInspectGroupC.ViewModel
         private void ShowEditAvailability()
         {
             Navigator.SetNewView(new AvailabilityCreationView());
+            ShowAvailability = false;
         }
 
         private bool CanShowEditAvailibility()
@@ -86,6 +88,7 @@ namespace ParkInspectGroupC.ViewModel
             }
             return true;
         }
+
         private bool _showAvailability;
         public bool ShowAvailability
         {

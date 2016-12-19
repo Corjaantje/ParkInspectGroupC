@@ -5,15 +5,16 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ParkInspectGroupC.View"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300" DataContext="{Binding InspectorList, Source={StaticResource Locator}}">
+             d:DesignHeight="300" d:DesignWidth="700" DataContext="{Binding InspectorList, Source={StaticResource Locator}}">
     <Canvas>
         <TextBlock Text="Inspecteurs" Canvas.Top="10" Canvas.Left="10" FontSize="18" FontWeight="Bold"/>
         <Button Content="Gegevens aanpasen" Command="{Binding ShowEditInspectorCommand}" FontWeight="Bold" FontSize="15" Canvas.Top="10" Canvas.Left="120"/>
         <Button Content="Availabality aanpassen" Command="{Binding ShowEditAvailabilityCommand}" FontWeight="Bold" FontSize="15" Canvas.Top="10" Canvas.Left="270"/>
-        <ScrollViewer VerticalScrollBarVisibility="Auto" Canvas.Top="40" Canvas.Left="10">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Canvas.Top="60" Canvas.Left="10">
 
             <DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedInspector}" ItemsSource="{Binding InspectorsList, UpdateSourceTrigger=PropertyChanged}" GridLinesVisibility="Horizontal" HeadersVisibility="Column">
                 <DataGrid.Columns>
+                    <DataGridTextColumn Header="#" Binding="{Binding Id}"/>
                     <DataGridTextColumn Header="Naam">
                         <DataGridTextColumn.Binding>
                             <MultiBinding StringFormat="{}{0} {1} {2}">
@@ -23,14 +24,17 @@
                             </MultiBinding>
                         </DataGridTextColumn.Binding>
                     </DataGridTextColumn>
+                    <DataGridTextColumn Header="Regio" Binding="{Binding City}"/>
+                    <DataGridTextColumn Header="Email" Binding="{Binding Email}"/>
+                    <DataGridTextColumn Header="Telefoonnummer" Binding="{Binding Phonenumber}"/>
                 </DataGrid.Columns>
             </DataGrid>
         </ScrollViewer>
-        <Border Canvas.Top="40" Canvas.Left="200" Visibility="{Binding ShowAvailability, Converter={StaticResource ShowAvailability}}">
+        <Border Canvas.Top="60" Canvas.Left="470" Visibility="{Binding ShowAvailability, Converter={StaticResource ShowAvailability}}">
             <DataGrid Grid.ColumnSpan="2" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding InspectorAvailability, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                   GridLinesVisibility="Horizontal" HeadersVisibility="Column" Canvas.Top="30" Canvas.Left="10" CanUserResizeColumns="False">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Tijd" Width="150">
+                    <DataGridTextColumn Header="Tijd" Width="250">
                         <DataGridTextColumn.Binding>
                             <MultiBinding StringFormat="{}{0}-{1}">
                                 <Binding Path="StartTime"/>
