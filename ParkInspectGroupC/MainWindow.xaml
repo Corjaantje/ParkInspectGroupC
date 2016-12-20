@@ -8,6 +8,7 @@
 		xmlns:viewsm="clr-namespace:ParkInspectGroupC.View.MainWindow"
 		Title="ParkInspect"
         mc:Ignorable="d"
+        Icon="Image/IconLogo.ico"
 		DataContext="{Binding Main, Source={StaticResource Locator}}">
 	<Grid Background="{DynamicResource WindowBackgroundBrush}">
 		<DockPanel LastChildFill="True">
