@@ -9,7 +9,7 @@
     <Canvas>
         <TextBlock Text="Inspecteurs" Canvas.Top="10" Canvas.Left="10" FontSize="18" FontWeight="Bold"/>
         <Button Content="Gegevens aanpasen" Command="{Binding ShowEditInspectorCommand}" FontWeight="Bold" FontSize="15" Canvas.Top="10" Canvas.Left="120"/>
-        <Button Content="Availabality aanpassen" Command="{Binding ShowEditAvailabilityCommand}" FontWeight="Bold" FontSize="15" Canvas.Top="10" Canvas.Left="270"/>
+        <Button Content="Availabality aangeven" Command="{Binding ShowCreateAvailabilityCommand}" FontWeight="Bold" FontSize="15" Canvas.Top="10" Canvas.Left="270"/>
         <ScrollViewer VerticalScrollBarVisibility="Auto" Canvas.Top="60" Canvas.Left="10">
 
             <DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedInspector}" ItemsSource="{Binding InspectorsList, UpdateSourceTrigger=PropertyChanged}" GridLinesVisibility="Horizontal" HeadersVisibility="Column">
@@ -31,10 +31,10 @@
             </DataGrid>
         </ScrollViewer>
         <Border Canvas.Top="60" Canvas.Left="470" Visibility="{Binding ShowAvailability, Converter={StaticResource ShowAvailability}}">
-            <DataGrid Grid.ColumnSpan="2" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding InspectorAvailability, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                  GridLinesVisibility="Horizontal" HeadersVisibility="Column" Canvas.Top="30" Canvas.Left="10" CanUserResizeColumns="False">
+            <DataGrid Grid.ColumnSpan="2" AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedAvailability}" ItemsSource="{Binding InspectorAvailability, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                  GridLinesVisibility="Horizontal" HeadersVisibility="Column" Canvas.Top="30" Canvas.Left="10" CanUserResizeColumns="False" RenderTransformOrigin="0.491,0.283">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Tijd" Width="250">
+                    <DataGridTextColumn Header="Tijd" Width="260">
                         <DataGridTextColumn.Binding>
                             <MultiBinding StringFormat="{}{0}-{1}">
                                 <Binding Path="StartTime"/>
@@ -43,6 +43,13 @@
                         </DataGridTextColumn.Binding>
                     </DataGridTextColumn>
                     <DataGridTextColumn Header="Datum" Binding="{Binding Date}" Width="140"/>
+                    <DataGridTemplateColumn Width="50">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Command="{Binding DataContext.ShowEditAvailabilityCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" BorderThickness="0,0,0,1" BorderBrush="#FF999A9B" Foreground="White" Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="60" Height="30" Background="#FF6F9BDA" Content="Edit"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </Border>

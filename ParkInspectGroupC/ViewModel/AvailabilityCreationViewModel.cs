@@ -5,8 +5,10 @@ using ParkInspectGroupC.Miscellaneous;
 using ParkInspectGroupC.View;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -47,15 +49,15 @@ namespace ParkInspectGroupC.ViewModel
             get { return _endTime; }
             set { _endTime = value; RaisePropertyChanged("EndTime"); }
         }
-
+        
+        public ObservableCollection<Availability> AvailibilityList { get; set; }
         public Employee SelectedInspector { get; set; }
         public ICommand SaveCommand { get; set; }
-        public AvailabilityCreationViewModel(Employee selectedInspector)
+        public AvailabilityCreationViewModel(Employee selectedInspector, ObservableCollection<Availability> iAvailability)
         {
             this.SelectedInspector = selectedInspector;
+            this.AvailibilityList = iAvailability;
             SaveCommand = new RelayCommand(Save, CanSave);
-            eTime = DateTime.Now.ToString();
-            //sTime = DateTime.Now.ToString();
         }
 
         private void Save()
@@ -73,26 +75,31 @@ namespace ParkInspectGroupC.ViewModel
                 context.Availability.Add(availability);
                 context.SaveChanges();
             }
-            Navigator.Back();
+            Navigator.SetNewView(new InspectorsListView());
         }
 
         private bool CanSave()
         {
-            if (Date == null || string.IsNullOrWhiteSpace(sTime))
+            DateTime start;
+            DateTime end;
+            string format = "dd-MM-yyyy HH:mm";
+            if (Date == null || 
+                !DateTime.TryParseExact(sTime, format, null, DateTimeStyles.None, out start) || 
+                !DateTime.TryParseExact(eTime, format, null, DateTimeStyles.None, out end))
             {
                 return false;
             }
-            try
+            
+            // cheeck if date already exist 
+            foreach(var a in AvailibilityList)
             {
-                string date = DateTime.Now.Date.ToString();
-                StartTime = DateTime.ParseExact(date + " "+ sTime, "dd-mm-yyyy hh:mm:ss", System.Globalization.CultureInfo.CurrentCulture);
-                //EndTime = TimeSpan.ParseExact(eTime, "hh:mm:ss", System.Globalization.CultureInfo.CurrentCulture);
+                if(a.Date == this.Date)
+                {
+                    return false;
+                }
             }
-            catch (Exception e)
-            {
-                Debug.WriteLine(e.Message);
-                Debug.WriteLine(e.StackTrace);
-            }
+            StartTime = start;
+            EndTime = end;
             return true;
         }
     }

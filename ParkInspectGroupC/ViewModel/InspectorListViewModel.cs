@@ -38,6 +38,19 @@ namespace ParkInspectGroupC.ViewModel
             }
         }
 
+        private Availability _selectedAvailability;
+        public Availability SelectedAvailability
+        {
+            get
+            {
+                return _selectedAvailability;
+            }
+            set
+            {
+                _selectedAvailability = value; RaisePropertyChanged("SelectedAvailability");
+            }
+        }
+        private int days;
         public ObservableCollection<Employee> InspectorsList { get; set; }
         private ObservableCollection<Availability> _inspectorAvailability;
         public ObservableCollection<Availability> InspectorAvailability
@@ -46,6 +59,7 @@ namespace ParkInspectGroupC.ViewModel
             set { _inspectorAvailability = value; RaisePropertyChanged("InspectorAvailability"); }
         }
         public ICommand ShowEditInspectorCommand { get; set; }
+        public ICommand ShowCreateAvailabilityCommand { get; set; }
         public ICommand ShowEditAvailabilityCommand { get; set; }
         public InspectorListViewModel()
         {
@@ -56,7 +70,8 @@ namespace ParkInspectGroupC.ViewModel
                 InspectorsList = new ObservableCollection<Employee>(iList);
             }
             ShowEditInspectorCommand = new RelayCommand(ShowEditView, CanShowEditView);
-            ShowEditAvailabilityCommand = new RelayCommand(ShowEditAvailability, CanShowEditAvailibility);
+            ShowCreateAvailabilityCommand = new RelayCommand(ShowCreateAvailability, CanShowCreateAvailibility);
+            ShowEditAvailabilityCommand = new RelayCommand(showEditAvailability, CanShowAvailabilityEdit);
         }
 
         private void ShowEditView()
@@ -74,15 +89,36 @@ namespace ParkInspectGroupC.ViewModel
             return true;
         }
 
-        private void ShowEditAvailability()
+        private void ShowCreateAvailability()
         {
             Navigator.SetNewView(new AvailabilityCreationView());
             ShowAvailability = false;
         }
 
-        private bool CanShowEditAvailibility()
+        private bool CanShowCreateAvailibility()
         {
             if (SelectedInspector == null)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private void showEditAvailability()
+        {
+            Navigator.SetNewView(new AvailabilityEditView());
+        }
+
+        private bool CanShowAvailabilityEdit()
+        {
+            if (SelectedAvailability != null)
+            {
+                // get days between dates to see if employee may edit
+                TimeSpan daysBetweenDates = DateTime.Now - SelectedAvailability.Date;
+                days = (int)daysBetweenDates.TotalDays;
+            }
+            
+            if (days < 7)
             {
                 return false;
             }

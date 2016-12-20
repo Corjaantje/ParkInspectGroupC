@@ -121,6 +121,7 @@
     <Compile Include="Miscellaneous\IHavePassword.cs" />
     <Compile Include="Miscellaneous\Navigator.cs" />
     <Compile Include="ViewModel\AvailabilityCreationViewModel.cs" />
+    <Compile Include="ViewModel\AvailabilityEditViewModel.cs" />
     <Compile Include="ViewModel\CustomerCreationViewModel.cs" />
     <Compile Include="ViewModel\DashboardViewModel.cs" />
     <Compile Include="ViewModel\DatabaseSyncViewModel.cs" />
@@ -138,6 +139,9 @@
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\AvailabilityCreationView.xaml.cs">
       <DependentUpon>AvailabilityCreationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AvailabilityEditView.xaml.cs">
+      <DependentUpon>AvailabilityEditView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\CustomerCreationView.xaml.cs">
       <DependentUpon>CustomerCreationView.xaml</DependentUpon>
@@ -238,6 +242,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\AvailabilityCreationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AvailabilityEditView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

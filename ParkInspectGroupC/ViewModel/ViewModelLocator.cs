@@ -55,6 +55,7 @@ namespace ParkInspectGroupC.ViewModel
             SimpleIoc.Default.Register<ManagerDashboardViewModel>();
             SimpleIoc.Default.Register<InspectorListViewModel>();
             SimpleIoc.Default.Register<AvailabilityCreationViewModel>();
+            SimpleIoc.Default.Register<AvailabilityEditViewModel>();
         }
 
         public MainViewModel Main
@@ -136,7 +137,12 @@ namespace ParkInspectGroupC.ViewModel
 
         public AvailabilityCreationViewModel Availability
         {
-            get { return new AvailabilityCreationViewModel(InspectorList.SelectedInspector); }
+            get { return new AvailabilityCreationViewModel(InspectorList.SelectedInspector, InspectorList.InspectorAvailability); }
+        }
+
+        public AvailabilityEditViewModel EditAvailability
+        {
+            get { return new AvailabilityEditViewModel(InspectorList.SelectedAvailability, InspectorList.InspectorAvailability); }
         }
 
 
