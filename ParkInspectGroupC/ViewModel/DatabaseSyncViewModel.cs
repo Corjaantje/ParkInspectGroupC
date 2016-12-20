@@ -10,7 +10,6 @@ using System.Diagnostics;
 using System;
 using ParkInspectGroupC.View.DatabaseSyncDialogs;
 using System.Linq;
-using ParkInspectGroupC.Miscellaneous;
 
 namespace ParkInspectGroupC.ViewModel
 {
@@ -86,25 +85,21 @@ namespace ParkInspectGroupC.ViewModel
             {
                 if (theUpdateMessages.Count == 0)
                 {
+                    //Start sync with central
+                    Debug.WriteLine("CentralToLocal: Starting Sync");
+                    Task<bool> syncCToL = ldb.SyncCentralToLocal();
+
                     _message.Date = DateTime.Now;
-                    if (Properties.Settings.Default.OnOffline)
+                    if (syncCToL.Result)
                     {
-                        //Start sync with central
-                        Task<bool> syncCToL = ldb.SyncCentralToLocal();
-                        
-                        if (syncCToL.Result)
-                        {
-                            _message.Message = "Succes!";
-                        }
-                        else
-                        {
-                            _message.Message = "Failed!";
-                        }
+                        _message.Message = "Succes!";
                     }
                     else
                     {
-                        _message.Message = "Kon niet gaan synchroniseren want er is geen verbinding met de centrale database!";
+                        _message.Message = "Failed!";
                     }
+                    Debug.WriteLine("CentralToLocal: Done Sync");
+                    Debug.WriteLine("CentralToLocal: Stopping Sync");
                 }
             });
 
@@ -149,7 +144,10 @@ namespace ParkInspectGroupC.ViewModel
 
             Task task = Task.Run(() =>
             {
+                Debug.WriteLine("SaveDelete: Starting Sync");
                 message = ldb.SyncLocalToCentralSaveDelete();
+                Debug.WriteLine("SaveDelete: Sync Done");
+                Debug.WriteLine("SaveDelete: Sync Stopping");
             });
 
             await task;
@@ -162,7 +160,10 @@ namespace ParkInspectGroupC.ViewModel
 
             Task task = Task.Run(() =>
             {
+                Debug.WriteLine("Update: Starting Sync");
                 UpdateMessages = ldb.SyncLocalToCentralUpdate();
+                Debug.WriteLine("Update: Sync Done");
+                Debug.WriteLine("Update: Sync Stopping");
             });
 
             await task;

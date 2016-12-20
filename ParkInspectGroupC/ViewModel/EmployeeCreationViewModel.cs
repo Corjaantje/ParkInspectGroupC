@@ -6,6 +6,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using LocalDatabase.Domain;
 using ParkInspectGroupC.Encryption;
+using ParkInspectGroupC.Miscellaneous;
 
 namespace ParkInspectGroupC.ViewModel
 {
@@ -64,6 +65,7 @@ namespace ParkInspectGroupC.ViewModel
 				context.Account.Add(nAccount);
 				context.SaveChanges();
 			}
+            Navigator.Back();
 		}
 
 		private bool CanSaveEmployee()

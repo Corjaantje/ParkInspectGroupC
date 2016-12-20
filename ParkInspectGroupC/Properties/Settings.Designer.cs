@@ -34,17 +34,5 @@ namespace ParkInspectGroupC.Properties {
                 this["CurrentThemeUri"] = value;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool OnOffline {
-            get {
-                return ((bool)(this["OnOffline"]));
-            }
-            set {
-                this["OnOffline"] = value;
-            }
-        }
     }
 }

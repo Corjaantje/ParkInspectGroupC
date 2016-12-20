@@ -10,24 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace ParkInspectGroupC.View
 {
-	/// <summary>
-	/// Interaction logic for NewAssignmentView.xaml
-	/// </summary>
-	public partial class NewAssignmentView : Window
-	{
-		public NewAssignmentView()
-		{
-			InitializeComponent();
-			DataContext = new NewAssignmentView();
-		}
-
-		private void createAssignment_Click(object sender, RoutedEventArgs e)
-		{
-
-		}
-	}
+    /// <summary>
+    /// Interaction logic for InspectorEditView.xaml
+    /// </summary>
+    public partial class InspectorEditView : UserControl
+    {
+        public InspectorEditView()
+        {
+            InitializeComponent();
+        }
+    }
 }

@@ -10,18 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace ParkInspectGroupC.View
 {
-	/// <summary>
-	/// Interaction logic for InspectionView.xaml
-	/// </summary>
-	public partial class InspectionView : Window
-	{
-		public InspectionView()
-		{
-			InitializeComponent();
-		}
-	}
+    /// <summary>
+    /// Interaction logic for AvailabilityEditView.xaml
+    /// </summary>
+    public partial class AvailabilityEditView : UserControl
+    {
+        public AvailabilityEditView()
+        {
+            InitializeComponent();
+        }
+    }
 }

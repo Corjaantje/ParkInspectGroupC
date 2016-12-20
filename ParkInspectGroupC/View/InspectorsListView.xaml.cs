@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ParkInspectGroupC.View.MainWindow
+namespace ParkInspectGroupC.View
 {
     /// <summary>
-    /// Interaction logic for OnOffIndicator.xaml
+    /// Interaction logic for InspectorsListView.xaml
     /// </summary>
-    public partial class OnOffIndicator : UserControl
+    public partial class InspectorsListView : UserControl
     {
-        public OnOffIndicator()
+        public InspectorsListView()
         {
             InitializeComponent();
         }
