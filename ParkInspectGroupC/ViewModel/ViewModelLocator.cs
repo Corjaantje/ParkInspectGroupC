@@ -142,7 +142,7 @@ namespace ParkInspectGroupC.ViewModel
 
         public AvailabilityEditViewModel EditAvailability
         {
-            get { return new AvailabilityEditViewModel(InspectorList.SelectedAvailability, InspectorList.InspectorAvailability); }
+            get { return new AvailabilityEditViewModel(InspectorList.SelectedAvailability); }
         }
 
 

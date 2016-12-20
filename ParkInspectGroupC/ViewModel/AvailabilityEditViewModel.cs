@@ -35,7 +35,7 @@ namespace ParkInspectGroupC.ViewModel
         public DateTime? TempEndTime { get; set; }
 
         public ICommand SaveCommand { get; set; }
-        public AvailabilityEditViewModel(Availability selectedAvailability, ObservableCollection<Availability> iAvailability)
+        public AvailabilityEditViewModel(Availability selectedAvailability)
         {
             this.SelectedAvailability = selectedAvailability;
             Date = SelectedAvailability.Date;
