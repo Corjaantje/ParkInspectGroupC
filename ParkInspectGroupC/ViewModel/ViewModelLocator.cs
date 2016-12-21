@@ -1,17 +1,3 @@
-/*
-  In App.xaml:
-  <Application.Resources>
-      <vm:ViewModelLocator xmlns:vm="clr-namespace:ParkInspectGroupC"
-                           x:Key="Locator" />
-  </Application.Resources>
-  
-  In the View:
-  DataContext="{Binding Source={StaticResource Locator}, Path=ViewModelName}"
-
-  You can also use Blend to do all this with the tool's support.
-  See http://www.galasoft.ch/mvvm
-*/
-
 using System;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
@@ -19,29 +5,13 @@ using Microsoft.Practices.ServiceLocation;
 
 namespace ParkInspectGroupC.ViewModel
 {
-    /// <summary>
-    /// This class contains static references to all the view models in the
-    /// application and provides an entry point for the bindings.
-    /// </summary>
+
     public class ViewModelLocator
     {
-        /// <summary>
-        /// Initializes a new instance of the ViewModelLocator class.
-        /// </summary>
+
         public ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-
-            ////if (ViewModelBase.IsInDesignModeStatic)
-            ////{
-            ////    // Create design time view services and models
-            ////    SimpleIoc.Default.Register<IDataService, DesignDataService>();
-            ////}
-            ////else
-            ////{
-            ////    // Create run time view services and models
-            ////    SimpleIoc.Default.Register<IDataService, DataService>();
-            ////}
 
             RegisterViewModels();
 
@@ -61,6 +31,11 @@ namespace ParkInspectGroupC.ViewModel
             SimpleIoc.Default.Register<CustomerEditViewModel>();
             SimpleIoc.Default.Register<OnOffIndicatorViewModel>();
             SimpleIoc.Default.Register<ViewModelLocator>(); //Needed for the cleanup method ~Roy
+            SimpleIoc.Default.Register<DashboardViewModel>();
+            SimpleIoc.Default.Register<ManagerDashboardViewModel>();
+            SimpleIoc.Default.Register<InspectorListViewModel>();
+            SimpleIoc.Default.Register<AvailabilityCreationViewModel>();
+            SimpleIoc.Default.Register<AvailabilityEditViewModel>();
         }
 
         private static void UnRegisterViewModels()
@@ -74,11 +49,11 @@ namespace ParkInspectGroupC.ViewModel
             SimpleIoc.Default.Unregister<CustomerListViewModel>();
             SimpleIoc.Default.Unregister<CustomerEditViewModel>();
             SimpleIoc.Default.Unregister<OnOffIndicatorViewModel>();
-            SimpleIoc.Default.Register<DashboardViewModel>();
-            SimpleIoc.Default.Register<ManagerDashboardViewModel>();
-            SimpleIoc.Default.Register<InspectorListViewModel>();
-            SimpleIoc.Default.Register<AvailabilityCreationViewModel>();
-            SimpleIoc.Default.Register<AvailabilityEditViewModel>();
+            SimpleIoc.Default.Unregister<DashboardViewModel>();
+            SimpleIoc.Default.Unregister<ManagerDashboardViewModel>();
+            SimpleIoc.Default.Unregister<InspectorListViewModel>();
+            SimpleIoc.Default.Unregister<AvailabilityCreationViewModel>();
+            SimpleIoc.Default.Unregister<AvailabilityEditViewModel>();
         }
 
         public MainViewModel Main
@@ -127,7 +102,7 @@ namespace ParkInspectGroupC.ViewModel
 
 	    public InspectorProfileViewModel InspectorProfile
 	    {
-		    get { return new InspectorProfileViewModel(LoginWindow.LoginEmployee); }
+		    get { return new InspectorProfileViewModel(); }
 	    }
 
         public DatabaseSyncViewModel DatabaseSync
@@ -153,12 +128,12 @@ namespace ParkInspectGroupC.ViewModel
 
         public DashboardViewModel Dashboard
         {
-            get { return new DashboardViewModel(); }
+            get { return ServiceLocator.Current.GetInstance<DashboardViewModel>(); }
         }
 
         public ManagerDashboardViewModel ManagerDashboard
         {
-            get { return new ManagerDashboardViewModel(); }
+            get { return ServiceLocator.Current.GetInstance<ManagerDashboardViewModel>(); }
         }
 
         public InspectorListViewModel InspectorList

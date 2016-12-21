@@ -64,7 +64,7 @@ namespace ParkInspectGroupC.ViewModel
             set { _inspections = value; RaisePropertyChanged("Inspections"); }
         }
 
-        public InspectorProfileViewModel(Employee employee)
+        public InspectorProfileViewModel()
         {
             Emp = Properties.Settings.Default.LoggedInEmp;
             try
