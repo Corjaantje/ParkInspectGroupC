@@ -36,7 +36,7 @@ namespace ParkInspectGroupC.ViewModel
 
 		public LoginViewModel()
 		{
-            			_loginMessage = string.Empty;
+            _loginMessage = string.Empty;
 			LoginCommand = new RelayCommand<object>(Login, CanLogin);
 		}
 
@@ -64,7 +64,6 @@ namespace ParkInspectGroupC.ViewModel
 						return;
 					}
 
-					LoginMessage = PasswordInVM;
 
 					// Check password
 					string passToCheck = PasswordInVM + acc.UserGuid;
