@@ -66,13 +66,9 @@ namespace ParkInspectGroupC.ViewModel
 
         public InspectorProfileViewModel()
         {
-            //TODO The emp variable should be a parameter to this constructor
+            var emp = Properties.Settings.Default.LoggedInEmp;
             try
             {
-                using (var context = new LocalParkInspectEntities())
-                {
-                    Emp = (from e in context.Employee where e.Id == 3 select e).FirstOrDefault();
-                }
                 Name = Emp.FirstName + " " + Emp.Prefix + " " + Emp.SurName + " (" + Emp.Gender + ")";
                 Adress = Emp.Address + ", " + Emp.ZipCode + ", " + Emp.City;
                 Email = Emp.Email;  
