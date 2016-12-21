@@ -21,9 +21,9 @@ namespace ParkInspectGroupC.ViewModel
          public ObservableCollection<Availability> ManagerAvailability { get; set; }
          public ICommand ShowInspectorListCommand { get; set; }
         public ICommand AddAccountCommand { get; set; }
-         public ManagerDashboardViewModel(Employee manager)
+         public ManagerDashboardViewModel()
          {
-             Manager = manager;
+             Manager = Properties.Settings.Default.LoggedInEmp;
              using (var context = new LocalParkInspectEntities())
              {
                  var asList = (from a in context.Assignment

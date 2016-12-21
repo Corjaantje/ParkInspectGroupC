@@ -13,9 +13,9 @@ namespace ParkInspectGroupC.ViewModel
     {
         public Employee Employee { get; set; }
          public ObservableCollection<Availability> EmployeeAvailability { get; set; }
-         public DashboardViewModel(Employee employee)
+         public DashboardViewModel()
          {
-             Employee = employee;
+             Employee = Properties.Settings.Default.LoggedInEmp;
              using (var context = new LocalParkInspectEntities())
              {
                  var eAvailability = context.Availability.Where(e => e.EmployeeId == Employee.Id).ToList();
