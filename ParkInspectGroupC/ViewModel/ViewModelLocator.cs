@@ -60,7 +60,7 @@ namespace ParkInspectGroupC.ViewModel
             SimpleIoc.Default.Register<CustomerListViewModel>();
             SimpleIoc.Default.Register<CustomerEditViewModel>();
             SimpleIoc.Default.Register<OnOffIndicatorViewModel>();
-            SimpleIoc.Default.Register<ViewModelLocator>();
+            SimpleIoc.Default.Register<ViewModelLocator>(); //Needed for the cleanup method ~Roy
         }
 
         private static void UnRegisterViewModels()
@@ -74,6 +74,11 @@ namespace ParkInspectGroupC.ViewModel
             SimpleIoc.Default.Unregister<CustomerListViewModel>();
             SimpleIoc.Default.Unregister<CustomerEditViewModel>();
             SimpleIoc.Default.Unregister<OnOffIndicatorViewModel>();
+            SimpleIoc.Default.Register<DashboardViewModel>();
+            SimpleIoc.Default.Register<ManagerDashboardViewModel>();
+            SimpleIoc.Default.Register<InspectorListViewModel>();
+            SimpleIoc.Default.Register<AvailabilityCreationViewModel>();
+            SimpleIoc.Default.Register<AvailabilityEditViewModel>();
         }
 
         public MainViewModel Main
@@ -122,7 +127,7 @@ namespace ParkInspectGroupC.ViewModel
 
 	    public InspectorProfileViewModel InspectorProfile
 	    {
-		    get { return ServiceLocator.Current.GetInstance<InspectorProfileViewModel>(); }
+		    get { return new InspectorProfileViewModel(LoginWindow.LoginEmployee); }
 	    }
 
         public DatabaseSyncViewModel DatabaseSync
@@ -146,7 +151,34 @@ namespace ParkInspectGroupC.ViewModel
             }
         }
 
+        public DashboardViewModel Dashboard
+        {
+            get { return new DashboardViewModel(); }
+        }
 
+        public ManagerDashboardViewModel ManagerDashboard
+        {
+            get { return new ManagerDashboardViewModel(); }
+        }
+
+        public InspectorListViewModel InspectorList
+        {
+            get { return ServiceLocator.Current.GetInstance<InspectorListViewModel>(); }
+        }
+
+        public InspectorEditViewModel EditInspector
+        {
+            get { return new InspectorEditViewModel(InspectorList.SelectedInspector); }
+        }
+         public AvailabilityCreationViewModel Availability
+        {
+            get { return new AvailabilityCreationViewModel(InspectorList.SelectedInspector, InspectorList.InspectorAvailability); }
+        }
+
+        public AvailabilityEditViewModel EditAvailability
+        {
+            get { return new AvailabilityEditViewModel(InspectorList.SelectedAvailability,InspectorList.InspectorAvailability); }
+        }
 
         public void Cleanup()
         {

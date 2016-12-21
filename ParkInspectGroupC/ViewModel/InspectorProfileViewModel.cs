@@ -64,11 +64,12 @@ namespace ParkInspectGroupC.ViewModel
             set { _inspections = value; RaisePropertyChanged("Inspections"); }
         }
 
-        public InspectorProfileViewModel()
+        public InspectorProfileViewModel(Employee employee)
         {
             Emp = Properties.Settings.Default.LoggedInEmp;
             try
             {
+
                 Name = Emp.FirstName + " " + Emp.Prefix + " " + Emp.SurName + " (" + Emp.Gender + ")";
                 Adress = Emp.Address + ", " + Emp.ZipCode + ", " + Emp.City;
                 Email = Emp.Email;  
