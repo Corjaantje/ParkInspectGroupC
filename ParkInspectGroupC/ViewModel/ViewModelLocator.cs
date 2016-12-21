@@ -60,11 +60,11 @@ namespace ParkInspectGroupC.ViewModel
             SimpleIoc.Default.Register<CustomerListViewModel>();
             SimpleIoc.Default.Register<CustomerEditViewModel>();
             SimpleIoc.Default.Register<OnOffIndicatorViewModel>();
+            SimpleIoc.Default.Register<ViewModelLocator>();
         }
 
         private static void UnRegisterViewModels()
         {
-            SimpleIoc.Default.Unregister<MainViewModel>();
             SimpleIoc.Default.Unregister<CustomerCreationViewModel>();
             SimpleIoc.Default.Unregister<MapViewModel>();
             SimpleIoc.Default.Unregister<QuestionnaireViewModel>();
@@ -148,7 +148,7 @@ namespace ParkInspectGroupC.ViewModel
 
 
 
-        public static void Cleanup()
+        public void Cleanup()
         {
             UnRegisterViewModels();
             Properties.Settings.Default.LoggedInEmp = null;

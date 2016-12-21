@@ -9,6 +9,8 @@ using GalaSoft.MvvmLight.CommandWpf;
 using ParkInspectGroupC.Factory;
 using ParkInspectGroupC.Properties;
 using ParkInspectGroupC.View;
+using GalaSoft.MvvmLight.Ioc;
+using Microsoft.Practices.ServiceLocation;
 
 namespace ParkInspectGroupC.ViewModel
 {
@@ -102,7 +104,11 @@ namespace ParkInspectGroupC.ViewModel
 
         private void PerformLogOut()
         {
+            SimpleIoc.Default.Unregister<LoginViewModel>();
+            SimpleIoc.Default.Register<LoginViewModel>();
             Navigator.SetNewView(new LoginView());
+            ServiceLocator.Current.GetInstance<ViewModelLocator>().Cleanup();
+            
         }
 
         private bool CanPerformBack()
