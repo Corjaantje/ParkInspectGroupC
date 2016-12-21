@@ -43,15 +43,17 @@ namespace ParkInspectGroupC.ViewModel
             ////}
 
             SimpleIoc.Default.Register<MainViewModel>();
-			SimpleIoc.Default.Register<LoginViewModel>();
+		      	SimpleIoc.Default.Register<LoginViewModel>();
             SimpleIoc.Default.Register<CustomerCreationViewModel>();
             SimpleIoc.Default.Register<MapViewModel>();
             SimpleIoc.Default.Register<QuestionnaireViewModel>();
-			SimpleIoc.Default.Register<EmployeeCreationViewModel>();
-			SimpleIoc.Default.Register<InspectorProfileViewModel>();
+			      SimpleIoc.Default.Register<EmployeeCreationViewModel>();
+		      	SimpleIoc.Default.Register<InspectorProfileViewModel>();
             SimpleIoc.Default.Register<DatabaseSyncViewModel>();
             SimpleIoc.Default.Register<CustomerListViewModel>();
+            SimpleIoc.Default.Register<CustomerEditViewModel>();
             SimpleIoc.Default.Register<OnOffIndicatorViewModel>();
+
         }
 
         public MainViewModel Main
@@ -114,6 +116,14 @@ namespace ParkInspectGroupC.ViewModel
         public CustomerListViewModel CustomerList
         {
             get { return ServiceLocator.Current.GetInstance<CustomerListViewModel>(); }
+        }
+
+        public CustomerEditViewModel CustomerEdit
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<CustomerEditViewModel>();
+            }
         }
 
 

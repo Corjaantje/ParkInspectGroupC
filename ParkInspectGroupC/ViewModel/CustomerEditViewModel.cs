@@ -2,33 +2,51 @@
 using GalaSoft.MvvmLight.Command;
 using LocalDatabase.Domain;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 using System.Windows.Input;
+
 
 namespace ParkInspectGroupC.ViewModel
 {
-    public class CustomerCreationViewModel : ViewModelBase
+    public class CustomerEditViewModel
     {
-
         private string _customername;
         private string _streetname;
         private string _housenumber;
         private string _location;
         private string _phonenumber;
         private string _customermail;
+        CustomerListViewModel _customerList;
+        
 
-       
-        public CustomerCreationViewModel()
+
+
+
+        public CustomerEditViewModel(CustomerListViewModel customerList)
         {
-            AddCustomerCommand = new RelayCommand(addCustomer, canAddCustomer);
+       
+            EditCustomerCommand = new RelayCommand(editCustomer, canEditCustomer);
+            this._customerList = customerList;
+            CustomerName = customerList.SelectedCustomer.Name;
+            string[] array = customerList.SelectedCustomer.Address.Split(' ');
+            StreetName = array[0];
+            HouseNumber = array[1];
+            CustomerLocation = customerList.SelectedCustomer.Location;
+            PhoneNumber = customerList.SelectedCustomer.Phonenumber;
+            CustomerMail = customerList.SelectedCustomer.Email;
         }
 
         public string CustomerName
         {
-            get{
+            get
+            {
                 return _customername;
             }
 
-            set{
+            set
+            {
                 _customername = value;
                 RaisePropertyChanged("CustomerName");
             }
@@ -88,7 +106,7 @@ namespace ParkInspectGroupC.ViewModel
             {
                 _phonenumber = value;
                 RaisePropertyChanged("PhoneNumber");
-               
+
             }
         }
 
@@ -103,11 +121,11 @@ namespace ParkInspectGroupC.ViewModel
             set
             {
                 _customermail = value;
-                RaisePropertyChanged("Customermail");
+                RaisePropertyChanged("CustomerMail");
             }
         }
 
-        private bool canAddCustomer()
+        private bool canEditCustomer()
         {
 
             if (string.IsNullOrWhiteSpace(CustomerName)
@@ -115,36 +133,43 @@ namespace ParkInspectGroupC.ViewModel
                 || string.IsNullOrWhiteSpace(HouseNumber)
                 || string.IsNullOrWhiteSpace(CustomerLocation)
                 || string.IsNullOrWhiteSpace(PhoneNumber)
-                || string.IsNullOrWhiteSpace(CustomerMail)) 
-                {
-                 return false;
+                || string.IsNullOrWhiteSpace(CustomerMail))
+            {
+                return false;
             }
 
             return true;
         }
 
 
-        public void addCustomer()
+        public void editCustomer()
         {
             using (var context = new LocalParkInspectEntities())
             {
-                var customer = new Customer()
+                List<Customer> customers = context.Customer.ToList<Customer>();
+                foreach(var customer in customers)
                 {
-                    Name = CustomerName,
-                    Address = StreetName + " " + HouseNumber,
-                    Location = CustomerLocation,
-                    Phonenumber = PhoneNumber,
-                    Email = CustomerMail
+                    if(customer.Id == _customerList.SelectedCustomer.Id)
+                    {
+                        customer.Name = CustomerName;
+                        customer.Address = StreetName + " " + HouseNumber;
+                        customer.Location = CustomerLocation;
+                        customer.Phonenumber = PhoneNumber;
+                        customer.Email = CustomerMail;
+                    }
+                }
 
-                };
-
-                context.Customer.Add(customer);
                 context.SaveChanges();
                 Console.WriteLine("TEST geslaagd");
             }
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+        void RaisePropertyChanged(string prop)
+        {
+            if (PropertyChanged != null) { PropertyChanged(this, new PropertyChangedEventArgs(prop)); }
+        }
 
-        public ICommand AddCustomerCommand { get; set; }
+        public ICommand EditCustomerCommand { get; set; }
     }
 }
