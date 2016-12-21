@@ -125,6 +125,7 @@
     <Compile Include="Miscellaneous\Navigator.cs" />
     <Compile Include="ViewModel\AssignmentOverviewViewModel.cs" />
     <Compile Include="ViewModel\CustomerCreationViewModel.cs" />
+    <Compile Include="ViewModel\CustomerEditViewModel.cs" />
     <Compile Include="ViewModel\DatabaseSyncViewModel.cs" />
     <Compile Include="ViewModel\CustomerListViewModel.cs" />
     <Compile Include="ViewModel\EditAssignmentViewModel.cs" />
