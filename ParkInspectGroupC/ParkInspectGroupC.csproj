@@ -37,6 +37,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>IconLogo.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
@@ -387,6 +390,9 @@
   <ItemGroup>
     <Content Include="Gmaps\GMap.NET.Core.dll" />
     <Content Include="Gmaps\GMap.NET.WindowsPresentation.dll" />
+    <Resource Include="Image\IconLogo.ico" />
+    <Resource Include="IconLogo.ico" />
+    <Resource Include="Image\IconLogo.png" />
     <Resource Include="Image\arrow-back-128.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

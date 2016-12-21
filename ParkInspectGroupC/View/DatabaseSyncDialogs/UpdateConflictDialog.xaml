@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ParkInspectGroupC.View.DatabaseSyncDialogs"
         mc:Ignorable="d"
+        Icon="Image/IconLogo.ico"
         Title="Conflict details" Height="410" Width="510">
     <Grid>
         <TextBlock TextWrapping="Wrap" Margin="5,5,5,0" Height="40" VerticalAlignment="Top" HorizontalAlignment="Center">Links ziet u de lokale versie. Rechts is de centrale versie. Welke versie moet er opgeslagen worden?</TextBlock>
