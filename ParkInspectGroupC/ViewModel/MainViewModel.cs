@@ -100,7 +100,7 @@ namespace ParkInspectGroupC.ViewModel
             Navigator.Back();
         }
 
-        private void PerformLogout()
+        private void PerformLogOut()
         {
             Navigator.SetNewView(new LoginView());
         }
