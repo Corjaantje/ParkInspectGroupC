@@ -46,5 +46,16 @@ namespace ParkInspectGroupC.Properties {
                 this["OnOffline"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::LocalDatabase.Domain.Employee LoggedInEmp {
+            get {
+                return ((global::LocalDatabase.Domain.Employee)(this["LoggedInEmp"]));
+            }
+            set {
+                this["LoggedInEmp"] = value;
+            }
+        }
     }
 }

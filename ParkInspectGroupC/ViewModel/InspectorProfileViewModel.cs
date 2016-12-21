@@ -66,13 +66,10 @@ namespace ParkInspectGroupC.ViewModel
 
         public InspectorProfileViewModel(Employee employee)
         {
-            Emp = employee;
+            Emp = Properties.Settings.Default.LoggedInEmp;
             try
             {
-                using (var context = new LocalParkInspectEntities())
-                {
-                    Emp = (from e in context.Employee where e.Id == Emp.Id select e).FirstOrDefault();
-                }
+
                 Name = Emp.FirstName + " " + Emp.Prefix + " " + Emp.SurName + " (" + Emp.Gender + ")";
                 Adress = Emp.Address + ", " + Emp.ZipCode + ", " + Emp.City;
                 Email = Emp.Email;  
@@ -80,12 +77,6 @@ namespace ParkInspectGroupC.ViewModel
                 using (var context = new LocalParkInspectEntities())
                 {
                     Status = (from s in context.EmployeeStatus where s.Id == Emp.EmployeeStatusId select s).FirstOrDefault().Description;
-                }
-                using (var context = new LocalParkInspectEntities())
-                {
-
-                    Inspections = (from insp in context.Inspection where insp.InspectorId == Emp.Id select new 
-                    { insp.Id, insp.Location, InspectionStatus = (from inspStat in context.InspectionStatus where inspStat.Id == insp.StatusId select inspStat).FirstOrDefault().Description}).ToList();
                 }
                 try
                 {
@@ -100,6 +91,13 @@ namespace ParkInspectGroupC.ViewModel
                 {
                     ManagerName = "Deze medewerker heeft geen manager.";
                 }
+                using (var context = new LocalParkInspectEntities())
+                {
+
+                    Inspections = (from insp in context.Inspection where insp.InspectorId == Emp.Id select new 
+                    { insp.Id, insp.Location, InspectionStatus = (from inspStat in context.InspectionStatus where inspStat.Id == insp.StatusId select inspStat).FirstOrDefault().Description}).ToList();
+                }
+                
             }
             catch
             {
