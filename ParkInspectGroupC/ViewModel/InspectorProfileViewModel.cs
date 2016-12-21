@@ -64,14 +64,14 @@ namespace ParkInspectGroupC.ViewModel
             set { _inspections = value; RaisePropertyChanged("Inspections"); }
         }
 
-        public InspectorProfileViewModel()
+        public InspectorProfileViewModel(Employee employee)
         {
-            //TODO The emp variable should be a parameter to this constructor
+            Emp = employee;
             try
             {
                 using (var context = new LocalParkInspectEntities())
                 {
-                    Emp = (from e in context.Employee where e.Id == 3 select e).FirstOrDefault();
+                    Emp = (from e in context.Employee where e.Id == Emp.Id select e).FirstOrDefault();
                 }
                 Name = Emp.FirstName + " " + Emp.Prefix + " " + Emp.SurName + " (" + Emp.Gender + ")";
                 Adress = Emp.Address + ", " + Emp.ZipCode + ", " + Emp.City;
