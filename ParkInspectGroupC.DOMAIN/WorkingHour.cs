@@ -12,14 +12,15 @@ namespace ParkInspectGroupC.DOMAIN
     using System;
     using System.Collections.Generic;
     
-    public partial class InspectionImage
+    public partial class WorkingHour
     {
-        public int Id { get; set; }
-        public string File { get; set; }
-        public Nullable<int> InspectionId { get; set; }
+        public int EmployeeId { get; set; }
+        public System.DateTime Date { get; set; }
+        public Nullable<System.TimeSpan> StartTime { get; set; }
+        public Nullable<System.TimeSpan> EndTime { get; set; }
         public System.DateTime DateCreated { get; set; }
         public System.DateTime DateUpdated { get; set; }
     
-        public virtual Inspection Inspection { get; set; }
+        public virtual Employee Employee { get; set; }
     }
 }

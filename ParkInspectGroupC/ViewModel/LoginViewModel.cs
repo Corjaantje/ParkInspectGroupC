@@ -1,14 +1,18 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using LocalDatabase.Domain;
+using ParkInspectGroupC.DOMAIN;
 using ParkInspectGroupC.Encryption;
 using ParkInspectGroupC.Miscellaneous;
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace ParkInspectGroupC.ViewModel
 {
-    public class LoginViewModel : ViewModelBase
+	public class LoginViewModel : ViewModelBase
 	{
 
 		public ICommand LoginCommand { get; set; }
@@ -53,7 +57,7 @@ namespace ParkInspectGroupC.ViewModel
 				var secureString = passwordContainer.Password;
 				PasswordInVM = PassEncrypt.ConvertToUnsecureString(secureString);
 
-				using(var context = new LocalParkInspectEntities())
+				using(var context = new ParkInspectEntities())
 				{
 					var acc = (from a in context.Account where a.Username.CompareTo(Username) == 0 select a).FirstOrDefault();
 

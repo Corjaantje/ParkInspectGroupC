@@ -37,14 +37,91 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
-    <EntityDeploy Include="ParkInspectModel.edmx">
+    <EntityDeploy Include="ParkInspectDomain.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ParkInspectModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>ParkInspectDomain.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="ParkInspectModel.edmx.diagram">
-      <DependentUpon>ParkInspectModel.edmx</DependentUpon>
+    <None Include="packages.config" />
+    <None Include="ParkInspectDomain.edmx.diagram">
+      <DependentUpon>ParkInspectDomain.edmx</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Account.cs">
+      <DependentUpon>ParkInspectDomain.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Assignment.cs">
+      <DependentUpon>ParkInspectDomain.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Availability.cs">
+      <DependentUpon>ParkInspectDomain.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Customer.cs">
+      <DependentUpon>ParkInspectDomain.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Employee.cs">
+      <DependentUpon>ParkInspectDomain.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeeStatus.cs">
+      <DependentUpon>ParkInspectDomain.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Inspection.cs">
+      <DependentUpon>ParkInspectDomain.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InspectionImage.cs">
+      <DependentUpon>ParkInspectDomain.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InspectionStatus.cs">
+      <DependentUpon>ParkInspectDomain.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Keyword.cs">
+      <DependentUpon>ParkInspectDomain.tt</DependentUpon>
+    </Compile>
+    <Compile Include="KeywordCategory.cs">
+      <DependentUpon>ParkInspectDomain.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Module.cs">
+      <DependentUpon>ParkInspectDomain.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ParkInspectDomain.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ParkInspectDomain.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ParkInspectDomain.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ParkInspectDomain.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ParkInspectDomain.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ParkInspectDomain.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Question.cs">
+      <DependentUpon>ParkInspectDomain.tt</DependentUpon>
+    </Compile>
+    <Compile Include="QuestionAnswer.cs">
+      <DependentUpon>ParkInspectDomain.tt</DependentUpon>
+    </Compile>
+    <Compile Include="QuestionKeyword.cs">
+      <DependentUpon>ParkInspectDomain.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Questionnaire.cs">
+      <DependentUpon>ParkInspectDomain.tt</DependentUpon>
+    </Compile>
+    <Compile Include="QuestionnaireModule.cs">
+      <DependentUpon>ParkInspectDomain.tt</DependentUpon>
+    </Compile>
+    <Compile Include="QuestionSort.cs">
+      <DependentUpon>ParkInspectDomain.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Region.cs">
+      <DependentUpon>ParkInspectDomain.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WorkingHour.cs">
+      <DependentUpon>ParkInspectDomain.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -63,108 +140,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ParkInspectDomain.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ParkInspectDomain.Context.cs</LastGenOutput>
+      <DependentUpon>ParkInspectDomain.edmx</DependentUpon>
+    </Content>
+    <Content Include="ParkInspectDomain.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ParkInspectDomain.edmx</DependentUpon>
+      <LastGenOutput>ParkInspectDomain.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Account.cs">
-      <DependentUpon>ParkInspectModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Assignment.cs">
-      <DependentUpon>ParkInspectModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Availability.cs">
-      <DependentUpon>ParkInspectModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Coordinate.cs">
-      <DependentUpon>ParkInspectModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Customer.cs">
-      <DependentUpon>ParkInspectModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Employee.cs">
-      <DependentUpon>ParkInspectModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EmployeeStatus.cs">
-      <DependentUpon>ParkInspectModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Inspection.cs">
-      <DependentUpon>ParkInspectModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="InspectionImage.cs">
-      <DependentUpon>ParkInspectModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="InspectionStatus.cs">
-      <DependentUpon>ParkInspectModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Keyword.cs">
-      <DependentUpon>ParkInspectModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="KeywordCategory.cs">
-      <DependentUpon>ParkInspectModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Message.cs">
-      <DependentUpon>ParkInspectModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Module.cs">
-      <DependentUpon>ParkInspectModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ParkInspectModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ParkInspectModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ParkInspectModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ParkInspectModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ParkInspectModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ParkInspectModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Question.cs">
-      <DependentUpon>ParkInspectModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="QuestionAnswer.cs">
-      <DependentUpon>ParkInspectModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="QuestionKeyword.cs">
-      <DependentUpon>ParkInspectModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Questionnaire.cs">
-      <DependentUpon>ParkInspectModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="QuestionnaireModule.cs">
-      <DependentUpon>ParkInspectModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="QuestionSort.cs">
-      <DependentUpon>ParkInspectModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Region.cs">
-      <DependentUpon>ParkInspectModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Report.cs">
-      <DependentUpon>ParkInspectModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ReportSection.cs">
-      <DependentUpon>ParkInspectModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="WorkingHours.cs">
-      <DependentUpon>ParkInspectModel.tt</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="ParkInspectModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ParkInspectModel.edmx</DependentUpon>
-      <LastGenOutput>ParkInspectModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="ParkInspectModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ParkInspectModel.edmx</DependentUpon>
-      <LastGenOutput>ParkInspectModel.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

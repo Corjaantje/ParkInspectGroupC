@@ -4,7 +4,7 @@ using System.Linq;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
-using LocalDatabase.Domain;
+using ParkInspectGroupC.DOMAIN;
 using ParkInspectGroupC.Encryption;
 
 namespace ParkInspectGroupC.ViewModel
@@ -17,7 +17,7 @@ namespace ParkInspectGroupC.ViewModel
 			ResetFieldsCommand = new RelayCommand(ResetFields);
 
 			// Retreive abailable data from database.
-			using (var context = new LocalParkInspectEntities())
+			using (var context = new ParkInspectEntities())
 			{
 				var regionList = context.Region.ToList();
 				AvailableRegions = new ObservableCollection<Region>(regionList);
@@ -29,7 +29,7 @@ namespace ParkInspectGroupC.ViewModel
 
 		private void SaveEmployee()
 		{
-			using (var context = new LocalParkInspectEntities())
+			using (var context = new ParkInspectEntities())
 			{
 				var guid = PassEncrypt.GenerateGuid();
 				var tempPass = "parkinspect";
@@ -51,7 +51,7 @@ namespace ParkInspectGroupC.ViewModel
 
 				nEmployee.Region = (from r in context.Region where r.Id == SelectedRegion.Id select r).FirstOrDefault();
 				nEmployee.Manager = (from m in context.Employee where m.Id == SelectedManager.Id select m).FirstOrDefault();
-                
+
 				var nAccount = new Account
 				{
 					Username = this.Username,

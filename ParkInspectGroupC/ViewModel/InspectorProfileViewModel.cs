@@ -1,8 +1,10 @@
 ﻿using GalaSoft.MvvmLight;
-using LocalDatabase.Domain;
+using ParkInspectGroupC.DOMAIN;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace ParkInspectGroupC.ViewModel
 {
@@ -64,12 +66,14 @@ namespace ParkInspectGroupC.ViewModel
             set { _inspections = value; RaisePropertyChanged("Inspections"); }
         }
 
+     
+        String InspectionStatus;
         public InspectorProfileViewModel()
         {
             //TODO The emp variable should be a parameter to this constructor
             try
             {
-                using (var context = new LocalParkInspectEntities())
+                using (var context = new ParkInspectEntities())
                 {
                     Emp = (from e in context.Employee where e.Id == 3 select e).FirstOrDefault();
                 }
@@ -77,11 +81,11 @@ namespace ParkInspectGroupC.ViewModel
                 Adress = Emp.Address + ", " + Emp.ZipCode + ", " + Emp.City;
                 Email = Emp.Email;  
                 PhoneNumber = Emp.Phonenumber;
-                using (var context = new LocalParkInspectEntities())
+                using (var context = new ParkInspectEntities())
                 {
                     Status = (from s in context.EmployeeStatus where s.Id == Emp.EmployeeStatusId select s).FirstOrDefault().Description;
                 }
-                using (var context = new LocalParkInspectEntities())
+                using (var context = new ParkInspectEntities())
                 {
 
                     Inspections = (from insp in context.Inspection where insp.InspectorId == Emp.Id select new 
@@ -89,7 +93,7 @@ namespace ParkInspectGroupC.ViewModel
                 }
                 try
                 {
-                    using (var context = new LocalParkInspectEntities())
+                    using (var context = new ParkInspectEntities())
                     {
                         Manager = (from m in context.Employee where m.Id == Emp.ManagerId select m).FirstOrDefault();
                     }

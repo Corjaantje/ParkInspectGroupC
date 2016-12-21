@@ -1,12 +1,23 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows;
+using System.Windows.Markup;
+using System.Xml;
 using GalaSoft.MvvmLight.Command;
+using System.IO;
 using System.Windows.Controls;
+using System.Resources;
+using ParkInspectGroupC.Properties;
 using ParkInspectGroupC.View.QuestionnaireModules;
-using LocalDatabase.Domain;
+using ParkInspectGroupC.DOMAIN;
 
 namespace ParkInspectGroupC.ViewModel
 {
@@ -86,7 +97,7 @@ namespace ParkInspectGroupC.ViewModel
             VehicleTypes.Add("Personenauto");
             VehicleTypes.Add("Vrachtwagen");
 
-            using (var context = new LocalParkInspectEntities())
+            using (var context = new ParkInspectEntities())
             {
                 //var initQuery = (from a in context.Keyword where a.KeywordCategory.Description == "Voertuig" select a.Description);
                 //VehicleTypes = initQuery.ToList();

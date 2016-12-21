@@ -18,7 +18,6 @@ namespace ParkInspectGroupC.DOMAIN
         public Assignment()
         {
             this.Inspection = new HashSet<Inspection>();
-            this.Report = new HashSet<Report>();
         }
     
         public int Id { get; set; }
@@ -34,7 +33,5 @@ namespace ParkInspectGroupC.DOMAIN
         public virtual Employee Employee { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Inspection> Inspection { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Report> Report { get; set; }
     }
 }

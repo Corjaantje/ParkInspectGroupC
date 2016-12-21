@@ -17,7 +17,6 @@ namespace ParkInspectGroupC.DOMAIN
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Inspection()
         {
-            this.Coordinate = new HashSet<Coordinate>();
             this.InspectionImage = new HashSet<InspectionImage>();
             this.Questionnaire = new HashSet<Questionnaire>();
         }
@@ -34,8 +33,6 @@ namespace ParkInspectGroupC.DOMAIN
         public System.DateTime DateUpdated { get; set; }
     
         public virtual Assignment Assignment { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Coordinate> Coordinate { get; set; }
         public virtual Employee Employee { get; set; }
         public virtual InspectionStatus InspectionStatus { get; set; }
         public virtual Region Region { get; set; }

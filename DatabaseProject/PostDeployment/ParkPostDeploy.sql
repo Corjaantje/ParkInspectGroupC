@@ -7,5 +7,4 @@
 :r .\InspectionStatusPost.sql
 :r .\AssignmentPost.sql
 :r .\WorkingHoursPost.sql
-:r .\InspectionPost.sql
-:r .\QuestionsPost.sql
+------:r .\QuestionsPost.sql
