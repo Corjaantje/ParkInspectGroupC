@@ -66,7 +66,7 @@ namespace ParkInspectGroupC.ViewModel
 
         public InspectorProfileViewModel()
         {
-            var emp = Properties.Settings.Default.LoggedInEmp;
+            Emp = Properties.Settings.Default.LoggedInEmp;
             try
             {
                 Name = Emp.FirstName + " " + Emp.Prefix + " " + Emp.SurName + " (" + Emp.Gender + ")";
@@ -76,12 +76,6 @@ namespace ParkInspectGroupC.ViewModel
                 using (var context = new LocalParkInspectEntities())
                 {
                     Status = (from s in context.EmployeeStatus where s.Id == Emp.EmployeeStatusId select s).FirstOrDefault().Description;
-                }
-                using (var context = new LocalParkInspectEntities())
-                {
-
-                    Inspections = (from insp in context.Inspection where insp.InspectorId == Emp.Id select new 
-                    { insp.Id, insp.Location, InspectionStatus = (from inspStat in context.InspectionStatus where inspStat.Id == insp.StatusId select inspStat).FirstOrDefault().Description}).ToList();
                 }
                 try
                 {
@@ -96,6 +90,13 @@ namespace ParkInspectGroupC.ViewModel
                 {
                     ManagerName = "Deze medewerker heeft geen manager.";
                 }
+                using (var context = new LocalParkInspectEntities())
+                {
+
+                    Inspections = (from insp in context.Inspection where insp.InspectorId == Emp.Id select new 
+                    { insp.Id, insp.Location, InspectionStatus = (from inspStat in context.InspectionStatus where inspStat.Id == insp.StatusId select inspStat).FirstOrDefault().Description}).ToList();
+                }
+                
             }
             catch
             {
