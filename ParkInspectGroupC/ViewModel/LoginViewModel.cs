@@ -36,7 +36,7 @@ namespace ParkInspectGroupC.ViewModel
 
 		public LoginViewModel()
 		{
-			_loginMessage = string.Empty;
+            			_loginMessage = string.Empty;
 			LoginCommand = new RelayCommand<object>(Login, CanLogin);
 		}
 
@@ -76,8 +76,8 @@ namespace ParkInspectGroupC.ViewModel
 
 					// Username and Password are correct, continue the application.
                     var emp = (from e in context.Employee where e.Id.CompareTo(acc.EmployeeId) == 0 select e).FirstOrDefault();
-					
-                    LoginMessage = "Succes!";
+                    Properties.Settings.Default.LoggedInEmp = emp;
+                    
 				}
 
 			}
