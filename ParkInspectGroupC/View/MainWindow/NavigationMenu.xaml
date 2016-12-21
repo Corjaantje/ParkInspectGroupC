@@ -6,12 +6,12 @@
              xmlns:local="clr-namespace:ParkInspectGroupC.View.MainWindow"
              mc:Ignorable="d"
 			 DataContext="{Binding Main, Source={StaticResource Locator}}" Width="197.333">
-    <Grid Width="249">
+    <Grid>
         <WrapPanel Margin="3,3,54,3">
-            <Button Command="{Binding BackCommand}" Margin="0,0,2,0" HorizontalAlignment="Left">
+            <Button Command="{Binding BackCommand}" HorizontalAlignment="Left">
                 <Image Source="/ParkInspectGroupC;component/Image/arrow-back-128.png" MaxWidth="20"></Image>
             </Button>
         </WrapPanel>
-        <Button x:Name="LogOutButton" Content="Uitloggen" HorizontalAlignment="Right" Margin="0,3,54,0" VerticalAlignment="Top" Width="58" Command="{Binding LogOutCommand}"/>
+        <Button x:Name="LogOutButton" Content="Uitloggen" HorizontalAlignment="Right" VerticalAlignment="Center" Width="58" Command="{Binding LogOutCommand}"/>
     </Grid>
 </UserControl>
