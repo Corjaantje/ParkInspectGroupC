@@ -12,6 +12,6 @@
                 <Image Source="/ParkInspectGroupC;component/Image/arrow-back-128.png" MaxWidth="20"></Image>
             </Button>
         </WrapPanel>
-        <Button x:Name="LogOutButton" Content="Uitloggen" HorizontalAlignment="Right" VerticalAlignment="Center" Width="58" Command="{Binding LogOutCommand}"/>
+        <Button x:Name="LogOutButton" Content="Uitloggen" HorizontalAlignment="Right" VerticalAlignment="Center" Width="58" Command="{Binding LogOutCommand}" Margin="0,3,4,7"/>
     </Grid>
 </UserControl>
