@@ -58,10 +58,11 @@ namespace ParkInspectGroupC.ViewModel
         }
 
         public ICommand BackCommand { get; set; }
-
+        public ICommand LogOutCommand { get; set; }
         public MainViewModel()
         {
             BackCommand = new RelayCommand(PerformBack, CanPerformBack);
+            LogOutCommand = new RelayCommand(PerformLogOut);
             CurrentView = new LoginView();
 
             //List<Theme> Themes = new List<Theme>
@@ -97,6 +98,11 @@ namespace ParkInspectGroupC.ViewModel
         private void PerformBack()
         {
             Navigator.Back();
+        }
+
+        private void PerformLogout()
+        {
+            Navigator.SetNewView(new LoginView());
         }
 
         private bool CanPerformBack()

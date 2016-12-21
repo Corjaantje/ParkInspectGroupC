@@ -12,6 +12,7 @@
   See http://www.galasoft.ch/mvvm
 */
 
+using System;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
@@ -42,18 +43,37 @@ namespace ParkInspectGroupC.ViewModel
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
             ////}
 
+            RegisterViewModels();
+
+        }
+
+        private static void RegisterViewModels()
+        {
             SimpleIoc.Default.Register<MainViewModel>();
-		      	SimpleIoc.Default.Register<LoginViewModel>();
+            SimpleIoc.Default.Register<LoginViewModel>();
             SimpleIoc.Default.Register<CustomerCreationViewModel>();
             SimpleIoc.Default.Register<MapViewModel>();
             SimpleIoc.Default.Register<QuestionnaireViewModel>();
-			      SimpleIoc.Default.Register<EmployeeCreationViewModel>();
-		      	SimpleIoc.Default.Register<InspectorProfileViewModel>();
+            SimpleIoc.Default.Register<EmployeeCreationViewModel>();
+            SimpleIoc.Default.Register<InspectorProfileViewModel>();
             SimpleIoc.Default.Register<DatabaseSyncViewModel>();
             SimpleIoc.Default.Register<CustomerListViewModel>();
             SimpleIoc.Default.Register<CustomerEditViewModel>();
             SimpleIoc.Default.Register<OnOffIndicatorViewModel>();
+        }
 
+        private static void UnRegisterViewModels()
+        {
+            SimpleIoc.Default.Unregister<MainViewModel>();
+            SimpleIoc.Default.Unregister<CustomerCreationViewModel>();
+            SimpleIoc.Default.Unregister<MapViewModel>();
+            SimpleIoc.Default.Unregister<QuestionnaireViewModel>();
+            SimpleIoc.Default.Unregister<EmployeeCreationViewModel>();
+            SimpleIoc.Default.Unregister<InspectorProfileViewModel>();
+            SimpleIoc.Default.Unregister<DatabaseSyncViewModel>();
+            SimpleIoc.Default.Unregister<CustomerListViewModel>();
+            SimpleIoc.Default.Unregister<CustomerEditViewModel>();
+            SimpleIoc.Default.Unregister<OnOffIndicatorViewModel>();
         }
 
         public MainViewModel Main
@@ -130,7 +150,9 @@ namespace ParkInspectGroupC.ViewModel
 
         public static void Cleanup()
         {
-            // TODO Clear the ViewModels
+            UnRegisterViewModels();
+            Properties.Settings.Default.LoggedInEmp = null;
+            RegisterViewModels();
         }
     }
 }
