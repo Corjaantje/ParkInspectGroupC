@@ -16,11 +16,22 @@ namespace ParkInspectGroupC.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
+        private bool _navVis;
+        public bool NavVis
+        {
+            get { return _navVis; }
+            set { _navVis = value; RaisePropertyChanged("NavVis"); }
+        }
         private UserControl _currentView;
         public UserControl CurrentView
         {
             get { return _currentView; }
-            set { _currentView = value; RaisePropertyChanged("CurrentView"); }
+            set
+            {
+                NavVis = (Properties.Settings.Default.LoggedInEmp != null);
+                _currentView = value; RaisePropertyChanged("CurrentView");
+                
+            }
         }
 
         //public IEnumerable<Theme> Themes { get; private set; }
@@ -104,6 +115,7 @@ namespace ParkInspectGroupC.ViewModel
 
         private void PerformLogOut()
         {
+            Properties.Settings.Default.LoggedInEmp = null;
             SimpleIoc.Default.Unregister<LoginViewModel>();
             SimpleIoc.Default.Register<LoginViewModel>();
             Navigator.SetNewView(new LoginView());
