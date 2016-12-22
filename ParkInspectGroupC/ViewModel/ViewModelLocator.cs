@@ -158,7 +158,6 @@ namespace ParkInspectGroupC.ViewModel
         public void Cleanup()
         {
             UnRegisterViewModels();
-            Properties.Settings.Default.LoggedInEmp = null;
             RegisterViewModels();
         }
     }
