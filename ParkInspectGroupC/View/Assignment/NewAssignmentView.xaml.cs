@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ParkInspectGroupC.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,12 +23,8 @@ namespace ParkInspectGroupC.View
 		public NewAssignmentView()
 		{
 			InitializeComponent();
-			DataContext = new NewAssignmentView();
+			DataContext = new NewAssignmentViewModel();
 		}
-
-		private void createAssignment_Click(object sender, RoutedEventArgs e)
-		{
-
-		}
+		
 	}
 }

@@ -4,6 +4,7 @@ using LocalDatabase.Domain;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,6 +43,8 @@ namespace ParkInspectGroupC.ViewModel
 			_searchCriteria = "";
 			fillInspections();
 
+			Debug.WriteLine("Hi");
+
 			StartSearch = new RelayCommand(refillObservableCollection);
 
 		}
@@ -54,7 +57,8 @@ namespace ParkInspectGroupC.ViewModel
 				{
 
 					var result = context.Inspection.ToList();
-
+					Debug.WriteLine(result.First().AssignmentId);
+					Debug.WriteLine("Hello World");
 					allInspections = new List<Inspection>(result);
 
 				}
@@ -73,7 +77,7 @@ namespace ParkInspectGroupC.ViewModel
 		private void refillObservableCollection()
 		{
 
-			var result = from Inspection in _inspections orderby Inspection.Id ascending where Inspection.Location.Contains(_searchCriteria) select Inspection;
+			var result = from Inspection in allInspections orderby Inspection.Id ascending where Inspection.Location.Contains(_searchCriteria) select Inspection;
 			Inspections = new ObservableCollection<Inspection>(allInspections);
 
 			base.RaisePropertyChanged("Inspections");

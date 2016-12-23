@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="InspectionView" Height="400" Width="500">
 	<Grid>
-		<DataGrid HorizontalAlignment="Left" Margin="10,119,0,0" VerticalAlignment="Top" Height="240" Width="472" IsReadOnly="True" ItemsSource="{Binding Inspections}">
+		<DataGrid HorizontalAlignment="Left" Margin="10,119,0,0" VerticalAlignment="Top" Height="240" Width="472" IsReadOnly="True" ItemsSource="{Binding Inspections}" AutoGenerateColumns="False" >
 
 			<DataGrid.Columns>
 

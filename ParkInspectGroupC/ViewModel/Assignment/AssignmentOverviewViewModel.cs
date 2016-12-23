@@ -22,7 +22,7 @@ namespace ParkInspectGroupC.ViewModel
 		public Boolean ShowClosedAssignments
 		{
 			get { return _showClosedAssignments; }
-			set { _showClosedAssignments = value; }
+			set { _showClosedAssignments = value; this.refillCollection(); }
 		}
 
 		private String _searchCritetia;
@@ -98,8 +98,15 @@ namespace ParkInspectGroupC.ViewModel
 
 		private void refillCollection()
 		{
-
-			var tempCollection = from Assignment in AssignmentCollection orderby Assignment.Id ascending where Assignment.Description.Contains(_searchCritetia) select Assignment;
+			IEnumerable<Assignment> tempCollection;
+			if (_showClosedAssignments)
+			{
+				tempCollection = from Assignment in AssignmentCollection orderby Assignment.Id ascending where Assignment.Description.Contains(_searchCritetia) select Assignment;
+			}
+			else
+			{
+				tempCollection = from Assignment in AssignmentCollection orderby Assignment.Id ascending where Assignment.Description.Contains(_searchCritetia) && Assignment.EndDate != null select Assignment;
+			}
 
 			ObservedCollection = new ObservableCollection<Assignment>(tempCollection);
 
