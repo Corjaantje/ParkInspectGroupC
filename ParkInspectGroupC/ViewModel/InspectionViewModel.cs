@@ -43,8 +43,6 @@ namespace ParkInspectGroupC.ViewModel
 			_searchCriteria = "";
 			fillInspections();
 
-			Debug.WriteLine("Hi");
-
 			StartSearch = new RelayCommand(refillObservableCollection);
 
 		}
@@ -57,8 +55,6 @@ namespace ParkInspectGroupC.ViewModel
 				{
 
 					var result = context.Inspection.ToList();
-					Debug.WriteLine(result.First().AssignmentId);
-					Debug.WriteLine("Hello World");
 					allInspections = new List<Inspection>(result);
 
 				}

@@ -50,7 +50,7 @@ namespace ParkInspectGroupC.ViewModel
 		public int CustomerIndex
 		{
 			get { return _customerIndex; }
-			set { _customerIndex = value; }
+			set { _customerIndex = value; selectedCustomerChanged(); }
 		}
 
 		private String _customerDescription;
@@ -111,9 +111,32 @@ namespace ParkInspectGroupC.ViewModel
 			}
 		}
 
+		private void selectedCustomerChanged()
+		{
+			try
+			{
+				using (var context = new LocalParkInspectEntities())
+				{
+
+					Customer customer = context.Customer.Single(c => c.Id == _customerIndex + 1);
+
+					CustomerDescription = customer.Name + "\n" + customer.Location + "\n" + customer.Phonenumber;
+
+					RaisePropertyChanged("CustomerDescription");
+
+				}
+			}
+			catch
+			{
+				CustomerDescription = "Something went wrong";
+				RaisePropertyChanged("CustomerDescription");
+			}
+
+		}
+		 
 		private void generateAllCustomers()
 		{
-			// rework plz
+			
 			try
 			{
 				using (var context = new LocalParkInspectEntities())
@@ -136,7 +159,6 @@ namespace ParkInspectGroupC.ViewModel
 			}
 		}
 
-		//private void 
 
 		private int getCustomerId()
 		{

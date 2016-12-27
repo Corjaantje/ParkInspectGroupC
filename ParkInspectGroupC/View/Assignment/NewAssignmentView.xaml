@@ -24,7 +24,7 @@
 
 		<Label Content="{Binding CreatedAssignment}" HorizontalAlignment="Left" Margin="189,283,0,0" VerticalAlignment="Top"/>
 		<ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="343,148,0,0" VerticalAlignment="Top" Width="189" ItemsSource="{Binding AllCustomerNames}" SelectedIndex="{Binding CustomerIndex}"/>
-		<Label x:Name="label" Content="Label" HorizontalAlignment="Left" Margin="343,175,0,0" VerticalAlignment="Top" Height="118" Width="189"/>
+		<Label x:Name="label" Content="{Binding CustomerDescription}" HorizontalAlignment="Left" Margin="343,175,0,0" VerticalAlignment="Top" Height="118" Width="189"/>
 
 	</Grid>
 </Window>
