@@ -50,6 +50,14 @@ namespace ParkInspectGroupC.ViewModel
 	                var secureString = passwordContainer.Password;
 	                var pass = PassEncrypt.ConvertToUnsecureString(secureString);
 	                PasswordInVM = PassEncrypt.GetPasswordHash(pass, guid);
+
+	                var employees = (from a in context.Employee select a).ToList();
+	                var newEmployees = employees.Max(u => u.Id);
+	                if (newEmployees == null)
+	                {
+	                    newEmployees = 1;
+	                }
+ 
 	                var nEmployee = new Employee
 	                {
 	                    FirstName = this.FirstName,
@@ -62,6 +70,7 @@ namespace ParkInspectGroupC.ViewModel
 	                    Email = this.Email,
 	                    IsInspecter = this.IsInspector,
 	                    IsManager = false,
+                        Id = (int)newEmployees + 1,
 	                };
 	                if (!string.IsNullOrWhiteSpace(Prefix))
 	                    nEmployee.Prefix = this.Prefix;
@@ -70,12 +79,20 @@ namespace ParkInspectGroupC.ViewModel
 	                nEmployee.Manager =
 	                    (from m in context.Employee where m.Id == SelectedManager.Id select m).FirstOrDefault();
 
-	                var nAccount = new Account
+                    var accounts = (from a in context.Employee select a).ToList();
+                    var newAccount = accounts.Max(u => u.Id);
+                    if (newAccount == null)
+                    {
+                        newEmployees = 1;
+                    }
+
+                    var nAccount = new Account
 	                {
 	                    Username = this.Username,
 	                    UserGuid = guid,
 	                    Password = PasswordInVM,
-	                    Employee = nEmployee
+	                    Employee = nEmployee,
+                        Id = (int)newAccount + 1,
 	                };
 
 	                context.Employee.Add(nEmployee);
