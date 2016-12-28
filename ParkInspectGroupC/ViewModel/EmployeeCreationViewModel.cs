@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
@@ -6,14 +7,22 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using LocalDatabase.Domain;
 using ParkInspectGroupC.Encryption;
+using ParkInspectGroupC.Miscellaneous;
 
 namespace ParkInspectGroupC.ViewModel
 {
 	public class EmployeeCreationViewModel : ViewModelBase
 	{
+	    private string _message;
+	    public string Message
+	    {
+	        get { return _message; }
+            set { _message = value; RaisePropertyChanged("Message"); }
+	    }
+
 		public EmployeeCreationViewModel()
 		{
-			SaveCommand = new RelayCommand(SaveEmployee, CanSaveEmployee);
+			SaveCommand = new RelayCommand<object>(SaveEmployee, CanSaveEmployee);
 			ResetFieldsCommand = new RelayCommand(ResetFields);
 
 			// Retreive abailable data from database.
@@ -27,70 +36,143 @@ namespace ParkInspectGroupC.ViewModel
 			}
 		}
 
-		private void SaveEmployee()
+
+		private void SaveEmployee(object parameter)
 		{
-			using (var context = new LocalParkInspectEntities())
-			{
-				var guid = PassEncrypt.GenerateGuid();
-				var tempPass = "parkinspect";
-				var nEmployee = new Employee
-				{
-					FirstName = this.FirstName,
-					SurName = this.SurName,
-					Gender = GenderEnum.ToString().ElementAt(0).ToString(),
-					City = this.City,
-					Address = this.Street + " " + this.Number,
-					ZipCode = this.ZipCode,
-					Phonenumber = this.TelNumber,
-					Email = this.Email,
-					IsInspecter = this.IsInspector,
-					IsManager = this.IsManager,
-				};
-				if (!string.IsNullOrWhiteSpace(Prefix))
-					nEmployee.Prefix = this.Prefix;
+		    using (var context = new LocalParkInspectEntities())
+		    {
+		        var guid = PassEncrypt.GenerateGuid();
+		        //var tempPass = "parkinspect";
+		        var passwordContainer = parameter as IHavePassword;
+		        if (passwordContainer != null)
+		        {
+		            var secureString = passwordContainer.Password;
+		            var pass = PassEncrypt.ConvertToUnsecureString(secureString);
+		            PasswordInVM = PassEncrypt.GetPasswordHash(pass, guid);
+		            var nEmployee = new Employee
+		            {
+		                FirstName = this.FirstName,
+		                SurName = this.SurName,
+		                Gender = GenderEnum.ToString().ElementAt(0).ToString(),
+		                City = this.City,
+		                Address = this.Street + " " + this.Number,
+		                ZipCode = this.ZipCode,
+		                Phonenumber = this.TelNumber,
+		                Email = this.Email,
+		                IsInspecter = this.IsInspector,
+		                IsManager = this.IsManager,
+		            };
+		            if (!string.IsNullOrWhiteSpace(Prefix))
+		                nEmployee.Prefix = this.Prefix;
 
-				nEmployee.Region = (from r in context.Region where r.Id == SelectedRegion.Id select r).FirstOrDefault();
-				nEmployee.Manager = (from m in context.Employee where m.Id == SelectedManager.Id select m).FirstOrDefault();
-                
-				var nAccount = new Account
-				{
-					Username = this.Username,
-					UserGuid = guid,
-					Password = PassEncrypt.GetPasswordHash(tempPass, guid),
-					Employee = nEmployee
-				};
+		            nEmployee.Region = (from r in context.Region where r.Id == SelectedRegion.Id select r).FirstOrDefault();
+		            nEmployee.Manager =
+		                (from m in context.Employee where m.Id == SelectedManager.Id select m).FirstOrDefault();
 
-				context.Employee.Add(nEmployee);
-				context.Account.Add(nAccount);
-				context.SaveChanges();
-			}
+		            var nAccount = new Account
+		            {
+		                Username = this.Username,
+		                UserGuid = guid,
+		                Password = PasswordInVM,
+		                Employee = nEmployee
+		            };
+
+		            context.Employee.Add(nEmployee);
+		            context.Account.Add(nAccount);
+		            context.SaveChanges();
+		        }
+		    }
 		}
 
-		private bool CanSaveEmployee()
+		private bool CanSaveEmployee(object parameter)
 		{
-			if (string.IsNullOrWhiteSpace(Username)
-			    || string.IsNullOrWhiteSpace(SurName)
-			    || string.IsNullOrWhiteSpace(City)
-			    || string.IsNullOrWhiteSpace(Street)
-			    || string.IsNullOrWhiteSpace(ZipCode)
-			    || string.IsNullOrWhiteSpace(TelNumber)
-			    || string.IsNullOrWhiteSpace(Email))
-				return false;
+		    if (string.IsNullOrWhiteSpace(Username)
+		        || string.IsNullOrWhiteSpace(SurName)
+		        || string.IsNullOrWhiteSpace(City)
+		        || string.IsNullOrWhiteSpace(Street)
+		        || string.IsNullOrWhiteSpace(ZipCode)
+		        || string.IsNullOrWhiteSpace(TelNumber)
+		        || string.IsNullOrWhiteSpace(Email))
+		    {
+		        Message = "Vul alle velden in.";
+		        return false;
+		    }
 
+		    if (Username.Length < 5 || Username.Length > 25)
+		    {
+		        Message = "Username heeft niet de juiste lengte [5,25].";
+		        return false;
+		    }
+
+            var passwordContainer = parameter as IHavePassword;
+		    if (passwordContainer != null)
+		    {
+                var secureString = passwordContainer.Password;
+                var pass = PassEncrypt.ConvertToUnsecureString(secureString);
+
+		        if (pass.Length < 5 || pass.Length > 25)
+		        {
+		            Message = "Wachtwoord heeft niet de juiste lengte [5.25].";
+		            return false;
+		        }
+
+		        if (!pass.Any(c => char.IsDigit(c)))
+		        {
+		            Message = "Wachtwoord moet minstens een cijfer bevatten [0,9].";
+		            return false;
+		        }
+
+		        if (!pass.Any(c => char.IsLetter(c)))
+		        {
+		            Message = "Wachtwoord moet minstens een letter bevatten [A-Z].";
+		            return false;
+		        }
+            }
+
+            using (var context = new LocalParkInspectEntities())
+            {
+                List<Account> nameList = (from a in context.Account select a).ToList();
+
+                foreach (var employee in nameList)
+                {
+                    if (string.Equals(Username, employee.Username, StringComparison.Ordinal))
+                    {
+                        Message = "Gebruikersnaam bestaad al.";
+                        return false;
+                    }
+                }
+            }
+
+		    Message = string.Empty;
 			return true;
 		}
 
-		private void ResetFields()
+        private void ResetFields()
 		{
 			
 		}
 
-		private string _username;
+        private string _passwordInVM;
+        public string PasswordInVM
+        {
+            get { return _passwordInVM; }
+            set { _passwordInVM = value; RaisePropertyChanged(PasswordInVM); }
+        }
+
+        private string _username;
 		public string Username
 		{
 			get { return _username; }
 			set { _username = value.Trim(); RaisePropertyChanged("Username"); }
 		}
+
+	    private string _password;
+
+	    public string Password
+	    {
+	        get { return _password; }
+            set { _password = value; RaisePropertyChanged("Password"); }
+	    }
 
 		private string _firstName;
 		public string FirstName
