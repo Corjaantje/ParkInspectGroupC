@@ -1,9 +1,9 @@
-﻿<Window x:Class="ParkInspectGroupC.View.InspectorProfileView"
+﻿<UserControl x:Class="ParkInspectGroupC.View.InspectorProfileView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
          xmlns:converter="clr-namespace:ParkInspectGroupC.Converter"
         DataContext="{Binding InspectorProfile, Source={StaticResource Locator}}"
-        Title="InspectorProfileView" Height="473.35" Width="740.1">
+       Height="473.35" Width="740.1">
 
     <Grid>
         <Grid.Resources>
@@ -38,4 +38,4 @@
         <Label Content="Telefoon Nummer:" HorizontalAlignment="Left" Margin="18,159,0,0" VerticalAlignment="Top" Height="26" Width="108"/>
         <Label Content="Status:" HorizontalAlignment="Left" Margin="22,229,0,0" VerticalAlignment="Top"/>
     </Grid>
-</Window>
+</UserControl>

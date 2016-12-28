@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ParkInspectGroupC.View.DatabaseSyncDialogs"
         mc:Ignorable="d"
+        Icon="Image/IconLogo.ico"
         Title="Delete conflict" Height="130" Width="280">
     <Grid>
         <TextBlock Height="100" TextWrapping="Wrap" Margin="5,5,5,0" VerticalAlignment="Top" HorizontalAlignment="Left">Weet u zeker dat u dit conflict wilt verwijderen? Er veranderd dan niks in de centrale database.</TextBlock>

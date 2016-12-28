@@ -2,6 +2,7 @@
   <Application.Resources>
     <ResourceDictionary>
       <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" xmlns:vm="clr-namespace:ParkInspectGroupC.ViewModel" />
-    </ResourceDictionary>
+            <BooleanToVisibilityConverter x:Key="ShowAvailability"/>
+        </ResourceDictionary>
   </Application.Resources>
 </Application>

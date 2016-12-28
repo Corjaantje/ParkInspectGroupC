@@ -8,6 +8,7 @@ using GalaSoft.MvvmLight.CommandWpf;
 using LocalDatabase.Domain;
 using ParkInspectGroupC.Encryption;
 using ParkInspectGroupC.Miscellaneous;
+using ParkInspectGroupC.View;
 
 namespace ParkInspectGroupC.ViewModel
 {
@@ -77,11 +78,11 @@ namespace ParkInspectGroupC.ViewModel
 		                Employee = nEmployee
 		            };
 
-		            context.Employee.Add(nEmployee);
-		            context.Account.Add(nAccount);
-		            context.SaveChanges();
-		        }
-		    }
+				context.Employee.Add(nEmployee);
+				context.Account.Add(nAccount);
+				context.SaveChanges();
+			}
+            Navigator.SetNewView(new ManagerDashboardView());
 		}
 
 		private bool CanSaveEmployee(object parameter)
