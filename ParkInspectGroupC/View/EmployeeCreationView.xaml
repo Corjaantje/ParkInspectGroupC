@@ -100,8 +100,9 @@
             <Label Grid.Row="14" Grid.Column="0" Content="Is inspecteur:" Margin="0,0,10,0" />
             <CheckBox Grid.Row="14" Grid.Column="1" Margin="0,0,10,0" VerticalAlignment="Center" IsChecked="{Binding Path=IsInspector}" />
 
-            <Label Grid.Row="15" Grid.Column="0" Content="Is manager:" Margin="0,0,10,0" />
-            <CheckBox Grid.Row="15" Grid.Column="1" Margin="0,0,10,0" VerticalAlignment="Center" IsChecked="{Binding Path=IsManager}" />
+
+            <Label Grid.Row="15" Grid.Column="0" Content="Is manager:" Margin="0,0,10,0" Visibility="Hidden" />
+            <CheckBox Grid.Row="15" Grid.Column="1" Margin="0,0,10,0" VerticalAlignment="Center" IsChecked="{Binding Path=IsManager}" Visibility="Hidden" />
 
             <WrapPanel Grid.Row="16" Grid.Column="0" Orientation="Horizontal" Margin="0,0,0,0" VerticalAlignment="Center">
                 <Button Content="Save" MinWidth="60" Margin="3,3,3,3" Command="{Binding SaveCommand}" CommandParameter="{Binding ElementName=This}" />

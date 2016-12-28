@@ -38,54 +38,55 @@ namespace ParkInspectGroupC.ViewModel
 		}
 
 
-		private void SaveEmployee(object parameter)
-		{
-		    using (var context = new LocalParkInspectEntities())
-		    {
-		        var guid = PassEncrypt.GenerateGuid();
-		        //var tempPass = "parkinspect";
-		        var passwordContainer = parameter as IHavePassword;
-		        if (passwordContainer != null)
-		        {
-		            var secureString = passwordContainer.Password;
-		            var pass = PassEncrypt.ConvertToUnsecureString(secureString);
-		            PasswordInVM = PassEncrypt.GetPasswordHash(pass, guid);
-		            var nEmployee = new Employee
-		            {
-		                FirstName = this.FirstName,
-		                SurName = this.SurName,
-		                Gender = GenderEnum.ToString().ElementAt(0).ToString(),
-		                City = this.City,
-		                Address = this.Street + " " + this.Number,
-		                ZipCode = this.ZipCode,
-		                Phonenumber = this.TelNumber,
-		                Email = this.Email,
-		                IsInspecter = this.IsInspector,
-		                IsManager = this.IsManager,
-		            };
-		            if (!string.IsNullOrWhiteSpace(Prefix))
-		                nEmployee.Prefix = this.Prefix;
+	    private void SaveEmployee(object parameter)
+	    {
+	        using (var context = new LocalParkInspectEntities())
+	        {
+	            var guid = PassEncrypt.GenerateGuid();
+	            //var tempPass = "parkinspect";
+	            var passwordContainer = parameter as IHavePassword;
+	            if (passwordContainer != null)
+	            {
+	                var secureString = passwordContainer.Password;
+	                var pass = PassEncrypt.ConvertToUnsecureString(secureString);
+	                PasswordInVM = PassEncrypt.GetPasswordHash(pass, guid);
+	                var nEmployee = new Employee
+	                {
+	                    FirstName = this.FirstName,
+	                    SurName = this.SurName,
+	                    Gender = GenderEnum.ToString().ElementAt(0).ToString(),
+	                    City = this.City,
+	                    Address = this.Street + " " + this.Number,
+	                    ZipCode = this.ZipCode,
+	                    Phonenumber = this.TelNumber,
+	                    Email = this.Email,
+	                    IsInspecter = this.IsInspector,
+	                    IsManager = false,
+	                };
+	                if (!string.IsNullOrWhiteSpace(Prefix))
+	                    nEmployee.Prefix = this.Prefix;
 
-		            nEmployee.Region = (from r in context.Region where r.Id == SelectedRegion.Id select r).FirstOrDefault();
-		            nEmployee.Manager =
-		                (from m in context.Employee where m.Id == SelectedManager.Id select m).FirstOrDefault();
+	                nEmployee.Region = (from r in context.Region where r.Id == SelectedRegion.Id select r).FirstOrDefault();
+	                nEmployee.Manager =
+	                    (from m in context.Employee where m.Id == SelectedManager.Id select m).FirstOrDefault();
 
-		            var nAccount = new Account
-		            {
-		                Username = this.Username,
-		                UserGuid = guid,
-		                Password = PasswordInVM,
-		                Employee = nEmployee
-		            };
+	                var nAccount = new Account
+	                {
+	                    Username = this.Username,
+	                    UserGuid = guid,
+	                    Password = PasswordInVM,
+	                    Employee = nEmployee
+	                };
 
-				context.Employee.Add(nEmployee);
-				context.Account.Add(nAccount);
-				context.SaveChanges();
-			}
-            Navigator.SetNewView(new ManagerDashboardView());
-		}
+	                context.Employee.Add(nEmployee);
+	                context.Account.Add(nAccount);
+	                context.SaveChanges();
+	            }
+	        }
+            Navigator.SetNewView(new LoginView());
+        }
 
-		private bool CanSaveEmployee(object parameter)
+	    private bool CanSaveEmployee(object parameter)
 		{
 		    if (string.IsNullOrWhiteSpace(Username)
 		        || string.IsNullOrWhiteSpace(SurName)
