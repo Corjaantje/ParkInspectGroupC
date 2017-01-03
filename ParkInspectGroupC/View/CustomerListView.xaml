@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="ParkInspectGroupC.View.CustomerListView"
+<UserControl x:Class="ParkInspectGroupC.View.CustomerListView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -9,13 +9,13 @@
         DataContext="{Binding CustomerList, Source={StaticResource Locator}}">
 
     <Grid Width="523" Background="White" Height="257">
+        <Button Content="Verwijder klant" Command="{Binding DataContext.DeleteCustomerCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}"  FontSize="16" HorizontalAlignment="Left" Margin="256,10,0,0" VerticalAlignment="Top" Width="112" Height="32"/>
 
-
-        <DataGrid AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Customers, UpdateSourceTrigger = PropertyChanged}" Margin="10,124,10,10" BorderBrush="#FF979494" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#FFF0E0E0" HeadersVisibility="Column">
+        <DataGrid x:Name="Grid" AutoGenerateColumns="False" CanUserDeleteRows="False" SelectedItem="{Binding SelectedCustomer, Mode=TwoWay}" IsReadOnly="True" ItemsSource="{Binding Customers, UpdateSourceTrigger = PropertyChanged}" Margin="10,124,10,10" BorderBrush="#FF979494" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#FFF0E0E0" HeadersVisibility="Column">
             <DataGrid.Columns>
 
                 <DataGridTextColumn Header="#" Binding="{Binding Id}" Foreground="#FF1D1616" />
-                <DataGridTextColumn Header="Customer" Binding="{Binding Name}" Width="*"  />
+                <DataGridTextColumn Header="Customer" Binding="{Binding Name}" Width="*" />
 
             </DataGrid.Columns>
 
@@ -25,10 +25,16 @@
                 </Style>
             </DataGrid.ColumnHeaderStyle>
 
+            <DataGrid.InputBindings>
+                <KeyBinding Key="Delete" Command="{Binding DeleteCustomerCommand}" />
+            </DataGrid.InputBindings>
+
         </DataGrid>
         <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="29" Margin="10,90,0,0" TextWrapping="Wrap" Text="{Binding SearchString, UpdateSourceTrigger=PropertyChanged}" FontSize="16" VerticalAlignment="Top" Width="503"/>
-        <Button x:Name="button" Content="Nieuwe Klant" FontSize="16" HorizontalAlignment="Left" Margin="193,38,0,0" VerticalAlignment="Top" Width="140" Height="47"/>
+        <Button x:Name="button" Command="{Binding AddCustomerCommand}" Content="Nieuwe Klant" FontSize="16" HorizontalAlignment="Left" Margin="135,10,0,0" VerticalAlignment="Top" Width="116" Height="32"/>
         <Image x:Name="image" HorizontalAlignment="Left" Height="124" VerticalAlignment="Top" Width="130" Source="/ParkInspectGroupC;component/Image/Logo_WhiteBack.PNG"/>
+        <Button x:Name="button1" Command="{Binding EditCustomerCommand }" Content="Bewerk klant" FontSize="16" HorizontalAlignment="Left" Margin="373,10,0,0" VerticalAlignment="Top" Width="119" Height="32"/>
+
 
 
 

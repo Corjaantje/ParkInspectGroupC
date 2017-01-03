@@ -1,5 +1,7 @@
-﻿using System;
+﻿using ParkInspectGroupC.ViewModel;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,17 +13,23 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Xaml;
 
 namespace ParkInspectGroupC.View
 {
-    /// <summary>
-    /// Interaction logic for InspectorProfileView.xaml
-    /// </summary>
-    public partial class InspectorProfileView : UserControl
-    {
-        public InspectorProfileView()
-        {
-            InitializeComponent();
-        }
-    }
+	/// <summary>
+	/// Interaction logic for AssignmentOverview.xaml
+	/// </summary>
+	public partial class AssignmentOverview : Window
+	{
+		public AssignmentOverview()
+		{
+			
+			InitializeComponent();
+			
+			DataContext = new AssignmentOverviewViewModel();
+
+			
+		}
+	}
 }

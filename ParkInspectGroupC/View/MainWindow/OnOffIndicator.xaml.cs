@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ParkInspectGroupC.View
+namespace ParkInspectGroupC.View.MainWindow
 {
     /// <summary>
-    /// Interaction logic for InspectorProfileView.xaml
+    /// Interaction logic for OnOffIndicator.xaml
     /// </summary>
-    public partial class InspectorProfileView : UserControl
+    public partial class OnOffIndicator : UserControl
     {
-        public InspectorProfileView()
+        public OnOffIndicator()
         {
             InitializeComponent();
         }
