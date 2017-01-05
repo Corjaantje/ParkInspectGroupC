@@ -16,15 +16,13 @@ namespace ParkInspectGroupC.ViewModel
         private string _phonenumber;
         private string _customermail;
 
-        
-
        
         public CustomerCreationViewModel()
         {
             AddCustomerCommand = new RelayCommand(addCustomer, canAddCustomer);
         }
 
-        public string Customername
+        public string CustomerName
         {
             get{
                 return _customername;
@@ -32,11 +30,11 @@ namespace ParkInspectGroupC.ViewModel
 
             set{
                 _customername = value;
-                RaisePropertyChanged("Customername");
+                RaisePropertyChanged("CustomerName");
             }
         }
 
-        public string Streetname
+        public string StreetName
         {
             get
             {
@@ -46,11 +44,11 @@ namespace ParkInspectGroupC.ViewModel
             set
             {
                 _streetname = value;
-                RaisePropertyChanged("Streetname");
+                RaisePropertyChanged("StreetName");
             }
         }
 
-        public string Housenumber
+        public string HouseNumber
         {
             get
             {
@@ -60,12 +58,12 @@ namespace ParkInspectGroupC.ViewModel
             set
             {
                 _housenumber = value;
-                RaisePropertyChanged("Housenumber");
+                RaisePropertyChanged("HouseNumber");
             }
         }
 
 
-        public string Customerlocation
+        public string CustomerLocation
         {
             get
             {
@@ -75,11 +73,11 @@ namespace ParkInspectGroupC.ViewModel
             set
             {
                 _location = value;
-                RaisePropertyChanged("Customerlocation");
+                RaisePropertyChanged("CustomerLocation");
             }
         }
 
-        public string Phonenumber
+        public string PhoneNumber
         {
             get
             {
@@ -89,13 +87,13 @@ namespace ParkInspectGroupC.ViewModel
             set
             {
                 _phonenumber = value;
-                RaisePropertyChanged("Phonenumber");
+                RaisePropertyChanged("PhoneNumber");
                
             }
         }
 
 
-        public string Customermail
+        public string CustomerMail
         {
             get
             {
@@ -112,12 +110,12 @@ namespace ParkInspectGroupC.ViewModel
         private bool canAddCustomer()
         {
 
-            if (string.IsNullOrWhiteSpace(Customername)
-                || string.IsNullOrWhiteSpace(Streetname)
-                || string.IsNullOrWhiteSpace(Housenumber)
-                || string.IsNullOrWhiteSpace(Customerlocation)
-                || string.IsNullOrWhiteSpace(Phonenumber)
-                || string.IsNullOrWhiteSpace(Customermail)) 
+            if (string.IsNullOrWhiteSpace(CustomerName)
+                || string.IsNullOrWhiteSpace(StreetName)
+                || string.IsNullOrWhiteSpace(HouseNumber)
+                || string.IsNullOrWhiteSpace(CustomerLocation)
+                || string.IsNullOrWhiteSpace(PhoneNumber)
+                || string.IsNullOrWhiteSpace(CustomerMail)) 
                 {
                  return false;
             }
@@ -132,11 +130,11 @@ namespace ParkInspectGroupC.ViewModel
             {
                 var customer = new Customer()
                 {
-                    Name = _customername,
-                    Address = _streetname + " " + _housenumber,
-                    Location = _location,
-                    Phonenumber = _phonenumber,
-                    Email = _customermail
+                    Name = CustomerName,
+                    Address = StreetName + " " + HouseNumber,
+                    Location = CustomerLocation,
+                    Phonenumber = PhoneNumber,
+                    Email = CustomerMail
 
                 };
 
@@ -146,11 +144,6 @@ namespace ParkInspectGroupC.ViewModel
             }
         }
 
-        //public event PropertyChangedEventHandler PropertyChanged;
-        //void RaisePropertyChanged(string prop)
-        //{
-        //    if (PropertyChanged != null) { PropertyChanged(this, new PropertyChangedEventArgs(prop)); }
-        //}
 
         public ICommand AddCustomerCommand { get; set; }
     }
