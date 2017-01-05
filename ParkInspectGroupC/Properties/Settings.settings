@@ -11,5 +11,8 @@
     <Setting Name="LoggedInEmp" Type="LocalDatabase.Domain.Employee" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="SyncError" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
