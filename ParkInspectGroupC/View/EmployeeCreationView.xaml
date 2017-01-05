@@ -73,10 +73,10 @@
             <Label Grid.Row="8" Grid.Column="0" Content="Plaats:" Margin="0,0,10,0" />
             <TextBox Grid.Row="8" Grid.Column="1" Margin="0,2,10,2" Text="{Binding Path=City, UpdateSourceTrigger=PropertyChanged}" />
 
-            <Label Grid.Row="9" Grid.Column="0" Content="Zipcode" Margin="0,0,10,0" />
+            <Label Grid.Row="9" Grid.Column="0" Content="Postcode" Margin="0,0,10,0" />
             <TextBox Grid.Row="9" Grid.Column="1" Margin="0,2,10,2" Text="{Binding Path=ZipCode, UpdateSourceTrigger=PropertyChanged}" />
 
-            <Label Grid.Row="10" Grid.Column="0" Content="Email:" Margin="0,0,10,0" />
+            <Label Grid.Row="10" Grid.Column="0" Content="E-mail adres:" Margin="0,0,10,0" />
             <TextBox Grid.Row="10" Grid.Column="1" Margin="0,2,10,2">
                 <TextBox.Text>
                     <Binding Path="Email" UpdateSourceTrigger="PropertyChanged">
@@ -96,15 +96,8 @@
             <Label Grid.Row="13" Grid.Column="0" Content="Manager:" Margin="0,0,10,0" />
             <ComboBox Grid.Row="13" Grid.Column="1" Margin="0,2,10,2" SelectedIndex="0" SelectedItem="{Binding Path=SelectedManager}" ItemsSource="{Binding Path=AvailableManagers}" DisplayMemberPath="SurName" />
 
-            <Label Grid.Row="14" Grid.Column="0" Content="Is inspecteur:" Margin="0,0,10,0" />
-            <CheckBox Grid.Row="14" Grid.Column="1" Margin="0,0,10,0" VerticalAlignment="Center" IsChecked="{Binding Path=IsInspector}" />
-
-
-            <Label Grid.Row="15" Grid.Column="0" Content="Is manager:" Margin="0,0,10,0" Visibility="Hidden" />
-            <CheckBox Grid.Row="15" Grid.Column="1" Margin="0,0,10,0" VerticalAlignment="Center" IsChecked="{Binding Path=IsManager}" Visibility="Hidden" />
-
             <WrapPanel Grid.Row="16" Grid.Column="0" Orientation="Horizontal" Margin="0,0,0,0" VerticalAlignment="Center">
-                <Button Content="Save" MinWidth="60" Margin="3,3,3,3" Command="{Binding SaveCommand}" CommandParameter="{Binding ElementName=This}" />
+                <Button Content="Opslaan" MinWidth="60" Margin="3,3,3,3" Command="{Binding SaveCommand}" CommandParameter="{Binding ElementName=This}" />
                 <Label Content="{Binding Message}" Foreground="Red" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Center" />
                 <!-- <Button Content="Reset" MinWidth="60" Margin="3,3,3,3" /> -->
             </WrapPanel>

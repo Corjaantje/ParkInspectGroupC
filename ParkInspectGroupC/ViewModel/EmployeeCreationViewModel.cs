@@ -68,7 +68,7 @@ namespace ParkInspectGroupC.ViewModel
 	                    ZipCode = this.ZipCode,
 	                    Phonenumber = this.TelNumber,
 	                    Email = this.Email,
-	                    IsInspecter = this.IsInspector,
+	                    IsInspecter = true,
 	                    IsManager = false,
                         Id = (int)newEmployees + 1,
 	                };
