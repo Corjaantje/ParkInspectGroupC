@@ -14,14 +14,20 @@ using System.Windows.Shapes;
 
 namespace ParkInspectGroupC.View
 {
-    /// <summary>
-    /// Interaction logic for InspectorProfileView.xaml
-    /// </summary>
-    public partial class InspectorProfileView : UserControl
-    {
-        public InspectorProfileView()
-        {
-            InitializeComponent();
-        }
-    }
+	/// <summary>
+	/// Interaction logic for NewAssignmentView.xaml
+	/// </summary>
+	public partial class NewAssignmentView : Window
+	{
+		public NewAssignmentView()
+		{
+			InitializeComponent();
+			DataContext = new NewAssignmentView();
+		}
+
+		private void createAssignment_Click(object sender, RoutedEventArgs e)
+		{
+
+		}
+	}
 }

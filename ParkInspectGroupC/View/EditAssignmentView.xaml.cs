@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LocalDatabase.Domain;
+using ParkInspectGroupC.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,25 +12,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ParkInspectGroupC.Miscellaneous;
 
 namespace ParkInspectGroupC.View
 {
 	/// <summary>
-	/// Interaction logic for EmployeeCreationView.xaml
+	/// Interaction logic for EditAssignmentView.xaml
 	/// </summary>
-	public partial class EmployeeCreationView : UserControl, IHavePassword
+	public partial class EditAssignmentView : Window
 	{
-		public EmployeeCreationView()
+		public EditAssignmentView(Assignment a, AssignmentOverviewViewModel avm)
 		{
 			InitializeComponent();
+			DataContext = new EditAssignmentViewModel(a, avm);
 		}
-
-        public System.Security.SecureString Password
-        {
-            get { return MynPasswordBox.SecurePassword; }
-        }
-    }
+	}
 }

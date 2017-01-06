@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace ParkInspectGroupC.View
 {
     /// <summary>
-    /// Interaction logic for InspectorProfileView.xaml
+    /// Interaction logic for InspectorsListView.xaml
     /// </summary>
-    public partial class InspectorProfileView : UserControl
+    public partial class InspectorsListView : UserControl
     {
-        public InspectorProfileView()
+        public InspectorsListView()
         {
             InitializeComponent();
         }
