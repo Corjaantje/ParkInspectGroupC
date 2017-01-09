@@ -36,6 +36,8 @@ namespace ParkInspectGroupC.ViewModel
             SimpleIoc.Default.Register<InspectorListViewModel>();
             SimpleIoc.Default.Register<AvailabilityCreationViewModel>();
             SimpleIoc.Default.Register<AvailabilityEditViewModel>();
+            SimpleIoc.Default.Register<InspectionViewModel>();
+
         }
 
         private static void UnRegisterViewModels()
@@ -54,6 +56,7 @@ namespace ParkInspectGroupC.ViewModel
             SimpleIoc.Default.Unregister<InspectorListViewModel>();
             SimpleIoc.Default.Unregister<AvailabilityCreationViewModel>();
             SimpleIoc.Default.Unregister<AvailabilityEditViewModel>();
+            SimpleIoc.Default.Unregister<InspectionViewModel>();
         }
 
         public MainViewModel Main
@@ -154,6 +157,15 @@ namespace ParkInspectGroupC.ViewModel
         {
             get { return new AvailabilityEditViewModel(InspectorList.SelectedAvailability,InspectorList.InspectorAvailability); }
         }
+
+        public InspectionViewModel InspectionOverView
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<InspectionViewModel>();
+            }
+        }
+
 
         public void Cleanup()
         {
