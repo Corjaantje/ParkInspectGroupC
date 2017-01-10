@@ -57,5 +57,17 @@ namespace ParkInspectGroupC.Properties {
                 this["LoggedInEmp"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool SyncError {
+            get {
+                return ((bool)(this["SyncError"]));
+            }
+            set {
+                this["SyncError"] = value;
+            }
+        }
     }
 }

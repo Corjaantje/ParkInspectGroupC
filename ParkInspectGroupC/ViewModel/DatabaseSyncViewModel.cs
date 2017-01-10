@@ -39,6 +39,16 @@ namespace ParkInspectGroupC.ViewModel
 
             theSaveDeleteMessages = new ObservableCollection<SaveDeleteMessage>();
             theUpdateMessages = new ObservableCollection<UpdateMessage>();
+
+            if (Properties.Settings.Default.SyncError)
+            {
+                Debug.WriteLine("Sync Error");
+                LocalToCentralSync();
+            }
+            else
+            {
+                Debug.WriteLine("No Sync Error");
+            }
         }
 
         #region Conflict Buttons
@@ -114,7 +124,7 @@ namespace ParkInspectGroupC.ViewModel
         #endregion
 
         #region Local to Central Sync
-        private async void LocalToCentralSync()
+        public async void LocalToCentralSync()
         {
             List<SaveDeleteMessage> SaveDeleteMessage = null;
             Tuple<List<UpdateMessage>, SaveDeleteMessage> UpdateMessages = null;
