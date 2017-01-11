@@ -71,10 +71,16 @@ namespace ParkInspectGroupC.ViewModel
         }
 
         public ICommand BackCommand { get; set; }
+        public ICommand ProfileNavigationCommand { get; set; }
+        public ICommand AssignmentNavigationCommand { get; set; }
+        public ICommand CustomerNavigationCommand { get; set; }
         public ICommand LogOutCommand { get; set; }
         public MainViewModel()
         {
             BackCommand = new RelayCommand(PerformBack, CanPerformBack);
+           AssignmentNavigationCommand = new RelayCommand(PerformAssignmentNavigation);
+            ProfileNavigationCommand = new RelayCommand(PerfromProfilenNavigation);
+            CustomerNavigationCommand = new RelayCommand(PerformCustomerNavigation);
             LogOutCommand = new RelayCommand(PerformLogOut);
             CurrentView = new LoginView();
 
@@ -113,6 +119,19 @@ namespace ParkInspectGroupC.ViewModel
             Navigator.Back();
         }
 
+        private void PerfromProfilenNavigation()
+        {
+            Navigator.SetNewView(new InspectorProfileView());
+        }
+      private void  PerformAssignmentNavigation()
+        {
+            Navigator.SetNewView(new AssignmentOverview());
+        }
+
+        private void PerformCustomerNavigation()
+        {
+            Navigator.SetNewView(new CustomerListView());
+        }
         private void PerformLogOut()
         {
             Properties.Settings.Default.LoggedInEmp = null;
