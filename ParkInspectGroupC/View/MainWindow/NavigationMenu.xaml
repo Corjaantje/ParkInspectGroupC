@@ -5,13 +5,16 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ParkInspectGroupC.View.MainWindow"
              mc:Ignorable="d"
-			 DataContext="{Binding Main, Source={StaticResource Locator}}" Width="197.333">
+			 DataContext="{Binding Main, Source={StaticResource Locator}}" Width="307.978">
     <Grid>
         <WrapPanel Margin="3,3,54,3">
             <Button Command="{Binding BackCommand}" HorizontalAlignment="Left">
                 <Image Source="/ParkInspectGroupC;component/Image/arrow-back-128.png" MaxWidth="20"></Image>
             </Button>
+            <Button x:Name="ProfielButton" Content="Profiel" Width="67" Height="20" HorizontalAlignment="Left" VerticalAlignment="Center" Command="{Binding ProfileNavigationCommand}" />
+            <Button x:Name="OpdrachtButton" Content="Opdrachten" Width="67" Height="20" HorizontalAlignment="Left" VerticalAlignment="Center" Command="{Binding AssignmentNavigationCommand}"/>
+            <Button x:Name="KlantButton" Content="Klanten" Width="67" Height="20" HorizontalAlignment="Left" VerticalAlignment="Center" Command="{Binding CustomerNavigationCommand}"/>
         </WrapPanel>
-        <Button x:Name="LogOutButton" Content="Uitloggen" HorizontalAlignment="Right" VerticalAlignment="Center" Width="58" Command="{Binding LogOutCommand}" Margin="0,3,4,7"/>
+        <Button x:Name="LogOutButton" Content="Uitloggen" HorizontalAlignment="Right" VerticalAlignment="Center" Width="58" Command="{Binding LogOutCommand}" Margin="0,5,4,5" Height="20"/>
     </Grid>
 </UserControl>

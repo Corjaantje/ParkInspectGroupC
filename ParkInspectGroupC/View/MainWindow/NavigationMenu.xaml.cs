@@ -24,5 +24,5 @@ namespace ParkInspectGroupC.View.MainWindow
 		{
 			InitializeComponent();
 		}
-	}
+    }
 }
