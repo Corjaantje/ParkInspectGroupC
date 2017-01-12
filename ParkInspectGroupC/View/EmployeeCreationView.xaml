@@ -76,7 +76,7 @@
             <Label Grid.Row="9" Grid.Column="0" Content="Postcode" Margin="0,0,10,0" />
             <TextBox Grid.Row="9" Grid.Column="1" Margin="0,2,10,2" Text="{Binding Path=ZipCode, UpdateSourceTrigger=PropertyChanged}" />
 
-            <Label Grid.Row="10" Grid.Column="0" Content="E-mail adres:" Margin="0,0,10,0" />
+            <Label Grid.Row="10" Grid.Column="0" Content="E-mail-Adres:" Margin="0,0,10,0" />
             <TextBox Grid.Row="10" Grid.Column="1" Margin="0,2,10,2">
                 <TextBox.Text>
                     <Binding Path="Email" UpdateSourceTrigger="PropertyChanged">

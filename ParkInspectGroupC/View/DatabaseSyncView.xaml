@@ -8,8 +8,8 @@
              DataContext="{Binding DatabaseSync, Source={StaticResource Locator}}"
              d:DesignHeight="720" d:DesignWidth="1280">
     <Grid>
-        <Button VerticalAlignment="Top" HorizontalAlignment="Left" Height="20" Width="150" Margin="5,5,0,0" Command="{Binding Path=LCSyncCommand}" Content="Start lokaal naar centraal" />
-        <Button VerticalAlignment="Top" HorizontalAlignment="Left" Height="20" Width="150" Margin="5,30,0,0" Command="{Binding Path=CLSyncCommand}" Content="Start centraal naar lokaal" />
+        <Button VerticalAlignment="Top" HorizontalAlignment="Left" Height="20" Width="190" Margin="10,10,0,0" Command="{Binding Path=LCSyncCommand}" Content="Synchroniseer lokaal naar centraal" />
+        <Button VerticalAlignment="Top" HorizontalAlignment="Left" Height="20" Width="190" Margin="10,40,0,0" Command="{Binding Path=CLSyncCommand}" Content="Synchroniseer centraal naar lokaal" />
         
         <Grid Margin="5,70,5,5">
             <Grid.RowDefinitions>
