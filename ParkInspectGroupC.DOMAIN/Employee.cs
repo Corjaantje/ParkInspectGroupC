@@ -24,8 +24,8 @@ namespace ParkInspectGroupC.DOMAIN
             this.Inspection = new HashSet<Inspection>();
             this.Report = new HashSet<Report>();
             this.WorkingHours = new HashSet<WorkingHours>();
-            this.Reciever = new HashSet<Message>();
-            this.Sender = new HashSet<Message>();
+            this.Message = new HashSet<Message>();
+            this.Message1 = new HashSet<Message>();
         }
     
         public int Id { get; set; }
@@ -64,8 +64,8 @@ namespace ParkInspectGroupC.DOMAIN
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WorkingHours> WorkingHours { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Message> Reciever { get; set; }
+        public virtual ICollection<Message> Message { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Message> Sender { get; set; }
+        public virtual ICollection<Message> Message1 { get; set; }
     }
 }

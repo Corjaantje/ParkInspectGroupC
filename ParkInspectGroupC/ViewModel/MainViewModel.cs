@@ -9,6 +9,7 @@ using GalaSoft.MvvmLight.CommandWpf;
 using ParkInspectGroupC.Factory;
 using ParkInspectGroupC.Properties;
 using ParkInspectGroupC.View;
+using ParkInspectGroupC.View.ReportCreation;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 
