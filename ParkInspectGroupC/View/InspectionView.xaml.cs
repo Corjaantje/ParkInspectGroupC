@@ -1,5 +1,3 @@
-﻿using ParkInspectGroupC.ViewModel;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,12 +16,12 @@ namespace ParkInspectGroupC.View
 	/// <summary>
 	/// Interaction logic for InspectionView.xaml
 	/// </summary>
-	public partial class InspectionView : Window
+	public partial class InspectionView : UserControl
+
 	{
 		public InspectionView()
 		{
 			InitializeComponent();
-			DataContext = new InspectionViewModel();
 		}
 	}
 }
