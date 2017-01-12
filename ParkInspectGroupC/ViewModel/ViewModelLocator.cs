@@ -1,56 +1,59 @@
-/*
-  In App.xaml:
-  <Application.Resources>
-      <vm:ViewModelLocator xmlns:vm="clr-namespace:ParkInspectGroupC"
-                           x:Key="Locator" />
-  </Application.Resources>
-  
-  In the View:
-  DataContext="{Binding Source={StaticResource Locator}, Path=ViewModelName}"
-
-  You can also use Blend to do all this with the tool's support.
-  See http://www.galasoft.ch/mvvm
-*/
-
+using System;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 
 namespace ParkInspectGroupC.ViewModel
 {
-    /// <summary>
-    /// This class contains static references to all the view models in the
-    /// application and provides an entry point for the bindings.
-    /// </summary>
+
     public class ViewModelLocator
     {
-        /// <summary>
-        /// Initializes a new instance of the ViewModelLocator class.
-        /// </summary>
+
         public ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-            ////if (ViewModelBase.IsInDesignModeStatic)
-            ////{
-            ////    // Create design time view services and models
-            ////    SimpleIoc.Default.Register<IDataService, DesignDataService>();
-            ////}
-            ////else
-            ////{
-            ////    // Create run time view services and models
-            ////    SimpleIoc.Default.Register<IDataService, DataService>();
-            ////}
+            RegisterViewModels();
 
+        }
+
+        private static void RegisterViewModels()
+        {
             SimpleIoc.Default.Register<MainViewModel>();
-			SimpleIoc.Default.Register<LoginViewModel>();
+            SimpleIoc.Default.Register<LoginViewModel>();
             SimpleIoc.Default.Register<CustomerCreationViewModel>();
             SimpleIoc.Default.Register<MapViewModel>();
             SimpleIoc.Default.Register<QuestionnaireViewModel>();
-			SimpleIoc.Default.Register<EmployeeCreationViewModel>();
-			SimpleIoc.Default.Register<InspectorProfileViewModel>();
+            SimpleIoc.Default.Register<EmployeeCreationViewModel>();
+            SimpleIoc.Default.Register<InspectorProfileViewModel>();
             SimpleIoc.Default.Register<DatabaseSyncViewModel>();
             SimpleIoc.Default.Register<CustomerListViewModel>();
+            SimpleIoc.Default.Register<CustomerEditViewModel>();
+            SimpleIoc.Default.Register<OnOffIndicatorViewModel>();
+            SimpleIoc.Default.Register<ViewModelLocator>(); //Needed for the cleanup method ~Roy
+            SimpleIoc.Default.Register<DashboardViewModel>();
+            SimpleIoc.Default.Register<ManagerDashboardViewModel>();
+            SimpleIoc.Default.Register<InspectorListViewModel>();
+            SimpleIoc.Default.Register<AvailabilityCreationViewModel>();
+            SimpleIoc.Default.Register<AvailabilityEditViewModel>();
+        }
+
+        private static void UnRegisterViewModels()
+        {
+            SimpleIoc.Default.Unregister<CustomerCreationViewModel>();
+            SimpleIoc.Default.Unregister<MapViewModel>();
+            SimpleIoc.Default.Unregister<QuestionnaireViewModel>();
+            SimpleIoc.Default.Unregister<EmployeeCreationViewModel>();
+            SimpleIoc.Default.Unregister<InspectorProfileViewModel>();
+            SimpleIoc.Default.Unregister<DatabaseSyncViewModel>();
+            SimpleIoc.Default.Unregister<CustomerListViewModel>();
+            SimpleIoc.Default.Unregister<CustomerEditViewModel>();
+            SimpleIoc.Default.Unregister<OnOffIndicatorViewModel>();
+            SimpleIoc.Default.Unregister<DashboardViewModel>();
+            SimpleIoc.Default.Unregister<ManagerDashboardViewModel>();
+            SimpleIoc.Default.Unregister<InspectorListViewModel>();
+            SimpleIoc.Default.Unregister<AvailabilityCreationViewModel>();
+            SimpleIoc.Default.Unregister<AvailabilityEditViewModel>();
         }
 
         public MainViewModel Main
@@ -99,23 +102,64 @@ namespace ParkInspectGroupC.ViewModel
 
 	    public InspectorProfileViewModel InspectorProfile
 	    {
-		    get { return ServiceLocator.Current.GetInstance<InspectorProfileViewModel>(); }
+		    get { return new InspectorProfileViewModel(); }
 	    }
 
         public DatabaseSyncViewModel DatabaseSync
         {
             get { return ServiceLocator.Current.GetInstance<DatabaseSyncViewModel>(); }
         }
+        public OnOffIndicatorViewModel OnOffIndicator
+        {
+            get { return ServiceLocator.Current.GetInstance<OnOffIndicatorViewModel>(); }
+        }
         public CustomerListViewModel CustomerList
         {
             get { return ServiceLocator.Current.GetInstance<CustomerListViewModel>(); }
         }
 
-
-
-        public static void Cleanup()
+        public CustomerEditViewModel CustomerEdit
         {
-            // TODO Clear the ViewModels
+            get
+            {
+                return ServiceLocator.Current.GetInstance<CustomerEditViewModel>();
+            }
+        }
+
+        public DashboardViewModel Dashboard
+        {
+            get { return ServiceLocator.Current.GetInstance<DashboardViewModel>(); }
+        }
+
+        public ManagerDashboardViewModel ManagerDashboard
+        {
+            get { return ServiceLocator.Current.GetInstance<ManagerDashboardViewModel>(); }
+        }
+
+        public InspectorListViewModel InspectorList
+        {
+            get { return ServiceLocator.Current.GetInstance<InspectorListViewModel>(); }
+        }
+
+        public InspectorEditViewModel EditInspector
+        {
+            get { return new InspectorEditViewModel(InspectorList.SelectedInspector); }
+        }
+         public AvailabilityCreationViewModel Availability
+        {
+            get { return new AvailabilityCreationViewModel(InspectorList.SelectedInspector, InspectorList.InspectorAvailability); }
+        }
+
+        public AvailabilityEditViewModel EditAvailability
+        {
+            get { return new AvailabilityEditViewModel(InspectorList.SelectedAvailability,InspectorList.InspectorAvailability); }
+        }
+
+        public void Cleanup()
+        {
+            UnRegisterViewModels();
+            Properties.Settings.Default.LoggedInEmp = null;
+            RegisterViewModels();
         }
     }
 }
