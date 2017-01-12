@@ -125,6 +125,7 @@
     <Compile Include="Factory\ThemeFactory.cs" />
     <Compile Include="Miscellaneous\IHavePassword.cs" />
     <Compile Include="Miscellaneous\Navigator.cs" />
+    <Compile Include="ViewModel\AssignmentToInspectionViewModel.cs" />
     <Compile Include="ViewModel\Assignment\AssignmentOverviewViewModel.cs" />
     <Compile Include="ViewModel\AvailabilityCreationViewModel.cs" />
     <Compile Include="ViewModel\AvailabilityEditViewModel.cs" />
@@ -145,6 +146,9 @@
     <Compile Include="ViewModel\ManagerDashboardViewModel.cs" />
     <Compile Include="ViewModel\MapViewModel.cs" />
     <Compile Include="ViewModel\Assignment\NewAssignmentViewModel.cs" />
+    <Compile Include="View\AssignmentToInspectionView.xaml.cs">
+      <DependentUpon>AssignmentToInspectionView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Assignment\AssignmentOverview.xaml.cs">
       <DependentUpon>AssignmentOverview.xaml</DependentUpon>
     </Compile>
@@ -266,6 +270,10 @@
     <Page Include="Themes\WhistlerBlue.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\AssignmentToInspectionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Assignment\AssignmentOverview.xaml">
       <Generator>MSBuild:Compile</Generator>

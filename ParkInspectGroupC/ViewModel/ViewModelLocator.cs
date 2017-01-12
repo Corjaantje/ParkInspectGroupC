@@ -37,6 +37,7 @@ namespace ParkInspectGroupC.ViewModel
             SimpleIoc.Default.Register<AvailabilityCreationViewModel>();
             SimpleIoc.Default.Register<AvailabilityEditViewModel>();
             SimpleIoc.Default.Register<InspectionViewModel>();
+			SimpleIoc.Default.Register<AssignmentToInspectionViewModel>();
 
         }
 
@@ -57,6 +58,7 @@ namespace ParkInspectGroupC.ViewModel
             SimpleIoc.Default.Unregister<AvailabilityCreationViewModel>();
             SimpleIoc.Default.Unregister<AvailabilityEditViewModel>();
             SimpleIoc.Default.Unregister<InspectionViewModel>();
+			SimpleIoc.Default.Unregister<AssignmentToInspectionViewModel>();
         }
 
         public MainViewModel Main

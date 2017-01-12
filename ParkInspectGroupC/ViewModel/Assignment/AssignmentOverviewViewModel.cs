@@ -159,6 +159,14 @@ namespace ParkInspectGroupC.ViewModel
 
 		}
 
+		private void createInspection()
+		{
+
+			AssignmentToInspectionView converterView = new AssignmentToInspectionView();
+			((AssignmentToInspectionViewModel)converterView.DataContext).setAssignment(_selectedAssignment);
+
+		}
+
 	}
 
 }
