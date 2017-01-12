@@ -1,17 +1,20 @@
 ﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
 using LocalDatabase.Domain;
 using ParkInspectGroupC.Encryption;
 using ParkInspectGroupC.Miscellaneous;
+using ParkInspectGroupC.View;
 using System.Linq;
 using System.Windows.Input;
+using GalaSoft.MvvmLight.CommandWpf;
+using ParkInspectGroupC.View;
 
 namespace ParkInspectGroupC.ViewModel
 {
     public class LoginViewModel : ViewModelBase
 	{
-
+        public Employee LoginEmployee { get; set; }
 		public ICommand LoginCommand { get; set; }
+        public ICommand RegisterCommand { get; set; }
 
 		private string _loginMessage;
 		public string LoginMessage
@@ -36,14 +39,20 @@ namespace ParkInspectGroupC.ViewModel
 
 		public LoginViewModel()
 		{
-			_loginMessage = string.Empty;
+            _loginMessage = string.Empty;
 			LoginCommand = new RelayCommand<object>(Login, CanLogin);
+            RegisterCommand = new RelayCommand(OpenRegisterWindow);
 		}
 
 		private bool CanLogin(object parameter)
 		{
 			return true;
 		}
+
+	    private void OpenRegisterWindow()
+	    {
+	        Navigator.SetNewView(new EmployeeCreationView());
+	    }
 
 		private void Login(object parameter)
 		{
@@ -64,7 +73,6 @@ namespace ParkInspectGroupC.ViewModel
 						return;
 					}
 
-					LoginMessage = PasswordInVM;
 
 					// Check password
 					string passToCheck = PasswordInVM + acc.UserGuid;
@@ -76,8 +84,18 @@ namespace ParkInspectGroupC.ViewModel
 
 					// Username and Password are correct, continue the application.
                     var emp = (from e in context.Employee where e.Id.CompareTo(acc.EmployeeId) == 0 select e).FirstOrDefault();
-					
+                    Properties.Settings.Default.LoggedInEmp = emp;
+                   
                     LoginMessage = "Succes!";
+
+                    if (emp.IsManager)
+                    {
+                        Navigator.SetNewView(new ManagerDashboardView());
+                    }
+                    else
+                    {
+                        Navigator.SetNewView(new DashboardView());
+                    }
 				}
 
 			}

@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System;
 using ParkInspectGroupC.View.DatabaseSyncDialogs;
 using System.Linq;
+using ParkInspectGroupC.Miscellaneous;
 
 namespace ParkInspectGroupC.ViewModel
 {
@@ -38,6 +39,16 @@ namespace ParkInspectGroupC.ViewModel
 
             theSaveDeleteMessages = new ObservableCollection<SaveDeleteMessage>();
             theUpdateMessages = new ObservableCollection<UpdateMessage>();
+
+            if (Properties.Settings.Default.SyncError)
+            {
+                Debug.WriteLine("Sync Error");
+                LocalToCentralSync();
+            }
+            else
+            {
+                Debug.WriteLine("No Sync Error");
+            }
         }
 
         #region Conflict Buttons
@@ -85,21 +96,25 @@ namespace ParkInspectGroupC.ViewModel
             {
                 if (theUpdateMessages.Count == 0)
                 {
-                    //Start sync with central
-                    Debug.WriteLine("CentralToLocal: Starting Sync");
-                    Task<bool> syncCToL = ldb.SyncCentralToLocal();
-
                     _message.Date = DateTime.Now;
-                    if (syncCToL.Result)
+                    if (Properties.Settings.Default.OnOffline)
                     {
-                        _message.Message = "Succes!";
+                        //Start sync with central
+                        Task<bool> syncCToL = ldb.SyncCentralToLocal();
+                        
+                        if (syncCToL.Result)
+                        {
+                            _message.Message = "Succes!";
+                        }
+                        else
+                        {
+                            _message.Message = "Failed!";
+                        }
                     }
                     else
                     {
-                        _message.Message = "Failed!";
+                        _message.Message = "Kon niet gaan synchroniseren want er is geen verbinding met de centrale database!";
                     }
-                    Debug.WriteLine("CentralToLocal: Done Sync");
-                    Debug.WriteLine("CentralToLocal: Stopping Sync");
                 }
             });
 
@@ -109,7 +124,7 @@ namespace ParkInspectGroupC.ViewModel
         #endregion
 
         #region Local to Central Sync
-        private async void LocalToCentralSync()
+        public async void LocalToCentralSync()
         {
             List<SaveDeleteMessage> SaveDeleteMessage = null;
             Tuple<List<UpdateMessage>, SaveDeleteMessage> UpdateMessages = null;
@@ -144,10 +159,7 @@ namespace ParkInspectGroupC.ViewModel
 
             Task task = Task.Run(() =>
             {
-                Debug.WriteLine("SaveDelete: Starting Sync");
                 message = ldb.SyncLocalToCentralSaveDelete();
-                Debug.WriteLine("SaveDelete: Sync Done");
-                Debug.WriteLine("SaveDelete: Sync Stopping");
             });
 
             await task;
@@ -160,10 +172,7 @@ namespace ParkInspectGroupC.ViewModel
 
             Task task = Task.Run(() =>
             {
-                Debug.WriteLine("Update: Starting Sync");
                 UpdateMessages = ldb.SyncLocalToCentralUpdate();
-                Debug.WriteLine("Update: Sync Done");
-                Debug.WriteLine("Update: Sync Stopping");
             });
 
             await task;

@@ -10,6 +10,8 @@ using ParkInspectGroupC.Factory;
 using ParkInspectGroupC.Properties;
 using ParkInspectGroupC.View;
 using ParkInspectGroupC.View.ReportCreation;
+using GalaSoft.MvvmLight.Ioc;
+using Microsoft.Practices.ServiceLocation;
 
 namespace ParkInspectGroupC.ViewModel
 {
@@ -59,11 +61,11 @@ namespace ParkInspectGroupC.ViewModel
         }
 
         public ICommand BackCommand { get; set; }
-
+        public ICommand LogOutCommand { get; set; }
         public MainViewModel()
         {
             BackCommand = new RelayCommand(PerformBack, CanPerformBack);
-            //CurrentView = new LoginView();
+            LogOutCommand = new RelayCommand(PerformLogOut);
             CurrentView = new LoginView();
 
             //List<Theme> Themes = new List<Theme>
@@ -99,6 +101,15 @@ namespace ParkInspectGroupC.ViewModel
         private void PerformBack()
         {
             Navigator.Back();
+        }
+
+        private void PerformLogOut()
+        {
+            SimpleIoc.Default.Unregister<LoginViewModel>();
+            SimpleIoc.Default.Register<LoginViewModel>();
+            Navigator.SetNewView(new LoginView());
+            ServiceLocator.Current.GetInstance<ViewModelLocator>().Cleanup();
+            
         }
 
         private bool CanPerformBack()
