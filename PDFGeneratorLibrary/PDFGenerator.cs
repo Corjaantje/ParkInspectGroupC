@@ -13,7 +13,7 @@ using MigraDoc.DocumentObjectModel.Shapes;
 
 namespace ParkInspectGroupC.Miscellaneous
 {
-	class PdfGenerator
+	public class PdfGenerator
 	{
 
 		public PdfGenerator()
@@ -179,14 +179,14 @@ namespace ParkInspectGroupC.Miscellaneous
 			
 		}
 
-		private void AskToOpenFile(string filename)
-		{
-			MessageBoxResult result = MessageBox.Show("Wilt u het bestand openen?", filename, MessageBoxButton.YesNo);
+        private void AskToOpenFile(string filename)
+        {
+            //MessageBoxResult result = MessageBox.Show("Wilt u het bestand openen?", filename, MessageBoxButton.YesNo);
 
-			if (result == MessageBoxResult.Yes)
-			{
-				Process.Start(filename);
-			}
-		}	
-	}
+            //if (result == MessageBoxResult.Yes)
+            //{
+                Process.Start(filename);
+            //}
+        }
+    }
 }

@@ -147,10 +147,8 @@
     <Compile Include="Converter\EnumToBooleanConverter.cs" />
     <Compile Include="Converter\StatusToPathConverter.cs" />
     <Compile Include="Factory\ThemeFactory.cs" />
-    <Compile Include="Miscellaneous\DiagramPlotter.cs" />
     <Compile Include="Miscellaneous\IHavePassword.cs" />
     <Compile Include="Miscellaneous\Navigator.cs" />
-    <Compile Include="Miscellaneous\PDFGenerator.cs" />
     <Compile Include="ViewModel\CustomerCreationViewModel.cs" />
     <Compile Include="ViewModel\DatabaseSyncViewModel.cs" />
     <Compile Include="ViewModel\CustomerListViewModel.cs" />
@@ -380,6 +378,10 @@
     <ProjectReference Include="..\ParkInspectGroupC.DOMAIN\ParkInspectGroupC.DOMAIN.csproj">
       <Project>{D1CC6F15-9980-47B1-AC43-11502E5D3668}</Project>
       <Name>ParkInspectGroupC.DOMAIN</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PDFGeneratorLibrary\PDFGeneratorLibrary.csproj">
+      <Project>{5e5614b8-4611-4505-a3bd-5b2e9a4a5807}</Project>
+      <Name>PDFGeneratorLibrary</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -64,7 +64,7 @@ namespace ParkInspectGroupC.ViewModel
         {
             BackCommand = new RelayCommand(PerformBack, CanPerformBack);
             //CurrentView = new LoginView();
-            CurrentView = new ReportAssignmentSelectionView();
+            CurrentView = new LoginView();
 
             //List<Theme> Themes = new List<Theme>
             //{

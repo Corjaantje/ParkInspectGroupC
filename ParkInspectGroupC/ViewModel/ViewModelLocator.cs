@@ -55,7 +55,6 @@ namespace ParkInspectGroupC.ViewModel
             SimpleIoc.Default.Register<CustomerListViewModel>();
             SimpleIoc.Default.Register<DiagramPreviewViewModel>();
             SimpleIoc.Default.Register<ReportViewModel>();
-            SimpleIoc.Default.Register<DiagramPlotter>();
         }
 
         public MainViewModel Main
