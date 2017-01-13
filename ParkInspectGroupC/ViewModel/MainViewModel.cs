@@ -29,6 +29,10 @@ namespace ParkInspectGroupC.ViewModel
             set
             {
                 NavVis = (Properties.Settings.Default.LoggedInEmp != null);
+                if(Properties.Settings.Default.LoggedInEmp != null)
+                {
+                    loggedInEmpIsmanager = Properties.Settings.Default.LoggedInEmp.IsManager;
+                }
                 _currentView = value; RaisePropertyChanged("CurrentView");
                 
             }
@@ -70,17 +74,31 @@ namespace ParkInspectGroupC.ViewModel
             Settings.Default.Save();
         }
 
+        public LocalDatabase.Domain.Employee loggedInEmp { get; set; }
+        private bool _loggedInEmpIsManager;
+        public bool loggedInEmpIsmanager
+        {
+            get
+            { return _loggedInEmpIsManager; }
+
+            set { _loggedInEmpIsManager = value; RaisePropertyChanged("LoggedInEmpIsmanager"); }
+        }
         public ICommand BackCommand { get; set; }
         public ICommand ProfileNavigationCommand { get; set; }
+        public ICommand ProfileListNavigationCommand { get; set; }
         public ICommand AssignmentNavigationCommand { get; set; }
         public ICommand CustomerNavigationCommand { get; set; }
+        public ICommand HomeCommand { get; set; }
         public ICommand LogOutCommand { get; set; }
         public MainViewModel()
         {
+            loggedInEmp = Settings.Default.LoggedInEmp;
             BackCommand = new RelayCommand(PerformBack, CanPerformBack);
            AssignmentNavigationCommand = new RelayCommand(PerformAssignmentNavigation);
             ProfileNavigationCommand = new RelayCommand(PerfromProfilenNavigation);
+            ProfileListNavigationCommand = new RelayCommand(PerfromProfileListNavigation);
             CustomerNavigationCommand = new RelayCommand(PerformCustomerNavigation);
+            HomeCommand = new RelayCommand(PerformHome);
             LogOutCommand = new RelayCommand(PerformLogOut);
             CurrentView = new LoginView();
 
@@ -118,7 +136,21 @@ namespace ParkInspectGroupC.ViewModel
         {
             Navigator.Back();
         }
-
+        private void PerformHome()
+        {
+            if (Properties.Settings.Default.LoggedInEmp.IsManager)
+            {
+                Navigator.SetNewView(new ManagerDashboardView());
+            }
+            else
+            {
+                Navigator.SetNewView(new DashboardView());
+            }
+        }
+        private void PerfromProfileListNavigation()
+        {
+            Navigator.SetNewView(new InspectorsListView());
+        }
         private void PerfromProfilenNavigation()
         {
             Navigator.SetNewView(new InspectorProfileView());
