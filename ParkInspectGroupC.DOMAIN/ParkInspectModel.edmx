@@ -67,14 +67,6 @@
           <Property Name="DateCreated" Type="datetime" Nullable="false" />
           <Property Name="DateUpdated" Type="datetime" Nullable="false" />
         </EntityType>
-        <EntityType Name="Diagram">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="QuestionId" Type="int" Nullable="false" />
-          <Property Name="ReportSectionId" Type="int" Nullable="false" />
-        </EntityType>
         <EntityType Name="Employee">
           <Key>
             <PropertyRef Name="Id" />
@@ -167,7 +159,7 @@
           <Property Name="SenderId" Type="int" Nullable="false" />
           <Property Name="ReceiverId" Type="int" Nullable="false" />
           <Property Name="Message" Type="varchar(max)" Nullable="false" />
-          <Property Name="Read" Type="bit" Nullable="false" />
+          <Property Name="Read" Type="bit" />
           <Property Name="DateCreated" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Module">
@@ -350,30 +342,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Diagram_QuestionId">
-          <End Role="Question" Type="Self.Question" Multiplicity="1" />
-          <End Role="Diagram" Type="Self.Diagram" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Question">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Diagram">
-              <PropertyRef Name="QuestionId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Diagram_ReportSection">
-          <End Role="ReportSection" Type="Self.ReportSection" Multiplicity="1" />
-          <End Role="Diagram" Type="Self.Diagram" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ReportSection">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Diagram">
-              <PropertyRef Name="ReportSectionId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Employee_EmployeeStatus">
           <End Role="EmployeeStatus" Type="Self.EmployeeStatus" Multiplicity="0..1" />
           <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
@@ -482,7 +450,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_MessageReceiver">
+        <Association Name="FK_Message_Receiver">
           <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
           <End Role="Message" Type="Self.Message" Multiplicity="*" />
           <ReferentialConstraint>
@@ -494,7 +462,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_MessageSender">
+        <Association Name="FK_Message_Sender">
           <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
           <End Role="Message" Type="Self.Message" Multiplicity="*" />
           <ReferentialConstraint>
@@ -692,7 +660,6 @@
           <EntitySet Name="Availability" EntityType="Self.Availability" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Coordinate" EntityType="Self.Coordinate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Diagram" EntityType="Self.Diagram" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmployeeStatus" EntityType="Self.EmployeeStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Inspection" EntityType="Self.Inspection" Schema="dbo" store:Type="Tables" />
@@ -733,14 +700,6 @@
             <End Role="Inspection" EntitySet="Inspection" />
             <End Role="Coordinate" EntitySet="Coordinate" />
           </AssociationSet>
-          <AssociationSet Name="FK_Diagram_QuestionId" Association="Self.FK_Diagram_QuestionId">
-            <End Role="Question" EntitySet="Question" />
-            <End Role="Diagram" EntitySet="Diagram" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Diagram_ReportSection" Association="Self.FK_Diagram_ReportSection">
-            <End Role="ReportSection" EntitySet="ReportSection" />
-            <End Role="Diagram" EntitySet="Diagram" />
-          </AssociationSet>
           <AssociationSet Name="FK_Employee_EmployeeStatus" Association="Self.FK_Employee_EmployeeStatus">
             <End Role="EmployeeStatus" EntitySet="EmployeeStatus" />
             <End Role="Employee" EntitySet="Employee" />
@@ -777,11 +736,11 @@
             <End Role="KeywordCategory" EntitySet="KeywordCategory" />
             <End Role="Keyword" EntitySet="Keyword" />
           </AssociationSet>
-          <AssociationSet Name="FK_MessageReceiver" Association="Self.FK_MessageReceiver">
+          <AssociationSet Name="FK_Message_Receiver" Association="Self.FK_Message_Receiver">
             <End Role="Employee" EntitySet="Employee" />
             <End Role="Message" EntitySet="Message" />
           </AssociationSet>
-          <AssociationSet Name="FK_MessageSender" Association="Self.FK_MessageSender">
+          <AssociationSet Name="FK_Message_Sender" Association="Self.FK_Message_Sender">
             <End Role="Employee" EntitySet="Employee" />
             <End Role="Message" EntitySet="Message" />
           </AssociationSet>
@@ -995,15 +954,6 @@
             <End Role="Employee" EntitySet="Employee" />
             <End Role="Message" EntitySet="Message" />
           </AssociationSet>
-          <EntitySet Name="Diagram" EntityType="ParkInspectModel.Diagram" />
-          <AssociationSet Name="FK_Diagram_QuestionId" Association="ParkInspectModel.FK_Diagram_QuestionId">
-            <End Role="Question" EntitySet="Question" />
-            <End Role="Diagram" EntitySet="Diagram" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Diagram_ReportSection" Association="ParkInspectModel.FK_Diagram_ReportSection">
-            <End Role="ReportSection" EntitySet="ReportSection" />
-            <End Role="Diagram" EntitySet="Diagram" />
-          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Account">
           <Key>
@@ -1212,7 +1162,6 @@
           <NavigationProperty Name="QuestionSort" Relationship="ParkInspectModel.FK_Question_QuestionSort" FromRole="Question" ToRole="QuestionSort" />
           <NavigationProperty Name="QuestionAnswer" Relationship="ParkInspectModel.FK_QuestionAnswer_Question" FromRole="Question" ToRole="QuestionAnswer" />
           <NavigationProperty Name="QuestionKeyword" Relationship="ParkInspectModel.FK_QuestionKeyword_Question" FromRole="Question" ToRole="QuestionKeyword" />
-          <NavigationProperty Name="Diagram" Relationship="ParkInspectModel.FK_Diagram_QuestionId" FromRole="Question" ToRole="Diagram" />
         </EntityType>
         <EntityType Name="QuestionAnswer">
           <Key>
@@ -1308,7 +1257,6 @@
           <Property Name="ReportId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Report" Relationship="ParkInspectModel.FK_ReportSection_Report" FromRole="ReportSection" ToRole="Report" />
           <NavigationProperty Name="InspectionImage" Relationship="ParkInspectModel.ReportSectionInspectionImage" FromRole="ReportSection" ToRole="InspectionImage" />
-          <NavigationProperty Name="Diagram" Relationship="ParkInspectModel.FK_Diagram_ReportSection" FromRole="ReportSection" ToRole="Diagram" />
         </EntityType>
         <EntityType Name="WorkingHours">
           <Key>
@@ -1659,7 +1607,7 @@
           <Property Name="SenderId" Type="Int32" Nullable="false" />
           <Property Name="ReceiverId" Type="Int32" Nullable="false" />
           <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Read" Type="Boolean" Nullable="false" />
+          <Property Name="Read" Type="Boolean" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Reciever" Relationship="ParkInspectModel.FK_Message_Receiver" FromRole="Message" ToRole="Employee" />
           <NavigationProperty Name="Sender" Relationship="ParkInspectModel.FK_Message_Sender" FromRole="Message" ToRole="Employee" />
@@ -1685,40 +1633,6 @@
             </Principal>
             <Dependent Role="Message">
               <PropertyRef Name="SenderId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Diagram">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="QuestionId" Type="Int32" Nullable="false" />
-          <Property Name="ReportSectionId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Question" Relationship="ParkInspectModel.FK_Diagram_QuestionId" FromRole="Diagram" ToRole="Question" />
-          <NavigationProperty Name="ReportSection" Relationship="ParkInspectModel.FK_Diagram_ReportSection" FromRole="Diagram" ToRole="ReportSection" />
-        </EntityType>
-        <Association Name="FK_Diagram_QuestionId">
-          <End Type="ParkInspectModel.Question" Role="Question" Multiplicity="1" />
-          <End Type="ParkInspectModel.Diagram" Role="Diagram" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Question">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Diagram">
-              <PropertyRef Name="QuestionId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Diagram_ReportSection">
-          <End Type="ParkInspectModel.ReportSection" Role="ReportSection" Multiplicity="1" />
-          <End Type="ParkInspectModel.Diagram" Role="Diagram" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ReportSection">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Diagram">
-              <PropertyRef Name="ReportSectionId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2020,15 +1934,6 @@
                 <ScalarProperty Name="Content" ColumnName="Message" />
                 <ScalarProperty Name="ReceiverId" ColumnName="ReceiverId" />
                 <ScalarProperty Name="SenderId" ColumnName="SenderId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Diagram">
-            <EntityTypeMapping TypeName="ParkInspectModel.Diagram">
-              <MappingFragment StoreEntitySet="Diagram">
-                <ScalarProperty Name="ReportSectionId" ColumnName="ReportSectionId" />
-                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

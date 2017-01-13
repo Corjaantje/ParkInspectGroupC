@@ -59,9 +59,6 @@
         <EntityTypeShape EntityType="ParkInspectModel.Message" Width="1.5" PointX="5.625" PointY="20.875" />
         <AssociationConnector Association="ParkInspectModel.FK_Message_Receiver" />
         <AssociationConnector Association="ParkInspectModel.FK_Message_Sender" />
-        <EntityTypeShape EntityType="ParkInspectModel.Diagram" Width="1.5" PointX="18" PointY="11.875" />
-        <AssociationConnector Association="ParkInspectModel.FK_Diagram_QuestionId" />
-        <AssociationConnector Association="ParkInspectModel.FK_Diagram_ReportSection" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

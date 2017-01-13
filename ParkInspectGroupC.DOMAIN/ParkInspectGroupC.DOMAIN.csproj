@@ -81,9 +81,6 @@
     <Compile Include="Customer.cs">
       <DependentUpon>ParkInspectModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Diagram.cs">
-      <DependentUpon>ParkInspectModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Employee.cs">
       <DependentUpon>ParkInspectModel.tt</DependentUpon>
     </Compile>

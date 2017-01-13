@@ -11,7 +11,6 @@ using ParkInspectGroupC.Properties;
 using ParkInspectGroupC.View;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
-using ParkInspectGroupC.View.ReportCreation;
 
 namespace ParkInspectGroupC.ViewModel
 {
@@ -66,7 +65,7 @@ namespace ParkInspectGroupC.ViewModel
         {
             BackCommand = new RelayCommand(PerformBack, CanPerformBack);
             LogOutCommand = new RelayCommand(PerformLogOut);
-            CurrentView = new ReportAssignmentSelectionView();
+            CurrentView = new LoginView();
 
             //List<Theme> Themes = new List<Theme>
             //{
