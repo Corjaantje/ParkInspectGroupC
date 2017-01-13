@@ -108,16 +108,18 @@ namespace ParkInspectGroupC.ViewModel
             {
 
                 List<Customer> customers = context.Customer.ToList();
-
-                foreach (var customer in customers)
+                if (SelectedCustomer != null)
                 {
-                    if (customer.Id == SelectedCustomer.Id)
+                    foreach (var customer in customers)
                     {
-                        context.Customer.Remove(customer);
+                        if (customer.Id == SelectedCustomer.Id)
+                        {
+                            context.Customer.Remove(customer);
 
+                        }
                     }
+                    context.SaveChanges();
                 }
-                context.SaveChanges();
             }
 
             _customers.Remove(_selectedCustomer);
