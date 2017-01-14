@@ -37,6 +37,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>IconLogo.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
@@ -91,8 +94,10 @@
       <HintPath>..\packages\System.Data.SQLite.Linq.1.0.103\lib\net46\System.Data.SQLite.Linq.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
@@ -120,20 +125,53 @@
     <Compile Include="Factory\ThemeFactory.cs" />
     <Compile Include="Miscellaneous\IHavePassword.cs" />
     <Compile Include="Miscellaneous\Navigator.cs" />
+    <Compile Include="ViewModel\AssignmentOverviewViewModel.cs" />
+    <Compile Include="ViewModel\AvailabilityCreationViewModel.cs" />
+    <Compile Include="ViewModel\AvailabilityEditViewModel.cs" />
     <Compile Include="ViewModel\CustomerCreationViewModel.cs" />
+    <Compile Include="ViewModel\CustomerEditViewModel.cs" />
+    <Compile Include="ViewModel\DashboardViewModel.cs" />
     <Compile Include="ViewModel\DatabaseSyncViewModel.cs" />
     <Compile Include="ViewModel\CustomerListViewModel.cs" />
+    <Compile Include="ViewModel\EditAssignmentViewModel.cs" />
+    <Compile Include="ViewModel\InspectionViewModel.cs" />
+    <Compile Include="ViewModel\InspectorEditViewModel.cs" />
+    <Compile Include="ViewModel\InspectorListViewModel.cs" />
     <Compile Include="ViewModel\InspectorProfileViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="Validation\EmailValidation.cs" />
     <Compile Include="ViewModel\EmployeeCreationViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\ManagerDashboardViewModel.cs" />
     <Compile Include="ViewModel\MapViewModel.cs" />
     <Compile Include="ViewModel\QuestionnaireModuleViewModels\QuestionnaireCommentControlVM.cs" />
     <Compile Include="ViewModel\QuestionnaireModuleViewModels\QuestionnaireModuleViewModelBase.cs" />
     <Compile Include="ViewModel\QuestionnaireModuleViewModels\VehicleCountControlVM.cs" />
+    <Compile Include="ViewModel\OnOffIndicatorViewModel.cs" />
+    <Compile Include="ViewModel\NewAssignmentViewModel.cs" />
     <Compile Include="ViewModel\QuestionnaireViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="View\AssignmentOverview.xaml.cs">
+      <DependentUpon>AssignmentOverview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AvailabilityCreationView.xaml.cs">
+      <DependentUpon>AvailabilityCreationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AvailabilityEditView.xaml.cs">
+      <DependentUpon>AvailabilityEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CustomerCreationView.xaml.cs">
+      <DependentUpon>CustomerCreationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CustomerEditView.xaml.cs">
+      <DependentUpon>CustomerEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CustomerListView.xaml.cs">
+      <DependentUpon>CustomerListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DashboardView.xaml.cs">
+      <DependentUpon>DashboardView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\DatabaseSyncDialogs\DeleteDialog.xaml.cs">
       <DependentUpon>DeleteDialog.xaml</DependentUpon>
     </Compile>
@@ -143,14 +181,32 @@
     <Compile Include="View\DatabaseSyncView.xaml.cs">
       <DependentUpon>DatabaseSyncView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\EditAssignmentView.xaml.cs">
+      <DependentUpon>EditAssignmentView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\EmployeeCreationView.xaml.cs">
       <DependentUpon>EmployeeCreationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\InspectionView.xaml.cs">
+      <DependentUpon>InspectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\InspectorEditView.xaml.cs">
+      <DependentUpon>InspectorEditView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\InspectorProfileView.xaml.cs">
       <DependentUpon>InspectorProfileView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\InspectorsListView.xaml.cs">
+      <DependentUpon>InspectorsListView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MainWindow\OnOffIndicator.xaml.cs">
+      <DependentUpon>OnOffIndicator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManagerDashboardView.xaml.cs">
+      <DependentUpon>ManagerDashboardView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MapView.xaml.cs">
       <DependentUpon>MapView.xaml</DependentUpon>
@@ -160,6 +216,9 @@
     </Compile>
     <Compile Include="View\MainWindow\ThemeSelector.xaml.cs">
       <DependentUpon>ThemeSelector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\NewAssignmentView.xaml.cs">
+      <DependentUpon>NewAssignmentView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\QuestionnaireModules\QuestionnaireCommentControl.xaml.cs">
       <DependentUpon>QuestionnaireCommentControl.xaml</DependentUpon>
@@ -211,6 +270,34 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\AssignmentOverview.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\AvailabilityCreationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AvailabilityEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CustomerCreationView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\CustomerEditView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\CustomerListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\DashboardView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\DatabaseSyncDialogs\DeleteDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -223,7 +310,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\EditAssignmentView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\InspectionView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\InspectorEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\InspectorProfileView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\InspectorsListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -232,6 +335,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\EmployeeCreationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MainWindow\OnOffIndicator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ManagerDashboardView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -246,6 +357,10 @@
     <Page Include="View\MainWindow\ThemeSelector.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\NewAssignmentView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\QuestionnaireModules\QuestionnaireCommentControl.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -330,6 +445,9 @@
     <Content Include="Gmaps\GMap.NET.Core.dll" />
     <Content Include="Gmaps\GMap.NET.WindowsPresentation.dll" />
     <Resource Include="View\QuestionnaireModules\Control Template\QuestionnaireModuleTemplate.txt" />
+    <Resource Include="Image\IconLogo.ico" />
+    <Resource Include="IconLogo.ico" />
+    <Resource Include="Image\IconLogo.png" />
     <Resource Include="Image\arrow-back-128.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

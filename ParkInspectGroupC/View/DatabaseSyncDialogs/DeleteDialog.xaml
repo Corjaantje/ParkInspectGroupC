@@ -5,10 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ParkInspectGroupC.View.DatabaseSyncDialogs"
         mc:Ignorable="d"
+        Icon="Image/IconLogo.ico"
         Title="Delete conflict" Height="130" Width="280">
     <Grid>
-        <TextBlock Height="100" TextWrapping="Wrap" Margin="5,5,5,0" VerticalAlignment="Top" HorizontalAlignment="Left">Weet u zeker dat u dit conflict wilt verwijderen? Er veranderd dan niks in de centrale database.</TextBlock>
-        <Button Margin="5,0,0,5" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="100" Height="30" Background="Green" Foreground="White" FontWeight="Bold" Name="btDelete" Click="btDelete_Click">Verwijder</Button>
-        <Button Margin="0,0,5,5" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" Height="30" Background="Red" Foreground="White" FontWeight="Bold" Name="btCancel" IsCancel="True">Cancel</Button>
+        <TextBlock Height="100" TextWrapping="Wrap" Margin="5,5,5,0" VerticalAlignment="Top" HorizontalAlignment="Left">Weet u zeker dat u dit conflict wilt verwijderen? Er wordt niks veranderd in de centrale database.</TextBlock>
+        <Button Margin="5,0,0,5" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="100" Height="30" Background="Green" Foreground="White" FontWeight="Bold" Name="btDelete" Click="btDelete_Click">Verwijderen</Button>
+        <Button Margin="0,0,5,5" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" Height="30" Background="Red" Foreground="White" FontWeight="Bold" Name="btCancel" IsCancel="True">Annuleren</Button>
     </Grid>
 </Window>
