@@ -12,16 +12,13 @@ namespace ParkInspectGroupC.DOMAIN
     using System;
     using System.Collections.Generic;
     
-    public partial class Message
+    public partial class Diagram
     {
         public int Id { get; set; }
-        public int SenderId { get; set; }
-        public int ReceiverId { get; set; }
-        public string Content { get; set; }
-        public bool Read { get; set; }
-        public System.DateTime DateCreated { get; set; }
+        public int QuestionId { get; set; }
+        public int ReportSectionId { get; set; }
     
-        public virtual Employee Reciever { get; set; }
-        public virtual Employee Sender { get; set; }
+        public virtual Question Question { get; set; }
+        public virtual ReportSection ReportSection { get; set; }
     }
 }

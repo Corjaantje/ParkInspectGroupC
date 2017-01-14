@@ -2,6 +2,7 @@ using System;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
+using ParkInspectGroupC.ViewModel.ReportCreation;
 
 namespace ParkInspectGroupC.ViewModel
 {
@@ -38,6 +39,10 @@ namespace ParkInspectGroupC.ViewModel
             SimpleIoc.Default.Register<AvailabilityEditViewModel>();
             SimpleIoc.Default.Register<InspectionViewModel>();
 
+            // ReportCreation.
+            SimpleIoc.Default.Register<DiagramPreviewViewModel>();
+            SimpleIoc.Default.Register<ReportViewModel>();
+
         }
 
         private static void UnRegisterViewModels()
@@ -57,6 +62,20 @@ namespace ParkInspectGroupC.ViewModel
             SimpleIoc.Default.Unregister<AvailabilityCreationViewModel>();
             SimpleIoc.Default.Unregister<AvailabilityEditViewModel>();
             SimpleIoc.Default.Unregister<InspectionViewModel>();
+
+            // ReportCreation.
+            SimpleIoc.Default.Unregister<DiagramPreviewViewModel>();
+            SimpleIoc.Default.Unregister<ReportViewModel>();
+        }
+
+        public ReportViewModel Reports
+        {
+            get { return ServiceLocator.Current.GetInstance<ReportViewModel>(); }
+        }
+
+        public DiagramPreviewViewModel DiagramPreview
+        {
+            get { return ServiceLocator.Current.GetInstance<DiagramPreviewViewModel>(); }
         }
 
         public MainViewModel Main
