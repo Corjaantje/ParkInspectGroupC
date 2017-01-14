@@ -113,7 +113,8 @@ namespace ParkInspectGroupC.ViewModel.ReportCreation
 			using (var context = new ParkInspectEntities())
 			{
 				//TODO is voor test; weghalen!
-				SelectedEmployee = (from a in context.Employee where a.FirstName == "Jaqueline" select a).FirstOrDefault();
+				//SelectedEmployee = (from a in context.Employee where a.FirstName == "Jaqueline" select a).FirstOrDefault();
+			    SelectedEmployee = (from a in context.Employee where a.Id == Properties.Settings.Default.LoggedInEmp.Id select a).First();
 
 				var assignmentList = (from a in context.Assignment.Include("Customer") where a.ManagerId == SelectedEmployee.Id select a).ToList();
 				AssignmentList = new ObservableCollection<Assignment>(assignmentList);
