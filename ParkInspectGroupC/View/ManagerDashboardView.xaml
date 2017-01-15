@@ -10,7 +10,7 @@
         <Canvas>
             <TextBlock Text="Opdrachten" Margin="0,10,0,0" FontSize="18" Canvas.Left="10"/>
 
-            <Button Content="Inspecteurs" Canvas.Top="5" Canvas.Left="150" Width="100" Height="30" Command="{Binding ShowInspectorListCommand}" />
+                <Button Content="Inspecteurs" Canvas.Top="5" Canvas.Left="150" Width="100" Height="30" Command="{Binding ShowInspectorListCommand}" />
             <Button Content="Account toevoegen" Canvas.Top="5" Canvas.Left="260" Height="30" Command="{Binding AddAccountCommand}"/>
             <ScrollViewer VerticalScrollBarVisibility="Auto" Canvas.Top="50" Canvas.Left="10" Height="130">
 
@@ -24,7 +24,7 @@
                 </DataGrid>
             </ScrollViewer>
             <TextBlock Text="Werkuren" FontSize="18" Canvas.Top="190" Canvas.Left="10"/>
-            <ScrollViewer VerticalScrollBarVisibility="Auto" Canvas.Top="220" Canvas.Left="10">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Canvas.Top="220" Canvas.Left="10">
                 <DataGrid AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding ManagerAvailability}"
                      GridLinesVisibility="Horizontal" HeadersVisibility="Column" CanUserResizeColumns="False">
                     <DataGrid.Columns>

@@ -9,7 +9,7 @@
 			 DataContext="{Binding Main, Source={StaticResource Locator}}">
     <Grid>
 		<WrapPanel DockPanel.Dock="Bottom" HorizontalAlignment="Left" VerticalAlignment="Center" >
-			<Label Content="Quick options:" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,5,5,5" />
+			<Label Content="Thema's:" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,5,5,5" />
 			<themes:Themes x:Name="ThemesControl" Margin="0,1,1,1" ItemsSource="{Binding Path=ThemeList}" SelectedItem="{Binding SelectedTheme}" Visibility="Hidden" Width="0" />
 			<ComboBox ItemsSource="{Binding Path=ThemeList, Mode=OneWay}" SelectedItem="{Binding Path=SelectedTheme, Mode= TwoWay}" DisplayMemberPath="Name" Margin="0,5,5,5" />
 		</WrapPanel>

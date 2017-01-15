@@ -15,7 +15,7 @@
             <DataGrid.Columns>
 
                 <DataGridTextColumn Header="#" Binding="{Binding Id}" Foreground="#FF1D1616" />
-                <DataGridTextColumn Header="Customer" Binding="{Binding Name}" Width="*" />
+                <DataGridTextColumn Header="Klant" Binding="{Binding Name}" Width="*" />
 
             </DataGrid.Columns>
 

@@ -20,7 +20,7 @@
         <Label Content="{Binding Path=Status, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="3,226,0,0" VerticalAlignment="Top" Width="182" Height="29" Grid.Column="1" />
         <Image Source="{Binding Status, Converter={StaticResource StatusToPathConverter}}" HorizontalAlignment="Left" Height="24" Margin="10,226,0,0" VerticalAlignment="Top" Width="23" Grid.Column="1"/>
         <Label Content="GebruikersProfiel:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="26" Width="112"/>
-        <Label Content="Manager:" HorizontalAlignment="Left" Margin="22,255,0,0" VerticalAlignment="Top" Width="60" Height="26"/>
+        <Label Content="Manager:" HorizontalAlignment="Left" Margin="22,250,0,0" VerticalAlignment="Top" Width="60" Height="26"/>
         <Label Content="{Binding Path=ManagerName, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="3,255,0,0" VerticalAlignment="Top" Width="285" Height="26" Grid.Column="1"/>
         <DataGrid HorizontalAlignment="Left" Height="84" Margin="10,345,0,0" VerticalAlignment="Top" Width="Auto" ItemsSource="{Binding Path=Inspections, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" Grid.ColumnSpan="2" IsReadOnly="True">
             <DataGrid.Columns>
@@ -47,12 +47,12 @@
         </ScrollViewer>
 
 
-        <Label Content="ContactInformatie" HorizontalAlignment="Left" Margin="10,55,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="26" Width="113"/>
-        <Label Content="Algemene Informatie" HorizontalAlignment="Left" Margin="10,190,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="26" Width="130"/>
-        <Label Content="Inspecties" HorizontalAlignment="Left" Margin="10,314,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="26" Width="66"/>
-        <Label Content="Adres:" HorizontalAlignment="Left" Margin="18,86,0,0" VerticalAlignment="Top" Height="26" Width="43"/>
-        <Label Content="E-Mail:" HorizontalAlignment="Left" Margin="18,123,0,0" VerticalAlignment="Top" Height="26" Width="46"/>
-        <Label Content="Telefoon Nummer:" HorizontalAlignment="Left" Margin="18,159,0,0" VerticalAlignment="Top" Height="26" Width="108"/>
-        <Label Content="Status:" HorizontalAlignment="Left" Margin="22,229,0,0" VerticalAlignment="Top"/>
+        <Label Content="ContactInformatie" HorizontalAlignment="Left" Margin="10,55,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="25" Width="113"/>
+        <Label Content="Algemene Informatie" HorizontalAlignment="Left" Margin="10,190,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="25" Width="130"/>
+        <Label Content="Inspecties" HorizontalAlignment="Left" Margin="10,314,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="25" Width="66"/>
+        <Label Content="Adres:" HorizontalAlignment="Left" Margin="18,85,0,0" VerticalAlignment="Top" Height="25" Width="43"/>
+        <Label Content="E-Mail-Adres:" HorizontalAlignment="Left" Margin="18,115,0,0" VerticalAlignment="Top" Height="25" Width="84"/>
+        <Label Content="Telefoon Nummer:" HorizontalAlignment="Left" Margin="18,145,0,0" VerticalAlignment="Top" Height="25" Width="108"/>
+        <Label Content="Status:" HorizontalAlignment="Left" Margin="22,220,0,0" VerticalAlignment="Top"/>
     </Grid>
 </UserControl>

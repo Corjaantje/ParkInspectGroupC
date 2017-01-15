@@ -31,8 +31,8 @@
         <Label x:Name="label6" Content="Telefoonnummer:" HorizontalAlignment="Left" Margin="5,122,0,0" Grid.Row="1" VerticalAlignment="Top"/>
         <TextBox x:Name="textBox4" HorizontalAlignment="Left" Height="23" Margin="110,122,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding Path = PhoneNumber, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="286"/>
         <Label x:Name="label7" Content="Email:" HorizontalAlignment="Left" Margin="5,153,0,0" Grid.Row="1" VerticalAlignment="Top" RenderTransformOrigin="0.403,0.182"/>
-        <TextBox x:Name="textBox5" HorizontalAlignment="Left" Height="23" Margin="110,155,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="286">
-        <TextBox.Text>
+            <TextBox x:Name="textBox5" HorizontalAlignment="Left" Height="23" Margin="110,155,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="286">
+                <TextBox.Text>
             <Binding Path ="CustomerMail"  UpdateSourceTrigger="PropertyChanged">
                 <Binding.ValidationRules>
                     <validation:EmailValidation />

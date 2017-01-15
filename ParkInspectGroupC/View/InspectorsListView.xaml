@@ -8,8 +8,8 @@
              d:DesignHeight="300" d:DesignWidth="950" DataContext="{Binding InspectorList, Source={StaticResource Locator}}">
     <Canvas>
         <TextBlock Text="Inspecteurs" Canvas.Top="10" Canvas.Left="10" FontSize="18"/>
-        <Button Content="Gegevens aanpasen" Command="{Binding ShowEditInspectorCommand}" FontSize="15" Canvas.Top="10" Canvas.Left="120"/>
-        <Button Content="Beschikbaarheid aangeven" Command="{Binding ShowCreateAvailabilityCommand}" FontSize="15" Canvas.Top="10" Canvas.Left="270"/>
+            <Button Content="Gegevens aanpassen" Command="{Binding ShowEditInspectorCommand}" FontSize="15" Canvas.Top="10" Canvas.Left="120"/>
+            <Button Content="Beschikbaarheid aangeven" Command="{Binding ShowCreateAvailabilityCommand}" FontSize="15" Canvas.Top="10" Canvas.Left="270"/>
         <ScrollViewer VerticalScrollBarVisibility="Auto" Canvas.Top="60" Canvas.Left="10">
             <DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedInspector}" 
                       ItemsSource="{Binding InspectorsList, UpdateSourceTrigger=PropertyChanged}" GridLinesVisibility="Horizontal" HeadersVisibility="Column">

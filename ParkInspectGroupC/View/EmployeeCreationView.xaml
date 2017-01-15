@@ -11,7 +11,7 @@
              x:Name="This"
 			 mc:Ignorable="d"
 			 DataContext="{Binding EmployeeCreation, Source={StaticResource Locator}}">
-	<Viewbox>
+    <Viewbox>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
