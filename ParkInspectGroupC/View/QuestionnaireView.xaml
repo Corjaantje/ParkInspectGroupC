@@ -1,5 +1,6 @@
-﻿<!-- x:Class="ParkInspectGroupC.View.QuestionnaireView" --> <!-- adding this to window throws build error?-->
-    <Window 
+﻿<!-- x:Class="ParkInspectGroupC.View.QuestionnaireView" -->
+<!-- adding this to window throws build error?-->
+<Window 
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -25,10 +26,10 @@
             </DataGrid.Columns>
         </DataGrid>
         <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="35" Margin="10,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="629"/>
-        <Button x:Name="button" Content="Opstellen" Command="{Binding AddModuleToQuestionnaire}" HorizontalAlignment="Left" Margin="18,16,0,0" VerticalAlignment="Top" Width="144"/>
-        <Button x:Name="button_Copy" Content="Invullen" HorizontalAlignment="Left" Margin="167,16,0,0" VerticalAlignment="Top" Width="144"/>
-        <Button x:Name="button_Copy1" Content="Opslaan" HorizontalAlignment="Left" Margin="10,431,0,0" VerticalAlignment="Top" Width="266"/>
+        <Button x:Name="button_Copy1" Command="{Binding SaveInspectionRelay}" Content="Opslaan" HorizontalAlignment="Left" Margin="10,431,0,0" VerticalAlignment="Top" Width="266"/>
         <ListBox x:Name="listBox" ItemsSource="{Binding ListElements}"  HorizontalAlignment="Left" Height="403" Margin="281,50,0,0" VerticalAlignment="Top" Width="358"/>
+        <Label x:Name="label" Content="Inspectie:" HorizontalAlignment="Left" Margin="16,15,0,0" VerticalAlignment="Top" Width="100"/>
+        <CheckBox x:Name="checkBox" Content="Toon lijst opties" IsChecked="{Binding QuestionnaireEditingMode}" HorizontalAlignment="Left" Margin="528,20,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
