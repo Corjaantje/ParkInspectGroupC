@@ -184,7 +184,7 @@ namespace ParkInspectGroupC.ViewModel
         * THESE CANNOT be used as normal views.
         * */
         #region QuestionnaireModules
-        private void RegisterQuestionnaireModuleViewModels()
+        private static void RegisterQuestionnaireModuleViewModels()
         {
             SimpleIoc.Default.Register<VehicleCountControlVM>();
             SimpleIoc.Default.Register<QuestionnaireCommentControlVM>();
