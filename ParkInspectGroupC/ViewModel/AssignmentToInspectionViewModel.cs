@@ -132,8 +132,23 @@ namespace ParkInspectGroupC.ViewModel
 			}
 		}
 
+		private string _errorMessage;
+		public string ErrorMessage
+		{
+			get
+			{
+				return _errorMessage;
+			}
+
+			set
+			{
+				_errorMessage = value;
+				RaisePropertyChanged("ErrorMessage");
+			}
+		}
 
 		public ICommand CreateInspection { get; set; }
+
 
 
 		#endregion
@@ -226,6 +241,7 @@ namespace ParkInspectGroupC.ViewModel
 					i.DateUpdated = DateTime.Today;
 
 				}
+				ErrorMessage = "De inspectie is opgeslagen";
 			}
 			catch(Exception e)
 			{

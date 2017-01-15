@@ -18,7 +18,7 @@ namespace ParkInspectGroupC.View
 	/// <summary>
 	/// Interaction logic for AssignmentToInspectionView.xaml
 	/// </summary>
-	public partial class AssignmentToInspectionView : UserControl
+	public partial class AssignmentToInspectionView : Window
 	{
 		public AssignmentToInspectionView()
 		{

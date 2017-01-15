@@ -29,7 +29,7 @@
 
 		<Button x:Name="Questionare" Content="Vragenlijst" HorizontalAlignment="Left" Margin="50,54,0,0" VerticalAlignment="Top" Width="116"/>
 		<Button x:Name="NewQuestionaire" Content="Nieuwe vragenlijst" HorizontalAlignment="Left" Margin="202,54,0,0" VerticalAlignment="Top" Width="118"/>
-		<Button x:Name="NewInspection" Content="Nieuwe inspectie" HorizontalAlignment="Left" Margin="350,54,0,0" VerticalAlignment="Top" Width="118"/>
+		<Button x:Name="NewInspection" Content="Nieuwe inspectie" HorizontalAlignment="Left" Margin="316,339,0,0" VerticalAlignment="Top" Width="118" Command="{Binding newInspection}"/>
 
 		<Button x:Name="EditAssignment" Content="Bewerken" HorizontalAlignment="Left" Margin="91,339,0,0" VerticalAlignment="Top" Width="75" Command="{Binding EditCommand}"/>
 		<Button x:Name="ShowDetails" Content="Details" HorizontalAlignment="Left" Margin="202,339,0,0" VerticalAlignment="Top" Width="75" Command="{Binding ShowDetails}"/>

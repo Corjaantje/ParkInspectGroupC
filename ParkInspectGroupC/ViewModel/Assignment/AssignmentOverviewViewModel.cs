@@ -58,6 +58,7 @@ namespace ParkInspectGroupC.ViewModel
 		public ICommand SearchAll { get; set; }
 		public ICommand EditCommand { get; set; }
 		public ICommand ShowDetails { get; set; }
+		public ICommand newInspection { get; set; }
 		#endregion
 
 		public AssignmentOverviewViewModel()
@@ -68,6 +69,7 @@ namespace ParkInspectGroupC.ViewModel
 			SearchAll = new RelayCommand(refillCollection);
 			EditCommand = new RelayCommand(EditAssignment);
 			ShowDetails = new RelayCommand(showDetails);
+			newInspection = new RelayCommand(createInspection);
 
 		}
 
@@ -163,6 +165,7 @@ namespace ParkInspectGroupC.ViewModel
 		{
 
 			AssignmentToInspectionView converterView = new AssignmentToInspectionView();
+			converterView.Show();
 			((AssignmentToInspectionViewModel)converterView.DataContext).setAssignment(_selectedAssignment);
 
 		}
