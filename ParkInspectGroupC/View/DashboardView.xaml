@@ -8,7 +8,7 @@
              d:DesignHeight="300" d:DesignWidth="300" DataContext="{Binding Dashboard, Source={StaticResource Locator}}">
     <Canvas>
         
-        <TextBlock Text="Werk tijden" FontSize="18" FontWeight="Bold" Canvas.Top="0" Canvas.Left="10"/>
+        <TextBlock Text="Werktijden" FontSize="18" Canvas.Top="0" Canvas.Left="10"/>
         
         <DataGrid Grid.ColumnSpan="2" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding EmployeeAvailability}" 
                    GridLinesVisibility="Horizontal" HeadersVisibility="Column" Canvas.Top="30" Canvas.Left="10" CanUserResizeColumns="False">

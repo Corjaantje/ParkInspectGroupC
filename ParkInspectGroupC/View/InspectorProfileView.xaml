@@ -17,7 +17,7 @@
         <Label Content="{Binding Path=Adress, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="3,86,0,0" VerticalAlignment="Top" Width="350"  Height="30" Grid.Column="1"/>
         <Label Content="{Binding Path=Email, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="3,123,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.474,-0.769" Width="286"  Height="29" Grid.Column="1"/>
         <Label Content="{Binding Path=PhoneNumber, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="3,157,0,0" VerticalAlignment="Top" Width="286"  Height="30" Grid.Column="1"/>
-        <Label Content="{Binding Path=Status, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="38,226,0,0" VerticalAlignment="Top" Width="182" Height="29" Grid.Column="1" />
+        <Label Content="{Binding Path=Status, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="3,226,0,0" VerticalAlignment="Top" Width="182" Height="29" Grid.Column="1" />
         <Image Source="{Binding Status, Converter={StaticResource StatusToPathConverter}}" HorizontalAlignment="Left" Height="24" Margin="10,226,0,0" VerticalAlignment="Top" Width="23" Grid.Column="1"/>
         <Label Content="GebruikersProfiel:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="26" Width="112"/>
         <Label Content="Manager:" HorizontalAlignment="Left" Margin="22,255,0,0" VerticalAlignment="Top" Width="60" Height="26"/>

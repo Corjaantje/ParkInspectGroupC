@@ -5,19 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ParkInspectGroupC.View"
         mc:Ignorable="d"
-        Title="EditAssignmentView" Height="400" Width="500">
-	<Grid>
+        Title="EditAssignmentView" Height="295.89" Width="282">
+    <Grid>
+        <Image x:Name="image" Source ="..\Image\Logo_WhiteBack.PNG" HorizontalAlignment="Left" Height="30" Margin="10,10,0,0" VerticalAlignment="Top" Width="72"/>
 
+        <Button x:Name="Assignmets" Content="Opdrachten" HorizontalAlignment="Left" Margin="189,10,0,0" VerticalAlignment="Top" Width="75" Background="LightBlue"/>
+        <Button x:Name="Administration" Content="Administatie" HorizontalAlignment="Left" Margin="109,10,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="Statistics" Content="Statistieken" HorizontalAlignment="Left" Margin="109,35,0,0" VerticalAlignment="Top" Width="75"/>
 
-		<Image x:Name="image" Source ="..\Image\Logo_WhiteBack.PNG" HorizontalAlignment="Left" Height="30" Margin="10,10,0,0" VerticalAlignment="Top" Width="72"/>
-
-		<Button x:Name="Assignmets" Content="Opdrachten" HorizontalAlignment="Left" Margin="111,20,0,0" VerticalAlignment="Top" Width="75" Background="LightBlue"/>
-		<Button x:Name="Administration" Content="Administatie" HorizontalAlignment="Left" Margin="220,20,0,0" VerticalAlignment="Top" Width="75"/>
-		<Button x:Name="Statistics" Content="Statistieken" HorizontalAlignment="Left" Margin="327,20,0,0" VerticalAlignment="Top" Width="75"/>
-
-		<Label x:Name="Description" Content="beschrijving" HorizontalAlignment="Left" Margin="54,146,0,0" VerticalAlignment="Top"/>
-		<TextBox x:Name="textBox" HorizontalAlignment="Left" Height="149" Margin="132,146,0,0" TextWrapping="Wrap" Text="{Binding Description}" VerticalAlignment="Top" Width="270" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"/>
-		<Button x:Name="button" Content="Bewerken" HorizontalAlignment="Left" Margin="220,325,0,0" VerticalAlignment="Top" Width="75"
+        <Label x:Name="Description" Content="Beschrijving:" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="145" Margin="10,86,0,0" TextWrapping="Wrap" Text="{Binding Description}" VerticalAlignment="Top" Width="257" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"/>
+        <Button x:Name="button" Content="Bewerken" HorizontalAlignment="Left" Margin="10,236,0,0" VerticalAlignment="Top" Width="75"
 				Command="{Binding FinishEdit, Mode=OneWay}"/>
 
 

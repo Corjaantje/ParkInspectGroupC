@@ -19,13 +19,13 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Row="0" Text="Datum:" Margin="10,0,0,0"/>
-        <Calendar Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Margin="0,2,10,2" VerticalAlignment="Top" SelectedDate="{Binding Date}"/>
+        <Calendar Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Margin="10,2,10,2" VerticalAlignment="Top" SelectedDate="{Binding Date}"/>
         
-        <TextBlock Grid.Row="0" Grid.Column="1" Text="Formaat: 12-09-2014 20:09" Margin="5,189,10,2"/>
-        <TextBlock Grid.Row="1" Text="Start tijd:" Margin="10,0,0,0"/>
+        <TextBlock Grid.Row="0" Grid.Column="1" Text="Formaat: 12-09-2014 20:09" Margin="10,189,10,2"/>
+        <TextBlock Grid.Row="1" Text="Start tijd:" Margin="10,5,0,0"/>
         <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=STime , UpdateSourceTrigger=PropertyChanged}" Margin="0,2,10,2"/>
 
-        <TextBlock Grid.Row="2" Text=" Eind tijd:" Margin="10,0,0,0"/>
+        <TextBlock Grid.Row="2" Text="Eind tijd:" Margin="10,5,0,0"/>
         <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=ETime , UpdateSourceTrigger=PropertyChanged}" Margin="0,2,10,2"/>
         
         <Button Grid.Row="3" Command="{Binding SaveCommand}" Content="Save " Margin="0,0,0,0" Width="80" Height="20"/>
