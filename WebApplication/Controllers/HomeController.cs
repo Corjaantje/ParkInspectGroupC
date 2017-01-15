@@ -4,12 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ParkInspectGroupC.DOMAIN;
+using ParkInspectGroupC.Miscellaneous;
+using MigraDoc.Rendering;
+using System.IO;
 
 namespace WebApplication.Controllers
 {
     public class HomeController : Controller
     {
-        bool redirect = false;
         public ActionResult Index(string message)
         {
             if (message != "" && message != null)
@@ -72,8 +74,18 @@ namespace WebApplication.Controllers
 
         public ActionResult Pdf(string Rid, string Cid)
         {
-            //Do pdf shit
+            int rid = Convert.ToInt32(Rid);
+            using (var context = new ParkInspectEntities())
+            {
+                Report report = (from r in context.Report.Where(x => x.Id == rid) select r ).First();
 
+                //Do pdf shit
+                PdfGenerator pdf = new PdfGenerator();
+                PdfDocumentRenderer renderer = pdf.GeneratePdfWeb(report, report.Employee, report.Title);
+
+                //Save
+                renderer.PdfDocument.Save("C:/Users/Public/" + report.Title + ".pdf");
+            }
 
             //Return to view
             return RedirectToAction("Overzicht", "Home", new { @Id = Cid });
