@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -176,8 +177,20 @@ namespace ParkInspectGroupC.Miscellaneous
 
 		private void DefineImage(Section section)
 		{
-			
-		}
+	        Paragraph paragraph = section.AddParagraph();
+           
+            Random random = new Random();
+		    string current = Environment.CurrentDirectory;
+            List<Image> images = new List<Image>();
+
+		    string imageName = "0" + random.Next(1, 9);
+		    string pathName = "../../Image/Testfotos/" + imageName + ".jpg";
+
+            MigraDoc.DocumentObjectModel.Shapes.Image img = paragraph.AddImage(pathName);
+		    img.LockAspectRatio = true;
+            img.Width = Unit.FromPoint(500);
+            img.Height = Unit.FromPoint(300);
+        }
 
         private void AskToOpenFile(string filename)
         {
