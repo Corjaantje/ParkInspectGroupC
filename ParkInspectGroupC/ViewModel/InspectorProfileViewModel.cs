@@ -2,6 +2,7 @@
 using LocalDatabase.Domain;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace ParkInspectGroupC.ViewModel
@@ -64,15 +65,14 @@ namespace ParkInspectGroupC.ViewModel
             set { _inspections = value; RaisePropertyChanged("Inspections"); }
         }
 
+        public ObservableCollection<Availability> InspectorAvailability { get; set; }
+
         public InspectorProfileViewModel()
         {
-            //TODO The emp variable should be a parameter to this constructor
+            Emp = Properties.Settings.Default.LoggedInEmp;
             try
             {
-                using (var context = new LocalParkInspectEntities())
-                {
-                    Emp = (from e in context.Employee where e.Id == 3 select e).FirstOrDefault();
-                }
+
                 Name = Emp.FirstName + " " + Emp.Prefix + " " + Emp.SurName + " (" + Emp.Gender + ")";
                 Adress = Emp.Address + ", " + Emp.ZipCode + ", " + Emp.City;
                 Email = Emp.Email;  
@@ -80,12 +80,9 @@ namespace ParkInspectGroupC.ViewModel
                 using (var context = new LocalParkInspectEntities())
                 {
                     Status = (from s in context.EmployeeStatus where s.Id == Emp.EmployeeStatusId select s).FirstOrDefault().Description;
-                }
-                using (var context = new LocalParkInspectEntities())
-                {
 
-                    Inspections = (from insp in context.Inspection where insp.InspectorId == Emp.Id select new 
-                    { insp.Id, insp.Location, InspectionStatus = (from inspStat in context.InspectionStatus where inspStat.Id == insp.StatusId select inspStat).FirstOrDefault().Description}).ToList();
+                    var aList = context.Availability.Where(a => a.EmployeeId == Emp.Id).ToList();
+                    InspectorAvailability = new ObservableCollection<Availability>(aList);
                 }
                 try
                 {
@@ -100,6 +97,13 @@ namespace ParkInspectGroupC.ViewModel
                 {
                     ManagerName = "Deze medewerker heeft geen manager.";
                 }
+                using (var context = new LocalParkInspectEntities())
+                {
+
+                    Inspections = (from insp in context.Inspection where insp.InspectorId == Emp.Id select new 
+                    { insp.Id, insp.Location, InspectionStatus = (from inspStat in context.InspectionStatus where inspStat.Id == insp.StatusId select inspStat).FirstOrDefault().Description}).ToList();
+                }
+                
             }
             catch
             {

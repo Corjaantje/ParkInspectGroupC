@@ -5,12 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ParkInspectGroupC.View.MainWindow"
              mc:Ignorable="d"
-			 DataContext="{Binding Main, Source={StaticResource Locator}}">
+			 DataContext="{Binding Main, Source={StaticResource Locator}}" Width="197.333">
     <Grid>
-		<WrapPanel Margin="3">
-			<Button Command="{Binding BackCommand}" Margin="0,0,2,0">
-				<Image Source="/ParkInspectGroupC;component/Image/arrow-back-128.png" MaxWidth="20"></Image>
-			</Button>
-		</WrapPanel>
+        <WrapPanel Margin="3,3,54,3">
+            <Button Command="{Binding BackCommand}" HorizontalAlignment="Left">
+                <Image Source="/ParkInspectGroupC;component/Image/arrow-back-128.png" MaxWidth="20"></Image>
+            </Button>
+        </WrapPanel>
+        <Button x:Name="LogOutButton" Content="Afmelden" HorizontalAlignment="Right" VerticalAlignment="Center" Width="58" Command="{Binding LogOutCommand}" Margin="0,3,4,7"/>
     </Grid>
 </UserControl>

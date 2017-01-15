@@ -1,9 +1,9 @@
-﻿<Window x:Class="ParkInspectGroupC.View.InspectorProfileView"
+﻿<UserControl x:Class="ParkInspectGroupC.View.InspectorProfileView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
          xmlns:converter="clr-namespace:ParkInspectGroupC.Converter"
         DataContext="{Binding InspectorProfile, Source={StaticResource Locator}}"
-        Title="InspectorProfileView" Height="473.35" Width="740.1">
+       Height="473.35" Width="740.1">
 
     <Grid>
         <Grid.Resources>
@@ -22,12 +22,29 @@
         <Label Content="GebruikersProfiel:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="26" Width="112"/>
         <Label Content="Manager:" HorizontalAlignment="Left" Margin="22,255,0,0" VerticalAlignment="Top" Width="60" Height="26"/>
         <Label Content="{Binding Path=ManagerName, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="3,255,0,0" VerticalAlignment="Top" Width="285" Height="26" Grid.Column="1"/>
-        <DataGrid HorizontalAlignment="Left" Height="84" Margin="10,345,0,0" VerticalAlignment="Top" Width="Auto" ItemsSource="{Binding Path=Inspections, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" Grid.ColumnSpan="2">
+        <DataGrid HorizontalAlignment="Left" Height="84" Margin="10,345,0,0" VerticalAlignment="Top" Width="Auto" ItemsSource="{Binding Path=Inspections, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" Grid.ColumnSpan="2" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Location}" Header="Locatie" />
                 <DataGridTextColumn Binding="{Binding InspectionStatus}" Header="Status" />
             </DataGrid.Columns>
         </DataGrid>
+
+        <Label Content="Werk tijden" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="10,314,0,0" Grid.Row="0" Grid.Column="1"/>
+        <ScrollViewer Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="Auto" Margin="10,345,0,0" Height="84" VerticalScrollBarVisibility="Auto">
+        <DataGrid ItemsSource="{Binding Path=InspectorAvailability, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" Grid.ColumnSpan="2" IsReadOnly="True" GridLinesVisibility="Horizontal" HeadersVisibility="Column" CanUserResizeColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Tijd">
+                    <DataGridTextColumn.Binding>
+                        <MultiBinding StringFormat="{}{0}-{1}">
+                            <Binding Path="StartTime"/>
+                            <Binding Path="EndTime"/>
+                        </MultiBinding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Datum" Binding="{Binding Date}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        </ScrollViewer>
 
 
         <Label Content="ContactInformatie" HorizontalAlignment="Left" Margin="10,55,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="26" Width="113"/>
@@ -38,4 +55,4 @@
         <Label Content="Telefoon Nummer:" HorizontalAlignment="Left" Margin="18,159,0,0" VerticalAlignment="Top" Height="26" Width="108"/>
         <Label Content="Status:" HorizontalAlignment="Left" Margin="22,229,0,0" VerticalAlignment="Top"/>
     </Grid>
-</Window>
+</UserControl>

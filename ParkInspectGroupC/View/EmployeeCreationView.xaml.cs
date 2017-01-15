@@ -12,17 +12,23 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ParkInspectGroupC.Miscellaneous;
 
 namespace ParkInspectGroupC.View
 {
 	/// <summary>
 	/// Interaction logic for EmployeeCreationView.xaml
 	/// </summary>
-	public partial class EmployeeCreationView : UserControl
+	public partial class EmployeeCreationView : UserControl, IHavePassword
 	{
 		public EmployeeCreationView()
 		{
 			InitializeComponent();
 		}
-	}
+
+        public System.Security.SecureString Password
+        {
+            get { return MynPasswordBox.SecurePassword; }
+        }
+    }
 }
