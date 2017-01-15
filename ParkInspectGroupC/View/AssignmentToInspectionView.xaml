@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:ParkInspectGroupC.View"
              mc:Ignorable="d" 
              d:DesignHeight="323.549" d:DesignWidth="323.549"
-             DataContext="{Binding AssignmentToInspectionViewModel, Source={StaticResource Locator}}">
+             DataContext="{Binding AssignmentToInspection, Source={StaticResource Locator}}">
     <Grid>
         <Label x:Name="label" Content="Inspectie voor " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label1" Content="{Binding CustomerName}" HorizontalAlignment="Left" Margin="103,10,0,0" VerticalAlignment="Top" Width="128" Height="26"/>
