@@ -13,7 +13,7 @@ namespace LocalDatabase
     public class LocalDatabaseMain
     {
         private string dbName;
-        SQLiteConnection _sqliteConnection;
+        public SQLiteConnection _sqliteConnection;
         DatabaseActions _sqliteActions;
 
         public LocalDatabaseMain(string _dbName)

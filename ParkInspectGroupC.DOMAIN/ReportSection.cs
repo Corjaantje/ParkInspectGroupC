@@ -18,6 +18,7 @@ namespace ParkInspectGroupC.DOMAIN
         public ReportSection()
         {
             this.InspectionImage = new HashSet<InspectionImage>();
+            this.Diagram = new HashSet<Diagram>();
         }
     
         public int Id { get; set; }
@@ -28,5 +29,7 @@ namespace ParkInspectGroupC.DOMAIN
         public virtual Report Report { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InspectionImage> InspectionImage { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Diagram> Diagram { get; set; }
     }
 }
