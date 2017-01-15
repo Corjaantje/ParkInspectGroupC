@@ -20,7 +20,7 @@
         <EntityTypeShape EntityType="ParkInspectModel.Module" Width="1.5" PointX="12.75" PointY="8.625" />
         <EntityTypeShape EntityType="ParkInspectModel.Question" Width="1.5" PointX="12.75" PointY="4.5" />
         <EntityTypeShape EntityType="ParkInspectModel.QuestionAnswer" Width="1.5" PointX="15" PointY="12.75" />
-        <EntityTypeShape EntityType="ParkInspectModel.QuestionKeyword" Width="1.5" PointX="15" PointY="4.875" />
+        <EntityTypeShape EntityType="ParkInspectModel.QuestionKeyword" Width="1.875" PointX="15" PointY="4.875" />
         <EntityTypeShape EntityType="ParkInspectModel.Questionnaire" Width="1.5" PointX="12.75" PointY="12.75" />
         <EntityTypeShape EntityType="ParkInspectModel.QuestionnaireModule" Width="1.5" PointX="15" PointY="9.875" />
         <EntityTypeShape EntityType="ParkInspectModel.QuestionSort" Width="1.5" PointX="10.5" PointY="5" />

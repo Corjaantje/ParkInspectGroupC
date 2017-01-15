@@ -58,7 +58,7 @@ namespace ParkInspectGroupC.ViewModel
         // Variables used for data handling and database writes
         #region Variables for database
 
-        private int CurrentInspectionId;
+        private int CurrentInspectionId = 100;
         private List<QuestionnaireRecord> Records;
 
         #endregion
@@ -84,6 +84,8 @@ namespace ParkInspectGroupC.ViewModel
             set { _listElements = value; }
         }
 
+        public RelayCommand SaveInspectionRelay { get; set; }
+
         #endregion
 
 
@@ -97,6 +99,8 @@ namespace ParkInspectGroupC.ViewModel
 
             AddModuleToQuestionnaire = new RelayCommand<int>(AddListElement);
             _listElements = new ObservableCollection<UIElement>();
+
+            SaveInspectionRelay = new RelayCommand(SaveInspection);
         }
 
         #region Functions for database
@@ -152,6 +156,48 @@ namespace ParkInspectGroupC.ViewModel
             }
 
             return true;
+        }
+
+        private void SaveInspection()
+        {
+            using (var context = new ParkInspectEntities())
+            {
+                Questionnaire questionnaire = new Questionnaire();
+                questionnaire.InspectionId = CurrentInspectionId;
+                int questionnaireId = context.Questionnaire.Add(questionnaire).Id;
+
+
+                // For each QuestionnaireRecord
+                foreach (QuestionnaireRecord QR in Records)
+                {
+                    // Create new Question
+                    Question q = context.Question.Add(new Question());
+
+                    // Create QuestionKeywords for each keyword in record (QuestionID, KeywordID)
+                    foreach (string keyword in QR.Keywords)
+                    {
+                        QuestionKeyword kq = new QuestionKeyword();
+                        kq.KeywordId = (from k in context.Keyword where k.Description == keyword select k.Id).First();
+                        kq.QuestionId = q.Id;
+                        context.QuestionKeyword.Add(kq);
+                    }
+
+                    // Create QuestionAnswer for the value (QuestionnaireID, QuestionID)
+                    QuestionAnswer qa = new QuestionAnswer();
+                    qa.QuestionnaireId = questionnaireId;
+                    qa.QuestionId = q.Id;
+                    context.QuestionAnswer.Add(qa);
+                }
+                try
+                {
+                    context.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                }
+            }
+            
         }
 
         #endregion

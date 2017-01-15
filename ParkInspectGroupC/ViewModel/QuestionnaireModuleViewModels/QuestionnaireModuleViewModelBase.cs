@@ -51,7 +51,7 @@ namespace ParkInspectGroupC.ViewModel.QuestionnaireModuleViewModels
         // get a list of all keywords in a KeywordCategory
         protected List<string> GetKeywordList(string category)
         {
-            using (var database = new LocalParkInspectEntities())
+            using (var database = new ParkInspectEntities())
             {
                 long categoryId = (from cat in database.KeywordCategory where cat.Description == category select cat.Id).SingleOrDefault();
 
