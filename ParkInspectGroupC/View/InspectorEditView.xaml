@@ -42,7 +42,7 @@
         <TextBlock Grid.Row="5" Text="Postcode:" Margin="10,0,0,0"/>
         <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding TempInspector.ZipCode}" Margin="0,2,10,2"/>
 
-        <TextBlock Grid.Row="6" Text="E-mail adres:" Margin="10,0,0,0"/>
+        <TextBlock Grid.Row="6" Text="E-mail:" Margin="10,0,0,0"/>
         <TextBox Grid.Row="6" Grid.Column="1" Margin="0,2,10,2">
             <TextBox.Text>
                 <Binding Path="TempInspector.Email">
