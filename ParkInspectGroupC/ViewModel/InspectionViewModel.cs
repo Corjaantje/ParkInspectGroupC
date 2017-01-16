@@ -1,5 +1,7 @@
 using GalaSoft.MvvmLight.Command;
 using LocalDatabase.Domain;
+using ParkInspectGroupC.Miscellaneous;
+using ParkInspectGroupC.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,33 +16,70 @@ using System.Windows.Input;
 
 namespace ParkInspectGroupC.ViewModel
 {
-    public class InspectionViewModel 
+    public class InspectionViewModel
     {
 
         #region properties
+
+        private ObservableCollection<Inspection> _inspections;
+        public ObservableCollection<Inspection> Inspections
+        {
+            get
+            {
+                return _inspections;
+            }
+            set
+            {
+                _inspections = value;
+                RaisePropertyChanged("Inspections");
+            }
+        }
 
         // maybe create fancier location search criteria
         private String _searchCriteria;
         public String SearchCriteria
         {
-            get { return _searchCriteria; }
-            set { _searchCriteria = value; }
+            get
+            {
+
+                return _searchCriteria;
+
+            }
+
+            set
+            {
+                _searchCriteria = value;
+                Debug.WriteLine(_searchCriteria);
+                ObservableCollection<Inspection> searchedInspections = new ObservableCollection<Inspection>();
+
+                foreach (var inspection in allInspections)
+                {
+                    if (SearchCriteria != null && inspection.Location.ToLower().Contains(SearchCriteria.ToLower()))
+                    {
+                        searchedInspections.Add(inspection);
+                    }
+                }
+
+
+                Inspections = searchedInspections;
+
+                RaisePropertyChanged("SearchCriteria");
+                RaisePropertyChanged("Inspections");
+
+            }
         }
 
-        private ObservableCollection<Inspection> _inspections;
-        public ObservableCollection<Inspection> Inspections
-        {
-            get { return _inspections; }
-            set { _inspections = value; }
-        }
+
 
         public ICommand StartSearch { get; set; }
 
-        private List<Inspection> allInspections;
+        private ObservableCollection<Inspection> allInspections;
         private Inspection _selectedInspection;
 
         public ICommand BladerCommand { get; set; }
         public ICommand SubmitCommand { get; set; }
+        public ICommand AddInspection { get; set; }
+        public ICommand DeleteInspection { get; set; }
         private string _imageSource;
         private string assemblyFile;
 
@@ -80,8 +119,9 @@ namespace ParkInspectGroupC.ViewModel
 
             BladerCommand = new RelayCommand(getFileFromDirectory, canGetFile);
             SubmitCommand = new RelayCommand(submitImage);
+            AddInspection = new RelayCommand(addInspection);
+            DeleteInspection = new RelayCommand(deleteInspection);
             assemblyFile = System.IO.Directory.GetCurrentDirectory();
-            //ImageString = assemblyFile + "\\..\\..\\Image\\silvio.jpeg";
             string source = assemblyFile + "\\..\\..\\Image\\silvio.jpeg";
             SourceName = source;
 
@@ -99,7 +139,7 @@ namespace ParkInspectGroupC.ViewModel
 
                     var result = context.Inspection.ToList();
 
-                    allInspections = new List<Inspection>(result);
+                    allInspections = new ObservableCollection<Inspection>(result);
 
                     Inspections = new ObservableCollection<Inspection>(result);
                 }
@@ -107,7 +147,7 @@ namespace ParkInspectGroupC.ViewModel
             catch
             {
 
-                allInspections = new List<Inspection>();
+                allInspections = new ObservableCollection<Inspection>();
                 Inspections.Add(new Inspection { Id = 100, Location = "Something went wrong" });
 
             }
@@ -118,7 +158,7 @@ namespace ParkInspectGroupC.ViewModel
         private void refillObservableCollection()
         {
 
-            var result = from Inspection in Inspections orderby Inspection.Id ascending where Inspection.Location.Contains(_searchCriteria) select Inspection;
+            var result = from Inspection in Inspections orderby Inspection.Id ascending where Inspection.Location.Contains(SearchCriteria) select Inspection;
             Inspections = new ObservableCollection<Inspection>(allInspections);
 
             RaisePropertyChanged("Inspections");
@@ -127,42 +167,52 @@ namespace ParkInspectGroupC.ViewModel
 
         public void submitImage()
         {
-            MemoryStream stream = new MemoryStream();
-            Bitmap bitmap = new Bitmap(SourceName);
-            bitmap.Save(stream, ImageFormat.Bmp);
-
-            byte[] byteArray = stream.GetBuffer();
-            var image = new InspectionImage();
-            string imageFile = "";
-            int counter = 0;
-
-            foreach (byte byte1 in byteArray)
+            if (SelectedInspection != null)
             {
-                imageFile += byte1;
+                MemoryStream stream = new MemoryStream();
+                Bitmap bitmap = new Bitmap(SourceName);
+                bitmap.Save(stream, ImageFormat.Bmp);
 
-                if (counter >= 16)
+                byte[] byteArray = stream.GetBuffer();
+                var image = new InspectionImage();
+                string imageFile = "";
+                int counter = 0;
+
+                foreach (byte byte1 in byteArray)
                 {
-                    break;
+                    //imageFile += byte1;
+
+                    //if (counter >= 16)
+                    //{
+                    //    break;
+                    //}
+                    //counter++;
                 }
-                counter++;
-            }
+                Debug.WriteLine(byteArray.Length);
 
-            using (var context = new LocalParkInspectEntities())
-            {
-                InspectionImage newImage = new InspectionImage()
+                using (var context = new LocalParkInspectEntities())
                 {
-                    File = imageFile,
-                    InspectionId = SelectedInspection.Id
-                    
+                    InspectionImage newImage = new InspectionImage()
+                    {
+                        File = imageFile,
+                        InspectionId = SelectedInspection.Id
 
-                };
 
-                context.InspectionImage.Add(newImage);
-                context.SaveChanges();
+                    };
 
+                    context.InspectionImage.Add(newImage);
+                    context.SaveChanges();
+
+                }
             }
 
-           
+
+            else
+            {
+                MessageBox.Show("Selecteer aub een inspectie");
+            }
+
+
 
         }
 
@@ -173,8 +223,8 @@ namespace ParkInspectGroupC.ViewModel
 
         public void getFileFromDirectory()
         {
-            Debug.WriteLine(SourceName);
-            Debug.WriteLine(SelectedInspection.Id);
+            //Debug.WriteLine(SourceName);
+            //Debug.WriteLine(SelectedInspection.Id);
             var dialog = new OpenFileDialog();
             dialog.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif";
 
@@ -222,6 +272,36 @@ namespace ParkInspectGroupC.ViewModel
                 int byte1 = imgdata[i];
             }
         }
+        
+        public void addInspection()
+        {
+            Navigator.SetNewView(new InspectionCreationView());
+        }
+
+        public void deleteInspection()
+        {
+            using (var context = new LocalParkInspectEntities())
+            {
+
+                List<Inspection> inspections = context.Inspection.ToList();
+
+                foreach (var inspection in inspections)
+                {
+                    if (inspection.Id == SelectedInspection.Id)
+                    {
+                        context.Inspection.Remove(inspection);
+
+                    }
+                }
+                context.SaveChanges();
+            }
+
+            _inspections.Remove(SelectedInspection);
+            allInspections.Remove(SelectedInspection);
+            RaisePropertyChanged("Inspections");
+        }
+
+
 
 
 
