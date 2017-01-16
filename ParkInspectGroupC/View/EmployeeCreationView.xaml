@@ -67,7 +67,7 @@
             <Label Grid.Row="6" Grid.Column="0" Content="Straat:" Margin="0,0,10,0" />
             <TextBox Grid.Row="6" Grid.Column="1" Margin="0,2,10,2" Text="{Binding Path=Street, UpdateSourceTrigger=PropertyChanged}" />
 
-            <Label Grid.Row="7" Grid.Column="0" Content="Nummer:" Margin="0,0,10,0" />
+            <Label Grid.Row="7" Grid.Column="0" Content="Huisnummer:" Margin="0,0,10,0" />
             <TextBox Grid.Row="7" Grid.Column="1" Margin="0,2,10,2" Text="{Binding Path=Number, UpdateSourceTrigger=PropertyChanged}" />
 
             <Label Grid.Row="8" Grid.Column="0" Content="Plaats:" Margin="0,0,10,0" />
@@ -76,7 +76,7 @@
             <Label Grid.Row="9" Grid.Column="0" Content="Postcode:" Margin="0,0,10,0" />
             <TextBox Grid.Row="9" Grid.Column="1" Margin="0,2,10,2" Text="{Binding Path=ZipCode, UpdateSourceTrigger=PropertyChanged}" />
 
-            <Label Grid.Row="10" Grid.Column="0" Content="E-mail:" Margin="0,0,10,0" />
+            <Label Grid.Row="10" Grid.Column="0" Content="Email-Adres:" Margin="0,0,10,0" />
             <TextBox Grid.Row="10" Grid.Column="1" Margin="0,2,10,2">
                 <TextBox.Text>
                     <Binding Path="Email" UpdateSourceTrigger="PropertyChanged">

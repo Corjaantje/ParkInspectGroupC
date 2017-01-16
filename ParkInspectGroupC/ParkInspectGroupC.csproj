@@ -201,9 +201,6 @@
     <Compile Include="View\EmployeeCreationView.xaml.cs">
       <DependentUpon>EmployeeCreationView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\InspectionCreationView.xaml.cs">
-      <DependentUpon>InspectionCreationView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\InspectionView.xaml.cs">
       <DependentUpon>InspectionView.xaml</DependentUpon>
     </Compile>
@@ -353,10 +350,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Assignment\EditAssignmentView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\InspectionCreationView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
