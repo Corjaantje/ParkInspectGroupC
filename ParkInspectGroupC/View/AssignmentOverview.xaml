@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ParkInspectGroupC.View"
         mc:Ignorable="d"
-        Title="OpdractOverzicht" Height="470.292" Width="428">
+        Title="OpdrachtOverzicht" Height="470.292" Width="428">
 	<Grid Margin="0,0,0,-21">
 		<DataGrid x:Name="AssignmentList" HorizontalAlignment="Left" Height="200" Margin="10,125,0,0" VerticalAlignment="Top" Width="400" ItemsSource="{Binding ObservedCollection}" SelectedItem="{Binding SelectedAssignment}" AutoGenerateColumns="False" IsReadOnly="True">
 
