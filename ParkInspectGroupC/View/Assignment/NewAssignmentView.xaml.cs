@@ -1,3 +1,5 @@
+﻿using ParkInspectGroupC.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,14 +16,15 @@ using System.Windows.Shapes;
 namespace ParkInspectGroupC.View
 {
 	/// <summary>
-	/// Interaction logic for InspectionView.xaml
+	/// Interaction logic for NewAssignmentView.xaml
 	/// </summary>
-	public partial class InspectionView : UserControl
-
+	public partial class NewAssignmentView : Window
 	{
-		public InspectionView()
+		public NewAssignmentView()
 		{
 			InitializeComponent();
+			DataContext = new NewAssignmentViewModel();
 		}
+		
 	}
 }

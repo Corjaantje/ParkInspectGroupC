@@ -38,6 +38,7 @@ namespace ParkInspectGroupC.ViewModel
             SimpleIoc.Default.Register<AvailabilityCreationViewModel>();
             SimpleIoc.Default.Register<AvailabilityEditViewModel>();
             SimpleIoc.Default.Register<InspectionViewModel>();
+			SimpleIoc.Default.Register<AssignmentToInspectionViewModel>();
 
             // ReportCreation.
             SimpleIoc.Default.Register<DiagramPreviewViewModel>();
@@ -62,6 +63,7 @@ namespace ParkInspectGroupC.ViewModel
             SimpleIoc.Default.Unregister<AvailabilityCreationViewModel>();
             SimpleIoc.Default.Unregister<AvailabilityEditViewModel>();
             SimpleIoc.Default.Unregister<InspectionViewModel>();
+			SimpleIoc.Default.Unregister<AssignmentToInspectionViewModel>();
 
             // ReportCreation.
             SimpleIoc.Default.Unregister<DiagramPreviewViewModel>();
@@ -185,6 +187,13 @@ namespace ParkInspectGroupC.ViewModel
             }
         }
 
+		public AssignmentToInspectionViewModel AssignmentToInspection
+		{
+			get
+			{
+				return ServiceLocator.Current.GetInstance <AssignmentToInspectionViewModel>;
+			}
+		}
 
         public void Cleanup()
         {

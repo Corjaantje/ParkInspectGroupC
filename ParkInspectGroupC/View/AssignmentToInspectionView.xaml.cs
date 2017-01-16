@@ -1,3 +1,4 @@
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,17 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace ParkInspectGroupC.View
 {
 	/// <summary>
-	/// Interaction logic for InspectionView.xaml
+	/// Interaction logic for AssignmentToInspectionView.xaml
 	/// </summary>
-	public partial class InspectionView : UserControl
-
+	public partial class AssignmentToInspectionView : Window
 	{
-		public InspectionView()
+		public AssignmentToInspectionView()
 		{
 			InitializeComponent();
 		}
