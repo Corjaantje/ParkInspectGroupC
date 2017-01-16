@@ -5,20 +5,17 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ParkInspectGroupC.View"
              mc:Ignorable="d"
-             DataContext="{Binding AssignmentToInspection, Source={StaticResource Locator}}" Height="230" Width="275">
+             DataContext="{Binding AssignmentToInspection, Source={StaticResource Locator}}" Height="367.549" Width="344.549">
     <Grid Margin="0,0,2,1">
-        <Label x:Name="label" Content="Inspectie voor klant:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label1" Content="{Binding CustomerName}" HorizontalAlignment="Left" Margin="131,10,0,0" VerticalAlignment="Top" Width="128" Height="26"/>
-        <Label x:Name="regiolabel" Content="Regio:" HorizontalAlignment="Left" Margin="10,37,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label" Content="Inspectie voor " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label1" Content="{Binding CustomerName}" HorizontalAlignment="Left" Margin="103,10,0,0" VerticalAlignment="Top" Width="128" Height="26"/>
         <ComboBox x:Name="RegionBox" HorizontalAlignment="Left" Margin="10,63,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding RegionNames}" SelectedItem="{Binding SelectedRegion}"/>
-        <Label x:Name="locatielabel" Content="Locatie:" HorizontalAlignment="Left" Margin="139,36,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="LocationBox" HorizontalAlignment="Left" Height="23" Margin="139,62,0,0" TextWrapping="Wrap" Text="{Binding Location}" VerticalAlignment="Top" Width="120"/>
-        <Label x:Name="label2" Content="Eind datum:" HorizontalAlignment="Left" Margin="10,90,0,0" VerticalAlignment="Top"/>
-        <DatePicker HorizontalAlignment="Left" Margin="88,92,0,0" VerticalAlignment="Top" SelectedDate="{Binding EndDate}"/>
-        <CheckBox x:Name="checkBox" Content="aan inspecteur toekennen" HorizontalAlignment="Left" Margin="10,121,0,0" VerticalAlignment="Top" IsChecked="{Binding AssignInspector}"/>
-        <Label x:Name="inspecteurlabel" Content="Inspecteur:" HorizontalAlignment="Left" Margin="10,141,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="10,172,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding InspectorNames}" SelectedItem="{Binding SelectedInspector}"/>
-        <Button x:Name="button" Content="Maak Inspectie" HorizontalAlignment="Left" Margin="157,172,0,0" VerticalAlignment="Top" Width="102" Command="{Binding SaveInspection}"/>
+        <TextBox x:Name="LocationBox" HorizontalAlignment="Left" Height="23" Margin="194,63,0,0" TextWrapping="Wrap" Text="{Binding Location}" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="label2" Content="Eind datum" HorizontalAlignment="Left" Margin="10,117,0,0" VerticalAlignment="Top"/>
+        <DatePicker HorizontalAlignment="Left" Margin="10,143,0,0" VerticalAlignment="Top" SelectedDate="{Binding EndDate}"/>
+        <CheckBox x:Name="checkBox" Content="aan inspecteur toekennen" HorizontalAlignment="Left" Margin="10,207,0,0" VerticalAlignment="Top" IsChecked="{Binding AssignInspector}"/>
+        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="10,227,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding InspectorNames}" SelectedItem="{Binding SelectedInspector}"/>
+        <Button x:Name="button" Content="Maak Inspectie" HorizontalAlignment="Left" Margin="212,278,0,0" VerticalAlignment="Top" Width="102" Command="{Binding SaveInspection}"/>
         <Label x:Name="MessageLabel" Content="{Binding ErrorMessage}" HorizontalAlignment="Left" Margin="10,304,0,0" VerticalAlignment="Top" Width="315" Height="22"/>
 
 

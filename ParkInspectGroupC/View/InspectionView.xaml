@@ -12,11 +12,11 @@
 
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}" Foreground="#FF1D1616" />
-                <DataGridTextColumn Header="Opdracht Id" Binding="{Binding AssignmentId}" Width="*" />
-                <DataGridTextColumn Header="Regio Id" Binding="{Binding RegionId}" Width="*"  />
-                <DataGridTextColumn Header="Locatie" Binding="{Binding Location}" Width="*" />
-                <DataGridTextColumn Header="Start datum" Binding="{Binding StartDate}" Width="*" />
-                <DataGridTextColumn Header="Eind datum" Binding="{Binding EndDate}" Width="*" />
+                <DataGridTextColumn Header="Assigment Id" Binding="{Binding AssignmentId}" Width="*" />
+                <DataGridTextColumn Header="Region Id" Binding="{Binding RegionId}" Width="*"  />
+                <DataGridTextColumn Header="Location" Binding="{Binding Location}" Width="*" />
+                <DataGridTextColumn Header="Start date" Binding="{Binding StartDate}" Width="*" />
+                <DataGridTextColumn Header="End date" Binding="{Binding EndDate}" Width="*" />
 
             </DataGrid.Columns>
             <DataGrid.ColumnHeaderStyle>
@@ -35,7 +35,7 @@
         <Label x:Name="label" Content="Afbeelding toevoegen:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <Button x:Name="button1" Content="Bladeren..." Command="{Binding BladerCommand}" HorizontalAlignment="Left" Margin="150,15,0,0" VerticalAlignment="Top" Width="75"/>
         <Image x:Name="image" Source="{Binding SourceName}" HorizontalAlignment="Left"  Height="58" Margin="237,0,0,0" VerticalAlignment="Top" Width="70"/>
-        <Label x:Name="label1" Content="Zoeken:" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,-0.5"/>
+        <Label x:Name="label1" Content="Search:" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,-0.5"/>
         <Button x:Name="addButton" Content="Add Inspection" Command="{Binding AddInspection}" HorizontalAlignment="Left" Height="28" Margin="255,286,0,0" VerticalAlignment="Top" Width="101" Grid.RowSpan="2"/>
         <Button x:Name="button2" Content="Delete Inspection" Command="{Binding DataContext.DeleteInspection, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}" HorizontalAlignment="Left" Margin="373,286,0,0" VerticalAlignment="Top" Width="99" Height="28" Grid.RowSpan="2"/>
     </Grid>
