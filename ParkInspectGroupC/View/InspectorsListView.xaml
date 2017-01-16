@@ -29,14 +29,21 @@
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="Gegevens aanpassen" Command="{Binding DataContext.ShowEditInspectorCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <Button Content="Gegevens" Command="{Binding DataContext.ShowEditInspectorCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#FF6F9BDA" Foreground="White" BorderThickness="0,0,0,1" BorderBrush="#FF999A9B" Margin="2"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="Beschikbaarheid aangeven" Command="{Binding DataContex.ShowCreateAvailabilityCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <Button Content="Beschikbaarheid aangeven" Command="{Binding DataContext.ShowCreateAvailabilityCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#FF6F9BDA" Foreground="White" BorderThickness="0,0,0,1" BorderBrush="#FF999A9B" Margin="2"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Inspecties" Command="{Binding DataContext.ShowInspectorInspectionsCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#FF6F9BDA" Foreground="White" BorderThickness="0,0,0,1" BorderBrush="#FF999A9B" Margin="2"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

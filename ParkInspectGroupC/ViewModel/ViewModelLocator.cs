@@ -44,6 +44,7 @@ namespace ParkInspectGroupC.ViewModel
 			SimpleIoc.Default.Register<AssignmentToInspectionViewModel>();
             SimpleIoc.Default.Register<InspectionCreationViewModel>();
             SimpleIoc.Default.Register<InspectionEditViewModel>();
+            SimpleIoc.Default.Register<InspectorInspectionsViewModel>();
 
             // ReportCreation.
             SimpleIoc.Default.Register<DiagramPreviewViewModel>();
@@ -71,6 +72,7 @@ namespace ParkInspectGroupC.ViewModel
 		    SimpleIoc.Default.Unregister<AssignmentToInspectionViewModel>();
             SimpleIoc.Default.Unregister<InspectionCreationViewModel>();
             SimpleIoc.Default.Unregister<InspectionEditViewModel>();
+            SimpleIoc.Default.Unregister<InspectorInspectionsViewModel>();
 
             // ReportCreation.
             SimpleIoc.Default.Unregister<DiagramPreviewViewModel>();
@@ -215,6 +217,14 @@ namespace ParkInspectGroupC.ViewModel
             get
             {
                 return new InspectionEditViewModel(this.InspectionOverView);
+            }
+        }
+
+        public InspectorInspectionsViewModel InspectorInspections
+        {
+            get
+            {
+                return new InspectorInspectionsViewModel(InspectorList.SelectedInspector);
             }
         }
 
