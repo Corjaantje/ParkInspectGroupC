@@ -16,7 +16,7 @@ using System.Windows.Input;
 
 namespace ParkInspectGroupC.ViewModel
 {
-    public class InspectionViewModel 
+    public class InspectionViewModel
     {
 
         #region properties
@@ -205,8 +205,6 @@ namespace ParkInspectGroupC.ViewModel
 
                 }
             }
-
-
             else
             {
                 MessageBox.Show("Selecteer aub een inspectie");
