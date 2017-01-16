@@ -1,4 +1,3 @@
-﻿
 using GalaSoft.MvvmLight.Command;
 using LocalDatabase.Domain;
 using System;
@@ -12,7 +11,6 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Input;
-
 
 namespace ParkInspectGroupC.ViewModel
 {

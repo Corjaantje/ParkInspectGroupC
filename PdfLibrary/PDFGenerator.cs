@@ -22,7 +22,18 @@ namespace ParkInspectGroupC.Miscellaneous
 			
 		}
 
-		public void GeneratePdf(Report report, Employee employee, string filename, string destination)
+        public PdfDocumentRenderer GeneratePdfWeb(Report report, Employee employee, string filename)
+        {
+            Document document = CreateDocument(report, employee);
+            PdfDocumentRenderer renderer = new PdfDocumentRenderer(true, PdfSharp.Pdf.PdfFontEmbedding.Always);
+
+            renderer.Document = document;
+            renderer.RenderDocument();
+
+            return renderer;
+        }
+
+        public void GeneratePdf(Report report, Employee employee, string filename, string destination)
 		{
 			Document document = CreateDocument(report, employee);
 			PdfDocumentRenderer renderer = new PdfDocumentRenderer(true, PdfSharp.Pdf.PdfFontEmbedding.Always);
