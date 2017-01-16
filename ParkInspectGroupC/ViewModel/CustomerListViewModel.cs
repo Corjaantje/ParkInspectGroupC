@@ -1,10 +1,16 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using LocalDatabase.Domain;
+using ParkInspectGroupC.Miscellaneous;
+using ParkInspectGroupC.View;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
-using LocalDatabase.Domain;
+
 
 namespace ParkInspectGroupC.ViewModel
 {
@@ -16,6 +22,7 @@ namespace ParkInspectGroupC.ViewModel
         private Customer _selectedCustomer;
         public ICommand DeleteCustomerCommand { get; set; }
         public ICommand AddCustomerCommand { get; set; }
+        public ICommand EditCustomerCommand { get; set; }
 
         public CustomerListViewModel()
         {
@@ -38,6 +45,7 @@ namespace ParkInspectGroupC.ViewModel
             _customers = searchedCustomers;
             DeleteCustomerCommand = new RelayCommand(deleteCustomer, canDelete);
             AddCustomerCommand = new RelayCommand(openAddWindow);
+            EditCustomerCommand = new RelayCommand(openEditWindow);
 
         }
         public ObservableCollection<Customer> Customers
@@ -124,8 +132,21 @@ namespace ParkInspectGroupC.ViewModel
 
         public void openAddWindow()
         {
-            //Navigator.SetNewView(new CustomerCreationView());
+            Navigator.SetNewView(new CustomerCreationView());
         }
 
+        public void openEditWindow()
+        {
+            if(SelectedCustomer != null)
+            {
+                Navigator.SetNewView(new CustomerEditView());
+            }
+
+            else
+            {
+                MessageBox.Show("Selecteer alstublieft eerst een klant");
+            }
+            
+        }
     }
 }
