@@ -10,6 +10,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace ParkInspectGroupC.View
@@ -17,7 +18,7 @@ namespace ParkInspectGroupC.View
     /// <summary>
     /// Interaction logic for InspectionCreationView.xaml
     /// </summary>
-    public partial class InspectionCreationView : UserControl
+    public partial class InspectionCreationView : Page
     {
         public InspectionCreationView()
         {
