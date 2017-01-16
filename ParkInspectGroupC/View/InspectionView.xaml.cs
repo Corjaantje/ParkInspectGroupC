@@ -1,4 +1,3 @@
-﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,6 +17,7 @@ namespace ParkInspectGroupC.View
 	/// Interaction logic for InspectionView.xaml
 	/// </summary>
 	public partial class InspectionView : UserControl
+
 	{
 		public InspectionView()
 		{
