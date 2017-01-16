@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="ParkInspectGroupC.View.InspectionCreationView"
+﻿<UserControl x:Class="ParkInspectGroupC.View.InspectionEditView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -10,7 +10,7 @@
 			 xmlns:vm="clr-namespace:ParkInspectGroupC.ViewModel"
              x:Name="This"
 			 mc:Ignorable="d"
-			 DataContext="{Binding AddInspection, Source={StaticResource Locator}}">
+			 DataContext="{Binding EditInspection, Source={StaticResource Locator}}">
     <Viewbox>
         <Grid>
             <Grid.RowDefinitions>
