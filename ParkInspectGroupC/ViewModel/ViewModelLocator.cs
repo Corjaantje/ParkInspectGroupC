@@ -43,6 +43,10 @@ namespace ParkInspectGroupC.ViewModel
             SimpleIoc.Default.Register<InspectionViewModel>();
 			SimpleIoc.Default.Register<AssignmentToInspectionViewModel>();
 
+            // ReportCreation.
+            SimpleIoc.Default.Register<DiagramPreviewViewModel>();
+            SimpleIoc.Default.Register<ReportViewModel>();
+
         }
 
         private static void UnRegisterViewModels()
