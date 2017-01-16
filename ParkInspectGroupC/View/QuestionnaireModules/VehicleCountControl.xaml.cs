@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ParkInspectGroupC.ViewModel;
+using ParkInspectGroupC.ViewModel.QuestionnaireModuleViewModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -19,64 +21,24 @@ namespace ParkInspectGroupC.View.QuestionnaireModules
     /// <summary>
     /// Interaction logic for VehicleCountControl.xaml
     /// </summary>
-    public partial class VehicleCountControl : UserControl, INotifyPropertyChanged // The UserControl modules aim to be self-contained, hence changes directly in the code-behind
+    public partial class VehicleCountControl : UserControl
     {
-        public List<string> VehicleTypes { get; set; }
-        public List<string> SubLocations { get; set; }
+        private QuestionnaireViewModel qvm;
+        private int moduleId;
 
-        public string SelectedVehicleType { get; set; }
-        public string SelectedSubLocation { get; set; }
-
-        public int CurrentValue { get; set; }
-
-        public ICommand ValueIncrement { get; set; }
-        public ICommand ValueDecrement { get; set; }
-
-        public VehicleCountControl()
+        public VehicleCountControl(int moduleId,  QuestionnaireViewModel qvm)
         {
+            this.qvm = qvm;
+            this.moduleId = moduleId;
             InitializeComponent();
-            DataContext = this;
-
-            VehicleTypes = new List<string>();
-            VehicleTypes.Add("Personenauto");
-            VehicleTypes.Add("Vrachtwagen");
-
-            SubLocations = new List<string>();
-            SubLocations.Add("Noord");
-            SubLocations.Add("Zuid");
-
-            CurrentValue = 0;
+            Loaded += GetQuestionnaireViewModelReference;
         }
 
-        
-
-        private void IncrementValue()
+        private void GetQuestionnaireViewModelReference(object sender, RoutedEventArgs routedEventArgs)
         {
-            CurrentValue++;
-            UpdateRecords();
-        }
-
-        private void DecrementValue()
-        {
-            CurrentValue--;
-            UpdateRecords();
-        }
-
-        private void UpdateRecords()
-        {
-            RaisePropertyChanged("CurrentValue");
-        }
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        void RaisePropertyChanged(string prop)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
-        }
-
-        private void textBox_AmountInput_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
+            QuestionnaireModuleViewModelBase vm = DataContext as QuestionnaireModuleViewModelBase;
+            vm.SetQuestionnaireViewModelReference(qvm);
+            vm.SetModuleId(moduleId);
         }
     }
 }
