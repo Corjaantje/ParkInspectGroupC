@@ -7,7 +7,7 @@
         xmlns:vm="clr-namespace:ParkInspectGroupC.ViewModel"
         mc:Ignorable="d"
         DataContext="{Binding InspectionOverView, Source={StaticResource Locator}}">
-    <Grid>
+    <Grid Height="313">
         <DataGrid HorizontalAlignment="Left" AutoGenerateColumns="False" CanUserDeleteRows="False" Margin="10,121,0,0" VerticalAlignment="Top" Height="144" Width="472" IsReadOnly="True" SelectedItem="{Binding SelectedInspection, Mode=TwoWay}" ItemsSource="{Binding Inspections,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" HeadersVisibility="Column">
 
             <DataGrid.Columns>
@@ -30,14 +30,15 @@
             </DataGrid.InputBindings>
 
         </DataGrid>
-      
+
         <TextBox x:Name="searchCriteria" HorizontalAlignment="Left" Height="23" Margin="80,63,0,0" TextWrapping="Wrap" Text="{Binding SearchCriteria, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="392"/>
         <Button x:Name="button" Content="Afbeelding Uploaden" Command = "{Binding SubmitCommand}" HorizontalAlignment="Left" Margin="353,13,0,0" VerticalAlignment="Top" Width="120"/>
         <Label x:Name="label" Content="Afbeelding toevoegen:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <Button x:Name="button1" Content="Bladeren..." Command="{Binding BladerCommand}" HorizontalAlignment="Left" Margin="150,15,0,0" VerticalAlignment="Top" Width="75"/>
         <Image x:Name="image" Source="{Binding SourceName}" HorizontalAlignment="Left"  Height="58" Margin="237,0,0,0" VerticalAlignment="Top" Width="70"/>
         <Label x:Name="label1" Content="Search:" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,-0.5"/>
-        <Button x:Name="addButton" Content="Add Inspection" Command="{Binding AddInspection}" HorizontalAlignment="Left" Height="28" Margin="255,286,0,0" VerticalAlignment="Top" Width="101" Grid.RowSpan="2"/>
-        <Button x:Name="button2" Content="Delete Inspection" Command="{Binding DataContext.DeleteInspection, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}" HorizontalAlignment="Left" Margin="373,286,0,0" VerticalAlignment="Top" Width="99" Height="28" Grid.RowSpan="2"/>
+        <Button x:Name="addButton" Content="Inspectie toevoegen" Command="{Binding AddInspection}" HorizontalAlignment="Left" Height="22" Margin="100,280,0,0" VerticalAlignment="Top" Width="125"/>
+        <Button x:Name="button2" Content="Delete Inspectie" Command="{Binding DataContext.DeleteInspection, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}" HorizontalAlignment="Left" Margin="373,280,0,0" VerticalAlignment="Top" Width="99" Height="22"/>
+        <Button x:Name="button3" Content="Bewerk Inspectie" Command="{Binding EditInspection}" HorizontalAlignment="Left" Margin="250,280,0,0" VerticalAlignment="Top" Width="96"/>
     </Grid>
 </UserControl>
