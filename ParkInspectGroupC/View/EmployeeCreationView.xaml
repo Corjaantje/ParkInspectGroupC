@@ -73,7 +73,7 @@
             <Label Grid.Row="8" Grid.Column="0" Content="Plaats:" Margin="0,0,10,0" />
             <TextBox Grid.Row="8" Grid.Column="1" Margin="0,2,10,2" Text="{Binding Path=City, UpdateSourceTrigger=PropertyChanged}" />
 
-            <Label Grid.Row="9" Grid.Column="0" Content="Postcode" Margin="0,0,10,0" />
+            <Label Grid.Row="9" Grid.Column="0" Content="Postcode:" Margin="0,0,10,0" />
             <TextBox Grid.Row="9" Grid.Column="1" Margin="0,2,10,2" Text="{Binding Path=ZipCode, UpdateSourceTrigger=PropertyChanged}" />
 
             <Label Grid.Row="10" Grid.Column="0" Content="E-mail:" Margin="0,0,10,0" />
