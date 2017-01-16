@@ -18,7 +18,7 @@ namespace ParkInspectGroupC.View
     /// <summary>
     /// Interaction logic for InspectionCreationView.xaml
     /// </summary>
-    public partial class InspectionCreationView : Page
+    public partial class InspectionCreationView : UserControl
     {
         public InspectionCreationView()
         {
