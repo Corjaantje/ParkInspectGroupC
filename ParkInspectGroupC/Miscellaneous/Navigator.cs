@@ -11,8 +11,8 @@ namespace ParkInspectGroupC.Miscellaneous
 {
 	public static class Navigator
 	{
-		private static LinkedList<UserControl> ViewHistory = new LinkedList<UserControl>();
-		private static LinkedListNode<UserControl> _currentViewNode;
+		public static LinkedList<UserControl> ViewHistory = new LinkedList<UserControl>();
+		public static LinkedListNode<UserControl> _currentViewNode;
 
 		private static MainViewModel MainView
 		{
