@@ -12,7 +12,6 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Input;
 
-
 namespace ParkInspectGroupC.ViewModel
 {
     public class InspectionViewModel 

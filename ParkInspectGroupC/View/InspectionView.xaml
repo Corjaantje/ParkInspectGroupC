@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         DataContext="{Binding InspectionViewModel, Source={StaticResource Locator}}">
     <Grid>
-        <DataGrid HorizontalAlignment="Left" Margin="10,119,0,0" VerticalAlignment="Top" Height="210" Width="472" IsReadOnly="True" SelectedItem="{Binding SelectedInspection, Mode=TwoWay}" ItemsSource="{Binding Inspections}">
+        <DataGrid HorizontalAlignment="Left" Margin="10,69,0,0" VerticalAlignment="Top" Height="210" Width="472" IsReadOnly="True" SelectedItem="{Binding SelectedInspection, Mode=TwoWay}" ItemsSource="{Binding Inspections}">
 
             <DataGrid.Columns>
 
@@ -13,11 +13,12 @@
             </DataGrid.Columns>
 
         </DataGrid>
-        <TextBox x:Name="searchCriteria" HorizontalAlignment="Left" Height="23" Margin="10,63,0,0" TextWrapping="Wrap" Text="{Binding SearchCriteria, Mode=TwoWay}" VerticalAlignment="Top" Width="392"/>
-        <Button x:Name="searchButton" Content="Button" HorizontalAlignment="Left" Margin="407,63,0,0" VerticalAlignment="Top" Width="75" Height="23"/>
-        <Button x:Name="button" Content="Upload afbeelding" Command = "{Binding SubmitCommand}" HorizontalAlignment="Left" Margin="373,36,0,0" VerticalAlignment="Top" Width="109"/>
+
+        <TextBox x:Name="searchCriteria" HorizontalAlignment="Left" Height="23" Margin="10,41,0,0" TextWrapping="Wrap" Text="{Binding SearchCriteria, Mode=TwoWay}" VerticalAlignment="Top" Width="392"/>
+        <Button x:Name="searchButton" Content="Search" HorizontalAlignment="Left" Margin="397,41,0,0" VerticalAlignment="Top" Width="75" Height="23"/>
+        <Button x:Name="button" Content="Afbeelding Uploaden" Command = "{Binding SubmitCommand}" HorizontalAlignment="Left" Margin="353,13,0,0" VerticalAlignment="Top" Width="120"/>
         <Label x:Name="label" Content="Afbeelding toevoegen:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="button1" Content="Blader" Command="{Binding BladerCommand}" HorizontalAlignment="Left" Margin="157,12,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="button1" Content="Bladeren..." Command="{Binding BladerCommand}" HorizontalAlignment="Left" Margin="150,15,0,0" VerticalAlignment="Top" Width="75"/>
         <Image x:Name="image" Source="{Binding SourceName}" HorizontalAlignment="Left"  Height="58" Margin="237,0,0,0" VerticalAlignment="Top" Width="70"/>
 
     </Grid>
