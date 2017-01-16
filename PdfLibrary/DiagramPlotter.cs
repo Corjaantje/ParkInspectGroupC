@@ -19,8 +19,6 @@ namespace ParkInspectGroupC.Miscellaneous
 			PlotModel MyModel = new PlotModel();
 			Diagram loadedDiagram;
 			Question loadedQuestion;
-			Questionnaire loadedQuestionnaire;
-			List<QuestionAnswer> loadedAnswers;
 			List<Questionnaire> loadedQuestionnaires;
 			List<Inspection> loadedInspections;
 			using (var context = new ParkInspectEntities())
