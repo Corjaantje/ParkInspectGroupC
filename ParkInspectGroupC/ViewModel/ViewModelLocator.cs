@@ -3,6 +3,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 using ParkInspectGroupC.ViewModel.QuestionnaireModuleViewModels;
+using ParkInspectGroupC.ViewModel.ReportCreation;
 
 namespace ParkInspectGroupC.ViewModel
 {
