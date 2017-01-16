@@ -79,6 +79,8 @@ namespace ParkInspectGroupC.ViewModel
         public ICommand BladerCommand { get; set; }
         public ICommand SubmitCommand { get; set; }
         public ICommand AddInspection { get; set; }
+
+        public ICommand EditInspection { get; set; }
         public ICommand DeleteInspection { get; set; }
         private string _imageSource;
         private string assemblyFile;
@@ -270,11 +272,33 @@ namespace ParkInspectGroupC.ViewModel
                 int byte1 = imgdata[i];
             }
         }
-        
+
         public void addInspection()
         {
             Navigator.SetNewView(new InspectionCreationView());
         }
+
+        public void editInspection()
+        {
+            if (SelectedInspection == null)
+            {
+                MessageBox.Show("Selecteer aub een inspectie");
+            }
+
+            else
+            {
+                Navigator.SetNewView(new InspectionEditView());
+            }
+
+        }
+
+        public void hideAddInspection()
+        {
+            Navigator.SetNewView(new InspectionView());
+            RaisePropertyChanged("Inspections");
+        }
+
+
 
         public void deleteInspection()
         {
