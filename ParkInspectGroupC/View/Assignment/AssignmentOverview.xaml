@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ParkInspectGroupC.View"
         mc:Ignorable="d"
-        Title="OpdractOverzicht" Height="470.292" Width="500">
-	<Grid Margin="0,0,0,-21">
-		<DataGrid x:Name="AssignmentList" HorizontalAlignment="Left" Height="200" Margin="10,134,0,0" VerticalAlignment="Top" Width="472" ItemsSource="{Binding ObservedCollection}" SelectedItem="{Binding SelectedAssignment}" AutoGenerateColumns="False" IsReadOnly="True">
+        Title="OpdractOverzicht" Height="439.292" Width="500">
+	<Grid Margin="0,0,0,32">
+		<DataGrid x:Name="AssignmentList" HorizontalAlignment="Left" Height="200" Margin="10,111,0,0" VerticalAlignment="Top" Width="472" ItemsSource="{Binding ObservedCollection}" SelectedItem="{Binding SelectedAssignment}" AutoGenerateColumns="False" IsReadOnly="True">
 
 			<DataGrid.Columns>
 
@@ -18,22 +18,22 @@
 
 		</DataGrid>
 
-		<CheckBox x:Name="ClosedAssigments" Content="Gesloten opdrachten" HorizontalAlignment="Left" Margin="10,114,0,0" VerticalAlignment="Top" IsChecked="{Binding ShowClosedAssignments}"/>
-		<TextBox x:Name="SearchBox" HorizontalAlignment="Left" Height="23" Margin="10,86,0,0" TextWrapping="Wrap" Text="{Binding SearchCriteria, Mode=TwoWay}" VerticalAlignment="Top" Width="392"/>
-		<Button x:Name="startSearch" Content="Zoek" HorizontalAlignment="Left" Margin="407,86,0,0" VerticalAlignment="Top" Width="75" Command="{Binding SearchAll}" Height="23"/>
+		<CheckBox x:Name="ClosedAssigments" Content="Gesloten opdrachten" HorizontalAlignment="Left" Margin="10,91,0,0" VerticalAlignment="Top" IsChecked="{Binding ShowClosedAssignments}"/>
+		<TextBox x:Name="SearchBox" HorizontalAlignment="Left" Height="23" Margin="10,63,0,0" TextWrapping="Wrap" Text="{Binding SearchCriteria, Mode=TwoWay}" VerticalAlignment="Top" Width="392"/>
+		<Button x:Name="startSearch" Content="Zoek" HorizontalAlignment="Left" Margin="402,63,0,0" VerticalAlignment="Top" Width="75" Command="{Binding SearchAll}" Height="23"/>
 		<Image x:Name="image" Source ="..\..\Image\Logo_WhiteBack.PNG" HorizontalAlignment="Left" Height="30" Margin="10,10,0,0" VerticalAlignment="Top" Width="72"/>
 
-		<Button x:Name="Assignmets" Content="Opdrachten" HorizontalAlignment="Left" Margin="111,20,0,0" VerticalAlignment="Top" Width="75" Background="LightBlue"/>
-		<Button x:Name="Administration" Content="Administatie" HorizontalAlignment="Left" Margin="220,20,0,0" VerticalAlignment="Top" Width="75"/>
-		<Button x:Name="Statistics" Content="Statistieken" HorizontalAlignment="Left" Margin="327,20,0,0" VerticalAlignment="Top" Width="75"/>
+		<Button x:Name="Assignmets" Content="Opdrachten" HorizontalAlignment="Left" Margin="110,10,0,0" VerticalAlignment="Top" Width="75" Background="LightBlue"/>
+		<Button x:Name="Administration" Content="Administatie" HorizontalAlignment="Left" Margin="195,10,0,0" VerticalAlignment="Top" Width="75"/>
+		<Button x:Name="Statistics" Content="Statistieken" HorizontalAlignment="Left" Margin="280,10,0,0" VerticalAlignment="Top" Width="75"/>
 
-		<Button x:Name="Questionare" Content="Vragenlijst" HorizontalAlignment="Left" Margin="50,54,0,0" VerticalAlignment="Top" Width="116"/>
-		<Button x:Name="NewQuestionaire" Content="Nieuwe vragenlijst" HorizontalAlignment="Left" Margin="202,54,0,0" VerticalAlignment="Top" Width="118"/>
-		<Button x:Name="NewInspection" Content="Nieuwe inspectie" HorizontalAlignment="Left" Margin="316,339,0,0" VerticalAlignment="Top" Width="118" Command="{Binding newInspection}"/>
+		<Button x:Name="Questionare" Content="Vragenlijst" HorizontalAlignment="Left" Margin="110,35,0,0" VerticalAlignment="Top" Width="116"/>
+		<Button x:Name="NewQuestionaire" Content="+ Nieuwe vragenlijst" HorizontalAlignment="Left" Margin="237,35,0,0" VerticalAlignment="Top" Width="118"/>
+		<Button x:Name="NewInspection" Content="+ Nieuwe inspectie" HorizontalAlignment="Left" Margin="180,316,0,0" VerticalAlignment="Top" Width="118" Command="{Binding newInspection}"/>
 
-		<Button x:Name="EditAssignment" Content="Bewerken" HorizontalAlignment="Left" Margin="91,339,0,0" VerticalAlignment="Top" Width="75" Command="{Binding EditCommand}"/>
-		<Button x:Name="ShowDetails" Content="Details" HorizontalAlignment="Left" Margin="202,339,0,0" VerticalAlignment="Top" Width="75" Command="{Binding ShowDetails}"/>
-		<Label x:Name="Details" Content="{Binding AssignmentDetails}" HorizontalAlignment="Left" Margin="10,364,0,0" VerticalAlignment="Top" Width="472" Height="65"/>
+		<Button x:Name="EditAssignment" Content="Bewerken" HorizontalAlignment="Left" Margin="10,316,0,0" VerticalAlignment="Top" Width="75" Command="{Binding EditCommand}"/>
+		<Button x:Name="ShowDetails" Content="Details" HorizontalAlignment="Left" Margin="95,316,0,0" VerticalAlignment="Top" Width="75" Command="{Binding ShowDetails}"/>
+		<Label x:Name="Details" Content="{Binding AssignmentDetails}" HorizontalAlignment="Left" Margin="10,341,0,0" VerticalAlignment="Top" Width="472" Height="65"/>
 
 	</Grid>
 </Window>

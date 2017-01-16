@@ -10,21 +10,23 @@
 
 		<Image x:Name="image" Source ="..\..\Image\Logo_WhiteBack.PNG" HorizontalAlignment="Left" Height="30" Margin="10,10,0,0" VerticalAlignment="Top" Width="72"/>
 
-		<Button x:Name="Assignmets" Content="Opdrachten" HorizontalAlignment="Left" Margin="111,20,0,0" VerticalAlignment="Top" Width="75" Background="LightBlue"/>
-		<Button x:Name="Administration" Content="Administatie" HorizontalAlignment="Left" Margin="220,20,0,0" VerticalAlignment="Top" Width="75"/>
-		<Button x:Name="Statistics" Content="Statistieken" HorizontalAlignment="Left" Margin="327,20,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="Assignmets" Content="Opdrachten" HorizontalAlignment="Left" Margin="110,10,0,0" VerticalAlignment="Top" Width="75" Background="LightBlue"/>
+        <Button x:Name="Administration" Content="Administatie" HorizontalAlignment="Left" Margin="195,10,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="Statistics" Content="Statistieken" HorizontalAlignment="Left" Margin="280,10,0,0" VerticalAlignment="Top" Width="75"/>
 
 
 		<Label x:Name="newAssignmentLabel" Content="{Binding TopLabel}" HorizontalAlignment="Left" Margin="81,110,0,0" VerticalAlignment="Top"/>
 
-		<Label x:Name="descriptionLabel" Content="Beschrijving" HorizontalAlignment="Left" Margin="3,148,0,0" VerticalAlignment="Top"/>
-		<TextBox x:Name="textBox" HorizontalAlignment="Left" Height="145" Margin="81,148,0,0" TextWrapping="Wrap" Text="{Binding Description, Mode=TwoWay}" VerticalAlignment="Top" Width="257" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"/>
+        <Label x:Name="descriptionLabel" Content="Beschrijving:" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="145" Margin="10,81,0,0" TextWrapping="Wrap" Text="{Binding Description, Mode=TwoWay}" VerticalAlignment="Top" Width="257" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"/>
 
-		<Button x:Name="createAssignment" Content="plaats opdracht" HorizontalAlignment="Left" Margin="125,298,0,0" VerticalAlignment="Top" Width="101" Command="{Binding CreateAssignment}"/>
+		<Button x:Name="createAssignment" Content="plaats opdracht" HorizontalAlignment="Left" Margin="10,231,0,0" VerticalAlignment="Top" Width="101" Command="{Binding CreateAssignment}"/>
 
 		<Label Content="{Binding CreatedAssignment}" HorizontalAlignment="Left" Margin="189,283,0,0" VerticalAlignment="Top"/>
-		<ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="343,148,0,0" VerticalAlignment="Top" Width="189" ItemsSource="{Binding AllCustomerNames}" SelectedIndex="{Binding CustomerIndex}"/>
-		<Label x:Name="label" Content="{Binding CustomerDescription}" HorizontalAlignment="Left" Margin="343,175,0,0" VerticalAlignment="Top" Height="118" Width="189"/>
+
+        <Label x:Name="customerDescriptionLabel" Content="Klant:" HorizontalAlignment="Left" Margin="280,50,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="280,81,0,0" VerticalAlignment="Top" Width="189" ItemsSource="{Binding AllCustomerNames}" SelectedIndex="{Binding CustomerIndex}"/>
+		<Label x:Name="label" Content="{Binding CustomerDescription}" HorizontalAlignment="Left" Margin="280,108,0,0" VerticalAlignment="Top" Height="118" Width="189"/>
 
 	</Grid>
 </Window>

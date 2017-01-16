@@ -52,7 +52,7 @@
         <Label Content="Inspecties" HorizontalAlignment="Left" Margin="10,314,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="25" Width="66"/>
         <Label Content="Adres:" HorizontalAlignment="Left" Margin="18,85,0,0" VerticalAlignment="Top" Height="25" Width="43"/>
         <Label Content="E-Mail-Adres:" HorizontalAlignment="Left" Margin="18,115,0,0" VerticalAlignment="Top" Height="25" Width="84"/>
-        <Label Content="Telefoon Nummer:" HorizontalAlignment="Left" Margin="18,145,0,0" VerticalAlignment="Top" Height="25" Width="108"/>
+        <Label Content="Telefoonnmmer:" HorizontalAlignment="Left" Margin="18,145,0,0" VerticalAlignment="Top" Height="25" Width="108"/>
         <Label Content="Status:" HorizontalAlignment="Left" Margin="22,220,0,0" VerticalAlignment="Top"/>
     </Grid>
 </UserControl>

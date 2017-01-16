@@ -1,4 +1,4 @@
-using GalaSoft.MvvmLight.Command;
+﻿using GalaSoft.MvvmLight.Command;
 using LocalDatabase.Domain;
 using ParkInspectGroupC.Miscellaneous;
 using ParkInspectGroupC.View;
@@ -207,8 +207,6 @@ namespace ParkInspectGroupC.ViewModel
 
                 }
             }
-
-
             else
             {
                 MessageBox.Show("Selecteer aub een inspectie");
@@ -324,8 +322,6 @@ namespace ParkInspectGroupC.ViewModel
             allInspections.Remove(SelectedInspection);
             RaisePropertyChanged("Inspections");
         }
-
-
 
 
 

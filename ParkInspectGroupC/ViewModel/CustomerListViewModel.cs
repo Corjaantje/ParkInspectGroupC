@@ -1,4 +1,4 @@
-using GalaSoft.MvvmLight;
+﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using LocalDatabase.Domain;
 using ParkInspectGroupC.Miscellaneous;
