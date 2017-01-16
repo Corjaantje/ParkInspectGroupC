@@ -1,4 +1,4 @@
-﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using LocalDatabase.Domain;
 using ParkInspectGroupC.Miscellaneous;
@@ -144,7 +144,7 @@ namespace ParkInspectGroupC.ViewModel
 
             else
             {
-                MessageBox.Show("Selecteer eerst een klant aub");
+                MessageBox.Show("Selecteer alstublieft eerst een klant");
             }
             
         }
