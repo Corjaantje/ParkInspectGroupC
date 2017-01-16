@@ -191,7 +191,7 @@ namespace ParkInspectGroupC.ViewModel
 		{
 			get
 			{
-				return ServiceLocator.Current.GetInstance <AssignmentToInspectionViewModel>;
+				return ServiceLocator.Current.GetInstance<AssignmentToInspectionViewModel>();
 			}
 		}
 

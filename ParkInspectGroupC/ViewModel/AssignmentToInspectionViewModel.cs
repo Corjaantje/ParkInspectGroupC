@@ -11,7 +11,7 @@ using System.Windows.Input;
 
 namespace ParkInspectGroupC.ViewModel
 {
-	class AssignmentToInspectionViewModel : ViewModelBase
+	public class AssignmentToInspectionViewModel : ViewModelBase
 	{
 
 		#region properties
