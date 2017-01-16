@@ -1,17 +1,16 @@
-<UserControl x:Class="ParkInspectGroupC.View.InspectionCreationView"
-
-       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-       xmlns:local="clr-namespace:ParkInspectGroupC.View"
+﻿<UserControl x:Class="ParkInspectGroupC.View.InspectionEditView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ParkInspectGroupC.View"
 			 xmlns:main="clr-namespace:ParkInspectGroupC"
 			 xmlns:validation="clr-namespace:ParkInspectGroupC.Validation"
 			 xmlns:converter="clr-namespace:ParkInspectGroupC.Converter"
 			 xmlns:vm="clr-namespace:ParkInspectGroupC.ViewModel"
-       x:Name="This"
+             x:Name="This"
 			 mc:Ignorable="d"
-			 DataContext="{Binding AddInspection, Source={StaticResource Locator}}">
+			 DataContext="{Binding EditInspection, Source={StaticResource Locator}}">
     <Viewbox>
         <Grid>
             <Grid.RowDefinitions>

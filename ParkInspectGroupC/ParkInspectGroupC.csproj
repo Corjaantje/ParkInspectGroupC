@@ -143,6 +143,8 @@
     <Compile Include="ViewModel\DatabaseSyncViewModel.cs" />
     <Compile Include="ViewModel\CustomerListViewModel.cs" />
     <Compile Include="ViewModel\Assignment\EditAssignmentViewModel.cs" />
+    <Compile Include="ViewModel\InspectionCreationViewModel.cs" />
+    <Compile Include="ViewModel\InspectionEditViewModel.cs" />
     <Compile Include="ViewModel\InspectionViewModel.cs" />
     <Compile Include="ViewModel\InspectorEditViewModel.cs" />
     <Compile Include="ViewModel\InspectorListViewModel.cs" />
@@ -203,6 +205,9 @@
     </Compile>
     <Compile Include="View\InspectionCreationView.xaml.cs">
       <DependentUpon>InspectionCreationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\InspectionEditView.xaml.cs">
+      <DependentUpon>InspectionEditView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\InspectionView.xaml.cs">
       <DependentUpon>InspectionView.xaml</DependentUpon>
@@ -359,6 +364,10 @@
     <Page Include="View\InspectionCreationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\InspectionEditView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\InspectionView.xaml">
       <Generator>MSBuild:Compile</Generator>
