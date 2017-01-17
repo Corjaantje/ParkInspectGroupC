@@ -1,32 +1,35 @@
-﻿using GalaSoft.MvvmLight;
-using LocalDatabase.Domain;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using GalaSoft.MvvmLight;
+using LocalDatabase.Domain;
 
 namespace ParkInspectGroupC.ViewModel
 {
-   public class InspectorInspectionsViewModel: ViewModelBase
+    public class InspectorInspectionsViewModel : ViewModelBase
     {
         private string _name;
-        public string Name
-        {
-            get { return _name; }
-            set { _name = value; RaisePropertyChanged("Name"); }
-        }
 
-        public ObservableCollection<Inspection> Inspections { get; set; }
         public InspectorInspectionsViewModel(Employee selectedInspector)
         {
             Name = selectedInspector.FirstName + " " + selectedInspector.Prefix + " " + selectedInspector.SurName;
-            using(var context =  new LocalParkInspectEntities())
+            using (var context = new LocalParkInspectEntities())
             {
-                var IList = context.Inspection.Include("InspectionStatus").Where(i => i.InspectorId == selectedInspector.Id);
+                var IList =
+                    context.Inspection.Include("InspectionStatus").Where(i => i.InspectorId == selectedInspector.Id);
                 Inspections = new ObservableCollection<Inspection>(IList);
             }
         }
+
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                _name = value;
+                RaisePropertyChanged("Name");
+            }
+        }
+
+        public ObservableCollection<Inspection> Inspections { get; set; }
     }
 }

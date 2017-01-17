@@ -1,22 +1,22 @@
-﻿using GalaSoft.MvvmLight;
+﻿using System;
+using System.Windows.Input;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using LocalDatabase.Domain;
-using System;
-using System.Windows.Input;
 
 namespace ParkInspectGroupC.ViewModel
 {
     public class CustomerCreationViewModel : ViewModelBase
     {
+        private string _customermail;
 
         private string _customername;
-        private string _streetname;
         private string _housenumber;
         private string _location;
         private string _phonenumber;
-        private string _customermail;
+        private string _streetname;
 
-       
+
         public CustomerCreationViewModel()
         {
             AddCustomerCommand = new RelayCommand(addCustomer, canAddCustomer);
@@ -24,11 +24,10 @@ namespace ParkInspectGroupC.ViewModel
 
         public string CustomerName
         {
-            get{
-                return _customername;
-            }
+            get { return _customername; }
 
-            set{
+            set
+            {
                 _customername = value;
                 RaisePropertyChanged("CustomerName");
             }
@@ -36,10 +35,7 @@ namespace ParkInspectGroupC.ViewModel
 
         public string StreetName
         {
-            get
-            {
-                return _streetname;
-            }
+            get { return _streetname; }
 
             set
             {
@@ -50,10 +46,7 @@ namespace ParkInspectGroupC.ViewModel
 
         public string HouseNumber
         {
-            get
-            {
-                return _housenumber;
-            }
+            get { return _housenumber; }
 
             set
             {
@@ -65,10 +58,7 @@ namespace ParkInspectGroupC.ViewModel
 
         public string CustomerLocation
         {
-            get
-            {
-                return _location;
-            }
+            get { return _location; }
 
             set
             {
@@ -79,26 +69,19 @@ namespace ParkInspectGroupC.ViewModel
 
         public string PhoneNumber
         {
-            get
-            {
-                return _phonenumber;
-            }
+            get { return _phonenumber; }
 
             set
             {
                 _phonenumber = value;
                 RaisePropertyChanged("PhoneNumber");
-               
             }
         }
 
 
         public string CustomerMail
         {
-            get
-            {
-                return _customermail;
-            }
+            get { return _customermail; }
 
             set
             {
@@ -107,18 +90,18 @@ namespace ParkInspectGroupC.ViewModel
             }
         }
 
+
+        public ICommand AddCustomerCommand { get; set; }
+
         private bool canAddCustomer()
         {
-
             if (string.IsNullOrWhiteSpace(CustomerName)
                 || string.IsNullOrWhiteSpace(StreetName)
                 || string.IsNullOrWhiteSpace(HouseNumber)
                 || string.IsNullOrWhiteSpace(CustomerLocation)
                 || string.IsNullOrWhiteSpace(PhoneNumber)
-                || string.IsNullOrWhiteSpace(CustomerMail)) 
-                {
-                 return false;
-            }
+                || string.IsNullOrWhiteSpace(CustomerMail))
+                return false;
 
             return true;
         }
@@ -128,23 +111,18 @@ namespace ParkInspectGroupC.ViewModel
         {
             using (var context = new LocalParkInspectEntities())
             {
-                var customer = new Customer()
+                var customer = new Customer
                 {
                     Name = CustomerName,
                     Address = StreetName + " " + HouseNumber,
                     Location = CustomerLocation,
                     Phonenumber = PhoneNumber,
                     Email = CustomerMail
-
                 };
 
                 context.Customer.Add(customer);
                 context.SaveChanges();
-                Console.WriteLine("TEST geslaagd");
             }
         }
-
-
-        public ICommand AddCustomerCommand { get; set; }
     }
 }

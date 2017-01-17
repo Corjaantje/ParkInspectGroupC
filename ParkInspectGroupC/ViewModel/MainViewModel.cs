@@ -1,106 +1,43 @@
-using System.Linq;
-using GalaSoft.MvvmLight;
-using ParkInspectGroupC.Miscellaneous;
-using Simple.Wpf.Themes;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Input;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using GalaSoft.MvvmLight.Ioc;
+using LocalDatabase.Domain;
+using Microsoft.Practices.ServiceLocation;
 using ParkInspectGroupC.Factory;
+using ParkInspectGroupC.Miscellaneous;
 using ParkInspectGroupC.Properties;
 using ParkInspectGroupC.View;
-using GalaSoft.MvvmLight.Ioc;
-using Microsoft.Practices.ServiceLocation;
+using Simple.Wpf.Themes;
 
 namespace ParkInspectGroupC.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
-        private bool _navVis;
-        public bool NavVis
-        {
-            get { return _navVis; }
-            set { _navVis = value; RaisePropertyChanged("NavVis"); }
-        }
         private UserControl _currentView;
-        public UserControl CurrentView
-        {
-            get { return _currentView; }
-            set
-            {
-                NavVis = (Properties.Settings.Default.LoggedInEmp != null);
-                if(Properties.Settings.Default.LoggedInEmp != null)
-                {
-                    loggedInEmpIsmanager = Properties.Settings.Default.LoggedInEmp.IsManager;
-                }
-                _currentView = value; RaisePropertyChanged("CurrentView");
-                
-            }
-        }
 
-        //public IEnumerable<Theme> Themes { get; private set; }
-        private ThemeFactory _themeFactory;
-
-        public List<Theme> ThemeList
-        {
-            get { return _themeFactory.Themes; }
-        }
-
-        private string _loadedTheme;
-        public string LoadedTheme
-        {
-            get { return _loadedTheme; }
-            private set { _loadedTheme = value; }
-        }
+        private bool _loggedInEmpIsManager;
+        private bool _navVis;
 
         private Theme _selectedTheme;
-        public Theme SelectedTheme
-        {
-            get
-            {
-                return _selectedTheme;
-            }
-            set
-            {
-                _selectedTheme = value;
-                SaveSettings();
-                RaisePropertyChanged("SelectedTheme");
-            }
-        }
 
-        private void SaveSettings()
-        {
-            Settings.Default.CurrentThemeUri = SelectedTheme.Name;
-            Settings.Default.Save();
-        }
+        //public IEnumerable<Theme> Themes { get; private set; }
+        private readonly ThemeFactory _themeFactory;
 
-        public LocalDatabase.Domain.Employee loggedInEmp { get; set; }
-        private bool _loggedInEmpIsManager;
-        public bool loggedInEmpIsmanager
-        {
-            get
-            { return _loggedInEmpIsManager; }
-
-            set { _loggedInEmpIsManager = value; RaisePropertyChanged("LoggedInEmpIsmanager"); }
-        }
-        public ICommand BackCommand { get; set; }
-        public ICommand ProfileNavigationCommand { get; set; }
-        public ICommand ProfileListNavigationCommand { get; set; }
-        public ICommand AssignmentNavigationCommand { get; set; }
-        public ICommand CustomerNavigationCommand { get; set; }
-        public ICommand HomeCommand { get; set; }
-        public ICommand LogOutCommand { get; set; }
         public MainViewModel()
         {
             loggedInEmp = Settings.Default.LoggedInEmp;
             BackCommand = new RelayCommand(PerformBack, CanPerformBack);
-           AssignmentNavigationCommand = new RelayCommand(PerformAssignmentNavigation);
+            AssignmentNavigationCommand = new RelayCommand(PerformAssignmentNavigation);
             ProfileNavigationCommand = new RelayCommand(PerfromProfilenNavigation);
             ProfileListNavigationCommand = new RelayCommand(PerfromProfileListNavigation);
             CustomerNavigationCommand = new RelayCommand(PerformCustomerNavigation);
             HomeCommand = new RelayCommand(PerformHome);
             LogOutCommand = new RelayCommand(PerformLogOut);
-            LoginView lView = new LoginView();
+            var lView = new LoginView();
             Navigator.ViewHistory.AddFirst(lView);
             Navigator._currentViewNode = new LinkedListNode<UserControl>(lView);
             CurrentView = lView;
@@ -118,47 +55,109 @@ namespace ParkInspectGroupC.ViewModel
 
             LoadedTheme = Settings.Default.CurrentThemeUri;
 
-            if (string.IsNullOrWhiteSpace(_loadedTheme.Trim()))
-            {
+            if (string.IsNullOrWhiteSpace(LoadedTheme.Trim()))
                 SelectedTheme = ThemeList.FirstOrDefault();
-            }
             else
-            {
                 foreach (var theme in ThemeList)
-                {
-                    if (string.Compare(_loadedTheme, theme.Name) == 0)
+                    if (string.Compare(LoadedTheme, theme.Name) == 0)
                     {
                         SelectedTheme = theme;
                         break;
                     }
-                }
+        }
+
+        public bool NavVis
+        {
+            get { return _navVis; }
+            set
+            {
+                _navVis = value;
+                RaisePropertyChanged("NavVis");
             }
+        }
+
+        public UserControl CurrentView
+        {
+            get { return _currentView; }
+            set
+            {
+                NavVis = Settings.Default.LoggedInEmp != null;
+                if (Settings.Default.LoggedInEmp != null)
+                    loggedInEmpIsmanager = Settings.Default.LoggedInEmp.IsManager;
+                _currentView = value;
+                RaisePropertyChanged("CurrentView");
+            }
+        }
+
+        public List<Theme> ThemeList
+        {
+            get { return _themeFactory.Themes; }
+        }
+
+        public string LoadedTheme { get; }
+
+        public Theme SelectedTheme
+        {
+            get { return _selectedTheme; }
+            set
+            {
+                _selectedTheme = value;
+                SaveSettings();
+                RaisePropertyChanged("SelectedTheme");
+            }
+        }
+
+        public Employee loggedInEmp { get; set; }
+
+        public bool loggedInEmpIsmanager
+        {
+            get { return _loggedInEmpIsManager; }
+
+            set
+            {
+                _loggedInEmpIsManager = value;
+                RaisePropertyChanged("LoggedInEmpIsmanager");
+            }
+        }
+
+        public ICommand BackCommand { get; set; }
+        public ICommand ProfileNavigationCommand { get; set; }
+        public ICommand ProfileListNavigationCommand { get; set; }
+        public ICommand AssignmentNavigationCommand { get; set; }
+        public ICommand CustomerNavigationCommand { get; set; }
+        public ICommand HomeCommand { get; set; }
+        public ICommand LogOutCommand { get; set; }
+
+        private void SaveSettings()
+        {
+            Settings.Default.CurrentThemeUri = SelectedTheme.Name;
+            Settings.Default.Save();
         }
 
         private void PerformBack()
         {
             Navigator.Back();
         }
+
         private void PerformHome()
         {
-            if (Properties.Settings.Default.LoggedInEmp.IsManager)
-            {
+            if (Settings.Default.LoggedInEmp.IsManager)
                 Navigator.SetNewView(new ManagerDashboardView());
-            }
             else
-            {
                 Navigator.SetNewView(new DashboardView());
-            }
         }
+
         private void PerfromProfileListNavigation()
         {
             Navigator.SetNewView(new InspectorsListView());
         }
+
         private void PerfromProfilenNavigation()
         {
             Navigator.SetNewView(new InspectorProfileView());
         }
-      private void  PerformAssignmentNavigation()
+
+        private void PerformAssignmentNavigation()
         {
             Navigator.SetNewView(new AssignmentOverview());
         }
@@ -167,14 +166,14 @@ namespace ParkInspectGroupC.ViewModel
         {
             Navigator.SetNewView(new CustomerListView());
         }
+
         private void PerformLogOut()
         {
-            Properties.Settings.Default.LoggedInEmp = null;
+            Settings.Default.LoggedInEmp = null;
             SimpleIoc.Default.Unregister<LoginViewModel>();
             SimpleIoc.Default.Register<LoginViewModel>();
             Navigator.SetNewView(new LoginView());
             ServiceLocator.Current.GetInstance<ViewModelLocator>().Cleanup();
-            
         }
 
         private bool CanPerformBack()

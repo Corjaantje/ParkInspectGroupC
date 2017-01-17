@@ -1,185 +1,155 @@
-﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-using LocalDatabase.Domain;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows.Input;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using LocalDatabase.Domain;
 
 namespace ParkInspectGroupC.ViewModel
 {
-	internal class NewAssignmentViewModel : ViewModelBase
-	{
-		#region properties
+    internal class NewAssignmentViewModel : ViewModelBase
+    {
+        private List<Customer> allCustomers;
 
-		private String _description;
+        public NewAssignmentViewModel()
+        {
+            TopLabel = " Nieuwe opdracht";
+            CreatedAssignment = "";
 
-		public String Description
-		{
-			get { return _description; }
-			set { _description = value; }
-		}
+            generateAllCustomers();
 
-		private String _topLabel;
+            CreateAssignment = new RelayCommand(createAssignment);
+        }
 
-		public String TopLabel
-		{
-			get { return _topLabel; }
-			set { _topLabel = value; }
-		}
+        public void createAssignment()
+        {
+            try
+            {
+                using (var context = new LocalParkInspectEntities())
+                {
+                    var assign = new Assignment();
 
-		private String _createdAssignment;
+                    assign.Id = context.Assignment.Max(u => u.Id) + 1;
+                    assign.CustomerId = getCustomerId();
+                    assign.ManagerId = getManager();
+                    assign.Description = Description;
+                    assign.DateCreated = DateTime.Today;
+                    assign.DateUpdated = DateTime.Today;
 
-		public String CreatedAssignment
-		{
-			get { return _createdAssignment; }
-			set { _createdAssignment = value; }
-		}
+                    context.Assignment.Add(assign);
+                    context.SaveChanges();
+                }
 
-		private ObservableCollection<String> _allCustomerNames;
+                TopLabel = "Opdracht aangemaakt";
 
-		public ObservableCollection<String> AllCustomerNames
-		{
-			get { return _allCustomerNames; }
-			set { _allCustomerNames = value; }
-		}
+                CreatedAssignment = Description;
 
-		private int _customerIndex;
-		public int CustomerIndex
-		{
-			get { return _customerIndex; }
-			set { _customerIndex = value; selectedCustomerChanged(); }
-		}
+                Description = "";
 
-		private String _customerDescription;
-		public String CustomerDescription
-		{
-			get { return _customerDescription; }
-			set { _customerDescription = value; }
-		}
+                RaisePropertyChanged();
+            }
+            catch
+            {
+                TopLabel = "Something went wrong, changes are not saved";
 
-		public ICommand CreateAssignment { get; set; }
+                RaisePropertyChanged();
+            }
+        }
 
-		#endregion properties
+        private void selectedCustomerChanged()
+        {
+            try
+            {
+                using (var context = new LocalParkInspectEntities())
+                {
+                    var customer = context.Customer.Single(c => c.Id == _customerIndex + 1);
 
-		private List<Customer> allCustomers;
+                    CustomerDescription = customer.Name + "\n" + customer.Location + "\n" + customer.Phonenumber;
 
-		public NewAssignmentViewModel()
-		{
-			TopLabel = " Nieuwe opdracht";
-			CreatedAssignment = "";
+                    RaisePropertyChanged("CustomerDescription");
+                }
+            }
+            catch
+            {
+                CustomerDescription = "Something went wrong";
+                RaisePropertyChanged("CustomerDescription");
+            }
+        }
 
-			generateAllCustomers();
+        private void generateAllCustomers()
+        {
+            try
+            {
+                using (var context = new LocalParkInspectEntities())
+                {
+                    allCustomers = context.Customer.ToList();
 
-			CreateAssignment = new RelayCommand(createAssignment);
-		}
+                    var tempArray = new List<string>();
 
-		public void createAssignment()
-		{
-			try
-			{
-				using (var context = new LocalParkInspectEntities())
-				{
-					var assign = new Assignment();
+                    foreach (var c in allCustomers)
+                        tempArray.Add(c.Name);
 
-					assign.Id = context.Assignment.Max(u => u.Id) + 1;
-					assign.CustomerId = getCustomerId();
-					assign.ManagerId = getManager();
-					assign.Description = _description;
-					assign.DateCreated = DateTime.Today;
-					assign.DateUpdated = DateTime.Today;
-
-					context.Assignment.Add(assign);
-					context.SaveChanges();
-				}
-
-				TopLabel = "Opdracht aangemaakt";
-
-				CreatedAssignment = Description;
-
-				Description = "";
-
-				RaisePropertyChanged();
-			}
-			catch
-			{
-				TopLabel = "Something went wrong, changes are not saved";
-
-				RaisePropertyChanged();
-			}
-		}
-
-		private void selectedCustomerChanged()
-		{
-			try
-			{
-				using (var context = new LocalParkInspectEntities())
-				{
-
-					Customer customer = context.Customer.Single(c => c.Id == _customerIndex + 1);
-
-					CustomerDescription = customer.Name + "\n" + customer.Location + "\n" + customer.Phonenumber;
-
-					RaisePropertyChanged("CustomerDescription");
-
-				}
-			}
-			catch
-			{
-				CustomerDescription = "Something went wrong";
-				RaisePropertyChanged("CustomerDescription");
-			}
-
-		}
-		 
-		private void generateAllCustomers()
-		{
-			
-			try
-			{
-				using (var context = new LocalParkInspectEntities())
-				{
-					allCustomers = context.Customer.ToList();
-
-					var tempArray = new List<String>();
-
-					foreach (Customer c in allCustomers)
-					{
-						tempArray.Add(c.Name);
-					}
-
-					AllCustomerNames = new ObservableCollection<String>(tempArray);
-				}
-			}
-			catch
-			{
-				TopLabel = "Database not working";
-			}
-		}
+                    AllCustomerNames = new ObservableCollection<string>(tempArray);
+                }
+            }
+            catch
+            {
+                TopLabel = "Database not working";
+            }
+        }
 
 
-		private int getCustomerId()
-		{
-			try
-			{
-				return (int) allCustomers[_customerIndex].Id;
-			}
-			catch(Exception e)
-			{
-				Debug.Write(e.StackTrace);
+        private int getCustomerId()
+        {
+            try
+            {
+                return (int) allCustomers[_customerIndex].Id;
+            }
+            catch (Exception e)
+            {
+                Debug.Write(e.StackTrace);
 
-				//will crash in the createAssignment method
-				//error will be shown there
-				return -1;
-			}
-		}
+                //will crash in the createAssignment method
+                //error will be shown there
+                return -1;
+            }
+        }
 
-		private int getManager()
-		{
-			// needs to properly assign to a manager
-			return 4;
-		}
-	}
+        private int getManager()
+        {
+            // needs to properly assign to a manager
+            return 4;
+        }
+
+        #region properties
+
+        public string Description { get; set; }
+
+        public string TopLabel { get; set; }
+
+        public string CreatedAssignment { get; set; }
+
+        public ObservableCollection<string> AllCustomerNames { get; set; }
+
+        private int _customerIndex;
+
+        public int CustomerIndex
+        {
+            get { return _customerIndex; }
+            set
+            {
+                _customerIndex = value;
+                selectedCustomerChanged();
+            }
+        }
+
+        public string CustomerDescription { get; set; }
+
+        public ICommand CreateAssignment { get; set; }
+
+        #endregion properties
+    }
 }

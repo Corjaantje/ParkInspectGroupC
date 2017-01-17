@@ -1,175 +1,149 @@
-﻿using GalaSoft.MvvmLight;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Windows.Input;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using LocalDatabase.Domain;
 using ParkInspectGroupC.View;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace ParkInspectGroupC.ViewModel
 {
-	public class AssignmentOverviewViewModel : ViewModelBase
-	{
+    public class AssignmentOverviewViewModel : ViewModelBase
+    {
+        public AssignmentOverviewViewModel()
+        {
+            _searchCritetia = "";
+            fillAllAssignments();
 
-		#region properties
-		private Boolean _showClosedAssignments;
-		public Boolean ShowClosedAssignments
-		{
-			get { return _showClosedAssignments; }
-			set { _showClosedAssignments = value; this.refillCollection(); }
-		}
+            SearchAll = new RelayCommand(refillCollection);
+            EditCommand = new RelayCommand(EditAssignment);
+            ShowDetails = new RelayCommand(showDetails);
+            newInspection = new RelayCommand(createInspection);
+        }
 
-		private String _searchCritetia;
-		public String SearchCriteria
-		{
-			get { return _searchCritetia; }
-			set { _searchCritetia = value; refillCollection();}
-		}
+        public void fillAllAssignments()
+        {
+            try
+            {
+                using (var context = new LocalParkInspectEntities())
+                {
+                    AssignmentCollection = context.Assignment.ToList();
+                }
+            }
+            catch
+            {
+                AssignmentCollection = new List<Assignment>();
+                var as1 = new Assignment {Id = 30, Description = "Something went wrong"};
+                AssignmentCollection.Add(as1);
+            }
 
-		private Assignment _selectedAssignment;
-		public Assignment SelectedAssignment
-		{
-			get { return _selectedAssignment; }
-			set { _selectedAssignment = value; }
-		}
+            refillCollection();
+        }
+
+        private void refillCollection()
+        {
+            IEnumerable<Assignment> tempCollection;
+            if (_showClosedAssignments)
+                tempCollection = from Assignment in AssignmentCollection
+                    orderby Assignment.Id ascending
+                    where Assignment.Description.Contains(_searchCritetia)
+                    select Assignment;
+            else
+                tempCollection = from Assignment in AssignmentCollection
+                    orderby Assignment.Id ascending
+                    where Assignment.Description.Contains(_searchCritetia) && (Assignment.EndDate != null)
+                    select Assignment;
+
+            ObservedCollection = new ObservableCollection<Assignment>(tempCollection);
+
+            base.RaisePropertyChanged("ObservedCollection");
+        }
+
+        private void showDetails()
+        {
+            var customerName = "";
+            var managerName = "";
+            var description = SelectedAssignment.Description;
+            var startDate = SelectedAssignment.StartDate.ToString();
+            var endDate = SelectedAssignment.EndDate.ToString();
+
+            var details = "";
+
+            try
+            {
+                using (var context = new LocalParkInspectEntities())
+                {
+                    customerName = context.Customer.Single(n => n.Id == SelectedAssignment.CustomerId).Name;
+                    var manager = context.Employee.Single(m => m.Id == SelectedAssignment.ManagerId);
+                    managerName = manager.FirstName + " " + manager.SurName;
+                }
+
+                details = "Klant: " + customerName + "; Manager: " + managerName + "\n" + "Beschrijving: " + description +
+                          "\n" + "Start datum: " + startDate + "; Eind datum: " + endDate;
+            }
+            catch
+            {
+                details = "Something went wrong";
+            }
+
+            AssignmentDetails = details;
+            base.RaisePropertyChanged("AssignmentDetails");
+        }
+
+        private void EditAssignment()
+        {
+            var EditView = new EditAssignmentView(SelectedAssignment, this);
+            EditView.Show();
+        }
+
+        private void createInspection()
+        {
+            var converterView = new AssignmentToInspectionView();
+            converterView.Show();
+            ((AssignmentToInspectionViewModel) converterView.DataContext).setAssignment(SelectedAssignment);
+        }
+
+        #region properties
+
+        private bool _showClosedAssignments;
+
+        public bool ShowClosedAssignments
+        {
+            get { return _showClosedAssignments; }
+            set
+            {
+                _showClosedAssignments = value;
+                refillCollection();
+            }
+        }
+
+        private string _searchCritetia;
+
+        public string SearchCriteria
+        {
+            get { return _searchCritetia; }
+            set
+            {
+                _searchCritetia = value;
+                refillCollection();
+            }
+        }
+
+        public Assignment SelectedAssignment { get; set; }
 
 
-		public List<Assignment> AssignmentCollection { get; set; }
+        public List<Assignment> AssignmentCollection { get; set; }
 
-		private ObservableCollection<Assignment> _observedCollection;
-		public ObservableCollection<Assignment> ObservedCollection
-		{
-			get { return _observedCollection; }
-			set { _observedCollection = value; }
-		}
+        public ObservableCollection<Assignment> ObservedCollection { get; set; }
 
-		private String _assignmentDetails;
-		public String AssignmentDetails {
-			get { return _assignmentDetails; }
-			set { _assignmentDetails = value; }
-		}
+        public string AssignmentDetails { get; set; }
 
-		public ICommand SearchAll { get; set; }
-		public ICommand EditCommand { get; set; }
-		public ICommand ShowDetails { get; set; }
-		public ICommand newInspection { get; set; }
-		#endregion
+        public ICommand SearchAll { get; set; }
+        public ICommand EditCommand { get; set; }
+        public ICommand ShowDetails { get; set; }
+        public ICommand newInspection { get; set; }
 
-		public AssignmentOverviewViewModel()
-		{
-			_searchCritetia = "";
-			fillAllAssignments();
-
-			SearchAll = new RelayCommand(refillCollection);
-			EditCommand = new RelayCommand(EditAssignment);
-			ShowDetails = new RelayCommand(showDetails);
-			newInspection = new RelayCommand(createInspection);
-
-		}
-
-		public void fillAllAssignments()
-		{
-
-			try
-			{
-				using (var context = new LocalParkInspectEntities())
-				{
-
-					AssignmentCollection = context.Assignment.ToList();
-
-				}
-			}
-			catch
-			{
-				AssignmentCollection = new List<Assignment>();
-				Assignment as1 = new Assignment { Id = 30, Description = "Something went wrong" };
-				AssignmentCollection.Add(as1);
-
-			}
-
-			refillCollection();
-
-
-		}
-
-		private void refillCollection()
-		{
-			IEnumerable<Assignment> tempCollection;
-			if (_showClosedAssignments)
-			{
-				tempCollection = from Assignment in AssignmentCollection orderby Assignment.Id ascending where Assignment.Description.Contains(_searchCritetia) select Assignment;
-			}
-			else
-			{
-				tempCollection = from Assignment in AssignmentCollection orderby Assignment.Id ascending where Assignment.Description.Contains(_searchCritetia) && Assignment.EndDate != null select Assignment;
-			}
-
-			ObservedCollection = new ObservableCollection<Assignment>(tempCollection);
-
-			base.RaisePropertyChanged("ObservedCollection");
-
-		}
-
-		private void showDetails()
-		{
-
-			String customerName = "";
-			String managerName = "";
-			String description = _selectedAssignment.Description;
-			String startDate = _selectedAssignment.StartDate.ToString();
-			String endDate = _selectedAssignment.EndDate.ToString();
-
-			String details = "";
-
-			try
-			{
-
-				using (var context = new LocalParkInspectEntities())
-				{
-
-					customerName = context.Customer.Single(n => n.Id == _selectedAssignment.CustomerId).Name;
-					Employee manager = context.Employee.Single(m => m.Id == _selectedAssignment.ManagerId);
-					managerName = manager.FirstName + " " + manager.SurName;
-
-				}
-
-				details = "Klant: " + customerName + "; Manager: " + managerName + "\n" + "Beschrijving: " + description + "\n" + "Start datum: " + startDate + "; Eind datum: " + endDate;
-				
-
-			}
-			catch
-			{
-				details = "Something went wrong";
-			}
-
-			AssignmentDetails = details;
-			base.RaisePropertyChanged("AssignmentDetails");
-
-		}
-
-		private void EditAssignment()
-		{
-
-			EditAssignmentView EditView = new EditAssignmentView(SelectedAssignment, this);
-			EditView.Show();
-
-		}
-
-		private void createInspection()
-		{
-
-			AssignmentToInspectionView converterView = new AssignmentToInspectionView();
-			converterView.Show();
-			((AssignmentToInspectionViewModel)converterView.DataContext).setAssignment(_selectedAssignment);
-
-		}
-
-	}
-
+        #endregion
+    }
 }

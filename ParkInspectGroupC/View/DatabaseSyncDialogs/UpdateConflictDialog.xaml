@@ -8,13 +8,32 @@
         Icon="Image/IconLogo.ico"
         Title="Conflict details" Height="410" Width="510">
     <Grid>
-        <TextBlock TextWrapping="Wrap" Margin="5,5,5,0" Height="40" VerticalAlignment="Top" HorizontalAlignment="Center">Links ziet u de lokale versie. Rechts is de centrale versie. Welke versie moet er opgeslagen worden?</TextBlock>
+        <TextBlock TextWrapping="Wrap" Margin="5,5,5,0" Height="40" VerticalAlignment="Top"
+                   HorizontalAlignment="Center">
+            Links ziet u de lokale versie. Rechts is de centrale versie. Welke versie moet er opgeslagen worden?
+        </TextBlock>
 
-        <TextBlock Name="tbLocal" VerticalAlignment="Top" HorizontalAlignment="Left" Width="240" Background="LightGray" Height="245" Margin="5,50,5,0" FontSize="12">Text</TextBlock>
-        <TextBlock Name="tbCentral" VerticalAlignment="Top" HorizontalAlignment="Right" Width="240" Background="LightGray" Height="245" Margin="0,50,5,0" FontSize="12">Text</TextBlock>
-        
-        <Button Margin="5,0,0,40" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="240" Height="30" Background="Green" Foreground="White" FontWeight="Bold" Name="btLocal" Click="btLocal_Click">Lokale versie</Button>
-        <Button Margin="0,0,5,40" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="240" Height="30" Background="Green" Foreground="White" FontWeight="Bold" Name="btCentral" Click="btCentral_Click">Centrale versie</Button>
-        <Button Margin="5,0,5,5" IsCancel="True" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="500" Height="30" Background="Red" Foreground="White" FontWeight="Bold" Name="btCancel" Click="btCancel_Click">Annuleren</Button>
+        <TextBlock Name="tbLocal" VerticalAlignment="Top" HorizontalAlignment="Left" Width="240" Background="LightGray"
+                   Height="245" Margin="5,50,5,0" FontSize="12">
+            Text
+        </TextBlock>
+        <TextBlock Name="tbCentral" VerticalAlignment="Top" HorizontalAlignment="Right" Width="240"
+                   Background="LightGray" Height="245" Margin="0,50,5,0" FontSize="12">
+            Text
+        </TextBlock>
+
+        <Button Margin="5,0,0,40" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="240" Height="30"
+                Background="Green" Foreground="White" FontWeight="Bold" Name="btLocal" Click="btLocal_Click">
+            Lokale versie
+        </Button>
+        <Button Margin="0,0,5,40" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="240" Height="30"
+                Background="Green" Foreground="White" FontWeight="Bold" Name="btCentral" Click="btCentral_Click">
+            Centrale versie
+        </Button>
+        <Button Margin="5,0,5,5" IsCancel="True" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="500"
+                Height="30" Background="Red" Foreground="White" FontWeight="Bold" Name="btCancel"
+                Click="btCancel_Click">
+            Annuleren
+        </Button>
     </Grid>
 </Window>

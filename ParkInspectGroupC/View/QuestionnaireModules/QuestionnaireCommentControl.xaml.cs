@@ -1,17 +1,17 @@
-﻿using ParkInspectGroupC.ViewModel;
-using ParkInspectGroupC.ViewModel.QuestionnaireModuleViewModels;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
+using ParkInspectGroupC.ViewModel;
+using ParkInspectGroupC.ViewModel.QuestionnaireModuleViewModels;
 
 namespace ParkInspectGroupC.View.QuestionnaireModules
 {
     /// <summary>
-    /// Interaction logic for QuestionnaireCommentControl.xaml
+    ///     Interaction logic for QuestionnaireCommentControl.xaml
     /// </summary>
     public partial class QuestionnaireCommentControl : UserControl
     {
-        private QuestionnaireViewModel qvm;
-        private int moduleId;
+        private readonly int moduleId;
+        private readonly QuestionnaireViewModel qvm;
 
         public QuestionnaireCommentControl(int moduleId, QuestionnaireViewModel qvm)
         {
@@ -23,7 +23,7 @@ namespace ParkInspectGroupC.View.QuestionnaireModules
 
         private void GetQuestionnaireViewModelReference(object sender, RoutedEventArgs routedEventArgs)
         {
-            QuestionnaireModuleViewModelBase vm = DataContext as QuestionnaireModuleViewModelBase;
+            var vm = DataContext as QuestionnaireModuleViewModelBase;
             vm.SetQuestionnaireViewModelReference(qvm);
             vm.SetModuleId(moduleId);
         }

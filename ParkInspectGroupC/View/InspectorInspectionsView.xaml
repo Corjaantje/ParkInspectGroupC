@@ -1,22 +1,24 @@
 ﻿<UserControl x:Class="ParkInspectGroupC.View.InspectorInspectionsView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:ParkInspectGroupC.View"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="400" DataContext="{Binding InspectorInspections, Source={StaticResource Locator}}">
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="400"
+             DataContext="{Binding InspectorInspections, Source={StaticResource Locator}}">
     <Grid>
-        <Label Content="Inspecteur:" Margin="0,50,0,225" FontWeight="Bold"/>
-        <Label Content="{Binding Name}" Margin="73,50,0,230"/>
+        <Label Content="Inspecteur:" Margin="0,50,0,225" FontWeight="Bold" />
+        <Label Content="{Binding Name}" Margin="73,50,0,230" />
         <ScrollViewer VerticalScrollBarVisibility="Auto" Width="400" Height="150">
-            <DataGrid AutoGenerateColumns="False" IsReadOnly="True" 
-                      ItemsSource="{Binding Inspections, UpdateSourceTrigger=PropertyChanged}" GridLinesVisibility="Horizontal" HeadersVisibility="Column">
+            <DataGrid AutoGenerateColumns="False" IsReadOnly="True"
+                      ItemsSource="{Binding Inspections, UpdateSourceTrigger=PropertyChanged}"
+                      GridLinesVisibility="Horizontal" HeadersVisibility="Column">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="#" Binding="{ Binding Id}"/>
-                    <DataGridTextColumn Header="Status" Binding="{Binding InspectionStatus.Description}"/>
-                    <DataGridTextColumn Header="Begin datum" Binding="{Binding StartDate}"/>
-                    <DataGridTextColumn Header="Eind datum" Binding="{Binding EndDate}"/>
+                    <DataGridTextColumn Header="#" Binding="{ Binding Id}" />
+                    <DataGridTextColumn Header="Status" Binding="{Binding InspectionStatus.Description}" />
+                    <DataGridTextColumn Header="Begin datum" Binding="{Binding StartDate}" />
+                    <DataGridTextColumn Header="Eind datum" Binding="{Binding EndDate}" />
                 </DataGrid.Columns>
             </DataGrid>
         </ScrollViewer>

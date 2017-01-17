@@ -1,36 +1,29 @@
-﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-using LocalDatabase.Domain;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
-
+using GalaSoft.MvvmLight.Command;
+using LocalDatabase.Domain;
 
 namespace ParkInspectGroupC.ViewModel
 {
     public class CustomerEditViewModel
     {
+        private readonly CustomerListViewModel _customerList;
+        private string _customermail;
         private string _customername;
-        private string _streetname;
         private string _housenumber;
         private string _location;
         private string _phonenumber;
-        private string _customermail;
-        CustomerListViewModel _customerList;
-        
-
-
+        private string _streetname;
 
 
         public CustomerEditViewModel(CustomerListViewModel customerList)
         {
-       
             EditCustomerCommand = new RelayCommand(editCustomer, canEditCustomer);
-            this._customerList = customerList;
+            _customerList = customerList;
             CustomerName = customerList.SelectedCustomer.Name;
-            string[] array = customerList.SelectedCustomer.Address.Split(' ');
+            var array = customerList.SelectedCustomer.Address.Split(' ');
             StreetName = array[0];
             HouseNumber = array[1];
             CustomerLocation = customerList.SelectedCustomer.Location;
@@ -40,10 +33,7 @@ namespace ParkInspectGroupC.ViewModel
 
         public string CustomerName
         {
-            get
-            {
-                return _customername;
-            }
+            get { return _customername; }
 
             set
             {
@@ -54,10 +44,7 @@ namespace ParkInspectGroupC.ViewModel
 
         public string StreetName
         {
-            get
-            {
-                return _streetname;
-            }
+            get { return _streetname; }
 
             set
             {
@@ -68,10 +55,7 @@ namespace ParkInspectGroupC.ViewModel
 
         public string HouseNumber
         {
-            get
-            {
-                return _housenumber;
-            }
+            get { return _housenumber; }
 
             set
             {
@@ -83,10 +67,7 @@ namespace ParkInspectGroupC.ViewModel
 
         public string CustomerLocation
         {
-            get
-            {
-                return _location;
-            }
+            get { return _location; }
 
             set
             {
@@ -97,26 +78,19 @@ namespace ParkInspectGroupC.ViewModel
 
         public string PhoneNumber
         {
-            get
-            {
-                return _phonenumber;
-            }
+            get { return _phonenumber; }
 
             set
             {
                 _phonenumber = value;
                 RaisePropertyChanged("PhoneNumber");
-
             }
         }
 
 
         public string CustomerMail
         {
-            get
-            {
-                return _customermail;
-            }
+            get { return _customermail; }
 
             set
             {
@@ -125,18 +99,17 @@ namespace ParkInspectGroupC.ViewModel
             }
         }
 
+        public ICommand EditCustomerCommand { get; set; }
+
         private bool canEditCustomer()
         {
-
             if (string.IsNullOrWhiteSpace(CustomerName)
                 || string.IsNullOrWhiteSpace(StreetName)
                 || string.IsNullOrWhiteSpace(HouseNumber)
                 || string.IsNullOrWhiteSpace(CustomerLocation)
                 || string.IsNullOrWhiteSpace(PhoneNumber)
                 || string.IsNullOrWhiteSpace(CustomerMail))
-            {
                 return false;
-            }
 
             return true;
         }
@@ -146,10 +119,9 @@ namespace ParkInspectGroupC.ViewModel
         {
             using (var context = new LocalParkInspectEntities())
             {
-                List<Customer> customers = context.Customer.ToList<Customer>();
-                foreach(var customer in customers)
-                {
-                    if(customer.Id == _customerList.SelectedCustomer.Id)
+                var customers = context.Customer.ToList();
+                foreach (var customer in customers)
+                    if (customer.Id == _customerList.SelectedCustomer.Id)
                     {
                         customer.Name = CustomerName;
                         customer.Address = StreetName + " " + HouseNumber;
@@ -157,19 +129,16 @@ namespace ParkInspectGroupC.ViewModel
                         customer.Phonenumber = PhoneNumber;
                         customer.Email = CustomerMail;
                     }
-                }
 
                 context.SaveChanges();
-                Console.WriteLine("TEST geslaagd");
             }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        void RaisePropertyChanged(string prop)
-        {
-            if (PropertyChanged != null) { PropertyChanged(this, new PropertyChangedEventArgs(prop)); }
-        }
 
-        public ICommand EditCustomerCommand { get; set; }
+        private void RaisePropertyChanged(string prop)
+        {
+            if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        }
     }
 }

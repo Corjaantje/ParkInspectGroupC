@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ParkInspectGroupC.View.ReportCreation"
         xmlns:oxy="http://oxyplot.org/wpf"
-		DataContext="{Binding DiagramPreview, Source={StaticResource Locator}}"
+        DataContext="{Binding DiagramPreview, Source={StaticResource Locator}}"
         mc:Ignorable="d"
         Title="DiagramPreview" Height="300" Width="300">
     <Grid>
-		<oxy:PlotView Model="{Binding MyModel}" />
+        <oxy:PlotView Model="{Binding MyModel}" />
     </Grid>
 </Window>
