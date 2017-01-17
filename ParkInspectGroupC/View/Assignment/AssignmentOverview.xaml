@@ -29,12 +29,14 @@
                 VerticalAlignment="Top" Width="75" Command="{Binding SearchAll}" Height="23" />
         <Image x:Name="image" Source="..\..\Image\Logo_WhiteBack.PNG" HorizontalAlignment="Left" Height="30"
                Margin="10,10,0,0" VerticalAlignment="Top" Width="72" />
+        <!--doen het niet/hebben geen functie
         <Button x:Name="Administration" Content="Administatie" HorizontalAlignment="Left" Margin="87,20,0,0"
                 VerticalAlignment="Top" Width="75" IsEnabled="False" />
 
         <Button x:Name="Questionare" Content="Vragenlijst" HorizontalAlignment="Left" Margin="196,20,0,0"
                 VerticalAlignment="Top" Width="116" IsEnabled="False" />
-        <Button x:Name="NewQuestionaire" Content="+ Nieuwe vragenlijst" HorizontalAlignment="Left" Margin="354,20,0,0"
+        -->
+        <Button x:Name="NewAssignment" Content="+ Nieuwe Opdracht" HorizontalAlignment="Left" Margin="95,20,0,0"
                 VerticalAlignment="Top" Width="118" Command="{Binding newAssigment}" />
         <Button x:Name="NewInspection" Content="+ Nieuwe inspectie" HorizontalAlignment="Left" Margin="180,316,0,0"
                 VerticalAlignment="Top" Width="118" Command="{Binding newInspection}" />
@@ -45,6 +47,11 @@
                 VerticalAlignment="Top" Width="75" Command="{Binding ShowDetails}" />
         <Label x:Name="Details" Content="{Binding AssignmentDetails}" HorizontalAlignment="Left" Margin="10,341,0,0"
                VerticalAlignment="Top" Width="472" Height="65" />
+        
+        <Button x:Name="ShowQuestionnaire" Content="Vragenlijst" HorizontalAlignment="Left" Margin="223,20,0,0" VerticalAlignment="Top" Width="75"
+                Command="{Binding ShowQuestionnaire}"/>
+        <Button x:Name="filteredInspections" Content="Inspecties" HorizontalAlignment="Left" Margin="303,316,0,0" VerticalAlignment="Top" Width="75"
+                Command="{Binding ShowFilteredInspections}"/>
 
     </Grid>
 </UserControl>
