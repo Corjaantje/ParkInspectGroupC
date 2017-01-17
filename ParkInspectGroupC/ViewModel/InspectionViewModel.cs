@@ -63,10 +63,23 @@ namespace ParkInspectGroupC.ViewModel
                 orderby Inspection.Id ascending
                 where Inspection.Location.Contains(SearchCriteria)
                 select Inspection;
-            Inspections = new ObservableCollection<Inspection>(allInspections);
+            Inspections = new ObservableCollection<Inspection>(result);
 
             RaisePropertyChanged("Inspections");
         }
+
+		public void filterInspections(int AssignmentId)
+		{
+
+			var result = from Inspection in allInspections
+						 orderby Inspection.Id ascending
+						 where Inspection.AssignmentId == AssignmentId
+						 select Inspection;
+
+			Inspections = new ObservableCollection<Inspection>(result);
+
+			RaisePropertyChanged("Inspections");
+		}
 
         public void submitImage()
         {
