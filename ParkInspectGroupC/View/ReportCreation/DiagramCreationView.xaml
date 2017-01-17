@@ -5,12 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ParkInspectGroupC.View.ReportCreation"
         mc:Ignorable="d"
-		DataContext="{Binding Reports, Source={StaticResource Locator}}" ResizeMode="NoResize" Height="94" Width="286" Title="Diagrammen toevoegen">
-	<StackPanel>
-		<ComboBox ItemsSource="{Binding ReportSectionDiagramsQuestion}" DisplayMemberPath="Description" SelectedItem="{Binding SelectedAddReportSectionDiagram}" Margin="3" />
-		<WrapPanel>
-			<Button Content="Voeg toe" Command="{Binding ConfirmAddDiagramCommand}" Margin="3" />
-			<Button Content="Annuleren" Command="{Binding CancelAddDiagramCommand}" Margin="3" />
-		</WrapPanel>
-	</StackPanel>
+        DataContext="{Binding Reports, Source={StaticResource Locator}}" ResizeMode="NoResize" Height="94" Width="286"
+        Title="Diagrammen toevoegen">
+    <StackPanel>
+        <ComboBox ItemsSource="{Binding ReportSectionDiagramsQuestion}" DisplayMemberPath="Description"
+                  SelectedItem="{Binding SelectedAddReportSectionDiagram}" Margin="3" />
+        <WrapPanel>
+            <Button Content="Voeg toe" Command="{Binding ConfirmAddDiagramCommand}" Margin="3" />
+            <Button Content="Annuleren" Command="{Binding CancelAddDiagramCommand}" Margin="3" />
+        </WrapPanel>
+    </StackPanel>
 </Window>

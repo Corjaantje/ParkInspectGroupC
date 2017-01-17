@@ -1,31 +1,36 @@
-﻿using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Ioc;
-using LocalDatabase.Domain;
-using Microsoft.Practices.ServiceLocation;
-using ParkInspectGroupC.DOMAIN;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
+using System.Windows;
+using GalaSoft.MvvmLight.Command;
+using ParkInspectGroupC.DOMAIN;
 
 namespace ParkInspectGroupC.ViewModel.QuestionnaireModuleViewModels
 {
     public abstract class QuestionnaireModuleViewModelBase : INotifyPropertyChanged
     {
-        private QuestionnaireViewModel qvm;
+        /* Code for common editing tools
+         * Only enabled when creating new questionnaire lists
+         * 
+         * */
 
         private int ModuleId;
+        private QuestionnaireViewModel qvm;
 
         public QuestionnaireModuleViewModelBase()
-        { 
+        {
             IncrementListPositionRelay = new RelayCommand(IncrementListPosition);
             DecrementListPositionRelay = new RelayCommand(DecrementListPosition);
             DeleteFromQuestionnaireRelay = new RelayCommand(DeleteFromQuestionnaire);
         }
+
+        public Visibility QuestionnaireEditingToolsVisibility { get; private set; } = Visibility.Visible;
+
+        public RelayCommand IncrementListPositionRelay { get; set; }
+        public RelayCommand DecrementListPositionRelay { get; set; }
+        public RelayCommand DeleteFromQuestionnaireRelay { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         protected void AddOrUpdateRecord(string[] keywords, int value)
         {
@@ -53,36 +58,23 @@ namespace ParkInspectGroupC.ViewModel.QuestionnaireModuleViewModels
         {
             using (var database = new ParkInspectEntities())
             {
-                long categoryId = (from cat in database.KeywordCategory where cat.Description == category select cat.Id).SingleOrDefault();
+                long categoryId =
+                    (from cat in database.KeywordCategory where cat.Description == category select cat.Id)
+                        .SingleOrDefault();
 
-                List<string> keywords = (from kwd in database.Keyword where kwd.CategoryId == categoryId select kwd.Description).ToList();
+                var keywords =
+                    (from kwd in database.Keyword where kwd.CategoryId == categoryId select kwd.Description).ToList();
 
                 return keywords;
             }
         }
 
-        /* Code for common editing tools
-         * Only enabled when creating new questionnaire lists
-         * 
-         * */
-
-        private System.Windows.Visibility _questionnaireEditingToolsVisibility = System.Windows.Visibility.Visible;
-        public System.Windows.Visibility QuestionnaireEditingToolsVisibility { get { return _questionnaireEditingToolsVisibility; } }
-
-        public RelayCommand IncrementListPositionRelay { get; set; }
-        public RelayCommand DecrementListPositionRelay { get; set; }
-        public RelayCommand DeleteFromQuestionnaireRelay { get; set; }
-
         public void EditingToolsEnabled(bool b)
         {
             if (b)
-            {
-                _questionnaireEditingToolsVisibility = System.Windows.Visibility.Visible;
-            }
+                QuestionnaireEditingToolsVisibility = Visibility.Visible;
             else
-            {
-                _questionnaireEditingToolsVisibility = System.Windows.Visibility.Hidden;
-            }
+                QuestionnaireEditingToolsVisibility = Visibility.Hidden;
 
             RaisePropertyChanged("QuestionnaireEditingToolsVisibility");
         }
@@ -105,7 +97,6 @@ namespace ParkInspectGroupC.ViewModel.QuestionnaireModuleViewModels
 
         protected abstract void CleanupForDeletion();
 
-        public event PropertyChangedEventHandler PropertyChanged;
         protected void RaisePropertyChanged(string prop)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));

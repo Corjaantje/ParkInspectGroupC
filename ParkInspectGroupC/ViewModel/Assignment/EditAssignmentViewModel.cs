@@ -1,68 +1,45 @@
-﻿using GalaSoft.MvvmLight.Command;
+﻿using System.Linq;
+using GalaSoft.MvvmLight.Command;
 using LocalDatabase.Domain;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
 
 namespace ParkInspectGroupC.ViewModel
 {
-	class EditAssignmentViewModel
-	{
+    internal class EditAssignmentViewModel
+    {
+        private readonly AssignmentOverviewViewModel AssignmentViewModel;
 
-		private Assignment _currentAssignment;
-		public Assignment CurrentAssignment
-		{
-			get { return _currentAssignment; }
-			set { _currentAssignment = value; }
-		}
+        public EditAssignmentViewModel(Assignment a, AssignmentOverviewViewModel avm)
+        {
+            FinishEdit = new RelayCommand(EditAssignment);
 
-		private String _description;
-		public String Description
-		{
-			get { return _description; }
-			set { _description = value; }
-		}
+            AssignmentViewModel = avm;
 
-		AssignmentOverviewViewModel AssignmentViewModel;
+            CurrentAssignment = a;
+            Description = CurrentAssignment.Description;
+        }
 
-		public RelayCommand FinishEdit { get; set; }
+        public Assignment CurrentAssignment { get; set; }
 
-		public EditAssignmentViewModel(Assignment a, AssignmentOverviewViewModel avm)
-		{
-			FinishEdit = new RelayCommand(EditAssignment);
+        public string Description { get; set; }
 
-			AssignmentViewModel = avm;
+        public RelayCommand FinishEdit { get; set; }
 
-			CurrentAssignment = a;
-			Description = CurrentAssignment.Description;
+        private void EditAssignment()
+        {
+            CurrentAssignment.Description = Description;
 
-		}
+            using (var context = new LocalParkInspectEntities())
+            {
+                var result = context.Assignment.Single(n => n.Id == CurrentAssignment.Id);
 
-		private void EditAssignment()
-		{
-			CurrentAssignment.Description = Description;
+                if (result != null)
+                {
+                    result.Description = Description;
+                    context.SaveChanges();
+                }
+            }
 
-			using (var context = new LocalParkInspectEntities())
-			{
-
-				var result = context.Assignment.Single(n => n.Id == _currentAssignment.Id);
-
-				if (result != null)
-				{
-					result.Description = _description;
-					context.SaveChanges();
-				}
-
-			}
-
-			AssignmentViewModel.fillAllAssignments();
-
-		}
-
-	}
+            AssignmentViewModel.fillAllAssignments();
+        }
+    }
 }

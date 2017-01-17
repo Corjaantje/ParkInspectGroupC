@@ -4,26 +4,29 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ParkInspectGroupC"
-		xmlns:views="clr-namespace:ParkInspectGroupC.View"
-		xmlns:viewsm="clr-namespace:ParkInspectGroupC.View.MainWindow"
+        xmlns:views="clr-namespace:ParkInspectGroupC.View"
+        xmlns:viewsm="clr-namespace:ParkInspectGroupC.View.MainWindow"
         xmlns:converter="clr-namespace:ParkInspectGroupC.Converter"
-		Title="ParkInspect"
+        Title="ParkInspect"
         mc:Ignorable="d"
         Icon="Image/IconLogo.ico"
         WindowState="Maximized"
-		DataContext="{Binding Main, Source={StaticResource Locator}}">
-	<Grid Background="{DynamicResource WindowBackgroundBrush}">
+        DataContext="{Binding Main, Source={StaticResource Locator}}">
+    <Grid Background="{DynamicResource WindowBackgroundBrush}">
         <Grid.Resources>
-            <converter:BoolToVisConverter x:Key="BoolToVisConverter"></converter:BoolToVisConverter>
+            <converter:BoolToVisConverter x:Key="BoolToVisConverter" />
         </Grid.Resources>
-		<DockPanel LastChildFill="True">
-            <viewsm:NavigationMenu DockPanel.Dock="Top" Width="auto" Visibility="{Binding NavVis, Converter={StaticResource BoolToVisConverter}}" />
+        <DockPanel LastChildFill="True">
+            <viewsm:NavigationMenu DockPanel.Dock="Top" Width="auto"
+                                   Visibility="{Binding NavVis, Converter={StaticResource BoolToVisConverter}}" />
             <Grid DockPanel.Dock="Bottom">
-                <viewsm:ThemeSelector Width="400" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="0,0,0,0" />
-                <viewsm:OnOffIndicator VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" Margin="0,0,0,5"/>
+                <viewsm:ThemeSelector Width="400" VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                                      Margin="0,0,0,0" />
+                <viewsm:OnOffIndicator VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100"
+                                       Margin="0,0,0,5" />
             </Grid>
-            <ContentControl Content="{Binding CurrentView}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-		</DockPanel>
-		
-	</Grid>
+            <ContentControl Content="{Binding CurrentView}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+        </DockPanel>
+
+    </Grid>
 </Window>

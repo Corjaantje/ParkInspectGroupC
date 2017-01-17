@@ -1,34 +1,30 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using LocalDatabase;
-using System.Threading.Tasks;
 using System.IO;
-using System.Collections.Generic;
-using LocalDatabase.Domain;
+using LocalDatabase;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ParkInspectGroupCTests
 {
     [TestClass]
     public class SyncTest
     {
-        string fileName = "ParkInspectTestSync";
+        private readonly string fileName = "ParkInspectTestSync";
+
         [TestMethod]
         public void CreateSQLiteDatabaseTest()
         {
             //Test if the database is created or not
             //arrange
             LocalDatabaseMain ldb;
-            bool exists = false;
+            var exists = false;
 
             //act
             ldb = new LocalDatabaseMain(fileName);
             if (File.Exists(fileName + ".sqlite"))
-            {
                 exists = true;
-            }
 
             //assert
-            Assert.AreEqual(true, exists, string.Format("The database was not created or the file could not be found!"));
+            Assert.AreEqual(true, exists, "The database was not created or the file could not be found!");
             ldb._sqliteConnection.Close();
             GC.Collect();
         }
@@ -41,8 +37,8 @@ namespace ParkInspectGroupCTests
 
             //Act
             ldb = new LocalDatabaseMain(fileName);
-            Task<bool> sync = ldb.SyncCentralToLocal();
-            bool result = sync.Result;
+            var sync = ldb.SyncCentralToLocal();
+            var result = sync.Result;
 
             //Assert
             Assert.AreEqual(true, result);
@@ -58,8 +54,8 @@ namespace ParkInspectGroupCTests
 
             //Act
             ldb = new LocalDatabaseMain(fileName);
-            List<SaveDeleteMessage> sync = ldb.SyncLocalToCentralSaveDelete();
-            int list = sync.Count;
+            var sync = ldb.SyncLocalToCentralSaveDelete();
+            var list = sync.Count;
 
             //Assert
             Assert.AreEqual(2, list);
@@ -75,11 +71,11 @@ namespace ParkInspectGroupCTests
 
             //Act
             ldb = new LocalDatabaseMain(fileName);
-            Tuple<List<UpdateMessage>, SaveDeleteMessage> sync = ldb.SyncLocalToCentralUpdate();
-            int list = sync.Item1.Count;
+            var sync = ldb.SyncLocalToCentralUpdate();
+            var list = sync.Item1.Count;
 
             //Assert
-            Assert.AreEqual(0,list);
+            Assert.AreEqual(0, list);
             ldb._sqliteConnection.Close();
             GC.Collect();
         }

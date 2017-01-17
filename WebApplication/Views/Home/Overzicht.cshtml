@@ -21,7 +21,9 @@
                 <td>@m.Title</td>
                 <td>@m.Summary</td>
                 <td>@m.Date</td>
-                <td><button class="btn btn-primary" onclick="Download(@m.Id)">Download</button></td>
+                <td>
+                    <button class="btn btn-primary" onclick="Download(@m.Id)">Download</button>
+                </td>
             </tr>
         }
     </table>
@@ -31,7 +33,7 @@
     function Download(rid) {
         event.preventDefault();
 
-        var url = window.location.protocol + "//" + window.location.host + "/Home/Pdf?Rid=" + rid + "&Cid="+ @cid;
+        var url = window.location.protocol + "//" + window.location.host + "/Home/Pdf?Rid=" + rid + "&Cid=" + @cid;
         window.location.href = url;
     }
 </script>

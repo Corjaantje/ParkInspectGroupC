@@ -1,5 +1,3 @@
-using System;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 using ParkInspectGroupC.ViewModel.QuestionnaireModuleViewModels;
@@ -7,16 +5,141 @@ using ParkInspectGroupC.ViewModel.ReportCreation;
 
 namespace ParkInspectGroupC.ViewModel
 {
-
     public class ViewModelLocator
     {
-
         public ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
             RegisterViewModels();
+        }
 
+        public ReportViewModel Reports
+        {
+            get { return ServiceLocator.Current.GetInstance<ReportViewModel>(); }
+        }
+
+        public DiagramPreviewViewModel DiagramPreview
+        {
+            get { return ServiceLocator.Current.GetInstance<DiagramPreviewViewModel>(); }
+        }
+
+        public MainViewModel Main
+        {
+            get { return ServiceLocator.Current.GetInstance<MainViewModel>(); }
+        }
+
+        public MapViewModel Map
+        {
+            get { return ServiceLocator.Current.GetInstance<MapViewModel>(); }
+        }
+
+        public LoginViewModel LoginWindow
+        {
+            get { return ServiceLocator.Current.GetInstance<LoginViewModel>(); }
+        }
+
+        public CustomerCreationViewModel CustomerCreation
+        {
+            get { return ServiceLocator.Current.GetInstance<CustomerCreationViewModel>(); }
+        }
+
+        public QuestionnaireViewModel QuestionnaireViewModel
+        {
+            get { return ServiceLocator.Current.GetInstance<QuestionnaireViewModel>(); }
+        }
+
+        public EmployeeCreationViewModel EmployeeCreation
+        {
+            get { return ServiceLocator.Current.GetInstance<EmployeeCreationViewModel>(); }
+        }
+
+        public InspectorProfileViewModel InspectorProfile
+        {
+            get { return new InspectorProfileViewModel(); }
+        }
+
+        public DatabaseSyncViewModel DatabaseSync
+        {
+            get { return ServiceLocator.Current.GetInstance<DatabaseSyncViewModel>(); }
+        }
+
+        public OnOffIndicatorViewModel OnOffIndicator
+        {
+            get { return ServiceLocator.Current.GetInstance<OnOffIndicatorViewModel>(); }
+        }
+
+        public CustomerListViewModel CustomerList
+        {
+            get { return ServiceLocator.Current.GetInstance<CustomerListViewModel>(); }
+        }
+
+        public CustomerEditViewModel CustomerEdit
+        {
+            get { return ServiceLocator.Current.GetInstance<CustomerEditViewModel>(); }
+        }
+
+        public DashboardViewModel Dashboard
+        {
+            get { return ServiceLocator.Current.GetInstance<DashboardViewModel>(); }
+        }
+
+        public ManagerDashboardViewModel ManagerDashboard
+        {
+            get { return ServiceLocator.Current.GetInstance<ManagerDashboardViewModel>(); }
+        }
+
+        public InspectorListViewModel InspectorList
+        {
+            get { return ServiceLocator.Current.GetInstance<InspectorListViewModel>(); }
+        }
+
+        public InspectorEditViewModel EditInspector
+        {
+            get { return new InspectorEditViewModel(InspectorList.SelectedInspector); }
+        }
+
+        public AvailabilityCreationViewModel Availability
+        {
+            get
+            {
+                return new AvailabilityCreationViewModel(InspectorList.SelectedInspector,
+                    InspectorList.InspectorAvailability);
+            }
+        }
+
+        public AvailabilityEditViewModel EditAvailability
+        {
+            get
+            {
+                return new AvailabilityEditViewModel(InspectorList.SelectedAvailability,
+                    InspectorList.InspectorAvailability);
+            }
+        }
+
+        public InspectionViewModel InspectionOverView
+        {
+            get { return ServiceLocator.Current.GetInstance<InspectionViewModel>(); }
+        }
+
+        public AssignmentToInspectionViewModel AssignmentToInspection
+        {
+            get { return ServiceLocator.Current.GetInstance<AssignmentToInspectionViewModel>(); }
+        }
+
+        public InspectionCreationViewModel AddInspection
+        {
+            get { return new InspectionCreationViewModel(InspectionOverView); }
+        }
+
+        public InspectionEditViewModel EditInspection
+        {
+            get { return new InspectionEditViewModel(InspectionOverView); }
+        }
+
+        public InspectorInspectionsViewModel InspectorInspections
+        {
+            get { return new InspectorInspectionsViewModel(InspectorList.SelectedInspector); }
         }
 
         private static void RegisterViewModels()
@@ -41,7 +164,7 @@ namespace ParkInspectGroupC.ViewModel
             SimpleIoc.Default.Register<AvailabilityCreationViewModel>();
             SimpleIoc.Default.Register<AvailabilityEditViewModel>();
             SimpleIoc.Default.Register<InspectionViewModel>();
-			SimpleIoc.Default.Register<AssignmentToInspectionViewModel>();
+            SimpleIoc.Default.Register<AssignmentToInspectionViewModel>();
             SimpleIoc.Default.Register<InspectionCreationViewModel>();
             SimpleIoc.Default.Register<InspectionEditViewModel>();
             SimpleIoc.Default.Register<InspectorInspectionsViewModel>();
@@ -49,7 +172,6 @@ namespace ParkInspectGroupC.ViewModel
             // ReportCreation.
             SimpleIoc.Default.Register<DiagramPreviewViewModel>();
             SimpleIoc.Default.Register<ReportViewModel>();
-
         }
 
         private static void UnRegisterViewModels()
@@ -69,7 +191,7 @@ namespace ParkInspectGroupC.ViewModel
             SimpleIoc.Default.Unregister<AvailabilityCreationViewModel>();
             SimpleIoc.Default.Unregister<AvailabilityEditViewModel>();
             SimpleIoc.Default.Unregister<InspectionViewModel>();
-		    SimpleIoc.Default.Unregister<AssignmentToInspectionViewModel>();
+            SimpleIoc.Default.Unregister<AssignmentToInspectionViewModel>();
             SimpleIoc.Default.Unregister<InspectionCreationViewModel>();
             SimpleIoc.Default.Unregister<InspectionEditViewModel>();
             SimpleIoc.Default.Unregister<InspectorInspectionsViewModel>();
@@ -77,155 +199,6 @@ namespace ParkInspectGroupC.ViewModel
             // ReportCreation.
             SimpleIoc.Default.Unregister<DiagramPreviewViewModel>();
             SimpleIoc.Default.Unregister<ReportViewModel>();
-        }
-
-        public ReportViewModel Reports
-        {
-            get { return ServiceLocator.Current.GetInstance<ReportViewModel>(); }
-        }
-
-        public DiagramPreviewViewModel DiagramPreview
-        {
-            get { return ServiceLocator.Current.GetInstance<DiagramPreviewViewModel>(); }
-        }
-
-        public MainViewModel Main
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<MainViewModel>();
-            }
-        }
-        public MapViewModel Map
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<MapViewModel>();
-            }
-        }
-        
-		public LoginViewModel LoginWindow
-		{
-			get
-			{
-				return ServiceLocator.Current.GetInstance<LoginViewModel>();
-			}
-		}
-
-        public CustomerCreationViewModel CustomerCreation
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<CustomerCreationViewModel>();
-            }
-        }
-
-        public QuestionnaireViewModel QuestionnaireViewModel
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<QuestionnaireViewModel>();
-            }
-        }
-
-	    public EmployeeCreationViewModel EmployeeCreation
-	    {
-		    get { return ServiceLocator.Current.GetInstance<EmployeeCreationViewModel>(); }
-	    }
-
-	    public InspectorProfileViewModel InspectorProfile
-	    {
-		    get { return new InspectorProfileViewModel(); }
-	    }
-
-        public DatabaseSyncViewModel DatabaseSync
-        {
-            get { return ServiceLocator.Current.GetInstance<DatabaseSyncViewModel>(); }
-        }
-        public OnOffIndicatorViewModel OnOffIndicator
-        {
-            get { return ServiceLocator.Current.GetInstance<OnOffIndicatorViewModel>(); }
-        }
-        public CustomerListViewModel CustomerList
-        {
-            get { return ServiceLocator.Current.GetInstance<CustomerListViewModel>(); }
-        }
-
-        public CustomerEditViewModel CustomerEdit
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<CustomerEditViewModel>();
-            }
-        }
-
-        public DashboardViewModel Dashboard
-        {
-            get { return ServiceLocator.Current.GetInstance<DashboardViewModel>(); }
-        }
-
-        public ManagerDashboardViewModel ManagerDashboard
-        {
-            get { return ServiceLocator.Current.GetInstance<ManagerDashboardViewModel>(); }
-        }
-
-        public InspectorListViewModel InspectorList
-        {
-            get { return ServiceLocator.Current.GetInstance<InspectorListViewModel>(); }
-        }
-
-        public InspectorEditViewModel EditInspector
-        {
-            get { return new InspectorEditViewModel(InspectorList.SelectedInspector); }
-        }
-         public AvailabilityCreationViewModel Availability
-        {
-            get { return new AvailabilityCreationViewModel(InspectorList.SelectedInspector, InspectorList.InspectorAvailability); }
-        }
-
-        public AvailabilityEditViewModel EditAvailability
-        {
-            get { return new AvailabilityEditViewModel(InspectorList.SelectedAvailability,InspectorList.InspectorAvailability); }
-        }
-
-        public InspectionViewModel InspectionOverView
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<InspectionViewModel>();
-            }
-        }
-
-		public AssignmentToInspectionViewModel AssignmentToInspection
-		{
-			get
-			{
-				return ServiceLocator.Current.GetInstance<AssignmentToInspectionViewModel>();
-			}
-		}
-
-        public InspectionCreationViewModel AddInspection
-        {
-            get
-            {
-                return new InspectionCreationViewModel(this.InspectionOverView);
-            }
-        }
-
-        public InspectionEditViewModel EditInspection
-        {
-            get
-            {
-                return new InspectionEditViewModel(this.InspectionOverView);
-            }
-        }
-
-        public InspectorInspectionsViewModel InspectorInspections
-        {
-            get
-            {
-                return new InspectorInspectionsViewModel(InspectorList.SelectedInspector);
-            }
         }
 
         public void Cleanup()
@@ -240,7 +213,9 @@ namespace ParkInspectGroupC.ViewModel
         * These ViewModels will be centralised elsewhere at a later point in time, but need to be accessed through the VMC until then.
         * THESE CANNOT be used as normal views.
         * */
+
         #region QuestionnaireModules
+
         private static void RegisterQuestionnaireModuleViewModels()
         {
             SimpleIoc.Default.Register<VehicleCountControlVM>();
@@ -258,7 +233,5 @@ namespace ParkInspectGroupC.ViewModel
         }
 
         #endregion
-
-
     }
 }

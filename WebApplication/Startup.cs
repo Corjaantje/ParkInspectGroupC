@@ -1,10 +1,12 @@
 ﻿using Microsoft.Owin;
 using Owin;
+using WebApplication;
 
-[assembly: OwinStartupAttribute(typeof(WebApplication.Startup))]
+[assembly: OwinStartup(typeof(Startup))]
+
 namespace WebApplication
 {
-    public partial class Startup
+    public class Startup
     {
         public void Configuration(IAppBuilder app)
         {

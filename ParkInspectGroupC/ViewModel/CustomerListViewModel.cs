@@ -1,44 +1,32 @@
-﻿using GalaSoft.MvvmLight;
+﻿using System.Collections.ObjectModel;
+using System.Linq;
+using System.Windows;
+using System.Windows.Input;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using LocalDatabase.Domain;
 using ParkInspectGroupC.Miscellaneous;
 using ParkInspectGroupC.View;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Windows;
-using System.Windows.Input;
-
 
 namespace ParkInspectGroupC.ViewModel
 {
     public class CustomerListViewModel : ViewModelBase
     {
+        private readonly ObservableCollection<Customer> _allCustomers;
         private ObservableCollection<Customer> _customers;
-        private ObservableCollection<Customer> _allCustomers;
         private string _searchString = "Search";
-        private Customer _selectedCustomer;
-        public ICommand DeleteCustomerCommand { get; set; }
-        public ICommand AddCustomerCommand { get; set; }
-        public ICommand EditCustomerCommand { get; set; }
 
         public CustomerListViewModel()
         {
-            ObservableCollection<Customer> searchedCustomers = new ObservableCollection<Customer>();
+            var searchedCustomers = new ObservableCollection<Customer>();
 
             using (var context = new LocalParkInspectEntities())
             {
-                List<Customer> customers = context.Customer.ToList();
+                var customers = context.Customer.ToList();
 
 
                 foreach (var customer in customers)
-                {
-
                     searchedCustomers.Add(customer);
-
-                }
             }
 
             _allCustomers = searchedCustomers;
@@ -46,14 +34,15 @@ namespace ParkInspectGroupC.ViewModel
             DeleteCustomerCommand = new RelayCommand(deleteCustomer, canDelete);
             AddCustomerCommand = new RelayCommand(openAddWindow);
             EditCustomerCommand = new RelayCommand(openEditWindow);
-
         }
+
+        public ICommand DeleteCustomerCommand { get; set; }
+        public ICommand AddCustomerCommand { get; set; }
+        public ICommand EditCustomerCommand { get; set; }
+
         public ObservableCollection<Customer> Customers
         {
-            get
-            {
-                return _customers;
-            }
+            get { return _customers; }
 
             set
             {
@@ -63,36 +52,22 @@ namespace ParkInspectGroupC.ViewModel
         }
 
 
-        public Customer SelectedCustomer
-        {
-            get { return _selectedCustomer; }
-            set
-            {
-                _selectedCustomer = value;
-            }
-        }
+        public Customer SelectedCustomer { get; set; }
 
         public string SearchString
         {
-            get
-            {
-                return _searchString;
-            }
+            get { return _searchString; }
 
             set
             {
                 _searchString = value;
 
 
-                ObservableCollection<Customer> searchedCustomers = new ObservableCollection<Customer>();
+                var searchedCustomers = new ObservableCollection<Customer>();
 
                 foreach (var customer in _allCustomers)
-                {
-                    if (SearchString != null && customer.Name.ToLower().Contains(SearchString.ToLower()))
-                    {
+                    if ((SearchString != null) && customer.Name.ToLower().Contains(SearchString.ToLower()))
                         searchedCustomers.Add(customer);
-                    }
-                }
 
 
                 _customers = searchedCustomers;
@@ -106,24 +81,18 @@ namespace ParkInspectGroupC.ViewModel
         {
             using (var context = new LocalParkInspectEntities())
             {
-
-                List<Customer> customers = context.Customer.ToList();
+                var customers = context.Customer.ToList();
                 if (SelectedCustomer != null)
                 {
                     foreach (var customer in customers)
-                    {
                         if (customer.Id == SelectedCustomer.Id)
-                        {
                             context.Customer.Remove(customer);
-
-                        }
-                    }
                     context.SaveChanges();
                 }
             }
 
-            _customers.Remove(_selectedCustomer);
-            _allCustomers.Remove(_selectedCustomer);
+            _customers.Remove(SelectedCustomer);
+            _allCustomers.Remove(SelectedCustomer);
             RaisePropertyChanged("Customers");
         }
 
@@ -139,16 +108,11 @@ namespace ParkInspectGroupC.ViewModel
 
         public void openEditWindow()
         {
-            if(SelectedCustomer != null)
-            {
+            if (SelectedCustomer != null)
                 Navigator.SetNewView(new CustomerEditView());
-            }
 
             else
-            {
                 MessageBox.Show("Selecteer alstublieft eerst een klant");
-            }
-            
         }
     }
 }

@@ -1,18 +1,36 @@
-﻿using LocalDatabase.Domain;
-using ParkInspectGroupC.DOMAIN;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using LocalDatabase.Domain;
+using ParkInspectGroupC.DOMAIN;
+using Account = LocalDatabase.Domain.Account;
+using Assignment = LocalDatabase.Domain.Assignment;
+using Availability = LocalDatabase.Domain.Availability;
+using Coordinate = LocalDatabase.Domain.Coordinate;
+using Customer = LocalDatabase.Domain.Customer;
+using Employee = LocalDatabase.Domain.Employee;
+using EmployeeStatus = LocalDatabase.Domain.EmployeeStatus;
+using Inspection = LocalDatabase.Domain.Inspection;
+using InspectionImage = LocalDatabase.Domain.InspectionImage;
+using InspectionStatus = LocalDatabase.Domain.InspectionStatus;
+using Keyword = LocalDatabase.Domain.Keyword;
+using KeywordCategory = LocalDatabase.Domain.KeywordCategory;
+using Module = LocalDatabase.Domain.Module;
+using Question = LocalDatabase.Domain.Question;
+using QuestionAnswer = LocalDatabase.Domain.QuestionAnswer;
+using QuestionKeyword = LocalDatabase.Domain.QuestionKeyword;
+using QuestionSort = LocalDatabase.Domain.QuestionSort;
+using Region = LocalDatabase.Domain.Region;
+using WorkingHours = LocalDatabase.Domain.WorkingHours;
 
 namespace LocalDatabase.Local
 {
     public class DeleteToCentral
     {
-        SQLiteConnection _sqliteConnection;
-        DatabaseActions _sqliteActions;
+        private DatabaseActions _sqliteActions;
+        private SQLiteConnection _sqliteConnection;
+
         public DeleteToCentral(SQLiteConnection conn, DatabaseActions actions)
         {
             _sqliteConnection = conn;
@@ -22,9 +40,9 @@ namespace LocalDatabase.Local
         public List<string> Save()
         {
             //Start deleting records in the central database, table for table
-            string action = "";
-            List<string> _temp = new List<string>();
-            List<string> messages = new List<string>();
+            var action = "";
+            var _temp = new List<string>();
+            var messages = new List<string>();
 
             action = QuestionKeyword();
             _temp.Add(action);
@@ -89,23 +107,20 @@ namespace LocalDatabase.Local
             action = Region();
             _temp.Add(action);
 
-            foreach (string m in _temp)
-            {
+            foreach (var m in _temp)
                 if (m != "true")
-                {
                     messages.Add(m);
-                }
-            }
 
             return messages;
         }
 
         #region Database tables
+
         private string QuestionKeyword()
         {
             try
             {
-                List<Domain.QuestionKeyword> list = new List<Domain.QuestionKeyword>();
+                var list = new List<QuestionKeyword>();
 
                 using (var localcontext = new LocalParkInspectEntities())
                 {
@@ -113,12 +128,11 @@ namespace LocalDatabase.Local
                 }
 
                 if (list.Count > 0)
-                {
                     using (var context = new ParkInspectEntities())
                     {
-                        foreach (Domain.QuestionKeyword r in list)
+                        foreach (var r in list)
                         {
-                            ParkInspectGroupC.DOMAIN.QuestionKeyword _new = new ParkInspectGroupC.DOMAIN.QuestionKeyword();
+                            var _new = new ParkInspectGroupC.DOMAIN.QuestionKeyword();
                             _new.KeywordId = Convert.ToInt32(r.KeywordId);
                             _new.QuestionId = Convert.ToInt32(r.QuestionId);
                             context.QuestionKeyword.Attach(_new);
@@ -126,19 +140,20 @@ namespace LocalDatabase.Local
                         }
                         context.SaveChanges();
                     }
-                }
                 return "true";
             }
             catch (Exception)
             {
-                return "Kon question keyword(s) niet verwijderen! Wordt het keyword wat u wou weggooien nog ergens gebruikt?";
+                return
+                    "Kon question keyword(s) niet verwijderen! Wordt het keyword wat u wou weggooien nog ergens gebruikt?";
             }
         }
+
         private string QuestionaireModule()
         {
             try
             {
-                List<Domain.QuestionaireModule> list = new List<Domain.QuestionaireModule>();
+                var list = new List<QuestionaireModule>();
 
                 using (var localcontext = new LocalParkInspectEntities())
                 {
@@ -146,12 +161,11 @@ namespace LocalDatabase.Local
                 }
 
                 if (list.Count > 0)
-                {
                     using (var context = new ParkInspectEntities())
                     {
-                        foreach (Domain.QuestionaireModule r in list)
+                        foreach (var r in list)
                         {
-                            ParkInspectGroupC.DOMAIN.QuestionnaireModule _new = new ParkInspectGroupC.DOMAIN.QuestionnaireModule();
+                            var _new = new QuestionnaireModule();
                             _new.ModuleId = Convert.ToInt32(r.ModuleId);
                             _new.QuestionnaireId = Convert.ToInt32(r.QuestionaireId);
                             context.QuestionnaireModule.Attach(_new);
@@ -159,19 +173,20 @@ namespace LocalDatabase.Local
                         }
                         context.SaveChanges();
                     }
-                }
                 return "true";
             }
             catch (Exception)
             {
-                return "Kon question module(s) niet verwijderen! Wordt het module wat u wou weggooien nog ergens gebruikt?";
+                return
+                    "Kon question module(s) niet verwijderen! Wordt het module wat u wou weggooien nog ergens gebruikt?";
             }
         }
+
         private string QuestionAnswer()
         {
             try
             {
-                List<Domain.QuestionAnswer> list = new List<Domain.QuestionAnswer>();
+                var list = new List<QuestionAnswer>();
 
                 using (var localcontext = new LocalParkInspectEntities())
                 {
@@ -179,12 +194,11 @@ namespace LocalDatabase.Local
                 }
 
                 if (list.Count > 0)
-                {
                     using (var context = new ParkInspectEntities())
                     {
-                        foreach (Domain.QuestionAnswer r in list)
+                        foreach (var r in list)
                         {
-                            ParkInspectGroupC.DOMAIN.QuestionAnswer _new = new ParkInspectGroupC.DOMAIN.QuestionAnswer();
+                            var _new = new ParkInspectGroupC.DOMAIN.QuestionAnswer();
                             _new.QuestionId = Convert.ToInt32(r.QuestionId);
                             _new.QuestionnaireId = Convert.ToInt32(r.QuestionnaireId);
                             context.QuestionAnswer.Attach(_new);
@@ -192,19 +206,20 @@ namespace LocalDatabase.Local
                         }
                         context.SaveChanges();
                     }
-                }
                 return "true";
             }
             catch (Exception)
             {
-                return "Kon question antwoord(en) niet verwijderen! Wordt het antwoord wat u wou weggooien nog ergens gebruikt?";
+                return
+                    "Kon question antwoord(en) niet verwijderen! Wordt het antwoord wat u wou weggooien nog ergens gebruikt?";
             }
         }
+
         private string Questionaire()
         {
             try
             {
-                List<Domain.Questionaire> list = new List<Domain.Questionaire>();
+                var list = new List<Questionaire>();
 
                 using (var localcontext = new LocalParkInspectEntities())
                 {
@@ -212,31 +227,31 @@ namespace LocalDatabase.Local
                 }
 
                 if (list.Count > 0)
-                {
                     using (var context = new ParkInspectEntities())
                     {
-                        foreach (Domain.Questionaire r in list)
+                        foreach (var r in list)
                         {
-                            ParkInspectGroupC.DOMAIN.Questionnaire _new = new ParkInspectGroupC.DOMAIN.Questionnaire();
+                            var _new = new Questionnaire();
                             _new.Id = Convert.ToInt32(r.Id);
                             context.Questionnaire.Attach(_new);
                             context.Questionnaire.Remove(_new);
                         }
                         context.SaveChanges();
                     }
-                }
                 return "true";
             }
             catch (Exception)
             {
-                return "Kon questionnaire niet verwijderen! Wordt het questionnaire wat u wou weggooien nog ergens gebruikt?";
+                return
+                    "Kon questionnaire niet verwijderen! Wordt het questionnaire wat u wou weggooien nog ergens gebruikt?";
             }
         }
+
         private string Question()
         {
             try
             {
-                List<Domain.Question> list = new List<Domain.Question>();
+                var list = new List<Question>();
 
                 using (var localcontext = new LocalParkInspectEntities())
                 {
@@ -244,19 +259,17 @@ namespace LocalDatabase.Local
                 }
 
                 if (list.Count > 0)
-                {
                     using (var context = new ParkInspectEntities())
                     {
-                        foreach (Domain.Question r in list)
+                        foreach (var r in list)
                         {
-                            ParkInspectGroupC.DOMAIN.Question _new = new ParkInspectGroupC.DOMAIN.Question();
+                            var _new = new ParkInspectGroupC.DOMAIN.Question();
                             _new.Id = Convert.ToInt32(r.Id);
                             context.Question.Attach(_new);
                             context.Question.Remove(_new);
                         }
                         context.SaveChanges();
                     }
-                }
                 return "true";
             }
             catch (Exception)
@@ -264,11 +277,12 @@ namespace LocalDatabase.Local
                 return "Kon question niet verwijderen! Wordt de question wat u wou weggooien nog ergens gebruikt?";
             }
         }
+
         private string QuestionSort()
         {
             try
             {
-                List<Domain.QuestionSort> list = new List<Domain.QuestionSort>();
+                var list = new List<QuestionSort>();
 
                 using (var localcontext = new LocalParkInspectEntities())
                 {
@@ -276,31 +290,31 @@ namespace LocalDatabase.Local
                 }
 
                 if (list.Count > 0)
-                {
                     using (var context = new ParkInspectEntities())
                     {
-                        foreach (Domain.QuestionSort r in list)
+                        foreach (var r in list)
                         {
-                            ParkInspectGroupC.DOMAIN.QuestionSort _new = new ParkInspectGroupC.DOMAIN.QuestionSort();
+                            var _new = new ParkInspectGroupC.DOMAIN.QuestionSort();
                             _new.Id = Convert.ToInt32(r.Id);
                             context.QuestionSort.Attach(_new);
                             context.QuestionSort.Remove(_new);
                         }
                         context.SaveChanges();
                     }
-                }
                 return "true";
             }
             catch (Exception)
             {
-                return "Kon question sort niet verwijderen! Wordt het question sort wat u wou weggooien nog ergens gebruikt?";
+                return
+                    "Kon question sort niet verwijderen! Wordt het question sort wat u wou weggooien nog ergens gebruikt?";
             }
         }
+
         private string Module()
         {
             try
             {
-                List<Domain.Module> list = new List<Domain.Module>();
+                var list = new List<Module>();
 
                 using (var localcontext = new LocalParkInspectEntities())
                 {
@@ -308,19 +322,17 @@ namespace LocalDatabase.Local
                 }
 
                 if (list.Count > 0)
-                {
                     using (var context = new ParkInspectEntities())
                     {
-                        foreach (Domain.Module r in list)
+                        foreach (var r in list)
                         {
-                            ParkInspectGroupC.DOMAIN.Module _new = new ParkInspectGroupC.DOMAIN.Module();
+                            var _new = new ParkInspectGroupC.DOMAIN.Module();
                             _new.Id = Convert.ToInt32(r.Id);
                             context.Module.Attach(_new);
                             context.Module.Remove(_new);
                         }
                         context.SaveChanges();
                     }
-                }
                 return "true";
             }
             catch (Exception)
@@ -328,11 +340,12 @@ namespace LocalDatabase.Local
                 return "Kon de module(s) niet verwijderen! Wordt het module wat u wou weggooien nog ergens gebruikt?";
             }
         }
+
         private string Keyword()
         {
             try
             {
-                List<Domain.Keyword> list = new List<Domain.Keyword>();
+                var list = new List<Keyword>();
 
                 using (var localcontext = new LocalParkInspectEntities())
                 {
@@ -340,19 +353,17 @@ namespace LocalDatabase.Local
                 }
 
                 if (list.Count > 0)
-                {
                     using (var context = new ParkInspectEntities())
                     {
-                        foreach (Domain.Keyword r in list)
+                        foreach (var r in list)
                         {
-                            ParkInspectGroupC.DOMAIN.Keyword _new = new ParkInspectGroupC.DOMAIN.Keyword();
+                            var _new = new ParkInspectGroupC.DOMAIN.Keyword();
                             _new.Id = Convert.ToInt32(r.Id);
                             context.Keyword.Attach(_new);
                             context.Keyword.Remove(_new);
                         }
                         context.SaveChanges();
                     }
-                }
                 return "true";
             }
             catch (Exception)
@@ -360,11 +371,12 @@ namespace LocalDatabase.Local
                 return "Kon keyword(s) niet verwijderen! Wordt het keyword wat u wou weggooien nog ergens gebruikt?";
             }
         }
+
         private string KeywordCategory()
         {
             try
             {
-                List<Domain.KeywordCategory> list = new List<Domain.KeywordCategory>();
+                var list = new List<KeywordCategory>();
 
                 using (var localcontext = new LocalParkInspectEntities())
                 {
@@ -372,31 +384,31 @@ namespace LocalDatabase.Local
                 }
 
                 if (list.Count > 0)
-                {
                     using (var context = new ParkInspectEntities())
                     {
-                        foreach (Domain.KeywordCategory r in list)
+                        foreach (var r in list)
                         {
-                            ParkInspectGroupC.DOMAIN.KeywordCategory _new = new ParkInspectGroupC.DOMAIN.KeywordCategory();
+                            var _new = new ParkInspectGroupC.DOMAIN.KeywordCategory();
                             _new.Id = Convert.ToInt32(r.Id);
                             context.KeywordCategory.Attach(_new);
                             context.KeywordCategory.Remove(_new);
                         }
                         context.SaveChanges();
                     }
-                }
                 return "true";
             }
             catch (Exception)
             {
-                return "Kon keyword categorie niet verwijderen! Wordt de categorie wat u wou weggooien nog ergens gebruikt?";
+                return
+                    "Kon keyword categorie niet verwijderen! Wordt de categorie wat u wou weggooien nog ergens gebruikt?";
             }
         }
+
         private string InspectionImage()
         {
             try
             {
-                List<Domain.InspectionImage> list = new List<Domain.InspectionImage>();
+                var list = new List<InspectionImage>();
 
                 using (var localcontext = new LocalParkInspectEntities())
                 {
@@ -404,19 +416,17 @@ namespace LocalDatabase.Local
                 }
 
                 if (list.Count > 0)
-                {
                     using (var context = new ParkInspectEntities())
                     {
-                        foreach (Domain.InspectionImage r in list)
+                        foreach (var r in list)
                         {
-                            ParkInspectGroupC.DOMAIN.InspectionImage _new = new ParkInspectGroupC.DOMAIN.InspectionImage();
+                            var _new = new ParkInspectGroupC.DOMAIN.InspectionImage();
                             _new.Id = Convert.ToInt32(r.Id);
                             context.InspectionImage.Attach(_new);
                             context.InspectionImage.Remove(_new);
                         }
                         context.SaveChanges();
                     }
-                }
                 return "true";
             }
             catch (Exception)
@@ -424,11 +434,12 @@ namespace LocalDatabase.Local
                 return "Kon de foto niet verwijderen! Wordt de foto die u wou weggooien nog ergens gebruikt?";
             }
         }
+
         private string Coordinate()
         {
             try
             {
-                List<Domain.Coordinate> list = new List<Domain.Coordinate>();
+                var list = new List<Coordinate>();
 
                 using (var localcontext = new LocalParkInspectEntities())
                 {
@@ -436,31 +447,31 @@ namespace LocalDatabase.Local
                 }
 
                 if (list.Count > 0)
-                {
                     using (var context = new ParkInspectEntities())
                     {
-                        foreach (Domain.Coordinate r in list)
+                        foreach (var r in list)
                         {
-                            ParkInspectGroupC.DOMAIN.Coordinate _new = new ParkInspectGroupC.DOMAIN.Coordinate();
+                            var _new = new ParkInspectGroupC.DOMAIN.Coordinate();
                             _new.Id = Convert.ToInt32(r.Id);
                             context.Coordinate.Attach(_new);
                             context.Coordinate.Remove(_new);
                         }
                         context.SaveChanges();
                     }
-                }
                 return "true";
             }
             catch (Exception)
             {
-                return "Kon de coordinaten niet verwijderen! Worden de coordinaten die u wou weggooien nog ergens gebruikt?";
+                return
+                    "Kon de coordinaten niet verwijderen! Worden de coordinaten die u wou weggooien nog ergens gebruikt?";
             }
         }
+
         private string Inspection()
         {
             try
             {
-                List<Domain.Inspection> list = new List<Domain.Inspection>();
+                var list = new List<Inspection>();
 
                 using (var localcontext = new LocalParkInspectEntities())
                 {
@@ -468,19 +479,17 @@ namespace LocalDatabase.Local
                 }
 
                 if (list.Count > 0)
-                {
                     using (var context = new ParkInspectEntities())
                     {
-                        foreach (Domain.Inspection r in list)
+                        foreach (var r in list)
                         {
-                            ParkInspectGroupC.DOMAIN.Inspection _new = new ParkInspectGroupC.DOMAIN.Inspection();
+                            var _new = new ParkInspectGroupC.DOMAIN.Inspection();
                             _new.Id = Convert.ToInt32(r.Id);
                             context.Inspection.Attach(_new);
                             context.Inspection.Remove(_new);
                         }
                         context.SaveChanges();
                     }
-                }
                 return "true";
             }
             catch (Exception)
@@ -488,11 +497,12 @@ namespace LocalDatabase.Local
                 return "Kon inspectie(s) niet verwijderen! Wordt de inspectie die u wou weggooien nog ergens gebruikt?";
             }
         }
+
         private string InspectionStatus()
         {
             try
             {
-                List<Domain.InspectionStatus> list = new List<Domain.InspectionStatus>();
+                var list = new List<InspectionStatus>();
 
                 using (var localcontext = new LocalParkInspectEntities())
                 {
@@ -500,19 +510,17 @@ namespace LocalDatabase.Local
                 }
 
                 if (list.Count > 0)
-                {
                     using (var context = new ParkInspectEntities())
                     {
-                        foreach (Domain.InspectionStatus r in list)
+                        foreach (var r in list)
                         {
-                            ParkInspectGroupC.DOMAIN.InspectionStatus _new = new ParkInspectGroupC.DOMAIN.InspectionStatus();
+                            var _new = new ParkInspectGroupC.DOMAIN.InspectionStatus();
                             _new.Id = Convert.ToInt32(r.Id);
                             context.InspectionStatus.Attach(_new);
                             context.InspectionStatus.Remove(_new);
                         }
                         context.SaveChanges();
                     }
-                }
                 return "true";
             }
             catch (Exception)
@@ -520,11 +528,12 @@ namespace LocalDatabase.Local
                 return "Kon inspectie status niet verwijderen! Wordt de status die u wou weggooien nog ergens gebruikt?";
             }
         }
+
         private string Assignment()
         {
             try
             {
-                List<Domain.Assignment> list = new List<Domain.Assignment>();
+                var list = new List<Assignment>();
 
                 using (var localcontext = new LocalParkInspectEntities())
                 {
@@ -532,19 +541,17 @@ namespace LocalDatabase.Local
                 }
 
                 if (list.Count > 0)
-                {
                     using (var context = new ParkInspectEntities())
                     {
-                        foreach (Domain.Assignment r in list)
+                        foreach (var r in list)
                         {
-                            ParkInspectGroupC.DOMAIN.Assignment _new = new ParkInspectGroupC.DOMAIN.Assignment();
+                            var _new = new ParkInspectGroupC.DOMAIN.Assignment();
                             _new.Id = Convert.ToInt32(r.Id);
                             context.Assignment.Attach(_new);
                             context.Assignment.Remove(_new);
                         }
                         context.SaveChanges();
                     }
-                }
                 return "true";
             }
             catch (Exception)
@@ -552,11 +559,12 @@ namespace LocalDatabase.Local
                 return "Kon opdracht niet verwijderen! Wordt de opdracht wat u wou weggooien nog ergens gebruikt?";
             }
         }
+
         private string Customer()
         {
             try
             {
-                List<Domain.Customer> list = new List<Domain.Customer>();
+                var list = new List<Customer>();
 
                 using (var localcontext = new LocalParkInspectEntities())
                 {
@@ -564,19 +572,17 @@ namespace LocalDatabase.Local
                 }
 
                 if (list.Count > 0)
-                {
                     using (var context = new ParkInspectEntities())
                     {
-                        foreach (Domain.Customer r in list)
+                        foreach (var r in list)
                         {
-                            ParkInspectGroupC.DOMAIN.Customer _new = new ParkInspectGroupC.DOMAIN.Customer();
+                            var _new = new ParkInspectGroupC.DOMAIN.Customer();
                             _new.Id = Convert.ToInt32(r.Id);
                             context.Customer.Attach(_new);
                             context.Customer.Remove(_new);
                         }
                         context.SaveChanges();
                     }
-                }
                 return "true";
             }
             catch (Exception)
@@ -584,11 +590,12 @@ namespace LocalDatabase.Local
                 return "Kon klant niet verwijderen! Wordt de klant die u wou weggooien nog ergens gebruikt?";
             }
         }
+
         private string WorkingHours()
         {
             try
             {
-                List<Domain.WorkingHours> list = new List<Domain.WorkingHours>();
+                var list = new List<WorkingHours>();
 
                 using (var localcontext = new LocalParkInspectEntities())
                 {
@@ -596,12 +603,11 @@ namespace LocalDatabase.Local
                 }
 
                 if (list.Count > 0)
-                {
                     using (var context = new ParkInspectEntities())
                     {
-                        foreach (Domain.WorkingHours r in list)
+                        foreach (var r in list)
                         {
-                            ParkInspectGroupC.DOMAIN.WorkingHours _new = new ParkInspectGroupC.DOMAIN.WorkingHours();
+                            var _new = new ParkInspectGroupC.DOMAIN.WorkingHours();
                             _new.EmployeeId = Convert.ToInt32(r.EmployeeId);
                             _new.Date = r.Date;
                             context.WorkingHours.Attach(_new);
@@ -609,7 +615,6 @@ namespace LocalDatabase.Local
                         }
                         context.SaveChanges();
                     }
-                }
                 return "true";
             }
             catch (Exception)
@@ -617,11 +622,12 @@ namespace LocalDatabase.Local
                 return "Kon werk uren niet verwijderen! Worden de werk uren die u wou weggooien nog ergens gebruikt?";
             }
         }
+
         private string Availability()
         {
             try
             {
-                List<Domain.Availability> list = new List<Domain.Availability>();
+                var list = new List<Availability>();
 
                 using (var localcontext = new LocalParkInspectEntities())
                 {
@@ -629,12 +635,11 @@ namespace LocalDatabase.Local
                 }
 
                 if (list.Count > 0)
-                {
                     using (var context = new ParkInspectEntities())
                     {
-                        foreach (Domain.Availability r in list)
+                        foreach (var r in list)
                         {
-                            ParkInspectGroupC.DOMAIN.Availability _new = new ParkInspectGroupC.DOMAIN.Availability();
+                            var _new = new ParkInspectGroupC.DOMAIN.Availability();
                             _new.EmployeeId = Convert.ToInt32(r.EmployeeId);
                             _new.Date = r.Date;
                             context.Availability.Attach(_new);
@@ -642,19 +647,20 @@ namespace LocalDatabase.Local
                         }
                         context.SaveChanges();
                     }
-                }
                 return "true";
             }
             catch (Exception)
             {
-                return "Kon beschikbaarheid niet verwijderen! Wordt de beschikbaarheid wat u wou weggooien nog ergens gebruikt?";
+                return
+                    "Kon beschikbaarheid niet verwijderen! Wordt de beschikbaarheid wat u wou weggooien nog ergens gebruikt?";
             }
         }
+
         private string Account()
         {
             try
             {
-                List<Domain.Account> list = new List<Domain.Account>();
+                var list = new List<Account>();
 
                 using (var localcontext = new LocalParkInspectEntities())
                 {
@@ -662,19 +668,17 @@ namespace LocalDatabase.Local
                 }
 
                 if (list.Count > 0)
-                {
                     using (var context = new ParkInspectEntities())
                     {
-                        foreach (Domain.Account r in list)
+                        foreach (var r in list)
                         {
-                            ParkInspectGroupC.DOMAIN.Account _new = new ParkInspectGroupC.DOMAIN.Account();
+                            var _new = new ParkInspectGroupC.DOMAIN.Account();
                             _new.Id = Convert.ToInt32(r.Id);
                             context.Account.Attach(_new);
                             context.Account.Remove(_new);
                         }
                         context.SaveChanges();
                     }
-                }
                 return "true";
             }
             catch (Exception)
@@ -682,11 +686,12 @@ namespace LocalDatabase.Local
                 return "Kon account niet verwijderen! Wordt het account wat u wou weggooien nog ergens gebruikt?";
             }
         }
+
         private string Employee()
         {
             try
             {
-                List<Domain.Employee> list = new List<Domain.Employee>();
+                var list = new List<Employee>();
 
                 using (var localcontext = new LocalParkInspectEntities())
                 {
@@ -694,19 +699,17 @@ namespace LocalDatabase.Local
                 }
 
                 if (list.Count > 0)
-                {
                     using (var context = new ParkInspectEntities())
                     {
-                        foreach (Domain.Employee r in list)
+                        foreach (var r in list)
                         {
-                            ParkInspectGroupC.DOMAIN.Employee _new = new ParkInspectGroupC.DOMAIN.Employee();
+                            var _new = new ParkInspectGroupC.DOMAIN.Employee();
                             _new.Id = Convert.ToInt32(r.Id);
                             context.Employee.Attach(_new);
                             context.Employee.Remove(_new);
                         }
                         context.SaveChanges();
                     }
-                }
                 return "true";
             }
             catch (Exception)
@@ -714,11 +717,12 @@ namespace LocalDatabase.Local
                 return "Kon werknemer niet verwijderen! Wordt de werknemer wat u wou weggooien nog ergens gebruikt?";
             }
         }
+
         private string EmployeeStatus()
         {
             try
             {
-                List<Domain.EmployeeStatus> list = new List<Domain.EmployeeStatus>();
+                var list = new List<EmployeeStatus>();
 
                 using (var localcontext = new LocalParkInspectEntities())
                 {
@@ -726,19 +730,17 @@ namespace LocalDatabase.Local
                 }
 
                 if (list.Count > 0)
-                {
                     using (var context = new ParkInspectEntities())
                     {
-                        foreach (Domain.EmployeeStatus r in list)
+                        foreach (var r in list)
                         {
-                            ParkInspectGroupC.DOMAIN.EmployeeStatus _new = new ParkInspectGroupC.DOMAIN.EmployeeStatus();
+                            var _new = new ParkInspectGroupC.DOMAIN.EmployeeStatus();
                             _new.Id = Convert.ToInt32(r.Id);
                             context.EmployeeStatus.Attach(_new);
                             context.EmployeeStatus.Remove(_new);
                         }
                         context.SaveChanges();
                     }
-                }
                 return "true";
             }
             catch (Exception)
@@ -746,11 +748,12 @@ namespace LocalDatabase.Local
                 return "Kon werknemer status niet verwijderen! Wordt de status wat u wou weggooien nog ergens gebruikt?";
             }
         }
+
         private string Region()
         {
             try
             {
-                List<Domain.Region> list = new List<Domain.Region>();
+                var list = new List<Region>();
 
                 using (var localcontext = new LocalParkInspectEntities())
                 {
@@ -758,19 +761,17 @@ namespace LocalDatabase.Local
                 }
 
                 if (list.Count > 0)
-                {
                     using (var context = new ParkInspectEntities())
                     {
-                        foreach (Domain.Region r in list)
+                        foreach (var r in list)
                         {
-                            ParkInspectGroupC.DOMAIN.Region _new = new ParkInspectGroupC.DOMAIN.Region();
+                            var _new = new ParkInspectGroupC.DOMAIN.Region();
                             _new.Id = Convert.ToInt32(r.Id);
                             context.Region.Attach(_new);
                             context.Region.Remove(_new);
                         }
                         context.SaveChanges();
                     }
-                }
                 return "true";
             }
             catch (Exception)
@@ -778,6 +779,7 @@ namespace LocalDatabase.Local
                 return "Kon region niet verwijderen! Wordt het region wat u wou weggooien nog ergens gebruikt?";
             }
         }
+
         #endregion
     }
 }

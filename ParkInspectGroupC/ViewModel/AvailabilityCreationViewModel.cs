@@ -1,105 +1,120 @@
-﻿using GalaSoft.MvvmLight;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Globalization;
+using System.Windows.Input;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using LocalDatabase.Domain;
 using ParkInspectGroupC.Miscellaneous;
 using ParkInspectGroupC.View;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Diagnostics;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace ParkInspectGroupC.ViewModel
 {
-    public class AvailabilityCreationViewModel: ViewModelBase
+    public class AvailabilityCreationViewModel : ViewModelBase
     {
+        private DateTime _date;
+        private DateTime? _endTime;
+        private string _eTime;
+        private DateTime? _startTime;
         private string _sTime;
-         public string sTime
-         {
+
+        public AvailabilityCreationViewModel(Employee selectedInspector,
+            ObservableCollection<Availability> iAvailability)
+        {
+            SelectedInspector = selectedInspector;
+            AvailabilityList = iAvailability;
+            SaveCommand = new RelayCommand(Save, CanSave);
+        }
+
+        public string sTime
+        {
             get { return _sTime; }
-             set { _sTime = value; RaisePropertyChanged("sTime");
-}
-         }
-         private string _eTime;
-         public string eTime
-         {
-             get { return _eTime; }
-             set { _eTime = value; RaisePropertyChanged("eTime"); }
-         }
-         private DateTime _date;
-         [Column(TypeName = "DateTime2")]
-         public DateTime Date
-         {
-             get { return _date; }
-             set { _date = value; RaisePropertyChanged("Date"); }
-         }
-         private DateTime? _startTime;
-         public DateTime? StartTime
-         {
-             get { return _startTime; }
-             set { _startTime = value; RaisePropertyChanged("StartTime"); }
-         }
-         private DateTime? _endTime;
-         public DateTime? EndTime
-         {
-             get { return _endTime; }
-             set { _endTime = value; RaisePropertyChanged("EndTime"); }
-         }
- 
-         public ObservableCollection<Availability> AvailabilityList { get; set; }
-         public Employee SelectedInspector { get; set; }
-         public ICommand SaveCommand { get; set; }
-         public AvailabilityCreationViewModel(Employee selectedInspector, ObservableCollection<Availability> iAvailability)
-         {
-             this.SelectedInspector = selectedInspector;
-             this.AvailabilityList = iAvailability;
-             SaveCommand = new RelayCommand(Save, CanSave);
-         }
- 
-         private void Save()
-         {
-             using (var context = new LocalParkInspectEntities())
-             {
-                 var availability = new Availability
-                 {
-                     EmployeeId = SelectedInspector.Id,
-                     Date = this.Date,
-                     StartTime = this.StartTime,
-                     EndTime = this.EndTime
-                 };
- 
-                 context.Availability.Add(availability);
-                 context.SaveChanges();
-             }
+            set
+            {
+                _sTime = value;
+                RaisePropertyChanged("sTime");
+            }
+        }
+
+        public string eTime
+        {
+            get { return _eTime; }
+            set
+            {
+                _eTime = value;
+                RaisePropertyChanged("eTime");
+            }
+        }
+
+        [Column(TypeName = "DateTime2")]
+        public DateTime Date
+        {
+            get { return _date; }
+            set
+            {
+                _date = value;
+                RaisePropertyChanged("Date");
+            }
+        }
+
+        public DateTime? StartTime
+        {
+            get { return _startTime; }
+            set
+            {
+                _startTime = value;
+                RaisePropertyChanged("StartTime");
+            }
+        }
+
+        public DateTime? EndTime
+        {
+            get { return _endTime; }
+            set
+            {
+                _endTime = value;
+                RaisePropertyChanged("EndTime");
+            }
+        }
+
+        public ObservableCollection<Availability> AvailabilityList { get; set; }
+        public Employee SelectedInspector { get; set; }
+        public ICommand SaveCommand { get; set; }
+
+        private void Save()
+        {
+            using (var context = new LocalParkInspectEntities())
+            {
+                var availability = new Availability
+                {
+                    EmployeeId = SelectedInspector.Id,
+                    Date = Date,
+                    StartTime = StartTime,
+                    EndTime = EndTime
+                };
+
+                context.Availability.Add(availability);
+                context.SaveChanges();
+            }
             Navigator.SetNewView(new InspectorsListView());
-         }
- 
-         private bool CanSave()
-         {
+        }
+
+        private bool CanSave()
+        {
             DateTime start;
             DateTime end;
-            string format = "dd-MM-yyyy HH:mm";
-            if(Date == null || 
+            var format = "dd-MM-yyyy HH:mm";
+            if ((Date == null) ||
                 !DateTime.TryParseExact(sTime, format, null, DateTimeStyles.None, out start) ||
                 !DateTime.TryParseExact(eTime, format, null, DateTimeStyles.None, out end))
-            {
                 return false;
-            }
-            foreach(var a in AvailabilityList)
-            {
-                if(a.Date == this.Date)
-                {
+            foreach (var a in AvailabilityList)
+                if (a.Date == Date)
                     return false;
-                }
-            }
             StartTime = start;
             EndTime = end;
             return true;
-         }
+        }
     }
 }
