@@ -53,10 +53,11 @@ namespace ParkInspectGroupC.ViewModel
 
 	                var employees = (from a in context.Employee select a).ToList();
 	                var newEmployees = employees.Max(u => u.Id);
-	                if (newEmployees == null)
-	                {
-	                    newEmployees = 1;
-	                }
+	                // ## Unreachable if statement, commented out ##
+                    //if (newEmployees == null)
+	                //{
+	                //    newEmployees = 1;
+	                //}
  
 	                var nEmployee = new Employee
 	                {
@@ -81,10 +82,11 @@ namespace ParkInspectGroupC.ViewModel
 
                     var accounts = (from a in context.Employee select a).ToList();
                     var newAccount = accounts.Max(u => u.Id);
-                    if (newAccount == null)
-                    {
-                        newEmployees = 1;
-                    }
+                    // ## Unreachable if statement, commented out ##
+                    //if (newAccount == null)
+                    //{
+                    //    newEmployees = 1;
+                    //}
 
                     var nAccount = new Account
 	                {

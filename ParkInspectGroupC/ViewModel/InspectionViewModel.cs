@@ -178,19 +178,20 @@ namespace ParkInspectGroupC.ViewModel
                 byte[] byteArray = stream.GetBuffer();
                 var image = new InspectionImage();
                 string imageFile = "";
-                int counter = 0;
+                //##Uitgecomenteerd door gebrek aan uiteindelijke implementatie
+                //int counter = 0;
 
-                foreach (byte byte1 in byteArray)
-                {
-                    //imageFile += byte1;
+                //foreach (byte byte1 in byteArray)
+                //{
+                //    //imageFile += byte1;
 
-                    //if (counter >= 16)
-                    //{
-                    //    break;
-                    //}
-                    //counter++;
-                }
-                Debug.WriteLine(byteArray.Length);
+                //    //if (counter >= 16)
+                //    //{
+                //    //    break;
+                //    //}
+                //    //counter++;
+                //}
+                //Debug.WriteLine(byteArray.Length);
 
                 using (var context = new LocalParkInspectEntities())
                 {
