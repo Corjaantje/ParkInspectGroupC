@@ -19,12 +19,29 @@ namespace ParkInspectGroupC.ViewModel
             CreateInspection = new RelayCommand(createInspection);
 
             getAllRegions();
+            this.getInspectorNames();
         }
 
         public void setAssignment(Assignment a)
         {
             assignment = a;
             fillProperties();
+        }
+
+        //Vult de lijst met inspecteur namen
+        private void getInspectorNames()
+        {
+            InspectorNames = new List<string>();
+            using (var context = new LocalParkInspectEntities())
+            {
+                foreach (Employee emp in context.Employee.ToList())
+                {
+                    if (emp.IsInspecter)
+                    {
+                        this.InspectorNames.Add(emp.Id + "." + emp.FirstName + " " + emp.SurName);
+                    }
+                }
+            }
         }
 
         private void fillProperties()
@@ -172,6 +189,9 @@ namespace ParkInspectGroupC.ViewModel
         }
 
         public ICommand CreateInspection { get; set; }
+
+        //NOT YET FUNCTIONAL, ONLY ADDED DAY BEFORE DEADLINE! TODO ADD FUNCTION
+        public ICommand SaveInspection { get; set; }
 
         #endregion
     }
