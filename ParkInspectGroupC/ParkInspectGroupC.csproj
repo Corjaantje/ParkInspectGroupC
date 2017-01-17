@@ -128,6 +128,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converter\BoolToVisConverter.cs" />
     <Compile Include="Converter\EnumToBooleanConverter.cs" />
     <Compile Include="Converter\StatusToPathConverter.cs" />
     <Compile Include="Factory\ThemeFactory.cs" />
@@ -539,6 +540,7 @@
   <ItemGroup>
     <Content Include="Gmaps\GMap.NET.Core.dll" />
     <Content Include="Gmaps\GMap.NET.WindowsPresentation.dll" />
+    <Resource Include="Image\home_icon.png" />
     <Resource Include="Image\Testfotos\01.jpg" />
     <Resource Include="Image\Testfotos\02.jpg" />
     <Resource Include="Image\Testfotos\03.jpg" />

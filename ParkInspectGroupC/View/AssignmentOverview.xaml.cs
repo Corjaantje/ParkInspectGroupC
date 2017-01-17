@@ -20,7 +20,7 @@ namespace ParkInspectGroupC.View
 	/// <summary>
 	/// Interaction logic for AssignmentOverview.xaml
 	/// </summary>
-	public partial class AssignmentOverview : Window
+	public partial class AssignmentOverview : UserControl
 	{
 		public AssignmentOverview()
 		{

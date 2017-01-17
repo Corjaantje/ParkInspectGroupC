@@ -16,11 +16,26 @@ namespace ParkInspectGroupC.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
+        private bool _navVis;
+        public bool NavVis
+        {
+            get { return _navVis; }
+            set { _navVis = value; RaisePropertyChanged("NavVis"); }
+        }
         private UserControl _currentView;
         public UserControl CurrentView
         {
             get { return _currentView; }
-            set { _currentView = value; RaisePropertyChanged("CurrentView"); }
+            set
+            {
+                NavVis = (Properties.Settings.Default.LoggedInEmp != null);
+                if(Properties.Settings.Default.LoggedInEmp != null)
+                {
+                    loggedInEmpIsmanager = Properties.Settings.Default.LoggedInEmp.IsManager;
+                }
+                _currentView = value; RaisePropertyChanged("CurrentView");
+                
+            }
         }
 
         //public IEnumerable<Theme> Themes { get; private set; }
@@ -59,11 +74,31 @@ namespace ParkInspectGroupC.ViewModel
             Settings.Default.Save();
         }
 
+        public LocalDatabase.Domain.Employee loggedInEmp { get; set; }
+        private bool _loggedInEmpIsManager;
+        public bool loggedInEmpIsmanager
+        {
+            get
+            { return _loggedInEmpIsManager; }
+
+            set { _loggedInEmpIsManager = value; RaisePropertyChanged("LoggedInEmpIsmanager"); }
+        }
         public ICommand BackCommand { get; set; }
+        public ICommand ProfileNavigationCommand { get; set; }
+        public ICommand ProfileListNavigationCommand { get; set; }
+        public ICommand AssignmentNavigationCommand { get; set; }
+        public ICommand CustomerNavigationCommand { get; set; }
+        public ICommand HomeCommand { get; set; }
         public ICommand LogOutCommand { get; set; }
         public MainViewModel()
         {
+            loggedInEmp = Settings.Default.LoggedInEmp;
             BackCommand = new RelayCommand(PerformBack, CanPerformBack);
+           AssignmentNavigationCommand = new RelayCommand(PerformAssignmentNavigation);
+            ProfileNavigationCommand = new RelayCommand(PerfromProfilenNavigation);
+            ProfileListNavigationCommand = new RelayCommand(PerfromProfileListNavigation);
+            CustomerNavigationCommand = new RelayCommand(PerformCustomerNavigation);
+            HomeCommand = new RelayCommand(PerformHome);
             LogOutCommand = new RelayCommand(PerformLogOut);
             LoginView lView = new LoginView();
             Navigator.ViewHistory.AddFirst(lView);
@@ -104,9 +139,37 @@ namespace ParkInspectGroupC.ViewModel
         {
             Navigator.Back();
         }
+        private void PerformHome()
+        {
+            if (Properties.Settings.Default.LoggedInEmp.IsManager)
+            {
+                Navigator.SetNewView(new ManagerDashboardView());
+            }
+            else
+            {
+                Navigator.SetNewView(new DashboardView());
+            }
+        }
+        private void PerfromProfileListNavigation()
+        {
+            Navigator.SetNewView(new InspectorsListView());
+        }
+        private void PerfromProfilenNavigation()
+        {
+            Navigator.SetNewView(new InspectorProfileView());
+        }
+      private void  PerformAssignmentNavigation()
+        {
+            Navigator.SetNewView(new AssignmentOverview());
+        }
 
+        private void PerformCustomerNavigation()
+        {
+            Navigator.SetNewView(new CustomerListView());
+        }
         private void PerformLogOut()
         {
+            Properties.Settings.Default.LoggedInEmp = null;
             SimpleIoc.Default.Unregister<LoginViewModel>();
             SimpleIoc.Default.Register<LoginViewModel>();
             Navigator.SetNewView(new LoginView());
