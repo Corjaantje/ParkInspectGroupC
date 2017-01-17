@@ -56,7 +56,7 @@ namespace ParkInspectGroupC.ViewModel
 
         public InspectorProfileViewModel InspectorProfile
         {
-            get { return new InspectorProfileViewModel(); }
+            get { return ServiceLocator.Current.GetInstance<InspectorProfileViewModel>(); }
         }
 
         public DatabaseSyncViewModel DatabaseSync
@@ -94,11 +94,6 @@ namespace ParkInspectGroupC.ViewModel
             get { return ServiceLocator.Current.GetInstance<InspectorListViewModel>(); }
         }
 
-        public InspectorEditViewModel EditInspector
-        {
-            get { return new InspectorEditViewModel(InspectorList.SelectedInspector); }
-        }
-
         public AvailabilityCreationViewModel Availability
         {
             get
@@ -127,6 +122,16 @@ namespace ParkInspectGroupC.ViewModel
             get { return ServiceLocator.Current.GetInstance<AssignmentToInspectionViewModel>(); }
         }
 
+        public AssignmentOverviewViewModel OpdrachtOverview
+        {
+            get { return ServiceLocator.Current.GetInstance<AssignmentOverviewViewModel>(); }
+        }
+        public NewAssignmentViewModel NewAssignment
+        {
+            get { return ServiceLocator.Current.GetInstance<NewAssignmentViewModel>(); }
+        }
+
+        //ViewModels without ServiceLocator
         public InspectionCreationViewModel AddInspection
         {
             get { return new InspectionCreationViewModel(InspectionOverView); }
@@ -142,13 +147,9 @@ namespace ParkInspectGroupC.ViewModel
             get { return new InspectorInspectionsViewModel(InspectorList.SelectedInspector); }
         }
 
-        public AssignmentOverviewViewModel OpdrachtOverview
+        public InspectorEditViewModel EditInspector
         {
-            get { return ServiceLocator.Current.GetInstance<AssignmentOverviewViewModel>(); }
-        }
-        public NewAssignmentViewModel NewAssignment
-        {
-            get { return ServiceLocator.Current.GetInstance<NewAssignmentViewModel>(); }
+            get { return new InspectorEditViewModel(InspectorList.SelectedInspector); }
         }
 
         private static void RegisterViewModels()
@@ -162,11 +163,9 @@ namespace ParkInspectGroupC.ViewModel
             SimpleIoc.Default.Register<InspectorProfileViewModel>();
             SimpleIoc.Default.Register<DatabaseSyncViewModel>();
             SimpleIoc.Default.Register<CustomerListViewModel>();
-
-            RegisterQuestionnaireModuleViewModels();
             SimpleIoc.Default.Register<CustomerEditViewModel>();
             SimpleIoc.Default.Register<OnOffIndicatorViewModel>();
-            SimpleIoc.Default.Register<ViewModelLocator>(); //Needed for the cleanup method ~Roy
+            SimpleIoc.Default.Register<ViewModelLocator>();
             SimpleIoc.Default.Register<DashboardViewModel>();
             SimpleIoc.Default.Register<ManagerDashboardViewModel>();
             SimpleIoc.Default.Register<InspectorListViewModel>();
@@ -179,10 +178,11 @@ namespace ParkInspectGroupC.ViewModel
             SimpleIoc.Default.Register<InspectorInspectionsViewModel>();
             SimpleIoc.Default.Register<AssignmentOverviewViewModel>();
             SimpleIoc.Default.Register<NewAssignmentViewModel>();
-
-            // ReportCreation.
+            SimpleIoc.Default.Register<InspectorProfileViewModel>();
             SimpleIoc.Default.Register<DiagramPreviewViewModel>();
             SimpleIoc.Default.Register<ReportViewModel>();
+
+            RegisterQuestionnaireModuleViewModels();
         }
 
         private static void UnRegisterViewModels()
@@ -208,8 +208,7 @@ namespace ParkInspectGroupC.ViewModel
             SimpleIoc.Default.Unregister<InspectorInspectionsViewModel>();
             SimpleIoc.Default.Unregister<AssignmentOverviewViewModel>();
             SimpleIoc.Default.Unregister<NewAssignmentViewModel>();
-
-            // ReportCreation.
+            SimpleIoc.Default.Unregister<InspectorProfileViewModel>();
             SimpleIoc.Default.Unregister<DiagramPreviewViewModel>();
             SimpleIoc.Default.Unregister<ReportViewModel>();
         }
