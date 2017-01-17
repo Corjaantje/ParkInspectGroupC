@@ -48,8 +48,6 @@
         <Label x:Name="Details" Content="{Binding AssignmentDetails}" HorizontalAlignment="Left" Margin="10,341,0,0"
                VerticalAlignment="Top" Width="472" Height="65" />
         
-        <Button x:Name="ShowQuestionnaire" Content="Vragenlijst" HorizontalAlignment="Left" Margin="223,20,0,0" VerticalAlignment="Top" Width="75"
-                Command="{Binding ShowQuestionnaire}"/>
         <Button x:Name="filteredInspections" Content="Inspecties" HorizontalAlignment="Left" Margin="303,316,0,0" VerticalAlignment="Top" Width="75"
                 Command="{Binding ShowFilteredInspections}"/>
 

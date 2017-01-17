@@ -22,7 +22,7 @@ namespace ParkInspectGroupC.ViewModel
 			ShowDetails = new RelayCommand(showDetails);
 			newInspection = new RelayCommand(createInspection);
 			newAssigment = new RelayCommand(makeNewAssignment);
-			ShowQuestionnaire = new RelayCommand(showQuestionnaire);
+			//ShowQuestionnaire = new RelayCommand(showQuestionnaire);
 			ShowFilteredInspections = new RelayCommand(showFilteredInspections);
 		}
 
@@ -69,11 +69,11 @@ namespace ParkInspectGroupC.ViewModel
 			Navigator.SetNewView(new NewAssignmentView());
 		}
 
-		private void showQuestionnaire()
-		{
-			var questionnaireView = new QuestionnaireView();
-			questionnaireView.Show();
-		}
+		//private void showQuestionnaire()
+		//{
+		//	var questionnaireView = new QuestionnaireView();
+		//	questionnaireView.Show();
+		//}
 
 		private void showFilteredInspections()
 		{
@@ -173,7 +173,7 @@ namespace ParkInspectGroupC.ViewModel
 		public ICommand EditCommand { get; set; }
 		public ICommand ShowDetails { get; set; }
 		public ICommand newInspection { get; set; }
-		public ICommand ShowQuestionnaire { get; set; }
+		//public ICommand ShowQuestionnaire { get; set; }
 		public ICommand ShowFilteredInspections { get; set; }
 
 
