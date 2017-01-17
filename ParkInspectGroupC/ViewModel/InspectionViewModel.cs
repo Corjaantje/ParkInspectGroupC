@@ -26,6 +26,7 @@ namespace ParkInspectGroupC.ViewModel
             BladerCommand = new RelayCommand(getFileFromDirectory, canGetFile);
             SubmitCommand = new RelayCommand(submitImage);
             AddInspection = new RelayCommand(addInspection);
+			ShowQuestionnaire = new RelayCommand(showQuestionnaire);
             DeleteInspection = new RelayCommand(deleteInspection);
             assemblyFile = Directory.GetCurrentDirectory();
             var source = assemblyFile + "\\..\\..\\Image\\silvio.jpeg";
@@ -35,7 +36,13 @@ namespace ParkInspectGroupC.ViewModel
             //SourceName = i;
         }
 
-        private void fillInspections()
+		private void showQuestionnaire()
+		{
+			var questionnaireView = new QuestionnaireView();
+			questionnaireView.Show();
+		}
+
+		private void fillInspections()
         {
             try
             {
@@ -290,6 +297,7 @@ namespace ParkInspectGroupC.ViewModel
 
 
         public Inspection SelectedInspection { get; set; }
+		public ICommand ShowQuestionnaire { get; set; }
 
         #endregion
     }

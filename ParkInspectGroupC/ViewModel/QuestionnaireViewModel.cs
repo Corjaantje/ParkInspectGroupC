@@ -13,234 +13,252 @@ using ParkInspectGroupC.ViewModel.QuestionnaireModuleViewModels;
 
 namespace ParkInspectGroupC.ViewModel
 {
-    // krijgt nog een eigen file
-    // wil hier eigenlijk geen instantie opslaan; alleen het type om later te instantieren
-    public class QuestionnaireModule
-    {
-        public QuestionnaireModule(int Id, string Name, UserControl ModuleUserControl)
-        {
-            this.Id = Id;
-            this.Name = Name;
-            this.ModuleUserControl = ModuleUserControl;
-        }
+	// krijgt nog een eigen file
+	// wil hier eigenlijk geen instantie opslaan; alleen het type om later te instantieren
+	public class QuestionnaireModule
+	{
+		public QuestionnaireModule(int Id, string Name, UserControl ModuleUserControl)
+		{
+			this.Id = Id;
+			this.Name = Name;
+			this.ModuleUserControl = ModuleUserControl;
+		}
 
-        public int Id { get; private set; }
-        public string Name { get; private set; }
-        public UserControl ModuleUserControl { get; }
-    }
+		public int Id { get; private set; }
+		public string Name { get; private set; }
+		public UserControl ModuleUserControl { get; }
+	}
 
-    public class QuestionnaireRecord
-    {
-        public QuestionnaireRecord(int ModuleId, string[] Keywords, int value)
-        {
-            this.ModuleId = ModuleId;
-            this.Keywords = Keywords;
-            this.value = value;
-        }
+	public class QuestionnaireRecord
+	{
+		public QuestionnaireRecord(int ModuleId, string[] Keywords, int value)
+		{
+			this.ModuleId = ModuleId;
+			this.Keywords = Keywords;
+			this.value = value;
+		}
 
-        //public int QuestionId { get; private set; } // unique within inspection
-        public int ModuleId { get; } // must be existing module
-        public string[] Keywords { get; }
-        public int value { get; set; }
-    }
+		//public int QuestionId { get; private set; } // unique within inspection
+		public int ModuleId { get; } // must be existing module
+		public string[] Keywords { get; }
+		public int value { get; set; }
+	}
 
-    public class QuestionnaireViewModel : INotifyPropertyChanged
-    {
-        public QuestionnaireViewModel()
-        {
-            Records = new List<QuestionnaireRecord>();
+	public class QuestionnaireViewModel : INotifyPropertyChanged
+	{
+		public QuestionnaireViewModel()
+		{
+			Records = new List<QuestionnaireRecord>();
 
-            _questionnaireModules = new Dictionary<int, QuestionnaireModule>();
-            _questionnaireModules.Add(1,
-                new QuestionnaireModule(1, "Aantal voertuigen", new VehicleCountControl(1, this)));
-            _questionnaireModules.Add(2,
-                new QuestionnaireModule(2, "Vragenlijst notities", new QuestionnaireCommentControl(2, this)));
+			_questionnaireModules = new Dictionary<int, QuestionnaireModule>();
+			_questionnaireModules.Add(1,
+				new QuestionnaireModule(1, "Aantal voertuigen", new VehicleCountControl(1, this)));
+			_questionnaireModules.Add(2,
+				new QuestionnaireModule(2, "Vragenlijst notities", new QuestionnaireCommentControl(2, this)));
 
-            AddModuleToQuestionnaire = new RelayCommand<int>(AddListElement);
-            ListElements = new ObservableCollection<UIElement>();
+			AddModuleToQuestionnaire = new RelayCommand<int>(AddListElement);
+			ListElements = new ObservableCollection<UIElement>();
 
-            SaveInspectionRelay = new RelayCommand(SaveInspection);
-        }
+			SaveInspectionRelay = new RelayCommand(SaveInspection);
+		}
 
-        // Variables used for data handling and database writes
+		// methods and variables for connecting with inspection
+		public void setInspection(int InspectionID)
+		{
 
-        #region Variables for database
+			CurrentInspectionId = InspectionID;
 
-        private readonly int CurrentInspectionId = 100;
-        private readonly List<QuestionnaireRecord> Records;
+			//using (var context = new ParkInspectEntities())
+			//{
 
-        #endregion
+			//	var Inspection = context.Inspection.SingleOrDefault(i => i.Id == CurrentInspectionId);
 
-        // Variables used for handling the view and QuestionnaireModules
+			//	questions = context.Questionnaire.SingleOrDefault(q => q.InspectionId == CurrentInspectionId);
 
-        #region Variables for view
+			//}
 
-        private bool _questionnaireEditingMode = true;
+		}
 
-        public bool QuestionnaireEditingMode
-        {
-            get { return _questionnaireEditingMode; }
-            set
-            {
-                _questionnaireEditingMode = value;
-                ShowEditingTools(value);
-            }
-        }
+		// Variables used for data handling and database writes
 
-        public Dictionary<int, QuestionnaireModule> _questionnaireModules;
+		#region Variables for database
 
-        public Dictionary<int, QuestionnaireModule> QuestionnaireModules
-        {
-            get { return _questionnaireModules; }
-        }
+		private int CurrentInspectionId = 100;
+		private readonly List<QuestionnaireRecord> Records;
 
-        public ObservableCollection<UIElement> ListElements { get; set; }
+		#endregion
 
-        public RelayCommand SaveInspectionRelay { get; set; }
-
-        #endregion
-
-        #region Functions for database
-
-        public int GetRecordValue(int moduleId, string[] keywords)
-        {
-            foreach (var record in Records)
-                if (record.ModuleId == moduleId)
-                    if (CheckEqualKeywordSet(record.Keywords, keywords))
-                        return record.value;
-
-            return 0;
-        }
-
-        public void AddOrUpdateRecord(int moduleId, string[] keywords, int value)
-        {
-            // Check whether record already exists and edit it's value
-            foreach (var record in Records)
-                if (record.ModuleId == moduleId)
-                    if (CheckEqualKeywordSet(record.Keywords, keywords))
-                    {
-                        record.value = value;
-                        return;
-                    }
-
-            // Else create new record and edit it's value
-            Records.Add(new QuestionnaireRecord(moduleId, keywords, value));
-        }
-
-        private bool CheckEqualKeywordSet(string[] firstSet, string[] secondSet)
-        {
-            if (firstSet.Length != secondSet.Length)
-                return false;
-
-            var secondSetAsList = new List<string>(secondSet);
-
-            foreach (var first in firstSet)
-                if (!secondSetAsList.Contains(first))
-                    return false;
-
-            return true;
-        }
-
-        private void SaveInspection()
-        {
-            using (var context = new ParkInspectEntities())
-            {
-                var questionnaire = new Questionnaire();
-                questionnaire.InspectionId = CurrentInspectionId;
-                var questionnaireId = context.Questionnaire.Add(questionnaire).Id;
+		// Variables used for handling the view and QuestionnaireModules
 
 
-                // For each QuestionnaireRecord
-                foreach (var QR in Records)
-                {
-                    // Create new Question
-                    var q = context.Question.Add(new Question());
+		#region Variables for view
 
-                    // Create QuestionKeywords for each keyword in record (QuestionID, KeywordID)
-                    foreach (var keyword in QR.Keywords)
-                    {
-                        var kq = new QuestionKeyword();
-                        kq.KeywordId = (from k in context.Keyword where k.Description == keyword select k.Id).First();
-                        kq.QuestionId = q.Id;
-                        context.QuestionKeyword.Add(kq);
-                    }
+		private bool _questionnaireEditingMode = true;
 
-                    // Create QuestionAnswer for the value (QuestionnaireID, QuestionID)
-                    var qa = new QuestionAnswer();
-                    qa.QuestionnaireId = questionnaireId;
-                    qa.QuestionId = q.Id;
-                    context.QuestionAnswer.Add(qa);
-                }
-                try
-                {
-                    context.SaveChanges();
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show(e.Message);
-                }
-            }
-        }
+		public bool QuestionnaireEditingMode
+		{
+			get { return _questionnaireEditingMode; }
+			set
+			{
+				_questionnaireEditingMode = value;
+				ShowEditingTools(value);
+			}
+		}
 
-        #endregion
+		public Dictionary<int, QuestionnaireModule> _questionnaireModules;
 
-        #region Functions for view
+		public Dictionary<int, QuestionnaireModule> QuestionnaireModules
+		{
+			get { return _questionnaireModules; }
+		}
 
-        public ICommand AddModuleToQuestionnaire { get; set; }
+		public ObservableCollection<UIElement> ListElements { get; set; }
 
-        private void ShowEditingTools(bool b)
-        {
-            foreach (UserControl control in ListElements)
-                (control.DataContext as QuestionnaireModuleViewModelBase).EditingToolsEnabled(b);
-        }
+		public RelayCommand SaveInspectionRelay { get; set; }
 
-        public void BumpElementUp(int moduleId)
-        {
-            var moduleIndex = ListElements.IndexOf(_questionnaireModules[moduleId].ModuleUserControl);
+		#endregion
 
-            if (moduleIndex < 1) return;
+		#region Functions for database
 
-            var temp = ListElements[moduleIndex - 1];
-            ListElements[moduleIndex - 1] = ListElements[moduleIndex];
-            ListElements[moduleIndex] = temp;
-            RaisePropertyChanged("ListElements");
-        }
+		public int GetRecordValue(int moduleId, string[] keywords)
+		{
+			foreach (var record in Records)
+				if (record.ModuleId == moduleId)
+					if (CheckEqualKeywordSet(record.Keywords, keywords))
+						return record.value;
 
-        public void BumpElementDown(int moduleId)
-        {
-            var moduleIndex = ListElements.IndexOf(_questionnaireModules[moduleId].ModuleUserControl);
+			return 0;
+		}
 
-            if (moduleIndex == ListElements.Count - 1) return;
+		public void AddOrUpdateRecord(int moduleId, string[] keywords, int value)
+		{
+			// Check whether record already exists and edit it's value
+			foreach (var record in Records)
+				if (record.ModuleId == moduleId)
+					if (CheckEqualKeywordSet(record.Keywords, keywords))
+					{
+						record.value = value;
+						return;
+					}
 
-            var temp = ListElements[moduleIndex + 1];
-            ListElements[moduleIndex + 1] = ListElements[moduleIndex];
-            ListElements[moduleIndex] = temp;
-            RaisePropertyChanged("ListElements");
-        }
+			// Else create new record and edit it's value
+			Records.Add(new QuestionnaireRecord(moduleId, keywords, value));
+		}
 
-        public void DeleteListElement(int moduleId)
-        {
-            ListElements.Remove(_questionnaireModules[moduleId].ModuleUserControl);
+		private bool CheckEqualKeywordSet(string[] firstSet, string[] secondSet)
+		{
+			if (firstSet.Length != secondSet.Length)
+				return false;
 
-            Records.RemoveAll(x => x.ModuleId == moduleId);
-        }
+			var secondSetAsList = new List<string>(secondSet);
 
-        public void AddListElement(int moduleId)
-        {
-            ListElements.Add(_questionnaireModules[moduleId].ModuleUserControl);
-            (_questionnaireModules[moduleId].ModuleUserControl.DataContext as QuestionnaireModuleViewModelBase)
-                .EditingToolsEnabled(_questionnaireEditingMode);
-            RaisePropertyChanged("ListElements");
-            RaisePropertyChanged("OrderedModuleNames");
-        }
+			foreach (var first in firstSet)
+				if (!secondSetAsList.Contains(first))
+					return false;
 
-        private void RaisePropertyChanged(string prop)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
-        }
+			return true;
+		}
 
-        public event PropertyChangedEventHandler PropertyChanged;
+		private void SaveInspection()
+		{
+			using (var context = new ParkInspectEntities())
+			{
+				var questionnaire = new Questionnaire();
+				questionnaire.InspectionId = CurrentInspectionId;
+				var questionnaireId = context.Questionnaire.Add(questionnaire).Id;
 
-        #endregion
-    }
+
+				// For each QuestionnaireRecord
+				foreach (var QR in Records)
+				{
+					// Create new Question
+					var q = context.Question.Add(new Question());
+
+					// Create QuestionKeywords for each keyword in record (QuestionID, KeywordID)
+					foreach (var keyword in QR.Keywords)
+					{
+						var kq = new QuestionKeyword();
+						kq.KeywordId = (from k in context.Keyword where k.Description == keyword select k.Id).First();
+						kq.QuestionId = q.Id;
+						context.QuestionKeyword.Add(kq);
+					}
+
+					// Create QuestionAnswer for the value (QuestionnaireID, QuestionID)
+					var qa = new QuestionAnswer();
+					qa.QuestionnaireId = questionnaireId;
+					qa.QuestionId = q.Id;
+					context.QuestionAnswer.Add(qa);
+				}
+				try
+				{
+					context.SaveChanges();
+				}
+				catch (Exception e)
+				{
+					MessageBox.Show(e.Message);
+				}
+			}
+		}
+
+		#endregion
+
+		#region Functions for view
+
+		public ICommand AddModuleToQuestionnaire { get; set; }
+
+		private void ShowEditingTools(bool b)
+		{
+			foreach (UserControl control in ListElements)
+				(control.DataContext as QuestionnaireModuleViewModelBase).EditingToolsEnabled(b);
+		}
+
+		public void BumpElementUp(int moduleId)
+		{
+			var moduleIndex = ListElements.IndexOf(_questionnaireModules[moduleId].ModuleUserControl);
+
+			if (moduleIndex < 1) return;
+
+			var temp = ListElements[moduleIndex - 1];
+			ListElements[moduleIndex - 1] = ListElements[moduleIndex];
+			ListElements[moduleIndex] = temp;
+			RaisePropertyChanged("ListElements");
+		}
+
+		public void BumpElementDown(int moduleId)
+		{
+			var moduleIndex = ListElements.IndexOf(_questionnaireModules[moduleId].ModuleUserControl);
+
+			if (moduleIndex == ListElements.Count - 1) return;
+
+			var temp = ListElements[moduleIndex + 1];
+			ListElements[moduleIndex + 1] = ListElements[moduleIndex];
+			ListElements[moduleIndex] = temp;
+			RaisePropertyChanged("ListElements");
+		}
+
+		public void DeleteListElement(int moduleId)
+		{
+			ListElements.Remove(_questionnaireModules[moduleId].ModuleUserControl);
+
+			Records.RemoveAll(x => x.ModuleId == moduleId);
+		}
+
+		public void AddListElement(int moduleId)
+		{
+			ListElements.Add(_questionnaireModules[moduleId].ModuleUserControl);
+			(_questionnaireModules[moduleId].ModuleUserControl.DataContext as QuestionnaireModuleViewModelBase)
+				.EditingToolsEnabled(_questionnaireEditingMode);
+			RaisePropertyChanged("ListElements");
+			RaisePropertyChanged("OrderedModuleNames");
+		}
+
+		private void RaisePropertyChanged(string prop)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+		}
+
+		public event PropertyChangedEventHandler PropertyChanged;
+
+		#endregion
+	}
 }
