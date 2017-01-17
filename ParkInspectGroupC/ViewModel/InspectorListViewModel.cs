@@ -50,7 +50,7 @@ namespace ParkInspectGroupC.ViewModel
                 _selectedAailability = value; RaisePropertyChanged("SelectedAvailability");
             }
         }
-        private int days;
+         private int days;
          public ObservableCollection<Employee> InspectorsList { get; set; }
          private ObservableCollection<Availability> _inspectorAvailability;
          public ObservableCollection<Availability> InspectorAvailability
@@ -60,33 +60,26 @@ namespace ParkInspectGroupC.ViewModel
          }
         public ICommand ShowEditInspectorCommand { get; set; }
         public ICommand ShowCreateAvailabilityCommand { get; set; }
-         public ICommand ShowEditAvailabilityCommand { get; set; }
-         public InspectorListViewModel()
-         {
-             ShowAvailability = false;
-             using (var context = new LocalParkInspectEntities())
-             {
-                 var iList = context.Employee.Where(e => e.IsManager == false).ToList();
-                 InspectorsList = new ObservableCollection<Employee>(iList);
-             }
-             ShowEditInspectorCommand = new RelayCommand(ShowEditView, CanShowEditView);
-            ShowCreateAvailabilityCommand = new RelayCommand(ShowCreateAvailability, CanshowCreateAvailability);
+        public ICommand ShowEditAvailabilityCommand { get; set; }
+        public ICommand ShowInspectorInspectionsCommand { get; set; }
+        public InspectorListViewModel()
+        {
+            ShowAvailability = false;
+            using (var context = new LocalParkInspectEntities())
+            {
+                var iList = context.Employee.Where(e => e.IsManager == false).ToList();
+                InspectorsList = new ObservableCollection<Employee>(iList);
+            }
+            ShowEditInspectorCommand = new RelayCommand(ShowEditView);
+            ShowCreateAvailabilityCommand = new RelayCommand(ShowCreateAvailability);
             ShowEditAvailabilityCommand = new RelayCommand(ShowEditAvailability, CanShowAvailabilityEdit);
-         }
- 
-         private void ShowEditView()
+            ShowInspectorInspectionsCommand = new RelayCommand(ShowInspectorInspections);
+        }
+
+        private void ShowEditView()
          {
              Navigator.SetNewView(new InspectorEditView());
             ShowAvailability = false;
-         }
- 
-         private bool CanShowEditView()
-         {
-             if (SelectedInspector == null)
-             {
-                 return false;
-             }
-             return true;
          }
  
          private void ShowCreateAvailability()
@@ -95,18 +88,14 @@ namespace ParkInspectGroupC.ViewModel
             ShowAvailability = false;
          }
  
-         private bool CanshowCreateAvailability()
-         {
-             if (SelectedInspector == null)
-             {
-                 return false;
-             }
-             return true;
-         }
-
         private void ShowEditAvailability()
         {
             Navigator.SetNewView(new AvailabilityEditView());
+        }
+        private void ShowInspectorInspections()
+        {
+            Navigator.SetNewView(new InspectorInspectionsView());
+            ShowAvailability = false;
         }
 
         private bool CanShowAvailabilityEdit()

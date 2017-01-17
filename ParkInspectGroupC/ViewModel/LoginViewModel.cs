@@ -1,11 +1,11 @@
 ﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
 using LocalDatabase.Domain;
 using ParkInspectGroupC.Encryption;
 using ParkInspectGroupC.Miscellaneous;
 using ParkInspectGroupC.View;
 using System.Linq;
 using System.Windows.Input;
+using GalaSoft.MvvmLight.CommandWpf;
 
 namespace ParkInspectGroupC.ViewModel
 {
@@ -13,6 +13,7 @@ namespace ParkInspectGroupC.ViewModel
 	{
         public Employee LoginEmployee { get; set; }
 		public ICommand LoginCommand { get; set; }
+        public ICommand RegisterCommand { get; set; }
 
 		private string _loginMessage;
 		public string LoginMessage
@@ -39,12 +40,18 @@ namespace ParkInspectGroupC.ViewModel
 		{
             _loginMessage = string.Empty;
 			LoginCommand = new RelayCommand<object>(Login, CanLogin);
+            RegisterCommand = new RelayCommand(OpenRegisterWindow);
 		}
 
 		private bool CanLogin(object parameter)
 		{
 			return true;
 		}
+
+	    private void OpenRegisterWindow()
+	    {
+	        Navigator.SetNewView(new EmployeeCreationView());
+	    }
 
 		private void Login(object parameter)
 		{

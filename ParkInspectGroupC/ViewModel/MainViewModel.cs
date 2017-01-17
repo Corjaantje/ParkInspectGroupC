@@ -100,7 +100,10 @@ namespace ParkInspectGroupC.ViewModel
             CustomerNavigationCommand = new RelayCommand(PerformCustomerNavigation);
             HomeCommand = new RelayCommand(PerformHome);
             LogOutCommand = new RelayCommand(PerformLogOut);
-            CurrentView = new LoginView();
+            LoginView lView = new LoginView();
+            Navigator.ViewHistory.AddFirst(lView);
+            Navigator._currentViewNode = new LinkedListNode<UserControl>(lView);
+            CurrentView = lView;
 
             //List<Theme> Themes = new List<Theme>
             //{

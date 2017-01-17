@@ -30,7 +30,7 @@
         <TextBlock Grid.Row="1" Text="Tussenvoegsel:" Margin="10,0,0,0"/>
         <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding TempInspector.Prefix, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="0,2,10,2"/>
         
-        <TextBlock Grid.Row="2" Text=" Achternaam:" Margin="10,0,0,0"/>
+        <TextBlock Grid.Row="2" Text="Achternaam:" Margin="10,0,0,0"/>
         <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding TempInspector.SurName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="0,2,10,2"/>
 
         <TextBlock Grid.Row="3" Text="Straat:" Margin="10,0,0,0"/>
@@ -39,10 +39,10 @@
         <TextBlock Grid.Row="4" Text="Plaats:" Margin="10,0,0,0"/>
         <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding TempInspector.City}" Margin="0,2,10,2"/>
 
-        <TextBlock Grid.Row="5" Text="Zipcode:" Margin="10,0,0,0"/>
+        <TextBlock Grid.Row="5" Text="Postcode:" Margin="10,0,0,0"/>
         <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding TempInspector.ZipCode}" Margin="0,2,10,2"/>
 
-        <TextBlock Grid.Row="6" Text="Email:" Margin="10,0,0,0"/>
+        <TextBlock Grid.Row="6" Text="E-mail:" Margin="10,0,0,0"/>
         <TextBox Grid.Row="6" Grid.Column="1" Margin="0,2,10,2">
             <TextBox.Text>
                 <Binding Path="TempInspector.Email">
@@ -59,6 +59,6 @@
         <TextBlock Grid.Row="8" Text="Regio:" Margin="10,0,0,0"/>
         <ComboBox Grid.Row="8" Grid.Column="1" Margin="0,2,10,2" SelectedIndex="{Binding TempInspector.RegionId}" SelectedItem="{Binding SelectedRegion}" ItemsSource="{Binding Path=Regions}" DisplayMemberPath="Region1"/>
        
-        <Button Grid.Row="9" Command="{Binding SaveCommand}" Content="Save Changes" Margin="0,0,0,0" Width="80" Height="20"/>
+        <Button Grid.Row="9" Grid.Column="1"  Command="{Binding SaveCommand}" Content="Wijzigingen opslaan" Margin="0,0,0,0" Width="120" Height="20"/>
     </Grid>
 </UserControl>

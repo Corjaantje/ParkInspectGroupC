@@ -146,7 +146,7 @@ namespace ParkInspectGroupC.ViewModel
 
             else
             {
-                MessageBox.Show("Selecteer eerst een klant aub");
+                MessageBox.Show("Selecteer alstublieft eerst een klant");
             }
             
         }

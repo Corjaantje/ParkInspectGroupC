@@ -75,6 +75,14 @@
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="OxyPlot, Version=1.0.0.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
+      <HintPath>..\packages\OxyPlot.Core.1.0.0\lib\net45\OxyPlot.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="OxyPlot.Wpf, Version=1.0.0.0, Culture=neutral, PublicKeyToken=75e952ba404cdbb0, processorArchitecture=MSIL">
+      <HintPath>..\packages\OxyPlot.Wpf.1.0.0\lib\net45\OxyPlot.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Simple.Wpf.Themes, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Simple.Wpf.Themes.2.0.0.0\lib\net461\Simple.Wpf.Themes.dll</HintPath>
       <Private>True</Private>
@@ -94,8 +102,10 @@
       <HintPath>..\packages\System.Data.SQLite.Linq.1.0.103\lib\net46\System.Data.SQLite.Linq.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
@@ -124,7 +134,8 @@
     <Compile Include="Factory\ThemeFactory.cs" />
     <Compile Include="Miscellaneous\IHavePassword.cs" />
     <Compile Include="Miscellaneous\Navigator.cs" />
-    <Compile Include="ViewModel\AssignmentOverviewViewModel.cs" />
+    <Compile Include="ViewModel\AssignmentToInspectionViewModel.cs" />
+    <Compile Include="ViewModel\Assignment\AssignmentOverviewViewModel.cs" />
     <Compile Include="ViewModel\AvailabilityCreationViewModel.cs" />
     <Compile Include="ViewModel\AvailabilityEditViewModel.cs" />
     <Compile Include="ViewModel\CustomerCreationViewModel.cs" />
@@ -132,9 +143,12 @@
     <Compile Include="ViewModel\DashboardViewModel.cs" />
     <Compile Include="ViewModel\DatabaseSyncViewModel.cs" />
     <Compile Include="ViewModel\CustomerListViewModel.cs" />
-    <Compile Include="ViewModel\EditAssignmentViewModel.cs" />
+    <Compile Include="ViewModel\Assignment\EditAssignmentViewModel.cs" />
+    <Compile Include="ViewModel\InspectionCreationViewModel.cs" />
+    <Compile Include="ViewModel\InspectionEditViewModel.cs" />
     <Compile Include="ViewModel\InspectionViewModel.cs" />
     <Compile Include="ViewModel\InspectorEditViewModel.cs" />
+    <Compile Include="ViewModel\InspectorInspectionsViewModel.cs" />
     <Compile Include="ViewModel\InspectorListViewModel.cs" />
     <Compile Include="ViewModel\InspectorProfileViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
@@ -143,13 +157,21 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ManagerDashboardViewModel.cs" />
     <Compile Include="ViewModel\MapViewModel.cs" />
-    <Compile Include="ViewModel\OnOffIndicatorViewModel.cs" />
-    <Compile Include="ViewModel\NewAssignmentViewModel.cs" />
-    <Compile Include="ViewModel\QuestionnaireViewModel.cs" />
-    <Compile Include="ViewModel\ViewModelLocator.cs" />
-    <Compile Include="View\AssignmentOverview.xaml.cs">
+    <Compile Include="ViewModel\Assignment\NewAssignmentViewModel.cs" />
+    <Compile Include="ViewModel\QuestionnaireModuleViewModels\QuestionnaireCommentControlVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireModuleViewModels\QuestionnaireModuleViewModelBase.cs" />
+    <Compile Include="ViewModel\QuestionnaireModuleViewModels\VehicleCountControlVM.cs" />
+    <Compile Include="View\AssignmentToInspectionView.xaml.cs">
+      <DependentUpon>AssignmentToInspectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Assignment\AssignmentOverview.xaml.cs">
       <DependentUpon>AssignmentOverview.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\OnOffIndicatorViewModel.cs" />
+    <Compile Include="ViewModel\QuestionnaireViewModel.cs" />
+    <Compile Include="ViewModel\ReportCreation\DiagramPreviewViewModel.cs" />
+    <Compile Include="ViewModel\ReportCreation\ReportViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\AvailabilityCreationView.xaml.cs">
       <DependentUpon>AvailabilityCreationView.xaml</DependentUpon>
     </Compile>
@@ -177,17 +199,26 @@
     <Compile Include="View\DatabaseSyncView.xaml.cs">
       <DependentUpon>DatabaseSyncView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\EditAssignmentView.xaml.cs">
+    <Compile Include="View\Assignment\EditAssignmentView.xaml.cs">
       <DependentUpon>EditAssignmentView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\EmployeeCreationView.xaml.cs">
       <DependentUpon>EmployeeCreationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\InspectionCreationView.xaml.cs">
+      <DependentUpon>InspectionCreationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\InspectionEditView.xaml.cs">
+      <DependentUpon>InspectionEditView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\InspectionView.xaml.cs">
       <DependentUpon>InspectionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\InspectorEditView.xaml.cs">
       <DependentUpon>InspectorEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\InspectorInspectionsView.xaml.cs">
+      <DependentUpon>InspectorInspectionsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\InspectorProfileView.xaml.cs">
       <DependentUpon>InspectorProfileView.xaml</DependentUpon>
@@ -213,7 +244,7 @@
     <Compile Include="View\MainWindow\ThemeSelector.xaml.cs">
       <DependentUpon>ThemeSelector.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\NewAssignmentView.xaml.cs">
+    <Compile Include="View\Assignment\NewAssignmentView.xaml.cs">
       <DependentUpon>NewAssignmentView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\QuestionnaireModules\QuestionnaireCommentControl.xaml.cs">
@@ -224,6 +255,27 @@
     </Compile>
     <Compile Include="View\QuestionnaireView.xaml.cs">
       <DependentUpon>QuestionnaireView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ReportCreation\DiagramCreationView.xaml.cs">
+      <DependentUpon>DiagramCreationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ReportCreation\DiagramPreview.xaml.cs">
+      <DependentUpon>DiagramPreview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ReportCreation\InspectorImageCreationView.xaml.cs">
+      <DependentUpon>InspectorImageCreationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ReportCreation\ReportAssignmentSelectionView.xaml.cs">
+      <DependentUpon>ReportAssignmentSelectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ReportCreation\ReportCreationView.xaml.cs">
+      <DependentUpon>ReportCreationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ReportCreation\ReportSectionView.xaml.cs">
+      <DependentUpon>ReportSectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ReportCreation\ReportView.xaml.cs">
+      <DependentUpon>ReportView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -266,7 +318,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\AssignmentOverview.xaml">
+    <Page Include="View\AssignmentToInspectionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Assignment\AssignmentOverview.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -306,7 +362,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\EditAssignmentView.xaml">
+    <Page Include="View\Assignment\EditAssignmentView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\InspectionCreationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\InspectionEditView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -315,6 +379,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\InspectorEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\InspectorInspectionsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -354,7 +422,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\NewAssignmentView.xaml">
+    <Page Include="View\Assignment\NewAssignmentView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -367,6 +435,34 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\QuestionnaireView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ReportCreation\DiagramCreationView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ReportCreation\DiagramPreview.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ReportCreation\InspectorImageCreationView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ReportCreation\ReportAssignmentSelectionView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ReportCreation\ReportCreationView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ReportCreation\ReportSectionView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ReportCreation\ReportView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -413,6 +509,10 @@
       <Project>{D1CC6F15-9980-47B1-AC43-11502E5D3668}</Project>
       <Name>ParkInspectGroupC.DOMAIN</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PdfLibrary\PdfLibrary.csproj">
+      <Project>{9ad5105d-a322-4f44-832b-a2bfccaf842a}</Project>
+      <Name>PdfLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Image\Logo_WhiteBack.PNG" />
@@ -441,6 +541,14 @@
     <Content Include="Gmaps\GMap.NET.Core.dll" />
     <Content Include="Gmaps\GMap.NET.WindowsPresentation.dll" />
     <Resource Include="Image\home_icon.png" />
+    <Resource Include="Image\Testfotos\01.jpg" />
+    <Resource Include="Image\Testfotos\02.jpg" />
+    <Resource Include="Image\Testfotos\03.jpg" />
+    <Resource Include="Image\Testfotos\04.jpg" />
+    <Resource Include="Image\Testfotos\05.jpg" />
+    <Resource Include="Image\Testfotos\06.jpg" />
+    <Resource Include="Image\Testfotos\07.jpg" />
+    <Resource Include="Image\Testfotos\08.jpg" />
     <Resource Include="Image\IconLogo.ico" />
     <Resource Include="IconLogo.ico" />
     <Resource Include="Image\IconLogo.png" />

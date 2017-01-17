@@ -2,6 +2,8 @@ using System;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
+using ParkInspectGroupC.ViewModel.QuestionnaireModuleViewModels;
+using ParkInspectGroupC.ViewModel.ReportCreation;
 
 namespace ParkInspectGroupC.ViewModel
 {
@@ -28,6 +30,8 @@ namespace ParkInspectGroupC.ViewModel
             SimpleIoc.Default.Register<InspectorProfileViewModel>();
             SimpleIoc.Default.Register<DatabaseSyncViewModel>();
             SimpleIoc.Default.Register<CustomerListViewModel>();
+
+            RegisterQuestionnaireModuleViewModels();
             SimpleIoc.Default.Register<CustomerEditViewModel>();
             SimpleIoc.Default.Register<OnOffIndicatorViewModel>();
             SimpleIoc.Default.Register<ViewModelLocator>(); //Needed for the cleanup method ~Roy
@@ -36,6 +40,16 @@ namespace ParkInspectGroupC.ViewModel
             SimpleIoc.Default.Register<InspectorListViewModel>();
             SimpleIoc.Default.Register<AvailabilityCreationViewModel>();
             SimpleIoc.Default.Register<AvailabilityEditViewModel>();
+            SimpleIoc.Default.Register<InspectionViewModel>();
+			SimpleIoc.Default.Register<AssignmentToInspectionViewModel>();
+            SimpleIoc.Default.Register<InspectionCreationViewModel>();
+            SimpleIoc.Default.Register<InspectionEditViewModel>();
+            SimpleIoc.Default.Register<InspectorInspectionsViewModel>();
+
+            // ReportCreation.
+            SimpleIoc.Default.Register<DiagramPreviewViewModel>();
+            SimpleIoc.Default.Register<ReportViewModel>();
+
         }
 
         private static void UnRegisterViewModels()
@@ -54,6 +68,25 @@ namespace ParkInspectGroupC.ViewModel
             SimpleIoc.Default.Unregister<InspectorListViewModel>();
             SimpleIoc.Default.Unregister<AvailabilityCreationViewModel>();
             SimpleIoc.Default.Unregister<AvailabilityEditViewModel>();
+            SimpleIoc.Default.Unregister<InspectionViewModel>();
+		    SimpleIoc.Default.Unregister<AssignmentToInspectionViewModel>();
+            SimpleIoc.Default.Unregister<InspectionCreationViewModel>();
+            SimpleIoc.Default.Unregister<InspectionEditViewModel>();
+            SimpleIoc.Default.Unregister<InspectorInspectionsViewModel>();
+
+            // ReportCreation.
+            SimpleIoc.Default.Unregister<DiagramPreviewViewModel>();
+            SimpleIoc.Default.Unregister<ReportViewModel>();
+        }
+
+        public ReportViewModel Reports
+        {
+            get { return ServiceLocator.Current.GetInstance<ReportViewModel>(); }
+        }
+
+        public DiagramPreviewViewModel DiagramPreview
+        {
+            get { return ServiceLocator.Current.GetInstance<DiagramPreviewViewModel>(); }
         }
 
         public MainViewModel Main
@@ -155,10 +188,77 @@ namespace ParkInspectGroupC.ViewModel
             get { return new AvailabilityEditViewModel(InspectorList.SelectedAvailability,InspectorList.InspectorAvailability); }
         }
 
+        public InspectionViewModel InspectionOverView
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<InspectionViewModel>();
+            }
+        }
+
+		public AssignmentToInspectionViewModel AssignmentToInspection
+		{
+			get
+			{
+				return ServiceLocator.Current.GetInstance<AssignmentToInspectionViewModel>();
+			}
+		}
+
+        public InspectionCreationViewModel AddInspection
+        {
+            get
+            {
+                return new InspectionCreationViewModel(this.InspectionOverView);
+            }
+        }
+
+        public InspectionEditViewModel EditInspection
+        {
+            get
+            {
+                return new InspectionEditViewModel(this.InspectionOverView);
+            }
+        }
+
+        public InspectorInspectionsViewModel InspectorInspections
+        {
+            get
+            {
+                return new InspectorInspectionsViewModel(InspectorList.SelectedInspector);
+            }
+        }
+
         public void Cleanup()
         {
             UnRegisterViewModels();
             RegisterViewModels();
         }
+
+
+        /* The following are ViewModels used for UserControls in the QuestionnaireView (QuestionnaireModules)
+        * As one needs to be added per QuestionnaireModule, this will eventually clutter up the ViewModelLocator
+        * These ViewModels will be centralised elsewhere at a later point in time, but need to be accessed through the VMC until then.
+        * THESE CANNOT be used as normal views.
+        * */
+        #region QuestionnaireModules
+        private static void RegisterQuestionnaireModuleViewModels()
+        {
+            SimpleIoc.Default.Register<VehicleCountControlVM>();
+            SimpleIoc.Default.Register<QuestionnaireCommentControlVM>();
+        }
+
+        public VehicleCountControlVM VehicleCountControlVM
+        {
+            get { return ServiceLocator.Current.GetInstance<VehicleCountControlVM>(); }
+        }
+
+        public QuestionnaireCommentControlVM QuestionnaireCommentControlVM
+        {
+            get { return ServiceLocator.Current.GetInstance<QuestionnaireCommentControlVM>(); }
+        }
+
+        #endregion
+
+
     }
 }

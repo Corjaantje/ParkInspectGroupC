@@ -2,6 +2,7 @@
 using LocalDatabase.Domain;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace ParkInspectGroupC.ViewModel
@@ -64,6 +65,8 @@ namespace ParkInspectGroupC.ViewModel
             set { _inspections = value; RaisePropertyChanged("Inspections"); }
         }
 
+        public ObservableCollection<Availability> InspectorAvailability { get; set; }
+
         public InspectorProfileViewModel()
         {
             Emp = Properties.Settings.Default.LoggedInEmp;
@@ -77,6 +80,9 @@ namespace ParkInspectGroupC.ViewModel
                 using (var context = new LocalParkInspectEntities())
                 {
                     Status = (from s in context.EmployeeStatus where s.Id == Emp.EmployeeStatusId select s).FirstOrDefault().Description;
+
+                    var aList = context.Availability.Where(a => a.EmployeeId == Emp.Id).ToList();
+                    InspectorAvailability = new ObservableCollection<Availability>(aList);
                 }
                 try
                 {

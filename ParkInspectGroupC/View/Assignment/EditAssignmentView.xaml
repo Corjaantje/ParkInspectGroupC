@@ -1,0 +1,29 @@
+﻿<Window x:Class="ParkInspectGroupC.View.EditAssignmentView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ParkInspectGroupC.View"
+        mc:Ignorable="d"
+        Title="EditAssignmentView" Height="292.603" Width="369.589">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+
+        <Image x:Name="image" Source ="..\..\Image\Logo_WhiteBack.PNG" HorizontalAlignment="Left" Height="30" Margin="10,10,0,0" VerticalAlignment="Top" Width="72"/>
+
+        <Button x:Name="Assignmets" Content="Opdrachten" HorizontalAlignment="Left" Margin="110,10,0,0" VerticalAlignment="Top" Width="75" Background="LightBlue"/>
+        <Button x:Name="Administration" Content="Administatie" HorizontalAlignment="Left" Margin="195,10,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="Statistics" Content="Statistieken" HorizontalAlignment="Left" Margin="280,10,0,0" VerticalAlignment="Top" Width="75"/>
+
+        <Label x:Name="Description" Content="Beschrijving:" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="149" Margin="10,81,0,0" TextWrapping="Wrap" Text="{Binding Description}" VerticalAlignment="Top" Width="345" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"/>
+        <Button x:Name="button" Content="Bewerken" HorizontalAlignment="Left" Margin="11,235,0,0" VerticalAlignment="Top" Width="75"
+				Command="{Binding FinishEdit, Mode=OneWay}"/>
+
+
+
+    </Grid>
+</Window>
