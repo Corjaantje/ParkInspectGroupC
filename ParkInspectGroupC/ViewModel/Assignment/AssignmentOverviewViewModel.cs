@@ -5,6 +5,7 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using LocalDatabase.Domain;
+using ParkInspectGroupC.Miscellaneous;
 using ParkInspectGroupC.View;
 
 namespace ParkInspectGroupC.ViewModel
@@ -20,6 +21,7 @@ namespace ParkInspectGroupC.ViewModel
             EditCommand = new RelayCommand(EditAssignment);
             ShowDetails = new RelayCommand(showDetails);
             newInspection = new RelayCommand(createInspection);
+            newAssigment = new RelayCommand(makeNewAssignment);
         }
 
         public void fillAllAssignments()
@@ -58,6 +60,11 @@ namespace ParkInspectGroupC.ViewModel
             ObservedCollection = new ObservableCollection<Assignment>(tempCollection);
 
             base.RaisePropertyChanged("ObservedCollection");
+        }
+
+        private void makeNewAssignment()
+        {
+            Navigator.SetNewView(new NewAssignmentView());
         }
 
         private void showDetails()
@@ -138,11 +145,13 @@ namespace ParkInspectGroupC.ViewModel
         public ObservableCollection<Assignment> ObservedCollection { get; set; }
 
         public string AssignmentDetails { get; set; }
+        public ICommand newAssigment { get; set; }
 
         public ICommand SearchAll { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand ShowDetails { get; set; }
         public ICommand newInspection { get; set; }
+
 
         #endregion
     }

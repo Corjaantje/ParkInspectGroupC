@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using ParkInspectGroupC.ViewModel;
 
 namespace ParkInspectGroupC.View
@@ -6,12 +7,11 @@ namespace ParkInspectGroupC.View
     /// <summary>
     ///     Interaction logic for NewAssignmentView.xaml
     /// </summary>
-    public partial class NewAssignmentView : Window
+    public partial class NewAssignmentView : UserControl
     {
         public NewAssignmentView()
         {
             InitializeComponent();
-            DataContext = new NewAssignmentViewModel();
         }
     }
 }
