@@ -11,8 +11,6 @@ namespace ParkInspectGroupC.View
         public AssignmentOverview()
         {
             InitializeComponent();
-
-            DataContext = new AssignmentOverviewViewModel();
         }
     }
 }

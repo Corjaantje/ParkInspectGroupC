@@ -7,10 +7,12 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using LocalDatabase.Domain;
+using ParkInspectGroupC.Miscellaneous;
+using ParkInspectGroupC.View;
 
 namespace ParkInspectGroupC.ViewModel
 {
-    internal class NewAssignmentViewModel : ViewModelBase
+    public class NewAssignmentViewModel : ViewModelBase
     {
         private List<Customer> allCustomers;
 
@@ -22,8 +24,14 @@ namespace ParkInspectGroupC.ViewModel
             generateAllCustomers();
 
             CreateAssignment = new RelayCommand(createAssignment);
+            AssignmentOverview = new RelayCommand(openAssignmentOverview);
+
         }
 
+        private void openAssignmentOverview()
+        {
+            Navigator.SetNewView(new AssignmentOverview());
+        }
         public void createAssignment()
         {
             try
@@ -149,6 +157,8 @@ namespace ParkInspectGroupC.ViewModel
         public string CustomerDescription { get; set; }
 
         public ICommand CreateAssignment { get; set; }
+
+        public ICommand AssignmentOverview { get; set; }
 
         #endregion properties
     }

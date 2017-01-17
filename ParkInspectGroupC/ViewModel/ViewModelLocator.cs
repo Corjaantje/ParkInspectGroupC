@@ -142,6 +142,15 @@ namespace ParkInspectGroupC.ViewModel
             get { return new InspectorInspectionsViewModel(InspectorList.SelectedInspector); }
         }
 
+        public AssignmentOverviewViewModel OpdrachtOverview
+        {
+            get { return ServiceLocator.Current.GetInstance<AssignmentOverviewViewModel>(); }
+        }
+        public NewAssignmentViewModel NewAssignment
+        {
+            get { return ServiceLocator.Current.GetInstance<NewAssignmentViewModel>(); }
+        }
+
         private static void RegisterViewModels()
         {
             SimpleIoc.Default.Register<MainViewModel>();
@@ -168,6 +177,8 @@ namespace ParkInspectGroupC.ViewModel
             SimpleIoc.Default.Register<InspectionCreationViewModel>();
             SimpleIoc.Default.Register<InspectionEditViewModel>();
             SimpleIoc.Default.Register<InspectorInspectionsViewModel>();
+            SimpleIoc.Default.Register<AssignmentOverviewViewModel>();
+            SimpleIoc.Default.Register<NewAssignmentViewModel>();
 
             // ReportCreation.
             SimpleIoc.Default.Register<DiagramPreviewViewModel>();
@@ -195,6 +206,8 @@ namespace ParkInspectGroupC.ViewModel
             SimpleIoc.Default.Unregister<InspectionCreationViewModel>();
             SimpleIoc.Default.Unregister<InspectionEditViewModel>();
             SimpleIoc.Default.Unregister<InspectorInspectionsViewModel>();
+            SimpleIoc.Default.Unregister<AssignmentOverviewViewModel>();
+            SimpleIoc.Default.Unregister<NewAssignmentViewModel>();
 
             // ReportCreation.
             SimpleIoc.Default.Unregister<DiagramPreviewViewModel>();

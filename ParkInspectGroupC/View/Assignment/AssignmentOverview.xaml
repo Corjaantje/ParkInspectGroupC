@@ -4,7 +4,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:ParkInspectGroupC.View"
-             mc:Ignorable="d">
+             mc:Ignorable="d"
+             DataContext="{Binding OpdrachtOverview, Source={StaticResource Locator}}">
     <Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
           Margin="0,0,0,32">
         <DataGrid x:Name="AssignmentList" HorizontalAlignment="Left" Height="200" Margin="10,111,0,0"
@@ -28,18 +29,13 @@
                 VerticalAlignment="Top" Width="75" Command="{Binding SearchAll}" Height="23" />
         <Image x:Name="image" Source="..\..\Image\Logo_WhiteBack.PNG" HorizontalAlignment="Left" Height="30"
                Margin="10,10,0,0" VerticalAlignment="Top" Width="72" />
+        <Button x:Name="Administration" Content="Administatie" HorizontalAlignment="Left" Margin="87,20,0,0"
+                VerticalAlignment="Top" Width="75" IsEnabled="False" />
 
-        <Button x:Name="Assignmets" Content="Opdrachten" HorizontalAlignment="Left" Margin="110,10,0,0"
-                VerticalAlignment="Top" Width="75" Background="LightBlue" />
-        <Button x:Name="Administration" Content="Administatie" HorizontalAlignment="Left" Margin="195,10,0,0"
-                VerticalAlignment="Top" Width="75" />
-        <Button x:Name="Statistics" Content="Statistieken" HorizontalAlignment="Left" Margin="280,10,0,0"
-                VerticalAlignment="Top" Width="75" />
-
-        <Button x:Name="Questionare" Content="Vragenlijst" HorizontalAlignment="Left" Margin="110,35,0,0"
-                VerticalAlignment="Top" Width="116" />
-        <Button x:Name="NewQuestionaire" Content="+ Nieuwe vragenlijst" HorizontalAlignment="Left" Margin="237,35,0,0"
-                VerticalAlignment="Top" Width="118" />
+        <Button x:Name="Questionare" Content="Vragenlijst" HorizontalAlignment="Left" Margin="196,20,0,0"
+                VerticalAlignment="Top" Width="116" IsEnabled="False" />
+        <Button x:Name="NewQuestionaire" Content="+ Nieuwe vragenlijst" HorizontalAlignment="Left" Margin="354,20,0,0"
+                VerticalAlignment="Top" Width="118" Command="{Binding newAssigment}" />
         <Button x:Name="NewInspection" Content="+ Nieuwe inspectie" HorizontalAlignment="Left" Margin="180,316,0,0"
                 VerticalAlignment="Top" Width="118" Command="{Binding newInspection}" />
 
