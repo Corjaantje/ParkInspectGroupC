@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using GalaSoft.MvvmLight;
 using LocalDatabase.Domain;
@@ -73,7 +74,7 @@ namespace ParkInspectGroupC.ViewModel
             }
             catch
             {
-                Console.WriteLine("OOPS! something went wrong pulling data from the DataBase!");
+                Debug.WriteLine("OOPS! something went wrong pulling data from the DataBase!");
             }
         }
 

@@ -131,7 +131,6 @@ namespace ParkInspectGroupC.ViewModel
                     }
 
                 context.SaveChanges();
-                Console.WriteLine("TEST geslaagd");
             }
         }
 
