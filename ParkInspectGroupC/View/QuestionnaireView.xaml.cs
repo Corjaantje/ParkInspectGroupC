@@ -12,7 +12,7 @@ namespace ParkInspectGroupC.View
     {
         public QuestionnaireView()
         {
-            ServiceLocator.Current.GetInstance<QuestionnaireViewModel>().RefreshViewModel();
+            //ServiceLocator.Current.GetInstance<QuestionnaireViewModel>().RefreshViewModel();
             InitializeComponent();
         }
     }

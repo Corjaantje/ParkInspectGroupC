@@ -32,7 +32,7 @@
         </DataGrid>
         <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="35" Margin="10,10,0,0" Stroke="Black"
                    VerticalAlignment="Top" Width="629" />
-        <Button x:Name="button_Copy1" Command="{Binding SaveInspectionRelay}" Content="Opslaan"
+        <Button x:Name="SaveButton" Command="{Binding SaveInspectionRelay}" Content="Invoer opslaan en vragenlijst sluiten"
                 HorizontalAlignment="Left" Margin="10,431,0,0" VerticalAlignment="Top" Width="266" />
         <ListBox x:Name="listBox" ItemsSource="{Binding ListElements}" HorizontalAlignment="Left" Height="403"
                  Margin="281,50,0,0" VerticalAlignment="Top" Width="358" />

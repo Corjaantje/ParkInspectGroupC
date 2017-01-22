@@ -44,11 +44,6 @@ namespace ParkInspectGroupC.ViewModel
             get { return ServiceLocator.Current.GetInstance<CustomerCreationViewModel>(); }
         }
 
-        public QuestionnaireViewModel QuestionnaireViewModel
-        {
-            get { return ServiceLocator.Current.GetInstance<QuestionnaireViewModel>(); }
-        }
-
         public EmployeeCreationViewModel EmployeeCreation
         {
             get { return ServiceLocator.Current.GetInstance<EmployeeCreationViewModel>(); }
@@ -152,6 +147,11 @@ namespace ParkInspectGroupC.ViewModel
             get { return new InspectorEditViewModel(InspectorList.SelectedInspector); }
         }
 
+        public QuestionnaireViewModel QuestionnaireViewModel
+        {
+            get { return new QuestionnaireViewModel(); }
+        }
+
         private static void RegisterViewModels()
         {
             SimpleIoc.Default.Register<MainViewModel>();
@@ -236,12 +236,12 @@ namespace ParkInspectGroupC.ViewModel
 
         public VehicleCountControlVM VehicleCountControlVM
         {
-            get { return ServiceLocator.Current.GetInstance<VehicleCountControlVM>(); }
+            get { return new VehicleCountControlVM(); }
         }
 
         public QuestionnaireCommentControlVM QuestionnaireCommentControlVM
         {
-            get { return ServiceLocator.Current.GetInstance<QuestionnaireCommentControlVM>(); }
+            get { return new QuestionnaireCommentControlVM(); }
         }
 
         #endregion

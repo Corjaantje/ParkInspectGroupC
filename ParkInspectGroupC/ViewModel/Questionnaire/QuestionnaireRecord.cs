@@ -18,6 +18,6 @@ namespace ParkInspectGroupC.ViewModel.Questionnaire
         //public int QuestionId { get; private set; } // unique within inspection
         public int ModuleId { get; } // must be existing module
         public string[] Keywords { get; }
-        public int value { get; set; }
+        public int value { get; set; } // may want to change this to string to be consistent with database and allow more than just numeric input
     }
 }
