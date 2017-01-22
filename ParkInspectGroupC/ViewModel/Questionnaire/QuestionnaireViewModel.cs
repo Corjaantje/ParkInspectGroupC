@@ -10,51 +10,29 @@ using GalaSoft.MvvmLight.Command;
 using ParkInspectGroupC.DOMAIN;
 using ParkInspectGroupC.View.QuestionnaireModules;
 using ParkInspectGroupC.ViewModel.QuestionnaireModuleViewModels;
+using ParkInspectGroupC.Properties;
+using ParkInspectGroupC.ViewModel.Questionnaire;
+using GalaSoft.MvvmLight;
 
 namespace ParkInspectGroupC.ViewModel
 {
-	// krijgt nog een eigen file
-	// wil hier eigenlijk geen instantie opslaan; alleen het type om later te instantieren
-	public class QuestionnaireModule
+
+	public class QuestionnaireViewModel : ViewModelBase
 	{
-		public QuestionnaireModule(int Id, string Name, UserControl ModuleUserControl)
-		{
-			this.Id = Id;
-			this.Name = Name;
-			this.ModuleUserControl = ModuleUserControl;
-		}
+        long _currentInspectionId;
 
-		public int Id { get; private set; }
-		public string Name { get; private set; }
-		public UserControl ModuleUserControl { get; }
-	}
-
-	public class QuestionnaireRecord
-	{
-		public QuestionnaireRecord(int ModuleId, string[] Keywords, int value)
-		{
-			this.ModuleId = ModuleId;
-			this.Keywords = Keywords;
-			this.value = value;
-		}
-
-		//public int QuestionId { get; private set; } // unique within inspection
-		public int ModuleId { get; } // must be existing module
-		public string[] Keywords { get; }
-		public int value { get; set; }
-	}
-
-	public class QuestionnaireViewModel : INotifyPropertyChanged
-	{
 		public QuestionnaireViewModel()
 		{
-			Records = new List<QuestionnaireRecord>();
+            _currentInspectionId = Settings.Default.QuestionnaireSelectedInspectionId;
+            RaisePropertyChanged("CurrentInspectionId");
 
-			_questionnaireModules = new Dictionary<int, QuestionnaireModule>();
+            Records = new List<QuestionnaireRecord>();
+
+			_questionnaireModules = new Dictionary<int, QuestionnaireControlData>();
 			_questionnaireModules.Add(1,
-				new QuestionnaireModule(1, "Aantal voertuigen", new VehicleCountControl(1, this)));
+				new QuestionnaireControlData(1, "Aantal voertuigen", new VehicleCountControl(1, this)));
 			_questionnaireModules.Add(2,
-				new QuestionnaireModule(2, "Vragenlijst notities", new QuestionnaireCommentControl(2, this)));
+				new QuestionnaireControlData(2, "Vragenlijst notities", new QuestionnaireCommentControl(2, this)));
 
 			AddModuleToQuestionnaire = new RelayCommand<int>(AddListElement);
 			ListElements = new ObservableCollection<UIElement>();
@@ -66,7 +44,7 @@ namespace ParkInspectGroupC.ViewModel
 		public void setInspection(int InspectionID)
 		{
 
-			CurrentInspectionId = InspectionID;
+			
 
 			//using (var context = new ParkInspectEntities())
 			//{
@@ -83,7 +61,7 @@ namespace ParkInspectGroupC.ViewModel
 
 		#region Variables for database
 
-		private int CurrentInspectionId = 100;
+
 		private readonly List<QuestionnaireRecord> Records;
 
 		#endregion
@@ -105,9 +83,14 @@ namespace ParkInspectGroupC.ViewModel
 			}
 		}
 
-		public Dictionary<int, QuestionnaireModule> _questionnaireModules;
+        public long CurrentInspectionId
+        {
+            get { return _currentInspectionId;  }
+        }
 
-		public Dictionary<int, QuestionnaireModule> QuestionnaireModules
+		public Dictionary<int, QuestionnaireControlData> _questionnaireModules;
+
+		public Dictionary<int, QuestionnaireControlData> QuestionnaireModules
 		{
 			get { return _questionnaireModules; }
 		}
@@ -163,8 +146,8 @@ namespace ParkInspectGroupC.ViewModel
 		{
 			using (var context = new ParkInspectEntities())
 			{
-				var questionnaire = new Questionnaire();
-				questionnaire.InspectionId = CurrentInspectionId;
+				var questionnaire = new DOMAIN.Questionnaire();
+				questionnaire.InspectionId = (int)CurrentInspectionId;
 				var questionnaireId = context.Questionnaire.Add(questionnaire).Id;
 
 
@@ -252,12 +235,12 @@ namespace ParkInspectGroupC.ViewModel
 			RaisePropertyChanged("OrderedModuleNames");
 		}
 
-		private void RaisePropertyChanged(string prop)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
-		}
-
-		public event PropertyChangedEventHandler PropertyChanged;
+        // used when a new view is sent to the navigator
+        public void RefreshViewModel()
+        {
+            _currentInspectionId = Settings.Default.QuestionnaireSelectedInspectionId;
+            RaisePropertyChanged("CurrentInspectionId");
+        }
 
 		#endregion
 	}

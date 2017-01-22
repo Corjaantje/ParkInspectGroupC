@@ -161,6 +161,8 @@
     <Compile Include="ViewModel\QuestionnaireModuleViewModels\QuestionnaireCommentControlVM.cs" />
     <Compile Include="ViewModel\QuestionnaireModuleViewModels\QuestionnaireModuleViewModelBase.cs" />
     <Compile Include="ViewModel\QuestionnaireModuleViewModels\VehicleCountControlVM.cs" />
+    <Compile Include="ViewModel\Questionnaire\QuestionnaireControlData.cs" />
+    <Compile Include="ViewModel\Questionnaire\QuestionnaireRecord.cs" />
     <Compile Include="View\AssignmentToInspectionView.xaml.cs">
       <DependentUpon>AssignmentToInspectionView.xaml</DependentUpon>
     </Compile>
@@ -168,7 +170,7 @@
       <DependentUpon>AssignmentOverview.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\OnOffIndicatorViewModel.cs" />
-    <Compile Include="ViewModel\QuestionnaireViewModel.cs" />
+    <Compile Include="ViewModel\Questionnaire\QuestionnaireViewModel.cs" />
     <Compile Include="ViewModel\ReportCreation\DiagramPreviewViewModel.cs" />
     <Compile Include="ViewModel\ReportCreation\ReportViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
