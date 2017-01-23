@@ -29,6 +29,8 @@
                 <Separator />
             </MenuItem>
             <MenuItem Header="Opdrachten" Command="{Binding AssignmentNavigationCommand}" />
+            <MenuItem Header="Rapporten"  Command="{Binding ReportNavigationCommand}"
+                      Visibility="{Binding loggedInEmpIsmanager, Converter={StaticResource BoolToVisConverter}}" />
             <MenuItem Header="Klanten" Command="{Binding CustomerNavigationCommand}"
                       Visibility="{Binding loggedInEmpIsmanager, Converter={StaticResource BoolToVisConverter}}" />
 
