@@ -8,45 +8,58 @@
              mc:Ignorable="d"
              DataContext="{Binding CustomerList, Source={StaticResource Locator}}">
 
-    <Grid Width="523" Background="White" Height="257">
-        <Button Content="Verwijder klant"
-                Command="{Binding DataContext.DeleteCustomerCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}"
-                FontSize="16" HorizontalAlignment="Left" Margin="256,10,0,0" VerticalAlignment="Top" Width="112"
-                Height="32" />
+    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
 
-        <DataGrid x:Name="Grid" AutoGenerateColumns="False" CanUserDeleteRows="False"
-                  SelectedItem="{Binding SelectedCustomer, Mode=TwoWay}" IsReadOnly="True"
-                  ItemsSource="{Binding Customers, UpdateSourceTrigger = PropertyChanged}" Margin="10,124,10,10"
-                  BorderBrush="#FF979494" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#FFF0E0E0"
-                  HeadersVisibility="Column">
-            <DataGrid.Columns>
+        <ScrollViewer VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" Grid.Row="2" VerticalScrollBarVisibility="Auto" Margin="10,10,10,10" >
+                <DataGrid x:Name="Grid" AutoGenerateColumns="False" CanUserDeleteRows="False"
+                      SelectedItem="{Binding SelectedCustomer, Mode=TwoWay}" IsReadOnly="True"
+                      ItemsSource="{Binding Customers, UpdateSourceTrigger = PropertyChanged}"
+                      BorderBrush="#FF979494" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#FFF0E0E0"
+                      HeadersVisibility="Column">
+                <DataGrid.Columns>
 
-                <DataGridTextColumn Header="#" Binding="{Binding Id}" Foreground="#FF1D1616" />
-                <DataGridTextColumn Header="Klant" Binding="{Binding Name}" Width="*" />
+                    <DataGridTextColumn Header="#" Binding="{Binding Id}" Foreground="#FF1D1616" />
+                    <DataGridTextColumn Header="Klant" Binding="{Binding Name}" Width="*" />
 
-            </DataGrid.Columns>
+                </DataGrid.Columns>
 
-            <DataGrid.ColumnHeaderStyle>
-                <Style TargetType="DataGridColumnHeader">
-                    <Setter Property="FontSize" Value="16" />
-                </Style>
-            </DataGrid.ColumnHeaderStyle>
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="FontSize" Value="16" />
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
 
-            <DataGrid.InputBindings>
-                <KeyBinding Key="Delete" Command="{Binding DeleteCustomerCommand}" />
-            </DataGrid.InputBindings>
+                <DataGrid.InputBindings>
+                    <KeyBinding Key="Delete" Command="{Binding DeleteCustomerCommand}" />
+                </DataGrid.InputBindings>
 
-        </DataGrid>
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="29" Margin="10,90,0,0" TextWrapping="Wrap"
+            </DataGrid>
+            </ScrollViewer>
+        <TextBox Grid.Row="1" Grid.ColumnSpan="2" x:Name="textBox" HorizontalAlignment="Left" Margin="10,10,10,0" TextWrapping="Wrap"
                  Text="{Binding SearchString, UpdateSourceTrigger=PropertyChanged}" FontSize="16"
                  VerticalAlignment="Top" Width="503" />
-        <Button x:Name="button" Command="{Binding AddCustomerCommand}" Content="Nieuwe Klant" FontSize="16"
-                HorizontalAlignment="Left" Margin="135,10,0,0" VerticalAlignment="Top" Width="116" Height="32" />
-        <Image x:Name="image" HorizontalAlignment="Left" Height="124" VerticalAlignment="Top" Width="130"
-               Source="/ParkInspectGroupC;component/Image/Logo_WhiteBack.PNG" />
-        <Button x:Name="button1" Command="{Binding EditCustomerCommand }" Content="Bewerk klant" FontSize="16"
-                HorizontalAlignment="Left" Margin="373,10,0,0" VerticalAlignment="Top" Width="119" Height="32" />
+        <WrapPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+            <Button x:Name="button" Command="{Binding AddCustomerCommand}" Content="Nieuwe Klant" FontSize="16"
+                    HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Width="116" />
+            <Button x:Name="button1" Command="{Binding EditCustomerCommand }" Content="Bewerk klant" FontSize="16"
+                    HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" />
+            <Button Content="Verwijder klant"
+                    Command="{Binding DataContext.DeleteCustomerCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}"
+                    FontSize="16" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        </WrapPanel>
 
+        <Image Margin="10,10,0,0" Grid.Row="0" Grid.Column="0" x:Name="image" HorizontalAlignment="Left" VerticalAlignment="Top" MinHeight="30" MaxWidth="100"
+               Source="/ParkInspectGroupC;component/Image/Logo_WhiteBack.PNG" />
 
     </Grid>
 </UserControl>
