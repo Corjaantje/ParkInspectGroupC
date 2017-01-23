@@ -81,5 +81,17 @@ namespace ParkInspectGroupC.Properties {
                 this["QuestionnaireSelectedInspectionId"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public long SelectedAssignmentId {
+            get {
+                return ((long)(this["SelectedAssignmentId"]));
+            }
+            set {
+                this["SelectedAssignmentId"] = value;
+            }
+        }
     }
 }
