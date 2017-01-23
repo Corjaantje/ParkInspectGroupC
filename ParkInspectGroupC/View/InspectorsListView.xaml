@@ -5,12 +5,24 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:ParkInspectGroupC.View"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="950"
              DataContext="{Binding InspectorList, Source={StaticResource Locator}}">
-    <Canvas>
-        <TextBlock Text="Inspecteurs" Canvas.Top="10" Canvas.Left="10" FontSize="18" />
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="Inspecteurs" Canvas.Top="10" Canvas.Left="10" FontSize="18" />
 
-        <ScrollViewer VerticalScrollBarVisibility="Auto" Canvas.Top="60" Canvas.Left="10">
+        <TextBox Grid.Row="1" Grid.ColumnSpan="2" TextWrapping="Wrap"
+                 Text="{Binding SearchString, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <ScrollViewer Grid.Row="2" Grid.Column="0" VerticalScrollBarVisibility="Auto" Canvas.Top="60" Canvas.Left="10">
             <DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedInspector}"
                       ItemsSource="{Binding InspectorsList, UpdateSourceTrigger=PropertyChanged}"
                       GridLinesVisibility="Horizontal" HeadersVisibility="Column">
@@ -65,7 +77,7 @@
             </DataGrid>
 
         </ScrollViewer>
-        <Border Canvas.Top="60" Canvas.Left="470"
+        <Border Grid.Row="2" Grid.Column="1" Canvas.Top="60" Canvas.Left="317"
                 Visibility="{Binding ShowAvailability, Converter={StaticResource ShowAvailability}}">
             <DataGrid Grid.ColumnSpan="2" AutoGenerateColumns="False" IsReadOnly="True"
                       SelectedItem="{Binding SelectedAvailability}"
@@ -73,7 +85,7 @@
                       GridLinesVisibility="Horizontal" HeadersVisibility="Column" Canvas.Top="30" Canvas.Left="10"
                       CanUserResizeColumns="False">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Tijd" Width="260">
+                    <DataGridTextColumn Header="Tijd" Width="auto">
                         <DataGridTextColumn.Binding>
                             <MultiBinding StringFormat="{}{0}-{1}">
                                 <Binding Path="StartTime" />
@@ -81,8 +93,7 @@
                             </MultiBinding>
                         </DataGridTextColumn.Binding>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Datum" Binding="{Binding Date}" Width="140" />
-                    <DataGridTemplateColumn Width="50">
+                    <DataGridTemplateColumn Width="auto">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Button
@@ -97,5 +108,5 @@
                 </DataGrid.Columns>
             </DataGrid>
         </Border>
-    </Canvas>
+    </Grid>
 </UserControl>
