@@ -25,7 +25,7 @@
                 <viewsm:OnOffIndicator VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100"
                                        Margin="0,0,0,5" />
             </Grid>
-            <ContentControl Content="{Binding CurrentView}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+            <ContentControl Content="{Binding CurrentView}" HorizontalAlignment="Center" VerticalAlignment="Top" />
         </DockPanel>
 
     </Grid>

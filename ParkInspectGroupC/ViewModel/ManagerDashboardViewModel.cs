@@ -14,37 +14,41 @@ namespace ParkInspectGroupC.ViewModel
     {
         public ManagerDashboardViewModel()
         {
-            Manager = Settings.Default.LoggedInEmp;
+            Employee = Settings.Default.LoggedInEmp;
             using (var context = new LocalParkInspectEntities())
             {
                 var asList = (from a in context.Assignment
                     join c in context.Customer on a.CustomerId equals c.Id
-                    where a.ManagerId == Manager.Id
+                    where a.ManagerId == Employee.Id
                     select new {c.Name, a.Description}).ToList();
                 AssignmentList = new ObservableCollection<object>(asList);
 
-                var mAvailability = context.Availability.Where(e => e.EmployeeId == Manager.Id).ToList();
-                ManagerAvailability = new ObservableCollection<Availability>(mAvailability);
+                var eAvailability = context.Availability.Where(e => e.EmployeeId == Employee.Id).ToList();
+                EmployeeAvailability = new ObservableCollection<Availability>(eAvailability);
+
+                var eWorkingHours = context.WorkingHours.Where(e => e.EmployeeId == Employee.Id).ToList();
+                EmployeeWorkingHours = new ObservableCollection<WorkingHours>(eWorkingHours);
             }
             ShowInspectorListCommand = new RelayCommand(ShowInspectorList);
             AddAccountCommand = new RelayCommand(ShowAddAccount);
         }
 
-        public Employee Manager { get; set; }
-
+        public Employee Employee { get; set; }
         public ObservableCollection<object> AssignmentList { get; set; }
-        public ObservableCollection<Availability> ManagerAvailability { get; set; }
+        public ObservableCollection<Availability> EmployeeAvailability { get; set; }
+        public ObservableCollection<WorkingHours> EmployeeWorkingHours { get; set; }
         public ICommand ShowInspectorListCommand { get; set; }
         public ICommand AddAccountCommand { get; set; }
 
+        #region Buttons
         private void ShowInspectorList()
         {
             Navigator.SetNewView(new InspectorsListView());
         }
-
         private void ShowAddAccount()
         {
             Navigator.SetNewView(new EmployeeCreationView());
         }
+        #endregion
     }
 }

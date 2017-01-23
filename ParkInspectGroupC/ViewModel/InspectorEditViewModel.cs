@@ -67,6 +67,7 @@ namespace ParkInspectGroupC.ViewModel
                 SelectedInspector.Phonenumber = TempInspector.Phonenumber;
                 SelectedInspector.ZipCode = TempInspector.ZipCode;
                 SelectedInspector.RegionId = TempInspector.RegionId;
+                SelectedInspector.ExistsInCentral = 2;
                 context.Entry(SelectedInspector).State = EntityState.Modified;
                 context.SaveChanges();
             }
