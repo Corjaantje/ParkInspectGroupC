@@ -6,37 +6,54 @@
              xmlns:local="clr-namespace:ParkInspectGroupC.View"
              mc:Ignorable="d"
              DataContext="{Binding Dashboard, Source={StaticResource Locator}}">
-    <Canvas>
-        <TextBlock Text="Werktijden" FontSize="18" Canvas.Top="0" Canvas.Left="10" />
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
 
-        <DataGrid Grid.ColumnSpan="2" AutoGenerateColumns="False" IsReadOnly="True"
-                  ItemsSource="{Binding EmployeeAvailability}"
-                  GridLinesVisibility="Horizontal" HeadersVisibility="Column" Canvas.Top="30" Canvas.Left="10"
-                  CanUserResizeColumns="False">
-
+        <TextBlock Text="Geplande beschikbaarheid:" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="0" Margin="10,0,0,0" />
+        <DataGrid AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding EmployeeAvailability}" GridLinesVisibility="Horizontal" HeadersVisibility="Column" Grid.Column="0" Margin="10,20,0,0">
             <DataGrid.Columns>
-
-                <DataGridTextColumn Header="Tijd">
-
+                <DataGridTextColumn Header="Start tijd">
                     <DataGridTextColumn.Binding>
-
-                        <MultiBinding StringFormat="{}{0}-{1}">
-
-                            <Binding Path="StartTime" />
-
-                            <Binding Path="EndTime" />
-
-                        </MultiBinding>
-
+                        <Binding Path="StartTime" StringFormat="{}{0:t}" />
                     </DataGridTextColumn.Binding>
-
                 </DataGridTextColumn>
-
-                <DataGridTextColumn Header="Datum" Binding="{Binding Date}" Width="140" />
-
+                <DataGridTextColumn Header="Eind tijd">
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="EndTime" StringFormat="{}{0:t}" />
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Datum">
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="Date" StringFormat="{}{0:d}" />
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
             </DataGrid.Columns>
-
         </DataGrid>
 
-    </Canvas>
+        <TextBlock Text="Werkelijk gewerkt:" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="2" Margin="0,0,0,0" />
+        <DataGrid AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding EmployeeWorkingHours}" GridLinesVisibility="Horizontal" HeadersVisibility="Column" Grid.Column="2" Margin="0,20,10,0">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Start tijd">
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="StartTime" StringFormat="{}{0:t}" />
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Eind tijd">
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="EndTime" StringFormat="{}{0:t}" />
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Datum">
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="Date" StringFormat="{}{0:d}" />
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
 </UserControl>
