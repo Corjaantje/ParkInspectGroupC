@@ -33,12 +33,12 @@ namespace ParkInspectGroupC.ViewModel
             Navigator.SetNewView(new AssignmentOverview());
         }
         public void createAssignment()
-        {
-            try
+		{
+			var assign = new Assignment();
+			try
             {
                 using (var context = new LocalParkInspectEntities())
                 {
-                    var assign = new Assignment();
 
                     assign.Id = context.Assignment.Max(u => u.Id) + 1;
                     assign.CustomerId = getCustomerId();
@@ -46,9 +46,11 @@ namespace ParkInspectGroupC.ViewModel
                     assign.Description = Description;
                     assign.DateCreated = DateTime.Today;
                     assign.DateUpdated = DateTime.Today;
+					assign.ExistsInCentral = 0;
 
-                    context.Assignment.Add(assign);
-                    context.SaveChanges();
+					context.Assignment.Add(assign);
+					//context.Entry(assign).State = System.Data.Entity.EntityState.Added;
+					context.SaveChanges();
                 }
 
                 TopLabel = "Opdracht aangemaakt";
@@ -57,13 +59,19 @@ namespace ParkInspectGroupC.ViewModel
 
                 Description = "";
 
-                RaisePropertyChanged();
+                RaisePropertyChanged(TopLabel);
+				RaisePropertyChanged(Description);
+
+				AssignmentOverview ao = new View.AssignmentOverview();
+				((AssignmentOverviewViewModel)ao.DataContext).addNewAssignment(assign);
+				Navigator.SetNewView(ao);
+
             }
             catch
             {
                 TopLabel = "Something went wrong, changes are not saved";
 
-                RaisePropertyChanged();
+                RaisePropertyChanged("TopLabel");
             }
         }
 
@@ -128,9 +136,10 @@ namespace ParkInspectGroupC.ViewModel
 
         private int getManager()
         {
-            // needs to properly assign to a manager
-            return 4;
-        }
+			// needs to properly assign to a manager
+			
+            return (int)Properties.Settings.Default.LoggedInEmp.Id;
+		}
 
         #region properties
 

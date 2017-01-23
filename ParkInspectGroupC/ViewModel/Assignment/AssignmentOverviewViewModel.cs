@@ -45,6 +45,15 @@ namespace ParkInspectGroupC.ViewModel
 			refillCollection();
 		}
 
+		public void addNewAssignment(Assignment a)
+		{
+			// adds a assignment to the list
+			AssignmentCollection.Add(a);
+			ObservedCollection.Add(a);
+			RaisePropertyChanged("AssignmentCollection");
+			RaisePropertyChanged("ObservedCollection");
+		}
+
 		private void refillCollection()
 		{
 			IEnumerable<Assignment> tempCollection;
@@ -87,6 +96,9 @@ namespace ParkInspectGroupC.ViewModel
 
 		private void showDetails()
 		{
+			if (SelectedAssignment == null)
+				return;
+
 			var customerName = "";
 			var managerName = "";
 			var description = SelectedAssignment.Description;

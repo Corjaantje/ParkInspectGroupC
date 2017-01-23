@@ -46,9 +46,9 @@ namespace ParkInspectGroupC.ViewModel
 
         private void fillProperties()
         {
-            try
-            {
-                using (var context = new LocalParkInspectEntities())
+			try
+			{
+				using (var context = new LocalParkInspectEntities())
                 {
                     var c = context.Customer.Single(o => o.Id == assignment.CustomerId);
                     CustomerName = c.Name;
@@ -58,14 +58,15 @@ namespace ParkInspectGroupC.ViewModel
 
                 EndDate = DateTime.Today;
                 SelectedRegion = RegionNames[0];
-            }
-            catch (Exception e)
-            {
-                Debug.Write(e.StackTrace);
-            }
-        }
+		}
+			    catch (Exception e)
+			    {
 
-        private void getAllRegions()
+					Debug.Write(e.StackTrace);
+			    }
+}
+
+		private void getAllRegions()
         {
             try
             {
@@ -86,11 +87,18 @@ namespace ParkInspectGroupC.ViewModel
 
         private void createInspection()
         {
+			
+
             try
             {
+
                 using (var context = new LocalParkInspectEntities())
                 {
-                    var i = new Inspection();
+
+					Employee Inspector = context.Employee.Single(e => e.FirstName == SelectedInspector);
+					
+
+					var i = new Inspection();
 
                     i.Id = context.Inspection.Max(o => o.Id) + 1;
                     i.AssignmentId = assignment.Id;
@@ -100,7 +108,7 @@ namespace ParkInspectGroupC.ViewModel
                     i.StatusId = 1;
 
                     if (AssignInspector)
-                        i.InspectorId = context.Employee.Single(e => e.FirstName == SelectedInspector).Id;
+                        i.InspectorId = Inspector.Id;
 
                     i.DateCreated = DateTime.Today;
                     i.DateUpdated = DateTime.Today;
@@ -189,9 +197,6 @@ namespace ParkInspectGroupC.ViewModel
         }
 
         public ICommand CreateInspection { get; set; }
-
-        //NOT YET FUNCTIONAL, ONLY ADDED DAY BEFORE DEADLINE! TODO ADD FUNCTION
-        public ICommand SaveInspection { get; set; }
 
         #endregion
     }

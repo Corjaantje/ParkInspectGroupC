@@ -21,7 +21,7 @@
                 VerticalAlignment="Top" Width="75" IsEnabled="False" />
 
 
-        <Label x:Name="newAssignmentLabel" Content="{Binding TopLabel}" HorizontalAlignment="Left" Margin="81,110,0,0"
+        <Label x:Name="newAssignmentLabel" Content="{Binding TopLabel}" HorizontalAlignment="Left" Margin="10,291,0,0"
                VerticalAlignment="Top" />
 
         <Label x:Name="descriptionLabel" Content="Beschrijving:" HorizontalAlignment="Left" Margin="10,50,0,0"

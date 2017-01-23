@@ -5,8 +5,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:ParkInspectGroupC.View"
         mc:Ignorable="d"
-        DataContext="{Binding AssignmentToInspection, Source={StaticResource Locator}}" Height="230" Width="275">
-    <Grid Margin="0,0,2,1">
+        DataContext="{Binding AssignmentToInspection, Source={StaticResource Locator}}" Height="293.853" Width="275">
+    <Grid Margin="0,0,2,12">
         <Label x:Name="label" Content="Inspectie voor klant:" HorizontalAlignment="Left" Margin="10,10,0,0"
                VerticalAlignment="Top" />
         <Label x:Name="label1" Content="{Binding CustomerName}" HorizontalAlignment="Left" Margin="131,10,0,0"
@@ -30,9 +30,9 @@
         <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="10,172,0,0" VerticalAlignment="Top" Width="120"
                   ItemsSource="{Binding InspectorNames}" SelectedItem="{Binding SelectedInspector}" />
         <Button x:Name="button" Content="Maak Inspectie" HorizontalAlignment="Left" Margin="157,172,0,0"
-                VerticalAlignment="Top" Width="102" Command="{Binding SaveInspection}" />
-        <Label x:Name="MessageLabel" Content="{Binding ErrorMessage}" HorizontalAlignment="Left" Margin="10,304,0,0"
-               VerticalAlignment="Top" Width="315" Height="22" />
+                VerticalAlignment="Top" Width="102" Command="{Binding CreateInspection}" />
+        <Label x:Name="MessageLabel" Content="{Binding ErrorMessage}" HorizontalAlignment="Left" Margin="10,199,-60,0"
+               VerticalAlignment="Top" Width="315" Height="27" />
 
 
     </Grid>
