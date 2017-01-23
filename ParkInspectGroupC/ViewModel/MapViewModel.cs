@@ -21,7 +21,6 @@ namespace ParkInspectGroupC.ViewModel
         //This is a debug constructor!
         public MapViewModel()
         {
-            Debug.WriteLine("Open screen");
             IEnumerable<Inspection> PInspections = null;
             using (var context = new LocalParkInspectEntities())
             {
@@ -55,9 +54,9 @@ namespace ParkInspectGroupC.ViewModel
                         coord = (from c in context.Coordinate
                             where c.InspectionId == insp.Id
                             select c).FirstOrDefault();
-                        frequency = (from c in context.Coordinate
-                            where (c.Latitude == coord.Latitude) && (c.Longitude == coord.Longitude)
-                            select c).Count();
+                        //frequency = (from c in context.Coordinate
+                        //    where (c.Latitude == coord.Latitude) && (c.Longitude == coord.Longitude)
+                        //    select c).Count();
                         Lat = (from c in context.Coordinate
                             where c.InspectionId == insp.Id
                             select c).FirstOrDefault().Latitude;

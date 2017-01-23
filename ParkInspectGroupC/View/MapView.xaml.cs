@@ -3,13 +3,14 @@ using System.Windows.Input;
 using GMap.NET;
 using GMap.NET.MapProviders;
 using ParkInspectGroupC.ViewModel;
+using System.Windows.Controls;
 
 namespace ParkInspectGroupC.View
 {
     /// <summary>
     ///     Interaction logic for MapView.xaml
     /// </summary>
-    public partial class MapView : Window
+    public partial class MapView : UserControl
     {
         private MapViewModel vm;
 
