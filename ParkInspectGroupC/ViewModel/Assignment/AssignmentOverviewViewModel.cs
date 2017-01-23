@@ -7,17 +7,17 @@ using GalaSoft.MvvmLight.Command;
 using LocalDatabase.Domain;
 using ParkInspectGroupC.Miscellaneous;
 using ParkInspectGroupC.View;
-using ParkInspectGroupC.Properties;
 
 namespace ParkInspectGroupC.ViewModel
 {
 	public class AssignmentOverviewViewModel : ViewModelBase
 	{
-		public AssignmentOverviewViewModel()
+        public bool loggedInEmpIsmanager{ get; set; }
+        public AssignmentOverviewViewModel()
 		{
-			_searchCritetia = "";
+            loggedInEmpIsmanager = Properties.Settings.Default.LoggedInEmp.IsManager;
+            _searchCritetia = "";
 			fillAllAssignments();
-
 			SearchAll = new RelayCommand(refillCollection);
 			EditCommand = new RelayCommand(EditAssignment);
 			ShowDetails = new RelayCommand(showDetails);
@@ -80,12 +80,10 @@ namespace ParkInspectGroupC.ViewModel
 		{
 			if (SelectedAssignment != null)
 			{
-                Settings.Default.AssignmentId = SelectedAssignment.Id;
-                var Inspections = new InspectionView();
+				var Inspections = new InspectionView();
 				Navigator.SetNewView(Inspections);
-                
-
-            }
+				((InspectionViewModel)Inspections.DataContext).filterInspections((int)SelectedAssignment.Id);
+			}
 		}
 
 		private void showDetails()
