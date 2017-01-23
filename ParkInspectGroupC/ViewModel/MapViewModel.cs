@@ -24,7 +24,9 @@ namespace ParkInspectGroupC.ViewModel
             IEnumerable<Inspection> PInspections = null;
             using (var context = new LocalParkInspectEntities())
             {
-                PInspections = (from c in context.Inspection
+                PInspections = (
+                    from c in context.Inspection
+                    where c.InspectorId == Properties.Settings.Default.LoggedInEmp.Id
                     select c).ToList();
             }
             AddInspections(PInspections);
@@ -54,9 +56,9 @@ namespace ParkInspectGroupC.ViewModel
                         coord = (from c in context.Coordinate
                             where c.InspectionId == insp.Id
                             select c).FirstOrDefault();
-                        //frequency = (from c in context.Coordinate
-                        //    where (c.Latitude == coord.Latitude) && (c.Longitude == coord.Longitude)
-                        //    select c).Count();
+                        frequency = (from c in context.Coordinate
+                                     where (c.Latitude == coord.Latitude) && (c.Longitude == coord.Longitude)
+                                     select c).Count();
                         Lat = (from c in context.Coordinate
                             where c.InspectionId == insp.Id
                             select c).FirstOrDefault().Latitude;
