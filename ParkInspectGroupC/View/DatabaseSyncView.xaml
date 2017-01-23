@@ -8,11 +8,11 @@
              DataContext="{Binding DatabaseSync, Source={StaticResource Locator}}"
              d:DesignHeight="720" d:DesignWidth="1280">
     <Grid>
-        <Button VerticalAlignment="Top" HorizontalAlignment="Left" Height="20" Width="250" Margin="5,5,0,0"
+        <Button VerticalAlignment="Top" HorizontalAlignment="Left" Height="20" Width="250" Margin="10,20,0,0"
                 Command="{Binding Path=LCSyncCommand}" Content="Start synchronisatie van lokaal naar centraal" />
-        <Button VerticalAlignment="Top" HorizontalAlignment="Left" Height="20" Width="250" Margin="5,30,0,0"
+        <Button VerticalAlignment="Top" HorizontalAlignment="Left" Height="20" Width="250" Margin="10,45,0,0"
                 Command="{Binding Path=CLSyncCommand}" Content="Start synchronisatie van centraal naar lokaal" />
-
+        <Button VerticalAlignment="Top" HorizontalAlignment="Left" Command="{Binding BackCommand}" Margin="268,19,947,653" />
         <Grid Margin="5,70,5,5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
@@ -69,5 +69,9 @@
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
+        <Button VerticalAlignment="Top" HorizontalAlignment="Left" Height="46" Width="72" Margin="265,19,0,0"
+            Command="{Binding BackCommand}" >
+            <Image Source="/ParkInspectGroupC;component/Image/arrow-back-128.png" MaxWidth="20" />
+        </Button>
     </Grid>
 </UserControl>

@@ -11,6 +11,8 @@ using LocalDatabase;
 using LocalDatabase.Domain;
 using ParkInspectGroupC.Properties;
 using ParkInspectGroupC.View.DatabaseSyncDialogs;
+using ParkInspectGroupC.Miscellaneous;
+using ParkInspectGroupC.View;
 
 namespace ParkInspectGroupC.ViewModel
 {
@@ -20,6 +22,7 @@ namespace ParkInspectGroupC.ViewModel
 
         public DatabaseSyncViewModel()
         {
+            BackCommand = new RelayCommand(PerformBack);
             LCSyncCommand = new RelayCommand(LocalToCentralSync);
             CLSyncCommand = new RelayCommand(CentralToLocalSync);
             ShowUpdateMessage = new RelayCommand(ShowUpdateMessageDialog);
@@ -41,12 +44,20 @@ namespace ParkInspectGroupC.ViewModel
 
         public ObservableCollection<SaveDeleteMessage> theSaveDeleteMessages { get; set; }
         public ObservableCollection<UpdateMessage> theUpdateMessages { get; set; }
+        public ICommand BackCommand { get; set; }
         public ICommand LCSyncCommand { get; set; }
         public ICommand CLSyncCommand { get; set; }
         public ICommand ShowUpdateMessage { get; set; }
         public ICommand DeleteUpdateMessage { get; set; }
 
         public UpdateMessage SelectedUpdateMessage { get; set; }
+
+        #region back
+        private void PerformBack()
+        {
+            Navigator.SetNewView(new LoginView());
+        }
+        #endregion
 
         #region Central to Local Sync
 

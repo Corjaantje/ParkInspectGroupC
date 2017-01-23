@@ -13,12 +13,13 @@ namespace ParkInspectGroupC.ViewModel
     public class InspectorListViewModel : ViewModelBase
     {
         private ObservableCollection<Availability> _inspectorAvailability;
-
-        private Availability _selectedAailability;
+        private Availability _selectedAvailability;
+        
         private Employee _selectedInspector;
 
         private bool _showAvailability;
         private int days;
+        private string _searchString = "Search";
 
         public InspectorListViewModel()
         {
@@ -49,6 +50,7 @@ namespace ParkInspectGroupC.ViewModel
                         var iAvailability =
                             context.Availability.Where(e => e.EmployeeId == SelectedInspector.Id).ToList();
                         InspectorAvailability = new ObservableCollection<Availability>(iAvailability);
+                        RaisePropertyChanged("InspectorAvailability");
                     }
                     ShowAvailability = true;
                 }
@@ -57,10 +59,10 @@ namespace ParkInspectGroupC.ViewModel
 
         public Availability SelectedAvailability
         {
-            get { return _selectedAailability; }
+            get { return _selectedAvailability; }
             set
             {
-                _selectedAailability = value;
+                _selectedAvailability = value;
                 RaisePropertyChanged("SelectedAvailability");
             }
         }
@@ -89,6 +91,44 @@ namespace ParkInspectGroupC.ViewModel
             {
                 _showAvailability = value;
                 RaisePropertyChanged("ShowAvailability");
+            }
+        }
+
+        public string SearchString
+        {
+            get { return _searchString; }
+
+            set
+            {
+                _searchString = value;
+
+                    using (var context = new LocalParkInspectEntities())
+                    {
+                        var iList = context.Employee.Where(e => e.IsManager == false).ToList();
+                        InspectorsList = new ObservableCollection<Employee>(iList);
+                    }
+
+
+                var searchedInspectors = new ObservableCollection<Employee>();
+
+                foreach (var inspector in InspectorsList)
+                    if ((SearchString != null) && 
+                        (  inspector.FirstName.ToLower().Contains(SearchString.ToLower()) 
+                        || inspector.SurName.ToLower().Contains(SearchString.ToLower()) 
+                        || inspector.Address.ToLower().Contains(SearchString.ToLower())
+                        || inspector.City.ToLower().Contains(SearchString.ToLower()) 
+                        || inspector.Email.ToLower().Contains(SearchString.ToLower()) 
+                        || inspector.Phonenumber.ToLower().Contains(SearchString.ToLower()) 
+                        || inspector.ZipCode.ToLower().Contains(SearchString.ToLower())))
+                    {
+                        searchedInspectors.Add(inspector);
+                    }
+
+
+                InspectorsList = searchedInspectors;
+
+
+                RaisePropertyChanged("InspectorsList");
             }
         }
 
@@ -121,7 +161,7 @@ namespace ParkInspectGroupC.ViewModel
             {
                 // get days between dates to see if employee may edit
                 var daysBetweenDates = DateTime.Now - SelectedAvailability.Date;
-                days = (int) daysBetweenDates.TotalDays;
+                days = (int)daysBetweenDates.TotalDays;
             }
 
             if (days < 7)

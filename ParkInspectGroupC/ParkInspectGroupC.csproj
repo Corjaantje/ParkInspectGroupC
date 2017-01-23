@@ -164,6 +164,7 @@
     <Compile Include="ViewModel\QuestionnaireModuleViewModels\VehicleCountControlVM.cs" />
     <Compile Include="ViewModel\Questionnaire\QuestionnaireControlData.cs" />
     <Compile Include="ViewModel\Questionnaire\QuestionnaireRecord.cs" />
+    <Compile Include="ViewModel\Results\ResultsDataStructs.cs" />
     <Compile Include="View\AssignmentToInspectionView.xaml.cs">
       <DependentUpon>AssignmentToInspectionView.xaml</DependentUpon>
     </Compile>
