@@ -85,8 +85,13 @@ namespace ParkInspectGroupC.ViewModel
                 if (SelectedCustomer != null)
                 {
                     foreach (var customer in customers)
+                    {
                         if (customer.Id == SelectedCustomer.Id)
+                        {
                             context.Customer.Remove(customer);
+                            customer.ExistsInCentral = 2;
+                        }
+                    }
                     context.SaveChanges();
                 }
             }
