@@ -34,7 +34,7 @@ namespace ParkInspectGroupC.ViewModel
             set
             {
                 _sTime = value;
-                RaisePropertyChanged("sTime");
+                RaisePropertyChanged("STime");
             }
         }
 
@@ -44,7 +44,7 @@ namespace ParkInspectGroupC.ViewModel
             set
             {
                 _eTime = value;
-                RaisePropertyChanged("eTime");
+                RaisePropertyChanged("ETime");
             }
         }
 
