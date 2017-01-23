@@ -104,7 +104,6 @@ namespace ParkInspectGroupC.ViewModel
         {
             TimeSpan start;
             TimeSpan end;
-            var format = "hh:mm";
             if ((Date == null) ||
                 !TimeSpan.TryParseExact(sTime, "g", null, TimeSpanStyles.None, out start) ||
                 !TimeSpan.TryParseExact(eTime, "g", null, TimeSpanStyles.None, out end))
