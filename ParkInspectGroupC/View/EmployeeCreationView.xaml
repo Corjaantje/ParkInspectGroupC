@@ -108,6 +108,7 @@
                       DisplayMemberPath="SurName" Grid.ColumnSpan="2" />
 
         <WrapPanel Grid.Row="14" Grid.Column="0" Orientation="Horizontal" Margin="0,0,0,0"
+
                        VerticalAlignment="Center">
             <Button Content="Opslaan" MinWidth="60" Margin="3,3,3,3" Command="{Binding SaveCommand}"
                         CommandParameter="{Binding ElementName=This}" />
@@ -116,4 +117,5 @@
             <!-- <Button Content="Reset" MinWidth="60" Margin="3,3,3,3" /> -->
         </WrapPanel>
     </Grid>
+
 </UserControl>

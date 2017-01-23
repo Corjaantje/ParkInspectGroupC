@@ -935,8 +935,17 @@ namespace LocalDatabase.Local
                 var oDate = get.Rows[0][0];
                 var lastDateAdded = (DateTime) oDate;
 
-                var r = context.Employee.Where(x => x.DateCreated == lastDateAdded).First();
-                id = r.Id;
+                ParkInspectGroupC.DOMAIN.Employee r = null;
+                try
+                {
+                    r = context.Employee.Where(x => x.DateCreated == lastDateAdded).First();
+                    id = r.Id;
+                }
+                catch (Exception)
+                {
+                    id = i;
+                }
+                
             }
             return id;
         }

@@ -12,6 +12,7 @@ using ParkInspectGroupC.Miscellaneous;
 using ParkInspectGroupC.Properties;
 using ParkInspectGroupC.View;
 using Simple.Wpf.Themes;
+using ParkInspectGroupC.View.ReportCreation;
 
 namespace ParkInspectGroupC.ViewModel
 {
@@ -34,6 +35,7 @@ namespace ParkInspectGroupC.ViewModel
             AssignmentNavigationCommand = new RelayCommand(PerformAssignmentNavigation);
             ProfileNavigationCommand = new RelayCommand(PerfromProfilenNavigation);
             ProfileListNavigationCommand = new RelayCommand(PerfromProfileListNavigation);
+            ReportNavigationCommand = new RelayCommand(PerformReportNavigation);
             CustomerNavigationCommand = new RelayCommand(PerformCustomerNavigation);
             HomeCommand = new RelayCommand(PerformHome);
             LogOutCommand = new RelayCommand(PerformLogOut);
@@ -122,6 +124,7 @@ namespace ParkInspectGroupC.ViewModel
 
         public ICommand BackCommand { get; set; }
         public ICommand ProfileNavigationCommand { get; set; }
+        public ICommand ReportNavigationCommand { get; set; }
         public ICommand ProfileListNavigationCommand { get; set; }
         public ICommand AssignmentNavigationCommand { get; set; }
         public ICommand CustomerNavigationCommand { get; set; }
@@ -156,7 +159,10 @@ namespace ParkInspectGroupC.ViewModel
         {
             Navigator.SetNewView(new InspectorProfileView());
         }
-
+        private void PerformReportNavigation()
+        {
+            Navigator.SetNewView(new ReportAssignmentSelectionView());
+        }
         private void PerformAssignmentNavigation()
         {
             Navigator.SetNewView(new AssignmentOverview());
