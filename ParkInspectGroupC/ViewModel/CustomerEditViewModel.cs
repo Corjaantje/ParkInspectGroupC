@@ -128,6 +128,7 @@ namespace ParkInspectGroupC.ViewModel
                         customer.Location = CustomerLocation;
                         customer.Phonenumber = PhoneNumber;
                         customer.Email = CustomerMail;
+                        customer.ExistsInCentral = 2;
                     }
 
                 context.SaveChanges();
