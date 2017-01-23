@@ -6,6 +6,7 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using LocalDatabase.Domain;
+using ParkInspectGroupC.Properties;
 
 namespace ParkInspectGroupC.ViewModel
 {
@@ -46,7 +47,7 @@ namespace ParkInspectGroupC.ViewModel
                 {
                     Assignments.Add(assignment.Description);
 
-                    if (assignment.Id == inspectionVM.SelectedInspection.AssignmentId)
+                    if (assignment.Id == Settings.Default.InspectionAssignmentId)
                         SelectedAssignment = assignment.Description;
                 }
 
@@ -56,7 +57,7 @@ namespace ParkInspectGroupC.ViewModel
                 {
                     Regions.Add(region.Region1);
 
-                    if (region.Id == inspectionVM.SelectedInspection.RegionId)
+                    if (region.Id == Settings.Default.InspectionRegionId)
                         SelectedRegion = region.Region1;
                 }
 
@@ -66,7 +67,7 @@ namespace ParkInspectGroupC.ViewModel
                 {
                     Stats.Add(stat.Description);
 
-                    if (inspectionVM.SelectedInspection.StatusId == stat.Id)
+                    if (Settings.Default.InspectionStatusId == stat.Id)
                         SelectedStatus = stat.Description;
                 }
 
@@ -77,14 +78,14 @@ namespace ParkInspectGroupC.ViewModel
                     if (inspector.IsInspecter)
                         Inspectors.Add(inspector.SurName);
 
-                    if (inspector.Id == inspectionVM.SelectedInspection.InspectorId)
+                    if (inspector.Id == Settings.Default.InspectionInspectorId)
                         SelectedInspector = inspector.SurName;
                 }
 
 
-                Locatie = inspectionVM.SelectedInspection.Location;
-                StartDatum = inspectionVM.SelectedInspection.StartDate;
-                EindDatum = inspectionVM.SelectedInspection.EndDate;
+                Locatie = Settings.Default.InspectionLocation;
+                StartDatum = Settings.Default.InspectionStartDatum;
+                EindDatum = Settings.Default.InspectionEindDatum;
             }
         }
 
@@ -219,7 +220,7 @@ namespace ParkInspectGroupC.ViewModel
                     var inspections = context.Inspection.ToList();
 
                     foreach (var inspection in inspections)
-                        if (inspection.Id == inspectionVM.SelectedInspection.Id)
+                        if (inspection.Id == Settings.Default.InspectionId)
                         {
                             inspection.AssignmentId = assigmentId;
                             inspection.InspectorId = inspectorId;

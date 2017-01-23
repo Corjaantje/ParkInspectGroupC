@@ -7,6 +7,7 @@ using GalaSoft.MvvmLight.CommandWpf;
 using LocalDatabase.Domain;
 using ParkInspectGroupC.Miscellaneous;
 using ParkInspectGroupC.View;
+using ParkInspectGroupC.Properties;
 
 namespace ParkInspectGroupC.ViewModel
 {
@@ -132,23 +133,27 @@ namespace ParkInspectGroupC.ViewModel
 
         private void ShowEditView()
         {
+            Settings.Default.Employee = SelectedInspector;
             Navigator.SetNewView(new InspectorEditView());
             ShowAvailability = false;
         }
 
         private void ShowCreateAvailability()
         {
+            Settings.Default.Employee = SelectedInspector;
             Navigator.SetNewView(new AvailabilityCreationView());
             ShowAvailability = false;
         }
 
         private void ShowEditAvailability()
         {
+            Settings.Default.Availability = SelectedAvailability;
             Navigator.SetNewView(new AvailabilityEditView());
         }
 
         private void ShowInspectorInspections()
         {
+            Settings.Default.Employee = SelectedInspector;
             Navigator.SetNewView(new InspectorInspectionsView());
             ShowAvailability = false;
         }

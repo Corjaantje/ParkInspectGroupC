@@ -8,6 +8,7 @@ using GalaSoft.MvvmLight.CommandWpf;
 using LocalDatabase.Domain;
 using ParkInspectGroupC.Miscellaneous;
 using ParkInspectGroupC.View;
+using ParkInspectGroupC.Properties;
 
 namespace ParkInspectGroupC.ViewModel
 {
@@ -16,10 +17,9 @@ namespace ParkInspectGroupC.ViewModel
         private string _eTime;
         private string _sTime;
 
-        public AvailabilityEditViewModel(Availability selectedAvailability,
-            ObservableCollection<Availability> iAvailability)
+        public AvailabilityEditViewModel(ObservableCollection<Availability> iAvailability)
         {
-            SelectedAvailability = selectedAvailability;
+            SelectedAvailability = Settings.Default.Availability;
             Date = SelectedAvailability.Date;
             TempStartTime = SelectedAvailability.StartTime;
             TempEndTime = SelectedAvailability.EndTime;

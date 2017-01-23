@@ -8,6 +8,7 @@ using GalaSoft.MvvmLight.CommandWpf;
 using LocalDatabase.Domain;
 using ParkInspectGroupC.Miscellaneous;
 using ParkInspectGroupC.View;
+using ParkInspectGroupC.Properties;
 
 namespace ParkInspectGroupC.ViewModel
 {
@@ -19,10 +20,9 @@ namespace ParkInspectGroupC.ViewModel
         private DateTime? _startTime;
         private string _sTime;
 
-        public AvailabilityCreationViewModel(Employee selectedInspector,
-            ObservableCollection<Availability> iAvailability)
+        public AvailabilityCreationViewModel(ObservableCollection<Availability> iAvailability)
         {
-            SelectedInspector = selectedInspector;
+            SelectedInspector = Settings.Default.Employee;
             AvailabilityList = iAvailability;
             SaveCommand = new RelayCommand(Save, CanSave);
         }

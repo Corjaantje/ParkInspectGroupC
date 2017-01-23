@@ -209,7 +209,7 @@ namespace ParkInspectGroupC.ViewModel
                     context.SaveChanges();
                 }
             }
-
+ 
             inspectionVM.hideAddInspection();
         }
     }
