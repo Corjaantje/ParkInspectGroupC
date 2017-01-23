@@ -13,11 +13,12 @@ namespace ParkInspectGroupC.ViewModel
 {
 	public class AssignmentOverviewViewModel : ViewModelBase
 	{
-		public AssignmentOverviewViewModel()
+        public bool loggedInEmpIsmanager{ get; set; }
+        public AssignmentOverviewViewModel()
 		{
-			_searchCritetia = "";
+            loggedInEmpIsmanager = Properties.Settings.Default.LoggedInEmp.IsManager;
+            _searchCritetia = "";
 			fillAllAssignments();
-
 			SearchAll = new RelayCommand(refillCollection);
 			EditCommand = new RelayCommand(EditAssignment);
 			ShowDetails = new RelayCommand(showDetails);

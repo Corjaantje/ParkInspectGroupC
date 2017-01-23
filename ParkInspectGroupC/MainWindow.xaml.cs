@@ -28,6 +28,8 @@ namespace ParkInspectGroupC
             //Setup settings for automatic sync
             theSaveDeleteMessages = new ObservableCollection<SaveDeleteMessage>();
             theUpdateMessages = new ObservableCollection<UpdateMessage>();
+            
+            AutoDatabaseSync();
 
             aTimer = new Timer();
             aTimer.Elapsed += OnTimedEvent;

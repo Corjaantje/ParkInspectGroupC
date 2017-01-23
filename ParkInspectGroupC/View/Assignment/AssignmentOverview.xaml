@@ -4,10 +4,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:ParkInspectGroupC.View"
+              xmlns:converter="clr-namespace:ParkInspectGroupC.Converter"
              mc:Ignorable="d"
              DataContext="{Binding OpdrachtOverview, Source={StaticResource Locator}}">
     <Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
           Margin="0,0,0,32">
+        <Grid.Resources>
+            <converter:BoolToVisConverter x:Key="BoolToVisConverter" />
+        </Grid.Resources>
         <DataGrid x:Name="AssignmentList" HorizontalAlignment="Left" Height="200" Margin="10,111,0,0"
                   VerticalAlignment="Top" Width="472" ItemsSource="{Binding ObservedCollection}"
                   SelectedItem="{Binding SelectedAssignment}" AutoGenerateColumns="False" IsReadOnly="True">
@@ -40,6 +44,7 @@
                 VerticalAlignment="Top" Width="118" Command="{Binding newAssigment}" />
         <Button x:Name="Resultaten" Content="Resultaten" HorizontalAlignment="Left" Margin="180,316,0,0"
                 VerticalAlignment="Top" Width="90" Command="{Binding ShowResultsRelay}" />
+
 
         <Button x:Name="EditAssignment" Content="Bewerken" HorizontalAlignment="Left" Margin="10,316,0,0"
                 VerticalAlignment="Top" Width="75" Command="{Binding EditCommand}" />
