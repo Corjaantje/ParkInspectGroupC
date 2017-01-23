@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
@@ -13,57 +13,14 @@ namespace ParkInspectGroupC.ViewModel
 {
     public class EmployeeCreationViewModel : ViewModelBase
     {
-        /*
-        private char _numberPrefix;
-        public char NumberPrefix
-        {
-            get { return _numberPrefix; }
-            set { _numberPrefix = value; RaisePropertyChanged("NumberPrefix"); }
-        }
-        */
+        public ICommand SaveCommand { get; set; }
 
-        private string _city;
-
-        private string _email;
-
-        private string _firstName;
-
-        private string _gender;
-
-        private GenderOption _genderEnum;
-
-        private bool _isInspector;
-
-        private bool _isManager;
-        private string _message;
-
-        private string _number;
-
-        private string _password;
-
-        private string _passwordInVM;
-
-        private string _prefix;
-
-        private Employee _selectedManager;
-
-
-        private Region _selectedRegion;
-
-        private string _street;
-
-        private string _surName;
-
-        private string _telNumber;
-
-        private string _username;
-
-        private string _zipCode;
+        public ObservableCollection<Region> AvailableRegions { get; set; }
+        public ObservableCollection<Employee> AvailableManagers { get; set; }
 
         public EmployeeCreationViewModel()
         {
             SaveCommand = new RelayCommand<object>(SaveEmployee, CanSaveEmployee);
-            ResetFieldsCommand = new RelayCommand(ResetFields);
 
             // Retreive abailable data from database.
             using (var context = new LocalParkInspectEntities())
@@ -75,203 +32,6 @@ namespace ParkInspectGroupC.ViewModel
                 AvailableManagers = new ObservableCollection<Employee>(managerList);
             }
         }
-
-        public string Message
-        {
-            get { return _message; }
-            set
-            {
-                _message = value;
-                RaisePropertyChanged("Message");
-            }
-        }
-
-        public string PasswordInVM
-        {
-            get { return _passwordInVM; }
-            set
-            {
-                _passwordInVM = value;
-                RaisePropertyChanged(PasswordInVM);
-            }
-        }
-
-        public string Username
-        {
-            get { return _username; }
-            set
-            {
-                _username = value.Trim();
-                RaisePropertyChanged("Username");
-            }
-        }
-
-        public string Password
-        {
-            get { return _password; }
-            set
-            {
-                _password = value;
-                RaisePropertyChanged("Password");
-            }
-        }
-
-        public string FirstName
-        {
-            get { return _firstName; }
-            set
-            {
-                _firstName = value.Trim();
-                RaisePropertyChanged("FirstName");
-            }
-        }
-
-        public string Prefix
-        {
-            get { return _prefix; }
-            set
-            {
-                _prefix = value.Trim();
-                RaisePropertyChanged("Prefix");
-            }
-        }
-
-        public string SurName
-        {
-            get { return _surName; }
-            set
-            {
-                _surName = value.Trim();
-                RaisePropertyChanged("SurName");
-            }
-        }
-
-        public string Gender
-        {
-            get { return _gender; }
-            set
-            {
-                _gender = value.Trim();
-                RaisePropertyChanged("Gender");
-            }
-        }
-
-        public GenderOption GenderEnum
-        {
-            get { return _genderEnum; }
-            set
-            {
-                _genderEnum = value;
-                RaisePropertyChanged("GenderEnum");
-            }
-        }
-
-        public string Street
-        {
-            get { return _street; }
-            set
-            {
-                _street = value.Trim();
-                RaisePropertyChanged("Street");
-            }
-        }
-
-        public string Number
-        {
-            get { return _number; }
-            set
-            {
-                _number = value.Trim();
-                RaisePropertyChanged("Number");
-            }
-        }
-
-        public string City
-        {
-            get { return _city; }
-            set
-            {
-                _city = value.Trim();
-                RaisePropertyChanged("City");
-            }
-        }
-
-        public string Email
-        {
-            get { return _email; }
-            set
-            {
-                _email = value.Trim();
-                RaisePropertyChanged("Email");
-            }
-        }
-
-        public string ZipCode
-        {
-            get { return _zipCode; }
-            set
-            {
-                _zipCode = value.Trim();
-                RaisePropertyChanged("ZipCode");
-            }
-        }
-
-        public string TelNumber
-        {
-            get { return _telNumber; }
-            set
-            {
-                _telNumber = value.Trim();
-                RaisePropertyChanged("TelNumber");
-            }
-        }
-
-        public Region SelectedRegion
-        {
-            get { return _selectedRegion; }
-            set
-            {
-                _selectedRegion = value;
-                RaisePropertyChanged("SelectedRegion");
-            }
-        }
-
-        public Employee SelectedManager
-        {
-            get { return _selectedManager; }
-            set
-            {
-                _selectedManager = value;
-                RaisePropertyChanged("SelectedManager");
-            }
-        }
-
-        public ObservableCollection<Region> AvailableRegions { get; set; }
-        public ObservableCollection<Employee> AvailableManagers { get; set; }
-
-        public bool IsInspector
-        {
-            get { return _isInspector; }
-            set
-            {
-                _isInspector = value;
-                RaisePropertyChanged("IsInspector");
-            }
-        }
-
-        public bool IsManager
-        {
-            get { return _isManager; }
-            set
-            {
-                _isManager = value;
-                RaisePropertyChanged("IsManager");
-            }
-        }
-
-        public ICommand SaveCommand { get; set; }
-        public ICommand ResetFieldsCommand { get; set; }
-
 
         private void SaveEmployee(object parameter)
         {
@@ -288,11 +48,6 @@ namespace ParkInspectGroupC.ViewModel
 
                     var employees = (from a in context.Employee select a).ToList();
                     var newEmployees = employees.Max(u => u.Id);
-                    // ## Unreachable if statement, commented out ##
-                    //if (newEmployees == null)
-                    //{
-                    //    newEmployees = 1;
-                    //}
 
                     var nEmployee = new Employee
                     {
@@ -306,7 +61,12 @@ namespace ParkInspectGroupC.ViewModel
                         Email = Email,
                         IsInspecter = true,
                         IsManager = false,
-                        Id = (int) newEmployees + 1
+                        RegionId = SelectedRegion.Id,
+                        ManagerId = SelectedManager.Id,
+                        EmployeeStatusId = 1,
+                        DateCreated = DateTime.Now,
+                        DateUpdated = DateTime.Now,
+                        Id = (int)newEmployees + 1
                     };
                     if (!string.IsNullOrWhiteSpace(Prefix))
                         nEmployee.Prefix = Prefix;
@@ -318,11 +78,6 @@ namespace ParkInspectGroupC.ViewModel
 
                     var accounts = (from a in context.Employee select a).ToList();
                     var newAccount = accounts.Max(u => u.Id);
-                    // ## Unreachable if statement, commented out ##
-                    //if (newAccount == null)
-                    //{
-                    //    newEmployees = 1;
-                    //}
 
                     var nAccount = new Account
                     {
@@ -330,7 +85,9 @@ namespace ParkInspectGroupC.ViewModel
                         UserGuid = guid,
                         Password = PasswordInVM,
                         Employee = nEmployee,
-                        Id = (int) newAccount + 1
+                        DateCreated = DateTime.Now,
+                        DateUpdated = DateTime.Now,
+                        Id = (int)newAccount + 1
                     };
 
                     context.Employee.Add(nEmployee);
@@ -340,7 +97,6 @@ namespace ParkInspectGroupC.ViewModel
             }
             Navigator.SetNewView(new LoginView());
         }
-
         private bool CanSaveEmployee(object parameter)
         {
             if (string.IsNullOrWhiteSpace(Username)
@@ -402,9 +158,216 @@ namespace ParkInspectGroupC.ViewModel
             return true;
         }
 
-        private void ResetFields()
+        #region Fields
+        private string _message;
+        public string Message
         {
+            get { return _message; }
+            set
+            {
+                _message = value;
+                RaisePropertyChanged("Message");
+            }
         }
+
+        private string _passwordInVM;
+        public string PasswordInVM
+        {
+            get { return _passwordInVM; }
+            set
+            {
+                _passwordInVM = value;
+                RaisePropertyChanged(PasswordInVM);
+            }
+        }
+
+        private string _username;
+        public string Username
+        {
+            get { return _username; }
+            set
+            {
+                _username = value.Trim();
+                RaisePropertyChanged("Username");
+            }
+        }
+
+        private string _password;
+        public string Password
+        {
+            get { return _password; }
+            set
+            {
+                _password = value;
+                RaisePropertyChanged("Password");
+            }
+        }
+
+        private string _firstName;
+        public string FirstName
+        {
+            get { return _firstName; }
+            set
+            {
+                _firstName = value.Trim();
+                RaisePropertyChanged("FirstName");
+            }
+        }
+
+        private string _prefix;
+        public string Prefix
+        {
+            get { return _prefix; }
+            set
+            {
+                _prefix = value.Trim();
+                RaisePropertyChanged("Prefix");
+            }
+        }
+
+        private string _surName;
+        public string SurName
+        {
+            get { return _surName; }
+            set
+            {
+                _surName = value.Trim();
+                RaisePropertyChanged("SurName");
+            }
+        }
+
+        private string _gender;
+        public string Gender
+        {
+            get { return _gender; }
+            set
+            {
+                _gender = value.Trim();
+                RaisePropertyChanged("Gender");
+            }
+        }
+
+        private string _street;
+        public string Street
+        {
+            get { return _street; }
+            set
+            {
+                _street = value.Trim();
+                RaisePropertyChanged("Street");
+            }
+        }
+
+        private string _number;
+        public string Number
+        {
+            get { return _number; }
+            set
+            {
+                _number = value.Trim();
+                RaisePropertyChanged("Number");
+            }
+        }
+
+        private string _city;
+        public string City
+        {
+            get { return _city; }
+            set
+            {
+                _city = value.Trim();
+                RaisePropertyChanged("City");
+            }
+        }
+
+        private string _email;
+        public string Email
+        {
+            get { return _email; }
+            set
+            {
+                _email = value.Trim();
+                RaisePropertyChanged("Email");
+            }
+        }
+
+        private string _zipCode;
+        public string ZipCode
+        {
+            get { return _zipCode; }
+            set
+            {
+                _zipCode = value.Trim();
+                RaisePropertyChanged("ZipCode");
+            }
+        }
+
+        private string _telNumber;
+        public string TelNumber
+        {
+            get { return _telNumber; }
+            set
+            {
+                _telNumber = value.Trim();
+                RaisePropertyChanged("TelNumber");
+            }
+        }
+
+        private Region _selectedRegion;
+        public Region SelectedRegion
+        {
+            get { return _selectedRegion; }
+            set
+            {
+                _selectedRegion = value;
+                RaisePropertyChanged("SelectedRegion");
+            }
+        }
+
+        private Employee _selectedManager;
+        public Employee SelectedManager
+        {
+            get { return _selectedManager; }
+            set
+            {
+                _selectedManager = value;
+                RaisePropertyChanged("SelectedManager");
+            }
+        }
+
+        private bool _isInspector;
+        public bool IsInspector
+        {
+            get { return _isInspector; }
+            set
+            {
+                _isInspector = value;
+                RaisePropertyChanged("IsInspector");
+            }
+        }
+
+        private bool _isManager;
+        public bool IsManager
+        {
+            get { return _isManager; }
+            set
+            {
+                _isManager = value;
+                RaisePropertyChanged("IsManager");
+            }
+        }
+
+        private GenderOption _genderEnum;
+        public GenderOption GenderEnum
+        {
+            get { return _genderEnum; }
+            set
+            {
+                _genderEnum = value;
+                RaisePropertyChanged("GenderEnum");
+            }
+        }
+        #endregion
     }
 
     public enum GenderOption
