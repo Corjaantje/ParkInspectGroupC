@@ -5,39 +5,46 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:ParkInspectGroupC.View"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300"
              DataContext="{Binding Dashboard, Source={StaticResource Locator}}">
-    <Canvas>
-        <TextBlock Text="Werktijden" FontSize="18" Canvas.Top="0" Canvas.Left="10" />
+    <Viewbox>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-        <DataGrid Grid.ColumnSpan="2" AutoGenerateColumns="False" IsReadOnly="True"
+            <DataGrid AutoGenerateColumns="False" IsReadOnly="True"
                   ItemsSource="{Binding EmployeeAvailability}"
-                  GridLinesVisibility="Horizontal" HeadersVisibility="Column" Canvas.Top="30" Canvas.Left="10"
-                  CanUserResizeColumns="False">
+                  GridLinesVisibility="Horizontal" HeadersVisibility="Column" Grid.Column="0">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Tijd">
+                        <DataGridTextColumn.Binding>
+                            <MultiBinding StringFormat="{}{0}-{1}">
+                                <Binding Path="StartTime" />
+                                <Binding Path="EndTime" />
+                            </MultiBinding>
+                        </DataGridTextColumn.Binding>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Datum" Binding="{Binding Date}" Width="140" />
+                </DataGrid.Columns>
+            </DataGrid>
 
-            <DataGrid.Columns>
+            <DataGrid AutoGenerateColumns="False" IsReadOnly="True"
+                  ItemsSource="{Binding EmployeeAvailability}"
+                  GridLinesVisibility="Horizontal" HeadersVisibility="Column" Grid.Column="1">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Tijd">
+                        <DataGridTextColumn.Binding>
+                            <MultiBinding StringFormat="{}{0}-{1}">
+                                <Binding Path="StartTime" />
+                                <Binding Path="EndTime" />
+                            </MultiBinding>
+                        </DataGridTextColumn.Binding>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Datum" Binding="{Binding Date}" Width="140" />
+                </DataGrid.Columns>
+            </DataGrid>
 
-                <DataGridTextColumn Header="Tijd">
-
-                    <DataGridTextColumn.Binding>
-
-                        <MultiBinding StringFormat="{}{0}-{1}">
-
-                            <Binding Path="StartTime" />
-
-                            <Binding Path="EndTime" />
-
-                        </MultiBinding>
-
-                    </DataGridTextColumn.Binding>
-
-                </DataGridTextColumn>
-
-                <DataGridTextColumn Header="Datum" Binding="{Binding Date}" Width="140" />
-
-            </DataGrid.Columns>
-
-        </DataGrid>
-
-    </Canvas>
+        </Grid>
+    </Viewbox>
 </UserControl>
