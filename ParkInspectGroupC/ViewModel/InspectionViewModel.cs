@@ -33,14 +33,13 @@ namespace ParkInspectGroupC.ViewModel
             var source = assemblyFile + "\\..\\..\\Image\\Testfotos\\01.jpg";
             SourceName = source;
 
-            
-
         }
 
 		private void showQuestionnaire()
 		{
-			var questionnaireView = new QuestionnaireView();
-			questionnaireView.Show();
+            RaisePropertyChanged("SelectedInspection");
+            Settings.Default.QuestionnaireSelectedInspectionId = SelectedInspection.Id;
+            Navigator.SetNewView(new QuestionnaireView());
 		}
 
 		private void fillInspections()
@@ -60,7 +59,6 @@ namespace ParkInspectGroupC.ViewModel
                         {
                             Inspections.Add(inspection);
                         }
-                       
                     }
                 }
             }
@@ -205,12 +203,19 @@ namespace ParkInspectGroupC.ViewModel
                 MessageBox.Show("Selecteer aub een inspectie");
 
             else
+                Settings.Default.InspectionId = SelectedInspection.Id;
+                Settings.Default.InspectionAssignmentId = SelectedInspection.AssignmentId;
+                Settings.Default.InspectionRegionId = SelectedInspection.RegionId;
+                Settings.Default.InspectionStatusId = SelectedInspection.StatusId;
+                Settings.Default.InspectionLocation = SelectedInspection.Location;
+                Settings.Default.InspectionStartDatum = SelectedInspection.StartDate;
+                Settings.Default.InspectionEindDatum = SelectedInspection.EndDate;
                 Navigator.SetNewView(new InspectionEditView());
         }
 
         public void hideAddInspection()
         {
-            Navigator.SetNewView(new InspectionView());
+            Navigator.Back();
             RaisePropertyChanged("Inspections");
         }
 
@@ -276,9 +281,9 @@ namespace ParkInspectGroupC.ViewModel
         public ICommand BladerCommand { get; set; }
         public ICommand SubmitCommand { get; set; }
         public ICommand AddInspection { get; set; }
-
         public ICommand EditInspection { get; set; }
         public ICommand DeleteInspection { get; set; }
+
         private string _imageSource;
         private readonly string assemblyFile;
 
