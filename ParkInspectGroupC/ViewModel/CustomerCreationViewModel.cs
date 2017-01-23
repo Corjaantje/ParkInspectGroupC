@@ -117,7 +117,8 @@ namespace ParkInspectGroupC.ViewModel
                     Address = StreetName + " " + HouseNumber,
                     Location = CustomerLocation,
                     Phonenumber = PhoneNumber,
-                    Email = CustomerMail
+                    Email = CustomerMail,
+                    ExistsInCentral = 0
                 };
 
                 context.Customer.Add(customer);
