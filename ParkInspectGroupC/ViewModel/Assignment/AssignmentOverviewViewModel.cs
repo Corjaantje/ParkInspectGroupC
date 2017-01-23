@@ -7,6 +7,7 @@ using GalaSoft.MvvmLight.Command;
 using LocalDatabase.Domain;
 using ParkInspectGroupC.Miscellaneous;
 using ParkInspectGroupC.View;
+using ParkInspectGroupC.Properties;
 
 namespace ParkInspectGroupC.ViewModel
 {
@@ -20,7 +21,7 @@ namespace ParkInspectGroupC.ViewModel
 			SearchAll = new RelayCommand(refillCollection);
 			EditCommand = new RelayCommand(EditAssignment);
 			ShowDetails = new RelayCommand(showDetails);
-			newInspection = new RelayCommand(createInspection);
+			ShowResultsRelay = new RelayCommand(ShowResults);
 			newAssigment = new RelayCommand(makeNewAssignment);
 			//ShowQuestionnaire = new RelayCommand(showQuestionnaire);
 			ShowFilteredInspections = new RelayCommand(showFilteredInspections);
@@ -126,11 +127,10 @@ namespace ParkInspectGroupC.ViewModel
 			}
 		}
 
-		private void createInspection()
+		private void ShowResults()
 		{
-			var converterView = new AssignmentToInspectionView();
-			converterView.Show();
-			((AssignmentToInspectionViewModel)converterView.DataContext).setAssignment(SelectedAssignment);
+            Settings.Default.SelectedAssignmentId = SelectedAssignment.Id;
+            Navigator.SetNewView(new AssignmentResultView());
 		}
 
 		#region properties
@@ -172,7 +172,7 @@ namespace ParkInspectGroupC.ViewModel
 		public ICommand SearchAll { get; set; }
 		public ICommand EditCommand { get; set; }
 		public ICommand ShowDetails { get; set; }
-		public ICommand newInspection { get; set; }
+		public ICommand ShowResultsRelay { get; set; }
 		//public ICommand ShowQuestionnaire { get; set; }
 		public ICommand ShowFilteredInspections { get; set; }
 
