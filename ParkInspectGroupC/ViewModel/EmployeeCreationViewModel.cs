@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
@@ -113,7 +113,7 @@ namespace ParkInspectGroupC.ViewModel
 
             if ((Username.Length < 5) || (Username.Length > 25))
             {
-                Message = "Username heeft niet de juiste lengte [5,25].";
+                Message = "Gebruikersnaam heeft niet de juiste lengte [5-25].";
                 return false;
             }
 
@@ -125,13 +125,13 @@ namespace ParkInspectGroupC.ViewModel
 
                 if ((pass.Length < 5) || (pass.Length > 25))
                 {
-                    Message = "Wachtwoord heeft niet de juiste lengte [5.25].";
+                    Message = "Wachtwoord heeft niet de juiste lengte [5-25].";
                     return false;
                 }
 
                 if (!pass.Any(c => char.IsDigit(c)))
                 {
-                    Message = "Wachtwoord moet minstens een cijfer bevatten [0,9].";
+                    Message = "Wachtwoord moet minstens een cijfer bevatten [0-9].";
                     return false;
                 }
 
@@ -149,7 +149,7 @@ namespace ParkInspectGroupC.ViewModel
                 foreach (var employee in nameList)
                     if (string.Equals(Username, employee.Username, StringComparison.Ordinal))
                     {
-                        Message = "Gebruikersnaam bestaad al.";
+                        Message = "Gebruikersnaam bestaat al.";
                         return false;
                     }
             }
