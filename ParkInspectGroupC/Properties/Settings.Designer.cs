@@ -69,5 +69,17 @@ namespace ParkInspectGroupC.Properties {
                 this["SyncError"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public long QuestionnaireSelectedInspectionId {
+            get {
+                return ((long)(this["QuestionnaireSelectedInspectionId"]));
+            }
+            set {
+                this["QuestionnaireSelectedInspectionId"] = value;
+            }
+        }
     }
 }

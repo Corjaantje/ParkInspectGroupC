@@ -11,6 +11,7 @@ using GalaSoft.MvvmLight.Command;
 using LocalDatabase.Domain;
 using ParkInspectGroupC.Miscellaneous;
 using ParkInspectGroupC.View;
+using ParkInspectGroupC.Properties;
 
 namespace ParkInspectGroupC.ViewModel
 {
@@ -38,8 +39,9 @@ namespace ParkInspectGroupC.ViewModel
 
 		private void showQuestionnaire()
 		{
-			var questionnaireView = new QuestionnaireView();
-			questionnaireView.Show();
+            RaisePropertyChanged("SelectedInspection");
+            Settings.Default.QuestionnaireSelectedInspectionId = SelectedInspection.Id;
+            Navigator.SetNewView(new QuestionnaireView());
 		}
 
 		private void fillInspections()
@@ -278,9 +280,9 @@ namespace ParkInspectGroupC.ViewModel
         public ICommand BladerCommand { get; set; }
         public ICommand SubmitCommand { get; set; }
         public ICommand AddInspection { get; set; }
-
         public ICommand EditInspection { get; set; }
         public ICommand DeleteInspection { get; set; }
+
         private string _imageSource;
         private readonly string assemblyFile;
 

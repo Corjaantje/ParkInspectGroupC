@@ -7,54 +7,35 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
-using ParkInspectGroupC.DOMAIN;
 using ParkInspectGroupC.View.QuestionnaireModules;
 using ParkInspectGroupC.ViewModel.QuestionnaireModuleViewModels;
+using ParkInspectGroupC.Properties;
+using ParkInspectGroupC.ViewModel.Questionnaire;
+using GalaSoft.MvvmLight;
+using System.Data.Entity.Validation;
+using System.Diagnostics;
+using LocalDatabase.Domain;
+using ParkInspectGroupC.Miscellaneous;
 
 namespace ParkInspectGroupC.ViewModel
 {
-	// krijgt nog een eigen file
-	// wil hier eigenlijk geen instantie opslaan; alleen het type om later te instantieren
-	public class QuestionnaireModule
+
+	public class QuestionnaireViewModel : ViewModelBase
 	{
-		public QuestionnaireModule(int Id, string Name, UserControl ModuleUserControl)
-		{
-			this.Id = Id;
-			this.Name = Name;
-			this.ModuleUserControl = ModuleUserControl;
-		}
+        long _currentInspectionId;
 
-		public int Id { get; private set; }
-		public string Name { get; private set; }
-		public UserControl ModuleUserControl { get; }
-	}
-
-	public class QuestionnaireRecord
-	{
-		public QuestionnaireRecord(int ModuleId, string[] Keywords, int value)
-		{
-			this.ModuleId = ModuleId;
-			this.Keywords = Keywords;
-			this.value = value;
-		}
-
-		//public int QuestionId { get; private set; } // unique within inspection
-		public int ModuleId { get; } // must be existing module
-		public string[] Keywords { get; }
-		public int value { get; set; }
-	}
-
-	public class QuestionnaireViewModel : INotifyPropertyChanged
-	{
 		public QuestionnaireViewModel()
 		{
-			Records = new List<QuestionnaireRecord>();
+            _currentInspectionId = Settings.Default.QuestionnaireSelectedInspectionId;
+            RaisePropertyChanged("CurrentInspectionId");
 
-			_questionnaireModules = new Dictionary<int, QuestionnaireModule>();
+            Records = new List<QuestionnaireRecord>();
+
+			_questionnaireModules = new Dictionary<int, QuestionnaireControlData>();
 			_questionnaireModules.Add(1,
-				new QuestionnaireModule(1, "Aantal voertuigen", new VehicleCountControl(1, this)));
+				new QuestionnaireControlData(1, "Aantal voertuigen", new VehicleCountControl(1, this)));
 			_questionnaireModules.Add(2,
-				new QuestionnaireModule(2, "Vragenlijst notities", new QuestionnaireCommentControl(2, this)));
+				new QuestionnaireControlData(2, "Vragenlijst notities", new QuestionnaireCommentControl(2, this)));
 
 			AddModuleToQuestionnaire = new RelayCommand<int>(AddListElement);
 			ListElements = new ObservableCollection<UIElement>();
@@ -62,13 +43,13 @@ namespace ParkInspectGroupC.ViewModel
 			SaveInspectionRelay = new RelayCommand(SaveInspection);
 		}
 
-		// methods and variables for connecting with inspection
-		public void setInspection(int InspectionID)
+		// Retrieve modules and questionsanswers of the inspection (if any)
+		public void LoadInspection(int InspectionID)
 		{
 
-			CurrentInspectionId = InspectionID;
+			
 
-			//using (var context = new ParkInspectEntities())
+			//using (var context = new LocalParkInspectEntities())
 			//{
 
 			//	var Inspection = context.Inspection.SingleOrDefault(i => i.Id == CurrentInspectionId);
@@ -83,7 +64,7 @@ namespace ParkInspectGroupC.ViewModel
 
 		#region Variables for database
 
-		private int CurrentInspectionId = 100;
+
 		private readonly List<QuestionnaireRecord> Records;
 
 		#endregion
@@ -105,9 +86,14 @@ namespace ParkInspectGroupC.ViewModel
 			}
 		}
 
-		public Dictionary<int, QuestionnaireModule> _questionnaireModules;
+        public long CurrentInspectionId
+        {
+            get { return _currentInspectionId;  }
+        }
 
-		public Dictionary<int, QuestionnaireModule> QuestionnaireModules
+		public Dictionary<int, QuestionnaireControlData> _questionnaireModules;
+
+		public Dictionary<int, QuestionnaireControlData> QuestionnaireModules
 		{
 			get { return _questionnaireModules; }
 		}
@@ -161,43 +147,63 @@ namespace ParkInspectGroupC.ViewModel
 
 		private void SaveInspection()
 		{
-			using (var context = new ParkInspectEntities())
+			using (var context = new LocalParkInspectEntities())
 			{
-				var questionnaire = new Questionnaire();
-				questionnaire.InspectionId = CurrentInspectionId;
-				var questionnaireId = context.Questionnaire.Add(questionnaire).Id;
+                var questionnaire = new Questionaire // "Questionaire" spelled wrong due to incorrect spelling in localdatabase
+                {
+                    Id = (from q in context.Questionaire select q.Id).Max()+1,
+                    InspectionId = (int)CurrentInspectionId
+                };
+
+				var questionnaireId = context.Questionaire.Add(questionnaire).Id; // "Questionaire" spelled wrong due to incorrect spelling in localdatabase
 
 
 				// For each QuestionnaireRecord
 				foreach (var QR in Records)
 				{
-					// Create new Question
-					var q = context.Question.Add(new Question());
+                    // Create new Question
+                    var question = new Question
+                    {
+                        Id = (from q in context.Question select q.Id).Max() + 1,
+                        Description = "There's nothing here yet!",
+                        SortId = 1 // needs to be specified for proper use
+                    };
+
+					context.Question.Add(question);
 
 					// Create QuestionKeywords for each keyword in record (QuestionID, KeywordID)
 					foreach (var keyword in QR.Keywords)
 					{
-						var kq = new QuestionKeyword();
-						kq.KeywordId = (from k in context.Keyword where k.Description == keyword select k.Id).First();
-						kq.QuestionId = q.Id;
-						context.QuestionKeyword.Add(kq);
+                        var questionkeyword = new QuestionKeyword
+                        {
+                            KeywordId = (from k in context.Keyword where k.Description == keyword select k.Id).First(),
+                            QuestionId = question.Id
+                        };
+
+						context.QuestionKeyword.Add(questionkeyword);
 					}
 
-					// Create QuestionAnswer for the value (QuestionnaireID, QuestionID)
-					var qa = new QuestionAnswer();
-					qa.QuestionnaireId = questionnaireId;
-					qa.QuestionId = q.Id;
-					context.QuestionAnswer.Add(qa);
+                    // Create QuestionAnswer for the value (QuestionnaireID, QuestionID)
+                    var questionanswer = new QuestionAnswer
+                    {
+                        QuestionnaireId = questionnaireId,
+                        QuestionId = question.Id,
+                        Result = QR.value.ToString()
+                    };
+
+					context.QuestionAnswer.Add(questionanswer);
 				}
-				try
+                try
 				{
 					context.SaveChanges();
 				}
 				catch (Exception e)
 				{
-					MessageBox.Show(e.Message);
-				}
+                    MessageBox.Show(e.Message);
+                }
 			}
+
+            Navigator.Back();
 		}
 
 		#endregion
@@ -252,12 +258,12 @@ namespace ParkInspectGroupC.ViewModel
 			RaisePropertyChanged("OrderedModuleNames");
 		}
 
-		private void RaisePropertyChanged(string prop)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
-		}
-
-		public event PropertyChangedEventHandler PropertyChanged;
+        // used when a new view is sent to the navigator
+        public void RefreshViewModel()
+        {
+            _currentInspectionId = Settings.Default.QuestionnaireSelectedInspectionId;
+            RaisePropertyChanged("CurrentInspectionId");
+        }
 
 		#endregion
 	}

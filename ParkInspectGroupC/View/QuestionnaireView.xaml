@@ -1,4 +1,4 @@
-﻿<Window
+﻿<UserControl
     x:Class="ParkInspectGroupC.View.QuestionnaireView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -6,8 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:ParkInspectGroupC.View"
     mc:Ignorable="d"
-    Title="Vragenlijsten" Height="496.431" Width="654.887"
-    ResizeMode="NoResize"
+    Height="496.431" Width="654.887"
     DataContext="{Binding QuestionnaireViewModel, Source={StaticResource Locator}}">
 
     <Grid>
@@ -33,14 +32,16 @@
         </DataGrid>
         <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="35" Margin="10,10,0,0" Stroke="Black"
                    VerticalAlignment="Top" Width="629" />
-        <Button x:Name="button_Copy1" Command="{Binding SaveInspectionRelay}" Content="Opslaan"
+        <Button x:Name="SaveButton" Command="{Binding SaveInspectionRelay}" Content="Invoer opslaan en vragenlijst sluiten"
                 HorizontalAlignment="Left" Margin="10,431,0,0" VerticalAlignment="Top" Width="266" />
         <ListBox x:Name="listBox" ItemsSource="{Binding ListElements}" HorizontalAlignment="Left" Height="403"
                  Margin="281,50,0,0" VerticalAlignment="Top" Width="358" />
-        <Label x:Name="label" Content="Inspectie:" HorizontalAlignment="Left" Margin="16,15,0,0"
+        <Label x:Name="InspectionID_Text" Content="Inspectie ID:" HorizontalAlignment="Left" Margin="16,15,0,0"
                VerticalAlignment="Top" Width="100" />
+        <Label x:Name="InspectionID_Value" Content="{Binding CurrentInspectionId}" HorizontalAlignment="Left" Margin="90,15,0,0"
+               VerticalAlignment="Top" Width="40" />
         <CheckBox x:Name="checkBox" Content="Toon lijst opties" IsChecked="{Binding QuestionnaireEditingMode}"
                   HorizontalAlignment="Left" Margin="528,20,0,0" VerticalAlignment="Top" />
 
     </Grid>
-</Window>
+</UserControl>
