@@ -30,18 +30,17 @@ namespace ParkInspectGroupC.ViewModel
 			ShowQuestionnaire = new RelayCommand(showQuestionnaire);
             DeleteInspection = new RelayCommand(deleteInspection);
             assemblyFile = Directory.GetCurrentDirectory();
-            var source = assemblyFile + "\\..\\..\\Image\\silvio.jpeg";
+            var source = assemblyFile + "\\..\\..\\Image\\Testfotos\\01.jpg";
             SourceName = source;
 
-            //BitmapImage i = new BitmapImage(uri);
-            //SourceName = i;
+            
+
         }
 
 		private void showQuestionnaire()
 		{
-            RaisePropertyChanged("SelectedInspection");
-            Settings.Default.QuestionnaireSelectedInspectionId = SelectedInspection.Id;
-            Navigator.SetNewView(new QuestionnaireView());
+			var questionnaireView = new QuestionnaireView();
+			questionnaireView.Show();
 		}
 
 		private void fillInspections()
@@ -53,8 +52,16 @@ namespace ParkInspectGroupC.ViewModel
                     var result = context.Inspection.ToList();
 
                     allInspections = new ObservableCollection<Inspection>(result);
+                    Inspections = new ObservableCollection<Inspection>();
 
-                    Inspections = new ObservableCollection<Inspection>(result);
+                    foreach(var inspection in allInspections)
+                    {
+                        if(inspection.AssignmentId == Settings.Default.AssignmentId)
+                        {
+                            Inspections.Add(inspection);
+                        }
+                       
+                    }
                 }
             }
             catch
@@ -257,18 +264,7 @@ namespace ParkInspectGroupC.ViewModel
             set
             {
                 _searchCriteria = value;
-                Debug.WriteLine(_searchCriteria);
-                var searchedInspections = new ObservableCollection<Inspection>();
-
-                foreach (var inspection in allInspections)
-                    if ((SearchCriteria != null) && inspection.Location.ToLower().Contains(SearchCriteria.ToLower()))
-                        searchedInspections.Add(inspection);
-
-
-                Inspections = searchedInspections;
-
-                RaisePropertyChanged("SearchCriteria");
-                RaisePropertyChanged("Inspections");
+                refillObservableCollection();
             }
         }
 
@@ -280,9 +276,9 @@ namespace ParkInspectGroupC.ViewModel
         public ICommand BladerCommand { get; set; }
         public ICommand SubmitCommand { get; set; }
         public ICommand AddInspection { get; set; }
+
         public ICommand EditInspection { get; set; }
         public ICommand DeleteInspection { get; set; }
-
         private string _imageSource;
         private readonly string assemblyFile;
 

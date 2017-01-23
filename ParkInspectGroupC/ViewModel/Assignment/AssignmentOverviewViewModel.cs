@@ -7,6 +7,7 @@ using GalaSoft.MvvmLight.Command;
 using LocalDatabase.Domain;
 using ParkInspectGroupC.Miscellaneous;
 using ParkInspectGroupC.View;
+using ParkInspectGroupC.Properties;
 
 namespace ParkInspectGroupC.ViewModel
 {
@@ -79,10 +80,12 @@ namespace ParkInspectGroupC.ViewModel
 		{
 			if (SelectedAssignment != null)
 			{
-				var Inspections = new InspectionView();
+                Settings.Default.AssignmentId = SelectedAssignment.Id;
+                var Inspections = new InspectionView();
 				Navigator.SetNewView(Inspections);
-				((InspectionViewModel)Inspections.DataContext).filterInspections((int)SelectedAssignment.Id);
-			}
+                
+
+            }
 		}
 
 		private void showDetails()
