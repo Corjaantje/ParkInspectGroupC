@@ -7,6 +7,7 @@ using GalaSoft.MvvmLight.CommandWpf;
 using LocalDatabase.Domain;
 using ParkInspectGroupC.Miscellaneous;
 using ParkInspectGroupC.View;
+using ParkInspectGroupC.Properties;
 
 namespace ParkInspectGroupC.ViewModel
 {
@@ -14,9 +15,9 @@ namespace ParkInspectGroupC.ViewModel
     {
         private Region _selectedRegion;
 
-        public InspectorEditViewModel(Employee selectedInspector)
+        public InspectorEditViewModel()
         {
-            SelectedInspector = selectedInspector;
+            SelectedInspector = Settings.Default.Employee;
             SaveCommand = new RelayCommand(SaveChanges, CanSaveChanges);
 
             TempInspector = new Employee();

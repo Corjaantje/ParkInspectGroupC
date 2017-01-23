@@ -19,7 +19,6 @@
 
         <TextBlock Text="Geplande beschikbaarheid:" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="0" Margin="10,0,0,0" />
         <DataGrid AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding EmployeeAvailability}" GridLinesVisibility="Horizontal" HeadersVisibility="Column" Grid.Column="0" Margin="10,20,0,0">
-
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Start tijd">
                     <DataGridTextColumn.Binding>
