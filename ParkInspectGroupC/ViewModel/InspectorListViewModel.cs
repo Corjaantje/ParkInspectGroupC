@@ -14,9 +14,7 @@ namespace ParkInspectGroupC.ViewModel
     {
         private ObservableCollection<Availability> _inspectorAvailability;
         private Availability _selectedAvailability;
-        
         private Employee _selectedInspector;
-
         private bool _showAvailability;
         private int days;
         private string _searchString = "Search";
@@ -164,8 +162,9 @@ namespace ParkInspectGroupC.ViewModel
                 days = (int)daysBetweenDates.TotalDays;
             }
 
-            if (days < 7)
+            if (days > 7)
                 return false;
+           
             return true;
         }
     }
