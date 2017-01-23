@@ -152,6 +152,11 @@ namespace ParkInspectGroupC.ViewModel
             get { return new QuestionnaireViewModel(); }
         }
 
+        public AssignmentResultViewModel AssignmentResultViewModel
+        {
+            get { return new AssignmentResultViewModel(); }
+        }
+
         private static void RegisterViewModels()
         {
             SimpleIoc.Default.Register<MainViewModel>();

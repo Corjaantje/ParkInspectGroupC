@@ -136,6 +136,7 @@
     <Compile Include="Miscellaneous\Navigator.cs" />
     <Compile Include="ViewModel\AssignmentToInspectionViewModel.cs" />
     <Compile Include="ViewModel\Assignment\AssignmentOverviewViewModel.cs" />
+    <Compile Include="ViewModel\Assignment\AssignmentResultViewModel.cs" />
     <Compile Include="ViewModel\AvailabilityCreationViewModel.cs" />
     <Compile Include="ViewModel\AvailabilityEditViewModel.cs" />
     <Compile Include="ViewModel\CustomerCreationViewModel.cs" />
@@ -165,6 +166,9 @@
     <Compile Include="ViewModel\Questionnaire\QuestionnaireRecord.cs" />
     <Compile Include="View\AssignmentToInspectionView.xaml.cs">
       <DependentUpon>AssignmentToInspectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Assignment\AssignmentResultView.xaml.cs">
+      <DependentUpon>AssignmentResultView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Assignment\AssignmentOverview.xaml.cs">
       <DependentUpon>AssignmentOverview.xaml</DependentUpon>
@@ -323,6 +327,10 @@
     <Page Include="View\AssignmentToInspectionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Assignment\AssignmentResultView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Assignment\AssignmentOverview.xaml">
       <Generator>MSBuild:Compile</Generator>

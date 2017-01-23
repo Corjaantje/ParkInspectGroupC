@@ -4,9 +4,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:ParkInspectGroupC.View"
+        xmlns:forms="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
         mc:Ignorable="d"
-        DataContext="{Binding AssignmentToInspection, Source={StaticResource Locator}}" Height="293.853" Width="275">
-    <Grid Margin="0,0,2,12">
+        DataContext="{Binding AssignmentToInspection, Source={StaticResource Locator}}">
+
+
+    <Grid Margin="0,0,2,1">
         <Label x:Name="label" Content="Inspectie voor klant:" HorizontalAlignment="Left" Margin="10,10,0,0"
                VerticalAlignment="Top" />
         <Label x:Name="label1" Content="{Binding CustomerName}" HorizontalAlignment="Left" Margin="131,10,0,0"

@@ -23,6 +23,8 @@ namespace ParkInspectGroupC.ViewModel
 
             generateAllCustomers();
 
+			EndDate = DateTime.Today;
+
             CreateAssignment = new RelayCommand(createAssignment);
             AssignmentOverview = new RelayCommand(openAssignmentOverview);
 
@@ -44,6 +46,8 @@ namespace ParkInspectGroupC.ViewModel
                     assign.CustomerId = getCustomerId();
                     assign.ManagerId = getManager();
                     assign.Description = Description;
+					assign.StartDate = DateTime.Today;
+					assign.EndDate = endDate;
                     assign.DateCreated = DateTime.Today;
                     assign.DateUpdated = DateTime.Today;
 					assign.ExistsInCentral = 0;
@@ -141,9 +145,23 @@ namespace ParkInspectGroupC.ViewModel
             return (int)Properties.Settings.Default.LoggedInEmp.Id;
 		}
 
-        #region properties
+		#region properties
 
-        public string Description { get; set; }
+		private DateTime endDate;
+		public DateTime EndDate
+		{
+			get
+			{
+				return endDate;
+			}
+
+			set
+			{
+				endDate = value;
+			}
+		}
+
+		public string Description { get; set; }
 
         public string TopLabel { get; set; }
 
@@ -169,6 +187,7 @@ namespace ParkInspectGroupC.ViewModel
 
         public ICommand AssignmentOverview { get; set; }
 
-        #endregion properties
-    }
+
+		#endregion properties
+	}
 }

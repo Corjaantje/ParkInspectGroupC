@@ -15,10 +15,14 @@ namespace ParkInspectGroupC.ViewModel
             {
                 var eAvailability = context.Availability.Where(e => e.EmployeeId == Employee.Id).ToList();
                 EmployeeAvailability = new ObservableCollection<Availability>(eAvailability);
+
+                var eWorkingHours = context.WorkingHours.Where(e => e.EmployeeId == Employee.Id).ToList();
+                EmployeeWorkingHours = new ObservableCollection<WorkingHours>(eWorkingHours);
             }
         }
 
         public Employee Employee { get; set; }
         public ObservableCollection<Availability> EmployeeAvailability { get; set; }
+        public ObservableCollection<WorkingHours> EmployeeWorkingHours { get; set; }
     }
 }
