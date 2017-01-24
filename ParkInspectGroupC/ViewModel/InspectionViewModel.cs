@@ -38,9 +38,12 @@ namespace ParkInspectGroupC.ViewModel
 
 		private void showQuestionnaire()
 		{
-            RaisePropertyChanged("SelectedInspection");
-            Settings.Default.QuestionnaireSelectedInspectionId = SelectedInspection.Id;
-            Navigator.SetNewView(new QuestionnaireView());
+            if (SelectedInspection != null)
+            {
+                RaisePropertyChanged("SelectedInspection");
+                Settings.Default.QuestionnaireSelectedInspectionId = SelectedInspection.Id;
+                Navigator.SetNewView(new QuestionnaireView());
+            }
 		}
 
 		private void fillInspections()
