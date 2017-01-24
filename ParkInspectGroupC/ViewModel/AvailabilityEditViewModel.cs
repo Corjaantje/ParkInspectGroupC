@@ -23,8 +23,8 @@ namespace ParkInspectGroupC.ViewModel
             Date = SelectedAvailability.Date;
             TempStartTime = SelectedAvailability.StartTime;
             TempEndTime = SelectedAvailability.EndTime;
-            STime = TempStartTime.ToString();
-            ETime = TempEndTime.ToString();
+            STime = TempStartTime.Value.TimeOfDay.ToString();
+            ETime = TempEndTime.Value.TimeOfDay.ToString();
             SaveCommand = new RelayCommand(Save, CanSave);
         }
 
@@ -61,6 +61,7 @@ namespace ParkInspectGroupC.ViewModel
             {
                 SelectedAvailability.StartTime = TempStartTime;
                 SelectedAvailability.EndTime = TempEndTime;
+                SelectedAvailability.ExistsInCentral = 2;
                 context.Entry(SelectedAvailability).State = EntityState.Modified;
                 context.SaveChanges();
             }

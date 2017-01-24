@@ -91,7 +91,8 @@ namespace ParkInspectGroupC.ViewModel
                     EmployeeId = SelectedInspector.Id,
                     Date = Date,
                     StartTime = StartTime,
-                    EndTime = EndTime
+                    EndTime = EndTime,
+                    ExistsInCentral = 0
                 };
 
                 context.Availability.Add(availability);
