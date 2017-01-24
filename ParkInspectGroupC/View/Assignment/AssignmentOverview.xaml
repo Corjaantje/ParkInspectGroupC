@@ -51,8 +51,6 @@
         <WrapPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Bottom">
             <Button x:Name="NewAssignment" Content="+ Nieuwe Opdracht" HorizontalAlignment="Left" Margin="10,10, 10, 10"
                     VerticalAlignment="Center" Width="118" Command="{Binding newAssigment}" />
-            <Button x:Name="NewInspection" Content="+ Nieuwe inspectie" HorizontalAlignment="Left" Margin="10,10,10,10"
-                            VerticalAlignment="Center" Command="{Binding newInspection}" />
         </WrapPanel>
 
         <WrapPanel Grid.ColumnSpan="2" Grid.Row="3">

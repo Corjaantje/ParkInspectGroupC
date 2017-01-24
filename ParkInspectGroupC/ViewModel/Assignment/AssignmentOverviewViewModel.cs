@@ -90,9 +90,10 @@ namespace ParkInspectGroupC.ViewModel
 		{
 			if (SelectedAssignment != null)
 			{
+				Settings.Default.AssignmentId = SelectedAssignment.Id;
 				var Inspections = new InspectionView();
 				Navigator.SetNewView(Inspections);
-				((InspectionViewModel)Inspections.DataContext).filterInspections((int)SelectedAssignment.Id);
+
 			}
 		}
 
@@ -188,7 +189,6 @@ namespace ParkInspectGroupC.ViewModel
 		public ICommand ShowResultsRelay { get; set; }
 		//public ICommand ShowQuestionnaire { get; set; }
 		public ICommand ShowFilteredInspections { get; set; }
-
 
 		#endregion
 	}
