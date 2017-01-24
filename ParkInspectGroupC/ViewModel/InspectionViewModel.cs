@@ -12,10 +12,11 @@ using LocalDatabase.Domain;
 using ParkInspectGroupC.Miscellaneous;
 using ParkInspectGroupC.View;
 using ParkInspectGroupC.Properties;
+using GalaSoft.MvvmLight;
 
 namespace ParkInspectGroupC.ViewModel
 {
-    public class InspectionViewModel
+    public class InspectionViewModel : ViewModelBase
     {
         public InspectionViewModel()
         {
@@ -75,7 +76,8 @@ namespace ParkInspectGroupC.ViewModel
         {
             var result = from Inspection in allInspections
                 orderby Inspection.Id ascending
-                where Inspection.Location.Contains(SearchCriteria)
+                where Inspection.Location.ToLower().Contains(SearchCriteria)
+                   || Inspection.Id.ToString().Contains(SearchCriteria)
                 select Inspection;
 
             Inspections = new ObservableCollection<Inspection>(result);
@@ -238,14 +240,6 @@ namespace ParkInspectGroupC.ViewModel
             allInspections.Remove(SelectedInspection);
             RaisePropertyChanged("Inspections");
         }
-
-
-        private void RaisePropertyChanged(string prop)
-        {
-            if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(prop));
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         #region properties
 
