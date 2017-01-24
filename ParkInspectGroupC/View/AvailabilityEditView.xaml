@@ -23,7 +23,7 @@
         <Calendar Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Margin="15,2,0,0" VerticalAlignment="Top"
                   SelectedDate="{Binding Date}" />
 
-        <TextBlock Grid.Row="0" Grid.Column="1" Text="Formaat: 12-09-2014 20:09" Margin="32,189,10,2" />
+        <TextBlock Grid.Row="0" Grid.Column="1" Text="Formaat: 20:09" Margin="32,189,10,2" />
         <TextBlock Grid.Row="1" Text="Starttijd:" Margin="20,6,0,0" />
         <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=STime , UpdateSourceTrigger=PropertyChanged}"
                  Margin="15,2,15,2" />
