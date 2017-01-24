@@ -6,23 +6,23 @@ using System.Threading.Tasks;
 
 namespace ParkInspectGroupC.ViewModel.Results
 {
-    public struct QuestionnaireResult
+    public class QuestionnaireResult
     {
-        public long InspectionId;
-        public DateTime DateTime;
-        public string[] Keywords;
-        public int Value;
+        public long InspectionId { get; set; }
+        public DateTime DateTime { get; set; }
+        public List<string> Keywords { get; set; }
+        public int Value { get; set; }
     }
 
-    public struct AggregatedResult
+    public class AggregatedResult
     {
-        public string Keywords;
-        public int Value;
+        public string Keywords { get; set; }
+        public int Value { get; set; }
     }
 
-    public struct PlottedResult
+    public class PlottedResult
     {
-        public DateTime DateTime;
-        public int Value;
+        public DateTime DateTime { get; set; }
+        public int Value { get; set; }
     }
 }
