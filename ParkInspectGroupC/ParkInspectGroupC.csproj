@@ -167,9 +167,6 @@
     <Compile Include="View\AssignmentToInspectionView.xaml.cs">
       <DependentUpon>AssignmentToInspectionView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Assignment\AssignmentResultView.xaml.cs">
-      <DependentUpon>AssignmentResultView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\Assignment\AssignmentOverview.xaml.cs">
       <DependentUpon>AssignmentOverview.xaml</DependentUpon>
     </Compile>
@@ -178,6 +175,9 @@
     <Compile Include="ViewModel\ReportCreation\DiagramPreviewViewModel.cs" />
     <Compile Include="ViewModel\ReportCreation\ReportViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="View\Assignment\AssignmentResultView.xaml.cs">
+      <DependentUpon>AssignmentResultView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\AvailabilityCreationView.xaml.cs">
       <DependentUpon>AvailabilityCreationView.xaml</DependentUpon>
     </Compile>
@@ -328,11 +328,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Assignment\AssignmentResultView.xaml">
+    <Page Include="View\Assignment\AssignmentOverview.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Assignment\AssignmentOverview.xaml">
+    <Page Include="View\Assignment\AssignmentResultView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
