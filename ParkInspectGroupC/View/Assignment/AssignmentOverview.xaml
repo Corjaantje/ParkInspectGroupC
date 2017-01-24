@@ -27,9 +27,7 @@
 
         <WrapPanel Grid.ColumnSpan="2" Grid.Row="1">
             <TextBox x:Name="SearchBox" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap"
-                         Text="{Binding SearchCriteria, Mode=TwoWay}" VerticalAlignment="Top" MinWidth="392" />
-            <Button x:Name="startSearch" Content="Zoek" HorizontalAlignment="Left" Margin="10,10,10,10"
-                        VerticalAlignment="Top" Width="75" Command="{Binding SearchAll}" />
+                         Text="{Binding SearchCriteria, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" MinWidth="392" />
             <CheckBox x:Name="ClosedAssigments" Content="Gesloten opdrachten" HorizontalAlignment="Left" Margin="10,10,10,10"
                       VerticalAlignment="Center" IsChecked="{Binding ShowClosedAssignments}" />
             <Button x:Name="NewAssignment" Content="Nieuwe Opdracht" HorizontalAlignment="Left" Margin="10,10, 10, 10"
@@ -44,7 +42,6 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="#" Binding="{Binding Id}" />
                     <DataGridTextColumn Header="Beschrijving" Binding="{Binding Description}" Width="*" />
-
                 </DataGrid.Columns>
 
             </DataGrid>

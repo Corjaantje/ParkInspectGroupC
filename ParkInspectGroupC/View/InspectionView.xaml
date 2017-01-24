@@ -22,7 +22,7 @@
             <DataGrid AutoGenerateColumns="False" CanUserDeleteRows="False" Margin="10,10,0,0"
                             IsReadOnly="True"
                       SelectedItem="{Binding SelectedInspection, Mode=TwoWay}"
-                      ItemsSource="{Binding Inspections,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                      ItemsSource="{Binding Inspections, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                       HeadersVisibility="Column">
 
                 <DataGrid.Columns>

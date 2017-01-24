@@ -34,7 +34,7 @@ namespace ParkInspectGroupC.ViewModel
 			{
 				using (var context = new LocalParkInspectEntities())
 				{
-					AssignmentCollection = context.Assignment.ToList();
+					AssignmentCollection = context.Assignment.Include("Customer").ToList();
 				}
 			}
 			catch
@@ -62,12 +62,27 @@ namespace ParkInspectGroupC.ViewModel
 			if (_showClosedAssignments)
 				tempCollection = from Assignment in AssignmentCollection
 								 orderby Assignment.Id ascending
-								 where Assignment.Description.Contains(_searchCritetia)
-								 select Assignment;
+								 where Assignment.Description.ToLower().Contains(_searchCritetia.ToLower()) 
+                                    || Assignment.Customer.Name.ToLower().Contains(_searchCritetia.ToLower()) 
+                                    || Assignment.Customer.Location.ToLower().Contains(_searchCritetia.ToLower()) 
+                                    || Assignment.Customer.Phonenumber.ToLower().Contains(_searchCritetia.ToLower()) 
+                                    || Assignment.Customer.Email.ToLower().Contains(_searchCritetia.ToLower()) 
+                                    || Assignment.Customer.Address.ToLower().Contains(_searchCritetia.ToLower())
+                                    || Assignment.Customer.Id.ToString().ToLower().Contains(_searchCritetia.ToLower())
+                                    || Assignment.DateCreated.ToString().ToLower().Contains(_searchCritetia.ToLower())
+                                 select Assignment;
 			else
 				tempCollection = from Assignment in AssignmentCollection
 								 orderby Assignment.Id ascending
-								 where Assignment.Description.Contains(_searchCritetia) && (Assignment.EndDate != null)
+								 where Assignment.Description.ToLower().Contains(_searchCritetia.ToLower()) 
+                                    || Assignment.Customer.Name.ToLower().Contains(_searchCritetia.ToLower())
+                                    || Assignment.Customer.Location.ToLower().Contains(_searchCritetia.ToLower())
+                                    || Assignment.Customer.Phonenumber.ToLower().Contains(_searchCritetia.ToLower())
+                                    || Assignment.Customer.Email.ToLower().Contains(_searchCritetia.ToLower())
+                                    || Assignment.Customer.Address.ToLower().Contains(_searchCritetia.ToLower())
+                                    || Assignment.Customer.Id.ToString().ToLower().Contains(_searchCritetia.ToLower())
+                                    || Assignment.DateCreated.ToString().ToLower().Contains(_searchCritetia.ToLower())
+                                    && (Assignment.EndDate != null)
 								 select Assignment;
 
 			ObservedCollection = new ObservableCollection<Assignment>(tempCollection);
