@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ParkInspectGroupC.View"
         mc:Ignorable="d"
-        Title="EditAssignmentView" Height="292.603" Width="369.589" ResizeMode="NoResize">
+        Title="Opdracht aanpassen" Height="292.603" Width="369.589" ResizeMode="NoResize">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -14,13 +14,6 @@
 
         <Image x:Name="image" Source="..\..\Image\Logo_WhiteBack.PNG" HorizontalAlignment="Left" Height="30"
                Margin="10,10,0,0" VerticalAlignment="Top" Width="72" />
-
-        <Button x:Name="Assignmets" Content="Opdrachten" HorizontalAlignment="Left" Margin="110,10,0,0"
-                VerticalAlignment="Top" Width="75" Background="LightBlue" />
-        <Button x:Name="Administration" Content="Administatie" HorizontalAlignment="Left" Margin="195,10,0,0"
-                VerticalAlignment="Top" Width="75" />
-        <Button x:Name="Statistics" Content="Statistieken" HorizontalAlignment="Left" Margin="280,10,0,0"
-                VerticalAlignment="Top" Width="75" />
 
         <Label x:Name="Description" Content="Beschrijving:" HorizontalAlignment="Left" Margin="10,50,0,0"
                VerticalAlignment="Top" />
