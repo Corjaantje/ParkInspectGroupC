@@ -5,7 +5,7 @@ using System.Windows.Controls;
 
 namespace ParkInspectGroupC.Validation
 {
-    internal class EmailValidation : ValidationRule
+    public class EmailValidation : ValidationRule
     {
         private bool invalid;
 
