@@ -52,7 +52,7 @@ namespace ParkInspectGroupC.ViewModel
                     var result = context.Inspection.ToList();
 
                     Inspections = new ObservableCollection<Inspection>();
-
+					
                     foreach(var inspection in result)
                     {
                         if(inspection.AssignmentId == Settings.Default.AssignmentId)
@@ -64,6 +64,7 @@ namespace ParkInspectGroupC.ViewModel
 
 
 				}
+
             }
             catch(Exception e)
             {

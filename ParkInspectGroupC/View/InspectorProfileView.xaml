@@ -54,10 +54,10 @@
         <Label Content="{Binding Path=ManagerName, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Grid.Row="8" />
 
         <Label Content="Inspecties" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Grid.Column="0" Grid.Row="9"/>
-        <DataGrid ItemsSource="{Binding Path=Inspections, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" Grid.ColumnSpan="2" IsReadOnly="True" Grid.Column="0" Grid.Row="10"  Height="100">
+        <DataGrid ItemsSource="{Binding Inspections, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" Grid.ColumnSpan="2" IsReadOnly="True" Grid.Column="0" Grid.Row="10"  Height="100">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Location}" Header="Locatie" />
-                <DataGridTextColumn Binding="{Binding InspectionStatus}" Header="Status" />
+                <DataGridTextColumn Binding="{Binding InspectionStatus.Description}" Header="Status" />
             </DataGrid.Columns>
         </DataGrid>
 
