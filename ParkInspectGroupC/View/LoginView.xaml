@@ -8,7 +8,9 @@
              xmlns:ph="clr-namespace:ParkInspectGroupC.Miscellaneous"
              DataContext="{Binding LoginWindow, Source={StaticResource Locator}}"
              x:Name="This">
-
+    <UserControl.InputBindings>
+        <KeyBinding Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=This}" Key="Enter"/>
+    </UserControl.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
