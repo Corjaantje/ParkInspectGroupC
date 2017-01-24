@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.CommandWpf;
 using LocalDatabase.Domain;
 
 namespace ParkInspectGroupC.ViewModel
@@ -86,7 +86,7 @@ namespace ParkInspectGroupC.ViewModel
             set
             {
                 _customermail = value;
-                RaisePropertyChanged("Customermail");
+                RaisePropertyChanged("CustomerMail");
             }
         }
 
