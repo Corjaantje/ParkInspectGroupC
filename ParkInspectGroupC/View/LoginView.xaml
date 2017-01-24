@@ -1,37 +1,42 @@
 ﻿<UserControl x:Class="ParkInspectGroupC.View.LoginView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:ParkInspectGroupC.View"
-             mc:Ignorable="d" 
-			 xmlns:ph="clr-namespace:ParkInspectGroupC.Miscellaneous"
-			 DataContext="{Binding LoginWindow, Source={StaticResource Locator}}"
-			 x:Name="This">
+             mc:Ignorable="d"
+             xmlns:ph="clr-namespace:ParkInspectGroupC.Miscellaneous"
+             DataContext="{Binding LoginWindow, Source={StaticResource Locator}}"
+             x:Name="This">
 
-	<Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="50" />
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="Auto" />
-		</Grid.RowDefinitions>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="Auto" />
-			<ColumnDefinition Width="200" />
-		</Grid.ColumnDefinitions>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="200" />
+        </Grid.ColumnDefinitions>
 
-		<Image Grid.Row="0" Grid.Column="0" Source="/ParkInspectGroupC;component/Image/Logo_WhiteBack.PNG" />
+        <Image Grid.Row="0" Grid.Column="0" Source="/ParkInspectGroupC;component/Image/Logo_WhiteBack.PNG" />
 
-		<Label Grid.Row="1" Grid.Column="0" Content="Gebruikersnaam:" Margin="0,0,10,0" />
-		<TextBox Grid.Row="1" Grid.Column="1" Margin="0,2,20,2" Text="{Binding Username}" />
+        <Label Grid.Row="1" Grid.Column="0" Content="Gebruikersnaam:" Margin="0,0,10,0" />
+        <TextBox Grid.Row="1" Grid.Column="1" Margin="0,2,20,2" Text="{Binding Username}" />
 
-		<Label Grid.Row="2" Grid.Column="0" Content="Wachtwoord:" Margin="0,0,10,0" />
-		<PasswordBox x:Name="MyPasswordBox" Grid.Row="2" Grid.Column="1" PasswordChar="☺" Margin="0,2,20,2" />
+        <Label Grid.Row="2" Grid.Column="0" Content="Wachtwoord:" Margin="0,0,10,0" />
+        <PasswordBox x:Name="MyPasswordBox" Grid.Row="1" Grid.Column="1" PasswordChar="*" Margin="0,24,20,6"
+                     Grid.RowSpan="2" />
 
-		<Button Grid.Row="3" Grid.Column="0" Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=This}" Content="Login" Margin="12,12,12,27" />
-		<Label Grid.Row="3" Grid.Column="1" Foreground="Red"  Margin="0,0,10,-50">
-			<TextBlock Text="{Binding LoginMessage}" TextWrapping="WrapWithOverflow" />
-		</Label>
-	</Grid>
+        <WrapPanel Grid.Row="3" Grid.Column="0">
+            <Button Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=This}" Content="Login"
+                    Margin="5,5,5,5" />
+            <Button Command="{Binding RegisterCommand}" Content="Registreren" Margin="5" />
+        </WrapPanel>
+        <Label Grid.Row="3" Grid.Column="1" Foreground="Red" Margin="0,0,10,-50">
+            <TextBlock Text="{Binding LoginMessage}" TextWrapping="WrapWithOverflow" />
+        </Label>
+    </Grid>
 </UserControl>

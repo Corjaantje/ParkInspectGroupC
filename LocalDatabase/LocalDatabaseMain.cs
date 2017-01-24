@@ -1,20 +1,20 @@
-﻿using LocalDatabase.Central;
-using LocalDatabase.Domain;
-using LocalDatabase.Local;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
 using System.IO;
 using System.Threading.Tasks;
+using LocalDatabase.Central;
+using LocalDatabase.Domain;
+using LocalDatabase.Local;
 
 namespace LocalDatabase
 {
     public class LocalDatabaseMain
     {
-        private string dbName;
-        SQLiteConnection _sqliteConnection;
-        DatabaseActions _sqliteActions;
+        private readonly DatabaseActions _sqliteActions;
+        public SQLiteConnection _sqliteConnection;
+        private readonly string dbName;
 
         public LocalDatabaseMain(string _dbName)
         {
@@ -22,11 +22,12 @@ namespace LocalDatabase
             _sqliteActions = new DatabaseActions();
             CheckForAndCreateDatabase();
         }
+
         public bool CheckForAndCreateDatabase()
         {
             //Check if database exists, if not create the database
             //Set up the connection
-            bool db = false;
+            var db = false;
             if (File.Exists(dbName + ".sqlite"))
             {
                 _sqliteConnection = new SQLiteConnection("Data Source=" + dbName + ".sqlite;Version=3;");
@@ -34,8 +35,9 @@ namespace LocalDatabase
             }
             else
             {
-                CreateSQLiteDatabase createDB = new CreateSQLiteDatabase();
-                db = createDB.Create(_sqliteActions, dbName, false); //When true database is created and thus exists, when false creating database failed
+                var createDB = new CreateSQLiteDatabase();
+                db = createDB.Create(_sqliteActions, dbName, false);
+                    //When true database is created and thus exists, when false creating database failed
                 _sqliteConnection = new SQLiteConnection("Data Source=" + dbName + ".sqlite;Version=3;");
             }
 
@@ -43,48 +45,55 @@ namespace LocalDatabase
         }
 
         #region Database Actions
+
         public bool CreateRecord(string sql)
         {
             return _sqliteActions.CUD(_sqliteConnection, sql);
         }
+
         public bool UpdateRecord(string sql)
         {
             return _sqliteActions.CUD(_sqliteConnection, sql);
         }
+
         public bool DeleteRecord(string sql)
         {
             return _sqliteActions.CUD(_sqliteConnection, sql);
         }
+
         public DataTable GetRecords(string sql)
         {
             return _sqliteActions.Get(_sqliteConnection, sql);
         }
+
         #endregion
 
         #region Database Sync Options
+
         public async Task<bool> SyncCentralToLocal()
         {
-            Task<bool> refresh = Task.Run(() =>
-            {
-                GetFromCentral sync = new GetFromCentral(_sqliteConnection, _sqliteActions);
-                bool r = sync.Sync(dbName);
+            var refresh = Task.Run(() =>
+                {
+                    var sync = new GetFromCentral(_sqliteConnection, _sqliteActions);
+                    var r = sync.Sync(dbName);
 
-                return r;
-            }
+                    return r;
+                }
             );
 
-            bool result = await refresh;
+            var result = await refresh;
             return result;
         }
+
         public List<SaveDeleteMessage> SyncLocalToCentralSaveDelete()
         {
-            bool cont = true;
-            List<SaveDeleteMessage> messages = new List<SaveDeleteMessage>();
-            SaveToCentral syncSave = new SaveToCentral(_sqliteConnection, _sqliteActions);
-            DeleteToCentral syncDelete = new DeleteToCentral(_sqliteConnection, _sqliteActions);
+            var cont = true;
+            var messages = new List<SaveDeleteMessage>();
+            var syncSave = new SaveToCentral(_sqliteConnection, _sqliteActions);
+            var syncDelete = new DeleteToCentral(_sqliteConnection, _sqliteActions);
 
             //Save
-            SaveDeleteMessage _newSave = new SaveDeleteMessage();
+            var _newSave = new SaveDeleteMessage();
             _newSave.Action = "LtC Opslaan";
             _newSave.Date = DateTime.Now;
             if (syncSave.Save())
@@ -101,10 +110,10 @@ namespace LocalDatabase
             if (!cont) return messages;
 
             //Delete
-            SaveDeleteMessage _newDelete = new SaveDeleteMessage();
+            var _newDelete = new SaveDeleteMessage();
             _newDelete.Action = "LtC Verwijderen";
             _newDelete.Date = DateTime.Now;
-            List<string> _temp = syncDelete.Save();
+            var _temp = syncDelete.Save();
             if (_temp.Count == 0)
             {
                 _newDelete.Message = "Succes!";
@@ -114,9 +123,9 @@ namespace LocalDatabase
             {
                 _newDelete.Message = "Er zijn meldingen:";
                 messages.Add(_newDelete);
-                foreach (string m in _temp)
+                foreach (var m in _temp)
                 {
-                    SaveDeleteMessage _newTemp = new SaveDeleteMessage();
+                    var _newTemp = new SaveDeleteMessage();
                     _newTemp.Message = m;
                     messages.Add(_newTemp);
                 }
@@ -124,20 +133,21 @@ namespace LocalDatabase
 
             return messages;
         }
-        public Tuple<List<UpdateMessage>,SaveDeleteMessage> SyncLocalToCentralUpdate()
+
+        public Tuple<List<UpdateMessage>, SaveDeleteMessage> SyncLocalToCentralUpdate()
         {
-            List<UpdateMessage> UpdateMessages = new List<UpdateMessage>();
-            UpdateToCentral UpdateSync = new UpdateToCentral(_sqliteConnection, _sqliteActions);
+            var UpdateMessages = new List<UpdateMessage>();
+            var UpdateSync = new UpdateToCentral(_sqliteConnection, _sqliteActions);
 
             //Update
-            SaveDeleteMessage _newUpdate = new SaveDeleteMessage();
+            var _newUpdate = new SaveDeleteMessage();
             _newUpdate.Action = "LtC Updaten";
             _newUpdate.Date = DateTime.Now;
-            Tuple<bool, List<UpdateMessage>> Update = UpdateSync.Update();
+            var Update = UpdateSync.Update();
 
             if (Update.Item1)
             {
-                _newUpdate.Message = "Succes! Er zijn "+ Update.Item2.Count + " conflicten gevonden.";
+                _newUpdate.Message = "Succes! Er zijn " + Update.Item2.Count + " conflicten gevonden.";
                 UpdateMessages = Update.Item2;
             }
             else
@@ -147,13 +157,15 @@ namespace LocalDatabase
 
             return Tuple.Create(UpdateMessages, _newUpdate);
         }
+
         #endregion
 
         #region Database Sync Update Actions
+
         public string GetLocalDetails(UpdateMessage message)
         {
             string msg = null;
-            GetLocalRecordDetails glrd = new GetLocalRecordDetails();
+            var glrd = new GetLocalRecordDetails();
 
             switch (message.LocalDatabaseName)
             {
@@ -224,10 +236,11 @@ namespace LocalDatabase
 
             return msg;
         }
+
         public string GetCentralDetails(UpdateMessage message)
         {
             string msg = null;
-            GetCentralRecordDetails glrd = new GetCentralRecordDetails();
+            var glrd = new GetCentralRecordDetails();
 
             switch (message.LocalDatabaseName)
             {
@@ -298,9 +311,10 @@ namespace LocalDatabase
 
             return msg;
         }
+
         public void KeepLocal(UpdateMessage message)
         {
-            KeepLocal kl = new KeepLocal();
+            var kl = new KeepLocal();
 
             switch (message.LocalDatabaseName)
             {
@@ -369,6 +383,7 @@ namespace LocalDatabase
                     break;
             }
         }
+
         #endregion
     }
 }

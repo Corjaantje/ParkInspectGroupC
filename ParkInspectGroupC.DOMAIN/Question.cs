@@ -19,6 +19,7 @@ namespace ParkInspectGroupC.DOMAIN
         {
             this.QuestionAnswer = new HashSet<QuestionAnswer>();
             this.QuestionKeyword = new HashSet<QuestionKeyword>();
+            this.Diagram = new HashSet<Diagram>();
         }
     
         public int Id { get; set; }
@@ -34,5 +35,7 @@ namespace ParkInspectGroupC.DOMAIN
         public virtual ICollection<QuestionAnswer> QuestionAnswer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<QuestionKeyword> QuestionKeyword { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Diagram> Diagram { get; set; }
     }
 }

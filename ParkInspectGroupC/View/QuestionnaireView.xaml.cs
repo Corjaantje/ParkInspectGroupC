@@ -1,26 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Practices.ServiceLocation;
+using ParkInspectGroupC.ViewModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace ParkInspectGroupC.View
 {
     /// <summary>
-    /// Interaction logic for QuestionnaireView.xaml
+    ///     Interaction logic for QuestionnaireView.xaml
     /// </summary>
-    public partial class QuestionnaireView : Window
+    public partial class QuestionnaireView : UserControl
     {
         public QuestionnaireView()
         {
+            //ServiceLocator.Current.GetInstance<QuestionnaireViewModel>().RefreshViewModel();
+            InitializeComponent();
         }
     }
 }

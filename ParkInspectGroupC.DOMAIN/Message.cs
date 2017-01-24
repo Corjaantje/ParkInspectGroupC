@@ -18,7 +18,7 @@ namespace ParkInspectGroupC.DOMAIN
         public int SenderId { get; set; }
         public int ReceiverId { get; set; }
         public string Content { get; set; }
-        public Nullable<bool> Read { get; set; }
+        public bool Read { get; set; }
         public System.DateTime DateCreated { get; set; }
     
         public virtual Employee Reciever { get; set; }
