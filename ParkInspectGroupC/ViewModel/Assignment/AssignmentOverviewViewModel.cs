@@ -8,6 +8,7 @@ using LocalDatabase.Domain;
 using ParkInspectGroupC.Miscellaneous;
 using ParkInspectGroupC.View;
 using ParkInspectGroupC.Properties;
+using System;
 
 namespace ParkInspectGroupC.ViewModel
 {
@@ -105,8 +106,8 @@ namespace ParkInspectGroupC.ViewModel
 			var customerName = "";
 			var managerName = "";
 			var description = SelectedAssignment.Description;
-			var startDate = SelectedAssignment.StartDate.ToString();
-			var endDate = SelectedAssignment.EndDate.ToString();
+			var startDate = ((DateTime)SelectedAssignment.StartDate).Date.ToString("d");
+			var endDate = ((DateTime)SelectedAssignment.EndDate).Date.ToString("d");
 
 			var details = "";
 

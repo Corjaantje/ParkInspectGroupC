@@ -27,6 +27,7 @@ namespace ParkInspectGroupC.ViewModel
 
             CreateAssignment = new RelayCommand(createAssignment);
             AssignmentOverview = new RelayCommand(openAssignmentOverview);
+			CustomerIndex = 0;
 
         }
 
