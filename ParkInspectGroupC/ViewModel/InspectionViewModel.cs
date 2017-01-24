@@ -232,11 +232,10 @@ namespace ParkInspectGroupC.ViewModel
         {
             using (var context = new LocalParkInspectEntities())
             {
-                var inspections = context.Inspection.ToList();
+				var inspection = context.Inspection.Single(i => i.Id == SelectedInspection.Id);
 
-                foreach (var inspection in inspections)
-                    if (inspection.Id == SelectedInspection.Id)
-                        context.Inspection.Remove(inspection);
+				inspection.ExistsInCentral = 3;
+
                 context.SaveChanges();
             }
 
