@@ -26,7 +26,7 @@ namespace ParkInspectGroupC.ViewModel
             {
                 PInspections = (
                     from c in context.Inspection
-                    where c.InspectorId == Properties.Settings.Default.LoggedInEmp.Id
+                    where c.InspectorId == Properties.Settings.Default.LoggedInEmp.Id && c.StatusId == 4
                     select c).ToList();
             }
             AddInspections(PInspections);
