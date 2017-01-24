@@ -92,7 +92,8 @@ namespace ParkInspectGroupC.ViewModel
 
         public InspectionViewModel InspectionOverView
         {
-            get { return ServiceLocator.Current.GetInstance<InspectionViewModel>(); }
+			//get { return ServiceLocator.Current.GetInstance<InspectionViewModel>(); }
+			get { return new InspectionViewModel(); }
         }
 
         public AssignmentToInspectionViewModel AssignmentToInspection

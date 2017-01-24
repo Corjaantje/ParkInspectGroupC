@@ -12,6 +12,7 @@ using LocalDatabase.Domain;
 using ParkInspectGroupC.Miscellaneous;
 using ParkInspectGroupC.View;
 using ParkInspectGroupC.Properties;
+using System;
 
 namespace ParkInspectGroupC.ViewModel
 {
@@ -50,21 +51,25 @@ namespace ParkInspectGroupC.ViewModel
                 {
                     var result = context.Inspection.ToList();
 
-                    allInspections = new ObservableCollection<Inspection>(result);
                     Inspections = new ObservableCollection<Inspection>();
 
-                    foreach(var inspection in allInspections)
+                    foreach(var inspection in result)
                     {
                         if(inspection.AssignmentId == Settings.Default.AssignmentId)
                         {
                             Inspections.Add(inspection);
                         }
-                    }
-                }
+					}
+					allInspections = new ObservableCollection<Inspection>(Inspections);
+
+
+				}
             }
-            catch
+            catch(Exception e)
             {
+				Debug.Write(e.StackTrace);
                 allInspections = new ObservableCollection<Inspection>();
+				Inspections = new ObservableCollection<Inspection>();
                 Inspections.Add(new Inspection {Id = 100, Location = "Something went wrong"});
             }
 
