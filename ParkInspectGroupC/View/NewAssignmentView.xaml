@@ -1,0 +1,20 @@
+﻿<Window x:Class="ParkInspectGroupC.View.NewAssignmentView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ParkInspectGroupC.View"
+        mc:Ignorable="d"
+        Title="NewAssignmentView" Height="300" Width="365">
+    <Grid>
+        <Image x:Name="image" Source ="..\Image\Logo_WhiteBack.PNG" HorizontalAlignment="Left" Height="30" Margin="10,10,0,0" VerticalAlignment="Top" Width="72"/>
+        <Button x:Name="Assignmets" Content="Opdrachten" HorizontalAlignment="Left" Margin="100,20,0,0" VerticalAlignment="Top" Width="75" Background="LightBlue"/>
+        <Button x:Name="Administration" Content="Administatie" HorizontalAlignment="Left" Margin="185,20,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="Statistics" Content="Statistieken" HorizontalAlignment="Left" Margin="270,20,10,0" VerticalAlignment="Top" Width="75"/>
+        <Label x:Name="newAssignmentLabel" Content="{Binding TopLabel}" HorizontalAlignment="Left" Margin="189,110,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="descriptionLabel" Content="Beschrijving:" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="150" Margin="10,85,10,0" TextWrapping="Wrap" Text="{Binding Description, Mode=TwoWay}" VerticalAlignment="Top" Width="335" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"/>
+        <Button x:Name="createAssignment" Content="Plaats opdracht" HorizontalAlignment="Left" Margin="10,240,0,0" VerticalAlignment="Top" Width="101" Click="createAssignment_Click"/>
+        <Label Content="{Binding CreatedAssignment}" HorizontalAlignment="Left" Margin="189,283,0,0" VerticalAlignment="Top"/>
+    </Grid>
+</Window>

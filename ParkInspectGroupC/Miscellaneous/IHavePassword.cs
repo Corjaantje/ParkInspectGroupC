@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Security;
 
 namespace ParkInspectGroupC.Miscellaneous
 {
-	interface IHavePassword
-	{
-		System.Security.SecureString Password { get; }
-	}
+    internal interface IHavePassword
+    {
+        SecureString Password { get; }
+    }
 }

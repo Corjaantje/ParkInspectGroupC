@@ -1,59 +1,76 @@
-﻿using LocalDatabase.Domain;
-using LocalDatabase.Local;
-using ParkInspectGroupC.DOMAIN;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using LocalDatabase.Domain;
+using LocalDatabase.Local;
+using ParkInspectGroupC.DOMAIN;
+using Account = ParkInspectGroupC.DOMAIN.Account;
+using Assignment = ParkInspectGroupC.DOMAIN.Assignment;
+using Availability = ParkInspectGroupC.DOMAIN.Availability;
+using Coordinate = ParkInspectGroupC.DOMAIN.Coordinate;
+using Customer = ParkInspectGroupC.DOMAIN.Customer;
+using Employee = ParkInspectGroupC.DOMAIN.Employee;
+using EmployeeStatus = ParkInspectGroupC.DOMAIN.EmployeeStatus;
+using Inspection = ParkInspectGroupC.DOMAIN.Inspection;
+using InspectionImage = ParkInspectGroupC.DOMAIN.InspectionImage;
+using InspectionStatus = ParkInspectGroupC.DOMAIN.InspectionStatus;
+using Keyword = ParkInspectGroupC.DOMAIN.Keyword;
+using KeywordCategory = ParkInspectGroupC.DOMAIN.KeywordCategory;
+using Module = ParkInspectGroupC.DOMAIN.Module;
+using Question = ParkInspectGroupC.DOMAIN.Question;
+using QuestionAnswer = ParkInspectGroupC.DOMAIN.QuestionAnswer;
+using QuestionKeyword = ParkInspectGroupC.DOMAIN.QuestionKeyword;
+using QuestionSort = ParkInspectGroupC.DOMAIN.QuestionSort;
+using Region = ParkInspectGroupC.DOMAIN.Region;
+using WorkingHours = ParkInspectGroupC.DOMAIN.WorkingHours;
 
 namespace LocalDatabase.Central
 {
     public class GetFromCentral
     {
-        DatabaseActions _sqliteActions;
-        SQLiteConnection _sqliteConnection;
+        private readonly DatabaseActions _sqliteActions;
+        private readonly SQLiteConnection _sqliteConnection;
+
         public GetFromCentral(SQLiteConnection conn, DatabaseActions actions)
         {
             _sqliteConnection = conn;
             _sqliteActions = actions;
         }
+
         public bool Sync(string dbName)
         {
             if (ClearLocal() && CreateLocal(dbName) && GetDataAndSaveToLocal())
-            {
                 return true;
-            }
 
             return false;
         }
+
         private bool ClearLocal()
         {
             try
             {
-                string sql = "DROP TABLE QuestionKeyword;" +
-                                "DROP TABLE QuestionaireModule;" +
-                                "DROP TABLE QuestionAnswer;" +
-                                "DROP TABLE Questionaire;" +
-                                "DROP TABLE Question;" +
-                                "DROP TABLE QuestionSort;" +
-                                "DROP TABLE Module;" +
-                                "DROP TABLE Keyword;" +
-                                "DROP TABLE KeywordCategory;" +
-                                "DROP TABLE InspectionImage;" +
-                                "DROP TABLE Coordinate;" +
-                                "DROP TABLE Inspection;" +
-                                "DROP TABLE InspectionStatus;" +
-                                "DROP TABLE Assignment;" +
-                                "DROP TABLE Customer;" +
-                                "DROP TABLE WorkingHours;" +
-                                "DROP TABLE Availability;" +
-                                "DROP TABLE Account;" +
-                                "DROP TABLE Employee;" +
-                                "DROP TABLE EmployeeStatus;" +
-                                "DROP TABLE Region;";
+                var sql = "DROP TABLE QuestionKeyword;" +
+                          "DROP TABLE QuestionaireModule;" +
+                          "DROP TABLE QuestionAnswer;" +
+                          "DROP TABLE Questionaire;" +
+                          "DROP TABLE Question;" +
+                          "DROP TABLE QuestionSort;" +
+                          "DROP TABLE Module;" +
+                          "DROP TABLE Keyword;" +
+                          "DROP TABLE KeywordCategory;" +
+                          "DROP TABLE InspectionImage;" +
+                          "DROP TABLE Coordinate;" +
+                          "DROP TABLE Inspection;" +
+                          "DROP TABLE InspectionStatus;" +
+                          "DROP TABLE Assignment;" +
+                          "DROP TABLE Customer;" +
+                          "DROP TABLE WorkingHours;" +
+                          "DROP TABLE Availability;" +
+                          "DROP TABLE Account;" +
+                          "DROP TABLE Employee;" +
+                          "DROP TABLE EmployeeStatus;" +
+                          "DROP TABLE Region;";
 
                 _sqliteActions.CUD(_sqliteConnection, sql);
                 return true;
@@ -64,14 +81,17 @@ namespace LocalDatabase.Central
                 return false;
             }
         }
+
         private bool CreateLocal(string dbName)
         {
-            CreateSQLiteDatabase createDB = new CreateSQLiteDatabase();
-            return createDB.Create(_sqliteActions, dbName, true); //When true database is created and thus exists, when false creating database failed
+            var createDB = new CreateSQLiteDatabase();
+            return createDB.Create(_sqliteActions, dbName, true);
+                //When true database is created and thus exists, when false creating database failed
         }
+
         private bool GetDataAndSaveToLocal()
         {
-            bool action = false;
+            var action = false;
 
             action = GetRegion();
             if (!action) return false;
@@ -139,25 +159,24 @@ namespace LocalDatabase.Central
         }
 
         #region Database tables
+
         private bool GetRegion()
         {
-            List<ParkInspectGroupC.DOMAIN.Region> list = new List<ParkInspectGroupC.DOMAIN.Region>();
+            var list = new List<Region>();
 
             try
             {
                 using (var context = new ParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.Region r in context.Region)
-                    {
+                    foreach (var r in context.Region)
                         list.Add(r);
-                    }
                 }
 
                 using (var localContext = new LocalParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.Region r in list)
+                    foreach (var r in list)
                     {
-                        Domain.Region _new = new Domain.Region();
+                        var _new = new Domain.Region();
                         _new.Id = r.Id;
                         _new.Region1 = r.Region1;
                         _new.DateCreated = r.DateCreated;
@@ -176,25 +195,24 @@ namespace LocalDatabase.Central
                 return false;
             }
         }
+
         private bool GetEmployeeStatus()
         {
-            List<ParkInspectGroupC.DOMAIN.EmployeeStatus> list = new List<ParkInspectGroupC.DOMAIN.EmployeeStatus>();
+            var list = new List<EmployeeStatus>();
 
             try
             {
                 using (var context = new ParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.EmployeeStatus r in context.EmployeeStatus)
-                    {
+                    foreach (var r in context.EmployeeStatus)
                         list.Add(r);
-                    }
                 }
 
                 using (var localContext = new LocalParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.EmployeeStatus r in list)
+                    foreach (var r in list)
                     {
-                        Domain.EmployeeStatus _new = new Domain.EmployeeStatus();
+                        var _new = new Domain.EmployeeStatus();
                         _new.Id = r.Id;
                         _new.Description = r.Description;
                         _new.DateCreated = r.DateCreated;
@@ -213,25 +231,24 @@ namespace LocalDatabase.Central
                 return false;
             }
         }
+
         private bool GetEmployee()
         {
-            List<ParkInspectGroupC.DOMAIN.Employee> list = new List<ParkInspectGroupC.DOMAIN.Employee>();
+            var list = new List<Employee>();
 
             try
             {
                 using (var context = new ParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.Employee r in context.Employee)
-                    {
+                    foreach (var r in context.Employee)
                         list.Add(r);
-                    }
                 }
 
                 using (var localContext = new LocalParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.Employee r in list)
+                    foreach (var r in list)
                     {
-                        Domain.Employee _new = new Domain.Employee();
+                        var _new = new Domain.Employee();
                         _new.Id = r.Id;
                         _new.FirstName = r.FirstName;
                         _new.Prefix = r.Prefix;
@@ -263,25 +280,24 @@ namespace LocalDatabase.Central
                 return false;
             }
         }
+
         private bool GetAccount()
         {
-            List<ParkInspectGroupC.DOMAIN.Account> list = new List<ParkInspectGroupC.DOMAIN.Account>();
+            var list = new List<Account>();
 
             try
             {
                 using (var context = new ParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.Account r in context.Account)
-                    {
+                    foreach (var r in context.Account)
                         list.Add(r);
-                    }
                 }
 
                 using (var localContext = new LocalParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.Account r in list)
+                    foreach (var r in list)
                     {
-                        Domain.Account _new = new Domain.Account();
+                        var _new = new Domain.Account();
                         _new.Id = r.Id;
                         _new.Username = r.Username;
                         _new.Password = r.Password;
@@ -303,25 +319,24 @@ namespace LocalDatabase.Central
                 return false;
             }
         }
+
         private bool GetAvailability()
         {
-            List<ParkInspectGroupC.DOMAIN.Availability> list = new List<ParkInspectGroupC.DOMAIN.Availability>();
+            var list = new List<Availability>();
 
             try
             {
                 using (var context = new ParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.Availability r in context.Availability)
-                    {
+                    foreach (var r in context.Availability)
                         list.Add(r);
-                    }
                 }
 
                 using (var localContext = new LocalParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.Availability r in list)
+                    foreach (var r in list)
                     {
-                        Domain.Availability _new = new Domain.Availability();
+                        var _new = new Domain.Availability();
                         _new.EmployeeId = r.EmployeeId;
                         _new.Date = r.Date;
                         _new.StartTime = Convert.ToDateTime(r.StartTime.ToString());
@@ -342,25 +357,24 @@ namespace LocalDatabase.Central
                 return false;
             }
         }
+
         private bool GetWorkingHours()
         {
-            List<ParkInspectGroupC.DOMAIN.WorkingHours> list = new List<ParkInspectGroupC.DOMAIN.WorkingHours>();
+            var list = new List<WorkingHours>();
 
             try
             {
                 using (var context = new ParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.WorkingHours r in context.WorkingHours)
-                    {
+                    foreach (var r in context.WorkingHours)
                         list.Add(r);
-                    }
                 }
 
                 using (var localContext = new LocalParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.WorkingHours r in list)
+                    foreach (var r in list)
                     {
-                        Domain.WorkingHours _new = new Domain.WorkingHours();
+                        var _new = new Domain.WorkingHours();
                         _new.EmployeeId = r.EmployeeId;
                         _new.Date = r.Date;
                         _new.StartTime = Convert.ToDateTime(r.StartTime.ToString());
@@ -381,25 +395,24 @@ namespace LocalDatabase.Central
                 return false;
             }
         }
+
         private bool GetCustomer()
         {
-            List<ParkInspectGroupC.DOMAIN.Customer> list = new List<ParkInspectGroupC.DOMAIN.Customer>();
+            var list = new List<Customer>();
 
             try
             {
                 using (var context = new ParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.Customer r in context.Customer)
-                    {
+                    foreach (var r in context.Customer)
                         list.Add(r);
-                    }
                 }
 
                 using (var localContext = new LocalParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.Customer r in list)
+                    foreach (var r in list)
                     {
-                        Domain.Customer _new = new Domain.Customer();
+                        var _new = new Domain.Customer();
                         _new.Id = r.Id;
                         _new.Name = r.Name;
                         _new.Address = r.Address;
@@ -422,25 +435,24 @@ namespace LocalDatabase.Central
                 return false;
             }
         }
+
         private bool GetAssignment()
         {
-            List<ParkInspectGroupC.DOMAIN.Assignment> list = new List<ParkInspectGroupC.DOMAIN.Assignment>();
+            var list = new List<Assignment>();
 
             try
             {
                 using (var context = new ParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.Assignment r in context.Assignment)
-                    {
+                    foreach (var r in context.Assignment)
                         list.Add(r);
-                    }
                 }
 
                 using (var localContext = new LocalParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.Assignment r in list)
+                    foreach (var r in list)
                     {
-                        Domain.Assignment _new = new Domain.Assignment();
+                        var _new = new Domain.Assignment();
                         _new.Id = r.Id;
                         _new.CustomerId = r.CustomerId;
                         _new.ManagerId = r.ManagerId;
@@ -463,25 +475,24 @@ namespace LocalDatabase.Central
                 return false;
             }
         }
+
         private bool GetInspectionStatus()
         {
-            List<ParkInspectGroupC.DOMAIN.InspectionStatus> list = new List<ParkInspectGroupC.DOMAIN.InspectionStatus>();
+            var list = new List<InspectionStatus>();
 
             try
             {
                 using (var context = new ParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.InspectionStatus r in context.InspectionStatus)
-                    {
+                    foreach (var r in context.InspectionStatus)
                         list.Add(r);
-                    }
                 }
 
                 using (var localContext = new LocalParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.InspectionStatus r in list)
+                    foreach (var r in list)
                     {
-                        Domain.InspectionStatus _new = new Domain.InspectionStatus();
+                        var _new = new Domain.InspectionStatus();
                         _new.Id = r.Id;
                         _new.Description = r.Description;
                         _new.DateCreated = r.DateCreated;
@@ -500,25 +511,24 @@ namespace LocalDatabase.Central
                 return false;
             }
         }
+
         private bool GetInspection()
         {
-            List<ParkInspectGroupC.DOMAIN.Inspection> list = new List<ParkInspectGroupC.DOMAIN.Inspection>();
+            var list = new List<Inspection>();
 
             try
             {
                 using (var context = new ParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.Inspection r in context.Inspection)
-                    {
+                    foreach (var r in context.Inspection)
                         list.Add(r);
-                    }
                 }
 
                 using (var localContext = new LocalParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.Inspection r in list)
+                    foreach (var r in list)
                     {
-                        Domain.Inspection _new = new Domain.Inspection();
+                        var _new = new Domain.Inspection();
                         _new.Id = r.Id;
                         _new.AssignmentId = r.AssignmentId;
                         _new.RegionId = r.RegionId;
@@ -543,25 +553,24 @@ namespace LocalDatabase.Central
                 return false;
             }
         }
+
         private bool GetInspectionImage()
         {
-            List<ParkInspectGroupC.DOMAIN.InspectionImage> list = new List<ParkInspectGroupC.DOMAIN.InspectionImage>();
+            var list = new List<InspectionImage>();
 
             try
             {
                 using (var context = new ParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.InspectionImage r in context.InspectionImage)
-                    {
+                    foreach (var r in context.InspectionImage)
                         list.Add(r);
-                    }
                 }
 
                 using (var localContext = new LocalParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.InspectionImage r in list)
+                    foreach (var r in list)
                     {
-                        Domain.InspectionImage _new = new Domain.InspectionImage();
+                        var _new = new Domain.InspectionImage();
                         _new.Id = r.Id;
                         _new.File = r.File;
                         _new.DateCreated = r.DateCreated;
@@ -580,25 +589,24 @@ namespace LocalDatabase.Central
                 return false;
             }
         }
+
         private bool GetCoordinate()
         {
-            List<ParkInspectGroupC.DOMAIN.Coordinate> list = new List<ParkInspectGroupC.DOMAIN.Coordinate>();
+            var list = new List<Coordinate>();
 
             try
             {
                 using (var context = new ParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.Coordinate r in context.Coordinate)
-                    {
+                    foreach (var r in context.Coordinate)
                         list.Add(r);
-                    }
                 }
 
                 using (var localContext = new LocalParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.Coordinate r in list)
+                    foreach (var r in list)
                     {
-                        Domain.Coordinate _new = new Domain.Coordinate();
+                        var _new = new Domain.Coordinate();
                         _new.Id = r.Id;
                         _new.Longitude = r.Longitude;
                         _new.Latitude = r.Latitude;
@@ -620,25 +628,24 @@ namespace LocalDatabase.Central
                 return false;
             }
         }
+
         private bool GetKeywordCategory()
         {
-            List<ParkInspectGroupC.DOMAIN.KeywordCategory> list = new List<ParkInspectGroupC.DOMAIN.KeywordCategory>();
+            var list = new List<KeywordCategory>();
 
             try
             {
                 using (var context = new ParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.KeywordCategory r in context.KeywordCategory)
-                    {
+                    foreach (var r in context.KeywordCategory)
                         list.Add(r);
-                    }
                 }
 
                 using (var localContext = new LocalParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.KeywordCategory r in list)
+                    foreach (var r in list)
                     {
-                        Domain.KeywordCategory _new = new Domain.KeywordCategory();
+                        var _new = new Domain.KeywordCategory();
                         _new.Id = r.Id;
                         _new.Description = r.Description;
                         _new.DateCreated = r.DateCreated;
@@ -657,25 +664,24 @@ namespace LocalDatabase.Central
                 return false;
             }
         }
+
         private bool GetKeyword()
         {
-            List<ParkInspectGroupC.DOMAIN.Keyword> list = new List<ParkInspectGroupC.DOMAIN.Keyword>();
+            var list = new List<Keyword>();
 
             try
             {
                 using (var context = new ParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.Keyword r in context.Keyword)
-                    {
+                    foreach (var r in context.Keyword)
                         list.Add(r);
-                    }
                 }
 
                 using (var localContext = new LocalParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.Keyword r in list)
+                    foreach (var r in list)
                     {
-                        Domain.Keyword _new = new Domain.Keyword();
+                        var _new = new Domain.Keyword();
                         _new.Id = r.Id;
                         _new.CategoryId = r.CategoryId;
                         _new.Description = r.Description;
@@ -695,25 +701,24 @@ namespace LocalDatabase.Central
                 return false;
             }
         }
+
         private bool GetModule()
         {
-            List<ParkInspectGroupC.DOMAIN.Module> list = new List<ParkInspectGroupC.DOMAIN.Module>();
+            var list = new List<Module>();
 
             try
             {
                 using (var context = new ParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.Module r in context.Module)
-                    {
+                    foreach (var r in context.Module)
                         list.Add(r);
-                    }
                 }
 
                 using (var localContext = new LocalParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.Module r in list)
+                    foreach (var r in list)
                     {
-                        Domain.Module _new = new Domain.Module();
+                        var _new = new Domain.Module();
                         _new.Id = r.Id;
                         _new.Name = r.Name;
                         _new.Description = r.Description;
@@ -734,25 +739,24 @@ namespace LocalDatabase.Central
                 return false;
             }
         }
+
         private bool GetQuestionSort()
         {
-            List<ParkInspectGroupC.DOMAIN.QuestionSort> list = new List<ParkInspectGroupC.DOMAIN.QuestionSort>();
+            var list = new List<QuestionSort>();
 
             try
             {
                 using (var context = new ParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.QuestionSort r in context.QuestionSort)
-                    {
+                    foreach (var r in context.QuestionSort)
                         list.Add(r);
-                    }
                 }
 
                 using (var localContext = new LocalParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.QuestionSort r in list)
+                    foreach (var r in list)
                     {
-                        Domain.QuestionSort _new = new Domain.QuestionSort();
+                        var _new = new Domain.QuestionSort();
                         _new.Id = r.Id;
                         _new.Description = r.Description;
                         _new.DateCreated = r.DateCreated;
@@ -771,25 +775,24 @@ namespace LocalDatabase.Central
                 return false;
             }
         }
+
         private bool GetQuestion()
         {
-            List<ParkInspectGroupC.DOMAIN.Question> list = new List<ParkInspectGroupC.DOMAIN.Question>();
+            var list = new List<Question>();
 
             try
             {
                 using (var context = new ParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.Question r in context.Question)
-                    {
+                    foreach (var r in context.Question)
                         list.Add(r);
-                    }
                 }
 
                 using (var localContext = new LocalParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.Question r in list)
+                    foreach (var r in list)
                     {
-                        Domain.Question _new = new Domain.Question();
+                        var _new = new Domain.Question();
                         _new.Id = r.Id;
                         _new.SortId = r.SortId;
                         _new.Description = r.Description;
@@ -810,25 +813,24 @@ namespace LocalDatabase.Central
                 return false;
             }
         }
+
         private bool GetQuestionaire()
         {
-            List<ParkInspectGroupC.DOMAIN.Questionnaire> list = new List<ParkInspectGroupC.DOMAIN.Questionnaire>();
+            var list = new List<Questionnaire>();
 
             try
             {
                 using (var context = new ParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.Questionnaire r in context.Questionnaire)
-                    {
+                    foreach (var r in context.Questionnaire)
                         list.Add(r);
-                    }
                 }
 
                 using (var localContext = new LocalParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.Questionnaire r in list)
+                    foreach (var r in list)
                     {
-                        Domain.Questionaire _new = new Domain.Questionaire();
+                        var _new = new Questionaire();
                         _new.Id = r.Id;
                         _new.InspectionId = r.InspectionId;
                         _new.DateCreated = r.DateCreated;
@@ -847,25 +849,24 @@ namespace LocalDatabase.Central
                 return false;
             }
         }
+
         private bool GetQuestionAnswer()
         {
-            List<ParkInspectGroupC.DOMAIN.QuestionAnswer> list = new List<ParkInspectGroupC.DOMAIN.QuestionAnswer>();
+            var list = new List<QuestionAnswer>();
 
             try
             {
                 using (var context = new ParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.QuestionAnswer r in context.QuestionAnswer)
-                    {
+                    foreach (var r in context.QuestionAnswer)
                         list.Add(r);
-                    }
                 }
 
                 using (var localContext = new LocalParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.QuestionAnswer r in list)
+                    foreach (var r in list)
                     {
-                        Domain.QuestionAnswer _new = new Domain.QuestionAnswer();
+                        var _new = new Domain.QuestionAnswer();
                         _new.QuestionnaireId = r.QuestionnaireId;
                         _new.QuestionId = r.QuestionId;
                         _new.Result = r.Result;
@@ -885,25 +886,24 @@ namespace LocalDatabase.Central
                 return false;
             }
         }
+
         private bool GetQuestionaireModule()
         {
-            List<ParkInspectGroupC.DOMAIN.QuestionnaireModule> list = new List<ParkInspectGroupC.DOMAIN.QuestionnaireModule>();
+            var list = new List<QuestionnaireModule>();
 
             try
             {
                 using (var context = new ParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.QuestionnaireModule r in context.QuestionnaireModule)
-                    {
+                    foreach (var r in context.QuestionnaireModule)
                         list.Add(r);
-                    }
                 }
 
                 using (var localContext = new LocalParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.QuestionnaireModule r in list)
+                    foreach (var r in list)
                     {
-                        Domain.QuestionaireModule _new = new Domain.QuestionaireModule();
+                        var _new = new QuestionaireModule();
                         _new.ModuleId = r.ModuleId;
                         _new.QuestionaireId = r.QuestionnaireId;
                         _new.DateCreated = r.DateCreated;
@@ -922,25 +922,24 @@ namespace LocalDatabase.Central
                 return false;
             }
         }
+
         private bool GetQuestionKeyword()
         {
-            List<ParkInspectGroupC.DOMAIN.QuestionKeyword> list = new List<ParkInspectGroupC.DOMAIN.QuestionKeyword>();
+            var list = new List<QuestionKeyword>();
 
             try
             {
                 using (var context = new ParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.QuestionKeyword r in context.QuestionKeyword)
-                    {
+                    foreach (var r in context.QuestionKeyword)
                         list.Add(r);
-                    }
                 }
 
                 using (var localContext = new LocalParkInspectEntities())
                 {
-                    foreach (ParkInspectGroupC.DOMAIN.QuestionKeyword r in list)
+                    foreach (var r in list)
                     {
-                        Domain.QuestionKeyword _new = new Domain.QuestionKeyword();
+                        var _new = new Domain.QuestionKeyword();
                         _new.QuestionId = r.QuestionId;
                         _new.KeywordId = r.KeywordId;
                         _new.DateCreated = r.DateCreated;
@@ -959,6 +958,7 @@ namespace LocalDatabase.Central
                 return false;
             }
         }
+
         #endregion
     }
 }

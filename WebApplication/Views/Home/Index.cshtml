@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+
+<span class="errorMessage">@ViewBag.Message</span><br/>
+<span class="sClientId">Klantnummer: <input type="text" id="tbClientId" /> <button class="btn btn-primary btLogin" onclick="Login()">Login</button></span>
+
+<script>
+    function Login() {
+        event.preventDefault();
+        var id = $('#tbClientId').val();
+
+        var url = window.location.protocol + "//" + window.location.host + "/Home/Overzicht?Id=" + id;
+        window.location.href = url;
+    }
+</script>

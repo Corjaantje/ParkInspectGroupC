@@ -1,10 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
+
 <edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
   <!-- EF Runtime content -->
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="ParkInspectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="ParkInspectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure"
+              Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator"
+              xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation"
+              xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="Id" />
@@ -66,6 +70,14 @@
           <Property Name="Email" Type="varchar" MaxLength="50" />
           <Property Name="DateCreated" Type="datetime" Nullable="false" />
           <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Diagram">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QuestionId" Type="int" Nullable="false" />
+          <Property Name="ReportSectionId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -159,7 +171,7 @@
           <Property Name="SenderId" Type="int" Nullable="false" />
           <Property Name="ReceiverId" Type="int" Nullable="false" />
           <Property Name="Message" Type="varchar(max)" Nullable="false" />
-          <Property Name="Read" Type="bit" />
+          <Property Name="Read" Type="bit" Nullable="false" />
           <Property Name="DateCreated" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Module">
@@ -342,6 +354,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Diagram_QuestionId">
+          <End Role="Question" Type="Self.Question" Multiplicity="1" />
+          <End Role="Diagram" Type="Self.Diagram" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Diagram">
+              <PropertyRef Name="QuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Diagram_ReportSection">
+          <End Role="ReportSection" Type="Self.ReportSection" Multiplicity="1" />
+          <End Role="Diagram" Type="Self.Diagram" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReportSection">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Diagram">
+              <PropertyRef Name="ReportSectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Employee_EmployeeStatus">
           <End Role="EmployeeStatus" Type="Self.EmployeeStatus" Multiplicity="0..1" />
           <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
@@ -450,7 +486,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Message_Receiver">
+        <Association Name="FK_MessageReceiver">
           <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
           <End Role="Message" Type="Self.Message" Multiplicity="*" />
           <ReferentialConstraint>
@@ -462,7 +498,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Message_Sender">
+        <Association Name="FK_MessageSender">
           <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
           <End Role="Message" Type="Self.Message" Multiplicity="*" />
           <ReferentialConstraint>
@@ -660,6 +696,7 @@
           <EntitySet Name="Availability" EntityType="Self.Availability" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Coordinate" EntityType="Self.Coordinate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Diagram" EntityType="Self.Diagram" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmployeeStatus" EntityType="Self.EmployeeStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Inspection" EntityType="Self.Inspection" Schema="dbo" store:Type="Tables" />
@@ -678,7 +715,8 @@
           <EntitySet Name="Region" EntityType="Self.Region" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Report" EntityType="Self.Report" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReportSection" EntityType="Self.ReportSection" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ReportSectionInspectionImage" EntityType="Self.ReportSectionInspectionImage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReportSectionInspectionImage" EntityType="Self.ReportSectionInspectionImage" Schema="dbo"
+                     store:Type="Tables" />
           <EntitySet Name="WorkingHours" EntityType="Self.WorkingHours" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Account_Employee" Association="Self.FK_Account_Employee">
             <End Role="Employee" EntitySet="Employee" />
@@ -699,6 +737,14 @@
           <AssociationSet Name="FK_Coordinate_Inspection" Association="Self.FK_Coordinate_Inspection">
             <End Role="Inspection" EntitySet="Inspection" />
             <End Role="Coordinate" EntitySet="Coordinate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Diagram_QuestionId" Association="Self.FK_Diagram_QuestionId">
+            <End Role="Question" EntitySet="Question" />
+            <End Role="Diagram" EntitySet="Diagram" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Diagram_ReportSection" Association="Self.FK_Diagram_ReportSection">
+            <End Role="ReportSection" EntitySet="ReportSection" />
+            <End Role="Diagram" EntitySet="Diagram" />
           </AssociationSet>
           <AssociationSet Name="FK_Employee_EmployeeStatus" Association="Self.FK_Employee_EmployeeStatus">
             <End Role="EmployeeStatus" EntitySet="EmployeeStatus" />
@@ -736,11 +782,11 @@
             <End Role="KeywordCategory" EntitySet="KeywordCategory" />
             <End Role="Keyword" EntitySet="Keyword" />
           </AssociationSet>
-          <AssociationSet Name="FK_Message_Receiver" Association="Self.FK_Message_Receiver">
+          <AssociationSet Name="FK_MessageReceiver" Association="Self.FK_MessageReceiver">
             <End Role="Employee" EntitySet="Employee" />
             <End Role="Message" EntitySet="Message" />
           </AssociationSet>
-          <AssociationSet Name="FK_Message_Sender" Association="Self.FK_Message_Sender">
+          <AssociationSet Name="FK_MessageSender" Association="Self.FK_MessageSender">
             <End Role="Employee" EntitySet="Employee" />
             <End Role="Message" EntitySet="Message" />
           </AssociationSet>
@@ -776,7 +822,8 @@
             <End Role="Module" EntitySet="Module" />
             <End Role="QuestionnaireModule" EntitySet="QuestionnaireModule" />
           </AssociationSet>
-          <AssociationSet Name="FK_QuestionnaireModule_Questionnaire" Association="Self.FK_QuestionnaireModule_Questionnaire">
+          <AssociationSet Name="FK_QuestionnaireModule_Questionnaire"
+                          Association="Self.FK_QuestionnaireModule_Questionnaire">
             <End Role="Questionnaire" EntitySet="Questionnaire" />
             <End Role="QuestionnaireModule" EntitySet="QuestionnaireModule" />
           </AssociationSet>
@@ -792,11 +839,13 @@
             <End Role="Report" EntitySet="Report" />
             <End Role="ReportSection" EntitySet="ReportSection" />
           </AssociationSet>
-          <AssociationSet Name="FK_ReportSectionInspectionImage_InspectionImage" Association="Self.FK_ReportSectionInspectionImage_InspectionImage">
+          <AssociationSet Name="FK_ReportSectionInspectionImage_InspectionImage"
+                          Association="Self.FK_ReportSectionInspectionImage_InspectionImage">
             <End Role="InspectionImage" EntitySet="InspectionImage" />
             <End Role="ReportSectionInspectionImage" EntitySet="ReportSectionInspectionImage" />
           </AssociationSet>
-          <AssociationSet Name="FK_ReportSectionInspectionImage_ReportSection" Association="Self.FK_ReportSectionInspectionImage_ReportSection">
+          <AssociationSet Name="FK_ReportSectionInspectionImage_ReportSection"
+                          Association="Self.FK_ReportSectionInspectionImage_ReportSection">
             <End Role="ReportSection" EntitySet="ReportSection" />
             <End Role="ReportSectionInspectionImage" EntitySet="ReportSectionInspectionImage" />
           </AssociationSet>
@@ -805,10 +854,14 @@
             <End Role="WorkingHours" EntitySet="WorkingHours" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="ParkInspectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="ParkInspectModel" Alias="Self" annotation:UseStrongSpatialTypes="false"
+              xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation"
+              xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation"
+              xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="ParkInspectEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Account" EntityType="ParkInspectModel.Account" />
           <EntitySet Name="Assignment" EntityType="ParkInspectModel.Assignment" />
@@ -885,7 +938,8 @@
             <End Role="Employee" EntitySet="Employee" />
             <End Role="WorkingHours" EntitySet="WorkingHours" />
           </AssociationSet>
-          <AssociationSet Name="FK_Inspection_InspectionStatus" Association="ParkInspectModel.FK_Inspection_InspectionStatus">
+          <AssociationSet Name="FK_Inspection_InspectionStatus"
+                          Association="ParkInspectModel.FK_Inspection_InspectionStatus">
             <End Role="InspectionStatus" EntitySet="InspectionStatus" />
             <End Role="Inspection" EntitySet="Inspection" />
           </AssociationSet>
@@ -893,7 +947,8 @@
             <End Role="Region" EntitySet="Region" />
             <End Role="Inspection" EntitySet="Inspection" />
           </AssociationSet>
-          <AssociationSet Name="FK_InspectionImages_Inspection" Association="ParkInspectModel.FK_InspectionImages_Inspection">
+          <AssociationSet Name="FK_InspectionImages_Inspection"
+                          Association="ParkInspectModel.FK_InspectionImages_Inspection">
             <End Role="Inspection" EntitySet="Inspection" />
             <End Role="InspectionImage" EntitySet="InspectionImage" />
           </AssociationSet>
@@ -913,7 +968,8 @@
             <End Role="Module" EntitySet="Module" />
             <End Role="Question" EntitySet="Question" />
           </AssociationSet>
-          <AssociationSet Name="FK_QuestionnaireModule_Module" Association="ParkInspectModel.FK_QuestionnaireModule_Module">
+          <AssociationSet Name="FK_QuestionnaireModule_Module"
+                          Association="ParkInspectModel.FK_QuestionnaireModule_Module">
             <End Role="Module" EntitySet="Module" />
             <End Role="QuestionnaireModule" EntitySet="QuestionnaireModule" />
           </AssociationSet>
@@ -929,11 +985,13 @@
             <End Role="Question" EntitySet="Question" />
             <End Role="QuestionKeyword" EntitySet="QuestionKeyword" />
           </AssociationSet>
-          <AssociationSet Name="FK_QuestionAnswer_Questionnaire" Association="ParkInspectModel.FK_QuestionAnswer_Questionnaire">
+          <AssociationSet Name="FK_QuestionAnswer_Questionnaire"
+                          Association="ParkInspectModel.FK_QuestionAnswer_Questionnaire">
             <End Role="Questionnaire" EntitySet="Questionnaire" />
             <End Role="QuestionAnswer" EntitySet="QuestionAnswer" />
           </AssociationSet>
-          <AssociationSet Name="FK_QuestionnaireModule_Questionnaire" Association="ParkInspectModel.FK_QuestionnaireModule_Questionnaire">
+          <AssociationSet Name="FK_QuestionnaireModule_Questionnaire"
+                          Association="ParkInspectModel.FK_QuestionnaireModule_Questionnaire">
             <End Role="Questionnaire" EntitySet="Questionnaire" />
             <End Role="QuestionnaireModule" EntitySet="QuestionnaireModule" />
           </AssociationSet>
@@ -941,7 +999,8 @@
             <End Role="Report" EntitySet="Report" />
             <End Role="ReportSection" EntitySet="ReportSection" />
           </AssociationSet>
-          <AssociationSet Name="ReportSectionInspectionImage" Association="ParkInspectModel.ReportSectionInspectionImage">
+          <AssociationSet Name="ReportSectionInspectionImage"
+                          Association="ParkInspectModel.ReportSectionInspectionImage">
             <End Role="InspectionImage" EntitySet="InspectionImage" />
             <End Role="ReportSection" EntitySet="ReportSection" />
           </AssociationSet>
@@ -953,6 +1012,15 @@
           <AssociationSet Name="FK_Message_Sender" Association="ParkInspectModel.FK_Message_Sender">
             <End Role="Employee" EntitySet="Employee" />
             <End Role="Message" EntitySet="Message" />
+          </AssociationSet>
+          <EntitySet Name="Diagram" EntityType="ParkInspectModel.Diagram" />
+          <AssociationSet Name="FK_Diagram_QuestionId" Association="ParkInspectModel.FK_Diagram_QuestionId">
+            <End Role="Question" EntitySet="Question" />
+            <End Role="Diagram" EntitySet="Diagram" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Diagram_ReportSection" Association="ParkInspectModel.FK_Diagram_ReportSection">
+            <End Role="ReportSection" EntitySet="ReportSection" />
+            <End Role="Diagram" EntitySet="Diagram" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Account">
@@ -966,7 +1034,8 @@
           <Property Name="EmployeeId" Type="Int32" Nullable="false" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Employee" Relationship="ParkInspectModel.FK_Account_Employee" FromRole="Account" ToRole="Employee" />
+          <NavigationProperty Name="Employee" Relationship="ParkInspectModel.FK_Account_Employee" FromRole="Account"
+                              ToRole="Employee" />
         </EntityType>
         <EntityType Name="Assignment">
           <Key>
@@ -980,10 +1049,14 @@
           <Property Name="EndDate" Type="DateTime" Precision="0" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Customer" Relationship="ParkInspectModel.FK_Assignment_Customer" FromRole="Assignment" ToRole="Customer" />
-          <NavigationProperty Name="Employee" Relationship="ParkInspectModel.FK_Assignment_Manager" FromRole="Assignment" ToRole="Employee" />
-          <NavigationProperty Name="Inspection" Relationship="ParkInspectModel.FK_Inspection_Assignment" FromRole="Assignment" ToRole="Inspection" />
-          <NavigationProperty Name="Report" Relationship="ParkInspectModel.FK_Report_Assignment" FromRole="Assignment" ToRole="Report" />
+          <NavigationProperty Name="Customer" Relationship="ParkInspectModel.FK_Assignment_Customer"
+                              FromRole="Assignment" ToRole="Customer" />
+          <NavigationProperty Name="Employee" Relationship="ParkInspectModel.FK_Assignment_Manager"
+                              FromRole="Assignment" ToRole="Employee" />
+          <NavigationProperty Name="Inspection" Relationship="ParkInspectModel.FK_Inspection_Assignment"
+                              FromRole="Assignment" ToRole="Inspection" />
+          <NavigationProperty Name="Report" Relationship="ParkInspectModel.FK_Report_Assignment" FromRole="Assignment"
+                              ToRole="Report" />
         </EntityType>
         <EntityType Name="Availability">
           <Key>
@@ -996,7 +1069,8 @@
           <Property Name="EndTime" Type="Time" Precision="0" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Employee" Relationship="ParkInspectModel.FK_Availability_Employee" FromRole="Availability" ToRole="Employee" />
+          <NavigationProperty Name="Employee" Relationship="ParkInspectModel.FK_Availability_Employee"
+                              FromRole="Availability" ToRole="Employee" />
         </EntityType>
         <EntityType Name="Coordinate">
           <Key>
@@ -1009,7 +1083,8 @@
           <Property Name="InspectionId" Type="Int32" Nullable="false" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Inspection" Relationship="ParkInspectModel.FK_Coordinate_Inspection" FromRole="Coordinate" ToRole="Inspection" />
+          <NavigationProperty Name="Inspection" Relationship="ParkInspectModel.FK_Coordinate_Inspection"
+                              FromRole="Coordinate" ToRole="Inspection" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -1023,7 +1098,8 @@
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Assignment" Relationship="ParkInspectModel.FK_Assignment_Customer" FromRole="Customer" ToRole="Assignment" />
+          <NavigationProperty Name="Assignment" Relationship="ParkInspectModel.FK_Assignment_Customer"
+                              FromRole="Customer" ToRole="Assignment" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -1046,28 +1122,42 @@
           <Property Name="ManagerId" Type="Int32" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Account" Relationship="ParkInspectModel.FK_Account_Employee" FromRole="Employee" ToRole="Account" />
-          <NavigationProperty Name="Assignment" Relationship="ParkInspectModel.FK_Assignment_Manager" FromRole="Employee" ToRole="Assignment" />
-          <NavigationProperty Name="Availability" Relationship="ParkInspectModel.FK_Availability_Employee" FromRole="Employee" ToRole="Availability" />
-          <NavigationProperty Name="EmployeeStatus" Relationship="ParkInspectModel.FK_Employee_EmployeeStatus" FromRole="Employee" ToRole="EmployeeStatus" />
-          <NavigationProperty Name="Employee1" Relationship="ParkInspectModel.FK_Employee_Manager" FromRole="Employee" ToRole="Employee1" />
-          <NavigationProperty Name="Manager" Relationship="ParkInspectModel.FK_Employee_Manager" FromRole="Employee1" ToRole="Employee" />
-          <NavigationProperty Name="Region" Relationship="ParkInspectModel.FK_Employee_Region" FromRole="Employee" ToRole="Region" />
-          <NavigationProperty Name="Inspection" Relationship="ParkInspectModel.FK_Inspection_Employee" FromRole="Employee" ToRole="Inspection" />
-          <NavigationProperty Name="Report" Relationship="ParkInspectModel.FK_Report_Employee" FromRole="Employee" ToRole="Report" />
-          <NavigationProperty Name="WorkingHours" Relationship="ParkInspectModel.FK_WorkingHours_Employee" FromRole="Employee" ToRole="WorkingHours" />
-          <NavigationProperty Name="Reciever" Relationship="ParkInspectModel.FK_Message_Receiver" FromRole="Employee" ToRole="Message" />
-          <NavigationProperty Name="Sender" Relationship="ParkInspectModel.FK_Message_Sender" FromRole="Employee" ToRole="Message" />
+          <NavigationProperty Name="Account" Relationship="ParkInspectModel.FK_Account_Employee" FromRole="Employee"
+                              ToRole="Account" />
+          <NavigationProperty Name="Assignment" Relationship="ParkInspectModel.FK_Assignment_Manager"
+                              FromRole="Employee" ToRole="Assignment" />
+          <NavigationProperty Name="Availability" Relationship="ParkInspectModel.FK_Availability_Employee"
+                              FromRole="Employee" ToRole="Availability" />
+          <NavigationProperty Name="EmployeeStatus" Relationship="ParkInspectModel.FK_Employee_EmployeeStatus"
+                              FromRole="Employee" ToRole="EmployeeStatus" />
+          <NavigationProperty Name="Employee1" Relationship="ParkInspectModel.FK_Employee_Manager" FromRole="Employee"
+                              ToRole="Employee1" />
+          <NavigationProperty Name="Manager" Relationship="ParkInspectModel.FK_Employee_Manager" FromRole="Employee1"
+                              ToRole="Employee" />
+          <NavigationProperty Name="Region" Relationship="ParkInspectModel.FK_Employee_Region" FromRole="Employee"
+                              ToRole="Region" />
+          <NavigationProperty Name="Inspection" Relationship="ParkInspectModel.FK_Inspection_Employee"
+                              FromRole="Employee" ToRole="Inspection" />
+          <NavigationProperty Name="Report" Relationship="ParkInspectModel.FK_Report_Employee" FromRole="Employee"
+                              ToRole="Report" />
+          <NavigationProperty Name="WorkingHours" Relationship="ParkInspectModel.FK_WorkingHours_Employee"
+                              FromRole="Employee" ToRole="WorkingHours" />
+          <NavigationProperty Name="Reciever" Relationship="ParkInspectModel.FK_Message_Receiver" FromRole="Employee"
+                              ToRole="Message" />
+          <NavigationProperty Name="Sender" Relationship="ParkInspectModel.FK_Message_Sender" FromRole="Employee"
+                              ToRole="Message" />
         </EntityType>
         <EntityType Name="EmployeeStatus">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="25" FixedLength="false"
+                    Unicode="false" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Employee" Relationship="ParkInspectModel.FK_Employee_EmployeeStatus" FromRole="EmployeeStatus" ToRole="Employee" />
+          <NavigationProperty Name="Employee" Relationship="ParkInspectModel.FK_Employee_EmployeeStatus"
+                              FromRole="EmployeeStatus" ToRole="Employee" />
         </EntityType>
         <EntityType Name="Inspection">
           <Key>
@@ -1083,13 +1173,20 @@
           <Property Name="InspectorId" Type="Int32" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Assignment" Relationship="ParkInspectModel.FK_Inspection_Assignment" FromRole="Inspection" ToRole="Assignment" />
-          <NavigationProperty Name="Coordinate" Relationship="ParkInspectModel.FK_Coordinate_Inspection" FromRole="Inspection" ToRole="Coordinate" />
-          <NavigationProperty Name="Employee" Relationship="ParkInspectModel.FK_Inspection_Employee" FromRole="Inspection" ToRole="Employee" />
-          <NavigationProperty Name="InspectionStatus" Relationship="ParkInspectModel.FK_Inspection_InspectionStatus" FromRole="Inspection" ToRole="InspectionStatus" />
-          <NavigationProperty Name="Region" Relationship="ParkInspectModel.FK_Inspection_Region" FromRole="Inspection" ToRole="Region" />
-          <NavigationProperty Name="InspectionImage" Relationship="ParkInspectModel.FK_InspectionImages_Inspection" FromRole="Inspection" ToRole="InspectionImage" />
-          <NavigationProperty Name="Questionnaire" Relationship="ParkInspectModel.FK_Questionnaire_Inspection" FromRole="Inspection" ToRole="Questionnaire" />
+          <NavigationProperty Name="Assignment" Relationship="ParkInspectModel.FK_Inspection_Assignment"
+                              FromRole="Inspection" ToRole="Assignment" />
+          <NavigationProperty Name="Coordinate" Relationship="ParkInspectModel.FK_Coordinate_Inspection"
+                              FromRole="Inspection" ToRole="Coordinate" />
+          <NavigationProperty Name="Employee" Relationship="ParkInspectModel.FK_Inspection_Employee"
+                              FromRole="Inspection" ToRole="Employee" />
+          <NavigationProperty Name="InspectionStatus" Relationship="ParkInspectModel.FK_Inspection_InspectionStatus"
+                              FromRole="Inspection" ToRole="InspectionStatus" />
+          <NavigationProperty Name="Region" Relationship="ParkInspectModel.FK_Inspection_Region" FromRole="Inspection"
+                              ToRole="Region" />
+          <NavigationProperty Name="InspectionImage" Relationship="ParkInspectModel.FK_InspectionImages_Inspection"
+                              FromRole="Inspection" ToRole="InspectionImage" />
+          <NavigationProperty Name="Questionnaire" Relationship="ParkInspectModel.FK_Questionnaire_Inspection"
+                              FromRole="Inspection" ToRole="Questionnaire" />
         </EntityType>
         <EntityType Name="InspectionImage">
           <Key>
@@ -1100,18 +1197,22 @@
           <Property Name="InspectionId" Type="Int32" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Inspection" Relationship="ParkInspectModel.FK_InspectionImages_Inspection" FromRole="InspectionImage" ToRole="Inspection" />
-          <NavigationProperty Name="ReportSection" Relationship="ParkInspectModel.ReportSectionInspectionImage" FromRole="InspectionImage" ToRole="ReportSection" />
+          <NavigationProperty Name="Inspection" Relationship="ParkInspectModel.FK_InspectionImages_Inspection"
+                              FromRole="InspectionImage" ToRole="Inspection" />
+          <NavigationProperty Name="ReportSection" Relationship="ParkInspectModel.ReportSectionInspectionImage"
+                              FromRole="InspectionImage" ToRole="ReportSection" />
         </EntityType>
         <EntityType Name="InspectionStatus">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false"
+                    Unicode="false" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Inspection" Relationship="ParkInspectModel.FK_Inspection_InspectionStatus" FromRole="InspectionStatus" ToRole="Inspection" />
+          <NavigationProperty Name="Inspection" Relationship="ParkInspectModel.FK_Inspection_InspectionStatus"
+                              FromRole="InspectionStatus" ToRole="Inspection" />
         </EntityType>
         <EntityType Name="Keyword">
           <Key>
@@ -1119,11 +1220,14 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CategoryId" Type="Int32" Nullable="false" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false"
+                    Unicode="false" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="KeywordCategory" Relationship="ParkInspectModel.FK_Keyword_KeywordCategory" FromRole="Keyword" ToRole="KeywordCategory" />
-          <NavigationProperty Name="QuestionKeyword" Relationship="ParkInspectModel.FK_QuestionKeyword_Keyword" FromRole="Keyword" ToRole="QuestionKeyword" />
+          <NavigationProperty Name="KeywordCategory" Relationship="ParkInspectModel.FK_Keyword_KeywordCategory"
+                              FromRole="Keyword" ToRole="KeywordCategory" />
+          <NavigationProperty Name="QuestionKeyword" Relationship="ParkInspectModel.FK_QuestionKeyword_Keyword"
+                              FromRole="Keyword" ToRole="QuestionKeyword" />
         </EntityType>
         <EntityType Name="KeywordCategory">
           <Key>
@@ -1133,7 +1237,8 @@
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Keyword" Relationship="ParkInspectModel.FK_Keyword_KeywordCategory" FromRole="KeywordCategory" ToRole="Keyword" />
+          <NavigationProperty Name="Keyword" Relationship="ParkInspectModel.FK_Keyword_KeywordCategory"
+                              FromRole="KeywordCategory" ToRole="Keyword" />
         </EntityType>
         <EntityType Name="Module">
           <Key>
@@ -1145,8 +1250,10 @@
           <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Question" Relationship="ParkInspectModel.FK_Question_Module" FromRole="Module" ToRole="Question" />
-          <NavigationProperty Name="QuestionnaireModule" Relationship="ParkInspectModel.FK_QuestionnaireModule_Module" FromRole="Module" ToRole="QuestionnaireModule" />
+          <NavigationProperty Name="Question" Relationship="ParkInspectModel.FK_Question_Module" FromRole="Module"
+                              ToRole="Question" />
+          <NavigationProperty Name="QuestionnaireModule" Relationship="ParkInspectModel.FK_QuestionnaireModule_Module"
+                              FromRole="Module" ToRole="QuestionnaireModule" />
         </EntityType>
         <EntityType Name="Question">
           <Key>
@@ -1154,14 +1261,21 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="SortId" Type="Int32" Nullable="false" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false"
+                    Unicode="false" />
           <Property Name="ModuleId" Type="Int32" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Module" Relationship="ParkInspectModel.FK_Question_Module" FromRole="Question" ToRole="Module" />
-          <NavigationProperty Name="QuestionSort" Relationship="ParkInspectModel.FK_Question_QuestionSort" FromRole="Question" ToRole="QuestionSort" />
-          <NavigationProperty Name="QuestionAnswer" Relationship="ParkInspectModel.FK_QuestionAnswer_Question" FromRole="Question" ToRole="QuestionAnswer" />
-          <NavigationProperty Name="QuestionKeyword" Relationship="ParkInspectModel.FK_QuestionKeyword_Question" FromRole="Question" ToRole="QuestionKeyword" />
+          <NavigationProperty Name="Module" Relationship="ParkInspectModel.FK_Question_Module" FromRole="Question"
+                              ToRole="Module" />
+          <NavigationProperty Name="QuestionSort" Relationship="ParkInspectModel.FK_Question_QuestionSort"
+                              FromRole="Question" ToRole="QuestionSort" />
+          <NavigationProperty Name="QuestionAnswer" Relationship="ParkInspectModel.FK_QuestionAnswer_Question"
+                              FromRole="Question" ToRole="QuestionAnswer" />
+          <NavigationProperty Name="QuestionKeyword" Relationship="ParkInspectModel.FK_QuestionKeyword_Question"
+                              FromRole="Question" ToRole="QuestionKeyword" />
+          <NavigationProperty Name="Diagram" Relationship="ParkInspectModel.FK_Diagram_QuestionId" FromRole="Question"
+                              ToRole="Diagram" />
         </EntityType>
         <EntityType Name="QuestionAnswer">
           <Key>
@@ -1173,8 +1287,10 @@
           <Property Name="Result" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Question" Relationship="ParkInspectModel.FK_QuestionAnswer_Question" FromRole="QuestionAnswer" ToRole="Question" />
-          <NavigationProperty Name="Questionnaire" Relationship="ParkInspectModel.FK_QuestionAnswer_Questionnaire" FromRole="QuestionAnswer" ToRole="Questionnaire" />
+          <NavigationProperty Name="Question" Relationship="ParkInspectModel.FK_QuestionAnswer_Question"
+                              FromRole="QuestionAnswer" ToRole="Question" />
+          <NavigationProperty Name="Questionnaire" Relationship="ParkInspectModel.FK_QuestionAnswer_Questionnaire"
+                              FromRole="QuestionAnswer" ToRole="Questionnaire" />
         </EntityType>
         <EntityType Name="QuestionKeyword">
           <Key>
@@ -1185,8 +1301,10 @@
           <Property Name="KeywordId" Type="Int32" Nullable="false" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Keyword" Relationship="ParkInspectModel.FK_QuestionKeyword_Keyword" FromRole="QuestionKeyword" ToRole="Keyword" />
-          <NavigationProperty Name="Question" Relationship="ParkInspectModel.FK_QuestionKeyword_Question" FromRole="QuestionKeyword" ToRole="Question" />
+          <NavigationProperty Name="Keyword" Relationship="ParkInspectModel.FK_QuestionKeyword_Keyword"
+                              FromRole="QuestionKeyword" ToRole="Keyword" />
+          <NavigationProperty Name="Question" Relationship="ParkInspectModel.FK_QuestionKeyword_Question"
+                              FromRole="QuestionKeyword" ToRole="Question" />
         </EntityType>
         <EntityType Name="Questionnaire">
           <Key>
@@ -1196,9 +1314,13 @@
           <Property Name="InspectionId" Type="Int32" Nullable="false" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Inspection" Relationship="ParkInspectModel.FK_Questionnaire_Inspection" FromRole="Questionnaire" ToRole="Inspection" />
-          <NavigationProperty Name="QuestionAnswer" Relationship="ParkInspectModel.FK_QuestionAnswer_Questionnaire" FromRole="Questionnaire" ToRole="QuestionAnswer" />
-          <NavigationProperty Name="QuestionnaireModule" Relationship="ParkInspectModel.FK_QuestionnaireModule_Questionnaire" FromRole="Questionnaire" ToRole="QuestionnaireModule" />
+          <NavigationProperty Name="Inspection" Relationship="ParkInspectModel.FK_Questionnaire_Inspection"
+                              FromRole="Questionnaire" ToRole="Inspection" />
+          <NavigationProperty Name="QuestionAnswer" Relationship="ParkInspectModel.FK_QuestionAnswer_Questionnaire"
+                              FromRole="Questionnaire" ToRole="QuestionAnswer" />
+          <NavigationProperty Name="QuestionnaireModule"
+                              Relationship="ParkInspectModel.FK_QuestionnaireModule_Questionnaire"
+                              FromRole="Questionnaire" ToRole="QuestionnaireModule" />
         </EntityType>
         <EntityType Name="QuestionnaireModule">
           <Key>
@@ -1209,18 +1331,22 @@
           <Property Name="QuestionnaireId" Type="Int32" Nullable="false" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Module" Relationship="ParkInspectModel.FK_QuestionnaireModule_Module" FromRole="QuestionnaireModule" ToRole="Module" />
-          <NavigationProperty Name="Questionnaire" Relationship="ParkInspectModel.FK_QuestionnaireModule_Questionnaire" FromRole="QuestionnaireModule" ToRole="Questionnaire" />
+          <NavigationProperty Name="Module" Relationship="ParkInspectModel.FK_QuestionnaireModule_Module"
+                              FromRole="QuestionnaireModule" ToRole="Module" />
+          <NavigationProperty Name="Questionnaire" Relationship="ParkInspectModel.FK_QuestionnaireModule_Questionnaire"
+                              FromRole="QuestionnaireModule" ToRole="Questionnaire" />
         </EntityType>
         <EntityType Name="QuestionSort">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false"
+                    Unicode="false" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Question" Relationship="ParkInspectModel.FK_Question_QuestionSort" FromRole="QuestionSort" ToRole="Question" />
+          <NavigationProperty Name="Question" Relationship="ParkInspectModel.FK_Question_QuestionSort"
+                              FromRole="QuestionSort" ToRole="Question" />
         </EntityType>
         <EntityType Name="Region">
           <Key>
@@ -1230,8 +1356,10 @@
           <Property Name="Region1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Employee" Relationship="ParkInspectModel.FK_Employee_Region" FromRole="Region" ToRole="Employee" />
-          <NavigationProperty Name="Inspection" Relationship="ParkInspectModel.FK_Inspection_Region" FromRole="Region" ToRole="Inspection" />
+          <NavigationProperty Name="Employee" Relationship="ParkInspectModel.FK_Employee_Region" FromRole="Region"
+                              ToRole="Employee" />
+          <NavigationProperty Name="Inspection" Relationship="ParkInspectModel.FK_Inspection_Region" FromRole="Region"
+                              ToRole="Inspection" />
         </EntityType>
         <EntityType Name="Report">
           <Key>
@@ -1243,9 +1371,12 @@
           <Property Name="Date" Type="DateTime" Precision="3" />
           <Property Name="EmployeeId" Type="Int32" Nullable="false" />
           <Property Name="AssignmentId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Assignment" Relationship="ParkInspectModel.FK_Report_Assignment" FromRole="Report" ToRole="Assignment" />
-          <NavigationProperty Name="Employee" Relationship="ParkInspectModel.FK_Report_Employee" FromRole="Report" ToRole="Employee" />
-          <NavigationProperty Name="ReportSection" Relationship="ParkInspectModel.FK_ReportSection_Report" FromRole="Report" ToRole="ReportSection" />
+          <NavigationProperty Name="Assignment" Relationship="ParkInspectModel.FK_Report_Assignment" FromRole="Report"
+                              ToRole="Assignment" />
+          <NavigationProperty Name="Employee" Relationship="ParkInspectModel.FK_Report_Employee" FromRole="Report"
+                              ToRole="Employee" />
+          <NavigationProperty Name="ReportSection" Relationship="ParkInspectModel.FK_ReportSection_Report"
+                              FromRole="Report" ToRole="ReportSection" />
         </EntityType>
         <EntityType Name="ReportSection">
           <Key>
@@ -1255,8 +1386,12 @@
           <Property Name="Title" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="ReportId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Report" Relationship="ParkInspectModel.FK_ReportSection_Report" FromRole="ReportSection" ToRole="Report" />
-          <NavigationProperty Name="InspectionImage" Relationship="ParkInspectModel.ReportSectionInspectionImage" FromRole="ReportSection" ToRole="InspectionImage" />
+          <NavigationProperty Name="Report" Relationship="ParkInspectModel.FK_ReportSection_Report"
+                              FromRole="ReportSection" ToRole="Report" />
+          <NavigationProperty Name="InspectionImage" Relationship="ParkInspectModel.ReportSectionInspectionImage"
+                              FromRole="ReportSection" ToRole="InspectionImage" />
+          <NavigationProperty Name="Diagram" Relationship="ParkInspectModel.FK_Diagram_ReportSection"
+                              FromRole="ReportSection" ToRole="Diagram" />
         </EntityType>
         <EntityType Name="WorkingHours">
           <Key>
@@ -1269,7 +1404,8 @@
           <Property Name="EndTime" Type="Time" Precision="0" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Employee" Relationship="ParkInspectModel.FK_WorkingHours_Employee" FromRole="WorkingHours" ToRole="Employee" />
+          <NavigationProperty Name="Employee" Relationship="ParkInspectModel.FK_WorkingHours_Employee"
+                              FromRole="WorkingHours" ToRole="Employee" />
         </EntityType>
         <Association Name="FK_Account_Employee">
           <End Type="ParkInspectModel.Employee" Role="Employee" Multiplicity="1" />
@@ -1607,10 +1743,12 @@
           <Property Name="SenderId" Type="Int32" Nullable="false" />
           <Property Name="ReceiverId" Type="Int32" Nullable="false" />
           <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Read" Type="Boolean" />
+          <Property Name="Read" Type="Boolean" Nullable="false" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Reciever" Relationship="ParkInspectModel.FK_Message_Receiver" FromRole="Message" ToRole="Employee" />
-          <NavigationProperty Name="Sender" Relationship="ParkInspectModel.FK_Message_Sender" FromRole="Message" ToRole="Employee" />
+          <NavigationProperty Name="Reciever" Relationship="ParkInspectModel.FK_Message_Receiver" FromRole="Message"
+                              ToRole="Employee" />
+          <NavigationProperty Name="Sender" Relationship="ParkInspectModel.FK_Message_Sender" FromRole="Message"
+                              ToRole="Employee" />
         </EntityType>
         <Association Name="FK_Message_Receiver">
           <End Type="ParkInspectModel.Employee" Role="Employee" Multiplicity="1" />
@@ -1636,12 +1774,49 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        </Schema>
+        <EntityType Name="Diagram">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QuestionId" Type="Int32" Nullable="false" />
+          <Property Name="ReportSectionId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Question" Relationship="ParkInspectModel.FK_Diagram_QuestionId" FromRole="Diagram"
+                              ToRole="Question" />
+          <NavigationProperty Name="ReportSection" Relationship="ParkInspectModel.FK_Diagram_ReportSection"
+                              FromRole="Diagram" ToRole="ReportSection" />
+        </EntityType>
+        <Association Name="FK_Diagram_QuestionId">
+          <End Type="ParkInspectModel.Question" Role="Question" Multiplicity="1" />
+          <End Type="ParkInspectModel.Diagram" Role="Diagram" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Diagram">
+              <PropertyRef Name="QuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Diagram_ReportSection">
+          <End Type="ParkInspectModel.ReportSection" Role="ReportSection" Multiplicity="1" />
+          <End Type="ParkInspectModel.Diagram" Role="Diagram" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReportSection">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Diagram">
+              <PropertyRef Name="ReportSectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ParkInspectModelStoreContainer" CdmEntityContainer="ParkInspectEntities">
+        <EntityContainerMapping StorageEntityContainer="ParkInspectModelStoreContainer"
+                                CdmEntityContainer="ParkInspectEntities">
           <EntitySetMapping Name="Account">
             <EntityTypeMapping TypeName="ParkInspectModel.Account">
               <MappingFragment StoreEntitySet="Account">
@@ -1918,7 +2093,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="ReportSectionInspectionImage" TypeName="ParkInspectModel.ReportSectionInspectionImage" StoreEntitySet="ReportSectionInspectionImage">
+          <AssociationSetMapping Name="ReportSectionInspectionImage"
+                                 TypeName="ParkInspectModel.ReportSectionInspectionImage"
+                                 StoreEntitySet="ReportSectionInspectionImage">
             <EndProperty Name="ReportSection">
               <ScalarProperty Name="Id" ColumnName="ReportSectionId" />
             </EndProperty>
@@ -1934,6 +2111,15 @@
                 <ScalarProperty Name="Content" ColumnName="Message" />
                 <ScalarProperty Name="ReceiverId" ColumnName="ReceiverId" />
                 <ScalarProperty Name="SenderId" ColumnName="SenderId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Diagram">
+            <EntityTypeMapping TypeName="ParkInspectModel.Diagram">
+              <MappingFragment StoreEntitySet="Diagram">
+                <ScalarProperty Name="ReportSectionId" ColumnName="ReportSectionId" />
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

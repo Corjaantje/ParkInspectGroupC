@@ -1,0 +1,62 @@
+﻿<UserControl x:Class="ParkInspectGroupC.View.NewAssignmentView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ParkInspectGroupC.View"
+        mc:Ignorable="d"
+
+        DataContext="{Binding NewAssignment , Source={StaticResource Locator}}">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+
+        <Image Grid.Column="0" Grid.Row="0" x:Name="image" Source="..\..\Image\Logo_WhiteBack.PNG" HorizontalAlignment="Left" MinWidth="50" MaxWidth="125" VerticalAlignment="Top" />
+
+        <!--<WrapPanel Grid.Column="1" Grid.Row="0">
+            <Button x:Name="Assignmets" Content="Opdrachten" HorizontalAlignment="Left" Margin="10,10,0,0"
+                    VerticalAlignment="Top" Width="75" Background="LightBlue" Command="{Binding AssignmentOverview}" />
+            <Button x:Name="Administration" Content="Administatie" HorizontalAlignment="Left" Margin="10,10,0,0"
+                    VerticalAlignment="Top" Width="75" IsEnabled="False"/>
+            <Button x:Name="Statistics" Content="Statistieken" HorizontalAlignment="Left" Margin="10,10,0,0"
+                    VerticalAlignment="Top" Width="75" IsEnabled="False" />
+        </WrapPanel>-->
+
+        <StackPanel Grid.Row="1" Grid.Column="0" >
+            <Label x:Name="descriptionLabel" Content="Beschrijving:" HorizontalAlignment="Left" Margin="10,10,0,0"
+                   VerticalAlignment="Top" />
+            <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="145" Margin="10,0,0,0" TextWrapping="Wrap"
+                 Text="{Binding Description, Mode=TwoWay}" VerticalAlignment="Top" Width="257" AcceptsReturn="True"
+                 VerticalScrollBarVisibility="Visible" />
+            <Button x:Name="createAssignment" Content="plaats opdracht" HorizontalAlignment="Left" Margin="10,10,0,0"
+                VerticalAlignment="Top" Width="101" Command="{Binding CreateAssignment}" />
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Grid.Row="1">
+            <Label x:Name="customerDescriptionLabel" Content="Klant:" HorizontalAlignment="Left" Margin="10,10,0,0"
+                   VerticalAlignment="Top" />
+            <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="189"
+                      ItemsSource="{Binding AllCustomerNames}" SelectedIndex="{Binding CustomerIndex}" />
+            <Label x:Name="label" Content="{Binding CustomerDescription}" HorizontalAlignment="Left" Margin="10,10,0,0"
+                   VerticalAlignment="Top" Height="118" Width="189" />
+        </StackPanel>
+
+        <StackPanel Grid.Column="0" Grid.Row="2">
+            <Label Content="{Binding CreatedAssignment}" HorizontalAlignment="Left" Margin="10,10,0,0"
+                   VerticalAlignment="Top" />
+            <Label  x:Name="newAssignmentLabel" Content="{Binding TopLabel}" HorizontalAlignment="Left" Margin="10,10,0,0"
+               VerticalAlignment="Top" />
+        </StackPanel>
+        <Label x:Name="label1" Content="Eind datum" Grid.Column="1" HorizontalAlignment="Left" Margin="5,5,0,0" Grid.Row="2" VerticalAlignment="Top"/>
+       <DatePicker Grid.Column="1" HorizontalAlignment="Left" Margin="10,36,0,0" Grid.Row="2" VerticalAlignment="Top" Width="179" Height="29" SelectedDate="{Binding EndDate}"/>
+    </Grid>
+</UserControl>
