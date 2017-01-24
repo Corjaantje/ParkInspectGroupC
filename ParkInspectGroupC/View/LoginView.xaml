@@ -32,7 +32,7 @@
 
         <WrapPanel Grid.Row="3" Grid.Column="0">
             <Button Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=This}" Content="Login"
-                    Margin="5,5,5,5" />
+                    Margin="5,5,5,5" IsDefault="True"/>
             <Button Command="{Binding RegisterCommand}" Content="Registreren" Margin="5" />
         </WrapPanel>
         <Label Grid.Row="3" Grid.Column="1" Foreground="Red" Margin="0,0,10,-50">
