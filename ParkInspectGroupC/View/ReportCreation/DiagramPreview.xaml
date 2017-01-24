@@ -7,7 +7,7 @@
         xmlns:oxy="http://oxyplot.org/wpf"
         DataContext="{Binding DiagramPreview, Source={StaticResource Locator}}"
         mc:Ignorable="d"
-        Title="DiagramPreview" Height="300" Width="300">
+        Title="DiagramPreview" Height="300" Width="300" ResizeMode="NoResize">
     <Grid>
         <oxy:PlotView Model="{Binding MyModel}" />
     </Grid>

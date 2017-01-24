@@ -89,23 +89,6 @@ namespace ParkInspectGroupC.ViewModel
             get { return ServiceLocator.Current.GetInstance<InspectorListViewModel>(); }
         }
 
-        public AvailabilityCreationViewModel Availability
-        {
-            get
-            {
-                return new AvailabilityCreationViewModel(InspectorList.SelectedInspector,
-                    InspectorList.InspectorAvailability);
-            }
-        }
-
-        public AvailabilityEditViewModel EditAvailability
-        {
-            get
-            {
-                return new AvailabilityEditViewModel(InspectorList.SelectedAvailability,
-                    InspectorList.InspectorAvailability);
-            }
-        }
 
         public InspectionViewModel InspectionOverView
         {
@@ -139,17 +122,34 @@ namespace ParkInspectGroupC.ViewModel
 
         public InspectorInspectionsViewModel InspectorInspections
         {
-            get { return new InspectorInspectionsViewModel(InspectorList.SelectedInspector); }
+            get { return new InspectorInspectionsViewModel(); }
         }
 
         public InspectorEditViewModel EditInspector
         {
-            get { return new InspectorEditViewModel(InspectorList.SelectedInspector); }
+            get { return new InspectorEditViewModel(); }
         }
 
         public QuestionnaireViewModel QuestionnaireViewModel
         {
             get { return new QuestionnaireViewModel(); }
+        }
+
+        public AvailabilityCreationViewModel Availability
+        {
+            get
+            {
+                return new AvailabilityCreationViewModel(InspectorList.InspectorAvailability);
+            }
+        }
+
+
+        public AvailabilityEditViewModel EditAvailability
+        {
+            get
+            {
+                return new AvailabilityEditViewModel(InspectorList.InspectorAvailability);
+            }
         }
 
         public AssignmentResultViewModel AssignmentResultViewModel

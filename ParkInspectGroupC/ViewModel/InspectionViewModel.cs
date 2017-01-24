@@ -30,11 +30,9 @@ namespace ParkInspectGroupC.ViewModel
 			ShowQuestionnaire = new RelayCommand(showQuestionnaire);
             DeleteInspection = new RelayCommand(deleteInspection);
             assemblyFile = Directory.GetCurrentDirectory();
-            var source = assemblyFile + "\\..\\..\\Image\\silvio.jpeg";
+            var source = assemblyFile + "\\..\\..\\Image\\Testfotos\\01.jpg";
             SourceName = source;
 
-            //BitmapImage i = new BitmapImage(uri);
-            //SourceName = i;
         }
 
 		private void showQuestionnaire()
@@ -53,8 +51,15 @@ namespace ParkInspectGroupC.ViewModel
                     var result = context.Inspection.ToList();
 
                     allInspections = new ObservableCollection<Inspection>(result);
+                    Inspections = new ObservableCollection<Inspection>();
 
-                    Inspections = new ObservableCollection<Inspection>(result);
+                    foreach(var inspection in allInspections)
+                    {
+                        if(inspection.AssignmentId == Settings.Default.AssignmentId)
+                        {
+                            Inspections.Add(inspection);
+                        }
+                    }
                 }
             }
             catch
@@ -198,12 +203,19 @@ namespace ParkInspectGroupC.ViewModel
                 MessageBox.Show("Selecteer aub een inspectie");
 
             else
+                Settings.Default.InspectionId = SelectedInspection.Id;
+                Settings.Default.InspectionAssignmentId = SelectedInspection.AssignmentId;
+                Settings.Default.InspectionRegionId = SelectedInspection.RegionId;
+                Settings.Default.InspectionStatusId = SelectedInspection.StatusId;
+                Settings.Default.InspectionLocation = SelectedInspection.Location;
+                Settings.Default.InspectionStartDatum = SelectedInspection.StartDate;
+                Settings.Default.InspectionEindDatum = SelectedInspection.EndDate;
                 Navigator.SetNewView(new InspectionEditView());
         }
 
         public void hideAddInspection()
         {
-            Navigator.SetNewView(new InspectionView());
+            Navigator.Back();
             RaisePropertyChanged("Inspections");
         }
 
@@ -257,18 +269,7 @@ namespace ParkInspectGroupC.ViewModel
             set
             {
                 _searchCriteria = value;
-                Debug.WriteLine(_searchCriteria);
-                var searchedInspections = new ObservableCollection<Inspection>();
-
-                foreach (var inspection in allInspections)
-                    if ((SearchCriteria != null) && inspection.Location.ToLower().Contains(SearchCriteria.ToLower()))
-                        searchedInspections.Add(inspection);
-
-
-                Inspections = searchedInspections;
-
-                RaisePropertyChanged("SearchCriteria");
-                RaisePropertyChanged("Inspections");
+                refillObservableCollection();
             }
         }
 

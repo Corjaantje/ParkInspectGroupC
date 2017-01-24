@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="ParkInspectGroupC.View.AssignmentOverview"
+<UserControl x:Class="ParkInspectGroupC.View.AssignmentOverview"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -8,53 +8,63 @@
              mc:Ignorable="d"
              DataContext="{Binding OpdrachtOverview, Source={StaticResource Locator}}">
     <Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-          Margin="0,0,0,32">
-        <Grid.Resources>
-            <converter:BoolToVisConverter x:Key="BoolToVisConverter" />
-        </Grid.Resources>
-        <DataGrid x:Name="AssignmentList" HorizontalAlignment="Left" Height="200" Margin="10,111,0,0"
-                  VerticalAlignment="Top" Width="472" ItemsSource="{Binding ObservedCollection}"
-                  SelectedItem="{Binding SelectedAssignment}" AutoGenerateColumns="False" IsReadOnly="True">
+              Margin="0,0,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
 
-            <DataGrid.Columns>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
 
-                <DataGridTextColumn Header="#" Binding="{Binding Id}" />
-                <DataGridTextColumn Header="Beschrijving" Binding="{Binding Description}" Width="*" />
+        <Image Grid.Row="0" Grid.Column="0" x:Name="image" Source="..\..\Image\Logo_WhiteBack.PNG" HorizontalAlignment="Left" MinHeight="30" MaxWidth="100"
+                   VerticalAlignment="Center" Margin="10,10" />
 
-            </DataGrid.Columns>
+        <WrapPanel Grid.ColumnSpan="2" Grid.Row="1">
+            <TextBox x:Name="SearchBox" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap"
+                         Text="{Binding SearchCriteria, Mode=TwoWay}" VerticalAlignment="Top" MinWidth="392" />
+            <Button x:Name="startSearch" Content="Zoek" HorizontalAlignment="Left" Margin="10,10,10,10"
+                        VerticalAlignment="Top" Width="75" Command="{Binding SearchAll}" />
+            <CheckBox x:Name="ClosedAssigments" Content="Gesloten opdrachten" HorizontalAlignment="Left" Margin="10,10,10,10"
+                      VerticalAlignment="Center" IsChecked="{Binding ShowClosedAssignments}" />
+        </WrapPanel>
 
-        </DataGrid>
+        <ScrollViewer VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" Grid.Row="2" VerticalScrollBarVisibility="Auto" Margin="10,10,10,10" >
+            <DataGrid x:Name="AssignmentList" 
+                          ItemsSource="{Binding ObservedCollection}"
+                          SelectedItem="{Binding SelectedAssignment}" AutoGenerateColumns="False" IsReadOnly="True">
 
-        <CheckBox x:Name="ClosedAssigments" Content="Gesloten opdrachten" HorizontalAlignment="Left" Margin="10,91,0,0"
-                  VerticalAlignment="Top" IsChecked="{Binding ShowClosedAssignments}" />
-        <TextBox x:Name="SearchBox" HorizontalAlignment="Left" Height="23" Margin="10,63,0,0" TextWrapping="Wrap"
-                 Text="{Binding SearchCriteria, Mode=TwoWay}" VerticalAlignment="Top" Width="392" />
-        <Button x:Name="startSearch" Content="Zoek" HorizontalAlignment="Left" Margin="402,63,0,0"
-                VerticalAlignment="Top" Width="75" Command="{Binding SearchAll}" Height="23" />
-        <Image x:Name="image" Source="..\..\Image\Logo_WhiteBack.PNG" HorizontalAlignment="Left" Height="30"
-               Margin="10,10,0,0" VerticalAlignment="Top" Width="72" />
-        <!--doen het niet/hebben geen functie
-        <Button x:Name="Administration" Content="Administatie" HorizontalAlignment="Left" Margin="87,20,0,0"
-                VerticalAlignment="Top" Width="75" IsEnabled="False" />
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="#" Binding="{Binding Id}" />
+                    <DataGridTextColumn Header="Beschrijving" Binding="{Binding Description}" Width="*" />
 
-        <Button x:Name="Questionare" Content="Vragenlijst" HorizontalAlignment="Left" Margin="196,20,0,0"
-                VerticalAlignment="Top" Width="116" IsEnabled="False" />
-        -->
-        <Button x:Name="NewAssignment" Content="+ Nieuwe Opdracht" HorizontalAlignment="Left" Margin="95,20,0,0"
-                VerticalAlignment="Top" Width="118" Command="{Binding newAssigment}" />
-        <Button x:Name="Resultaten" Content="Resultaten" HorizontalAlignment="Left" Margin="180,316,0,0"
-                VerticalAlignment="Top" Width="90" Command="{Binding ShowResultsRelay}" />
+                </DataGrid.Columns>
 
+            </DataGrid>
+        </ScrollViewer>
 
-        <Button x:Name="EditAssignment" Content="Bewerken" HorizontalAlignment="Left" Margin="10,316,0,0"
-                VerticalAlignment="Top" Width="75" Command="{Binding EditCommand}" />
-        <Button x:Name="ShowDetails" Content="Details" HorizontalAlignment="Left" Margin="95,316,0,0"
-                VerticalAlignment="Top" Width="75" Command="{Binding ShowDetails}" />
-        <Label x:Name="Details" Content="{Binding AssignmentDetails}" HorizontalAlignment="Left" Margin="10,341,0,0"
-               VerticalAlignment="Top" Width="472" Height="65" />
-        
-        <Button x:Name="filteredInspections" Content="Inspecties" HorizontalAlignment="Left" Margin="275,316,0,0" VerticalAlignment="Top" Width="75"
-                Command="{Binding ShowFilteredInspections}"/>
+        <WrapPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Bottom">
+            <Button x:Name="NewAssignment" Content="+ Nieuwe Opdracht" HorizontalAlignment="Left" Margin="10,10, 10, 10"
+                    VerticalAlignment="Center" Width="118" Command="{Binding newAssigment}" />
+            <Button x:Name="NewInspection" Content="+ Nieuwe inspectie" HorizontalAlignment="Left" Margin="10,10,10,10"
+                            VerticalAlignment="Center" Command="{Binding newInspection}" />
+        </WrapPanel>
 
+        <WrapPanel Grid.ColumnSpan="2" Grid.Row="3">
+            <Button x:Name="EditAssignment" Content="Bewerken" HorizontalAlignment="Left" Margin="10,10,10,10"
+                        VerticalAlignment="Center" Command="{Binding EditCommand}" />
+            <Button x:Name="ShowDetails" Content="Details" HorizontalAlignment="Left" Margin="10,10,10,10"
+                        VerticalAlignment="Center" Command="{Binding ShowDetails}" />
+            <Button Grid.Row="4" Grid.Column="0" x:Name="filteredInspections" Content="Inspecties" Margin="10,10,10,10" VerticalAlignment="Center"
+                    HorizontalAlignment="Left" Command="{Binding ShowFilteredInspections}"/>
+            <Label x:Name="Details" Content="{Binding AssignmentDetails}" HorizontalAlignment="Left" Margin="10,10,10,10"
+                       VerticalAlignment="Center" MinWidth="472" MaxWidth="472" MinHeight="20" />
+
+        </WrapPanel>
     </Grid>
 </UserControl>
