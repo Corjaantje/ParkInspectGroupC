@@ -25,12 +25,14 @@ namespace ParkInspectGroupC.ViewModel
             AggregatedResults = new ObservableCollection<AggregatedResult>(QuestionnaireResultsToAggregatedResults(results));
 
             RaisePropertyChanged("SelectedAssignmentId");
-            RaisePropertyChanged("AggregatedResults");
-            foreach (AggregatedResult aggr in AggregatedResults)
-            {
-                Debug.WriteLine(aggr.Keywords);
-            }
 
+            //test
+            List<string> filter = new List<string> { "Vuil nummerbord", "Auto" };
+            List<PlottedResult> plots = QuestionnaireResultsToPlottedResults(results, filter);
+            foreach (PlottedResult plot in plots)
+            {
+                Debug.WriteLine(plot.DateTime + " - " + plot.Value);
+            }
         }
 
         private List<QuestionnaireResult> GetAllAssignmentResults(long assignmentId)
@@ -46,43 +48,34 @@ namespace ParkInspectGroupC.ViewModel
                 // Get all inspectionID's related to the assignment
                 inspectionIds = (from insp in context.Inspection where insp.AssignmentId == assignmentId select insp.Id).ToList();
 
-                Debug.WriteLine("inspectieIDs:");
                 questionnaires = new List<Questionaire>();
                 foreach (long inspectionId in inspectionIds)
                 {
                     // Get all questionnaire's for each inspection
                     questionnaires.AddRange((from ques in context.Questionaire where ques.InspectionId == inspectionId select ques).ToList());
-                    Debug.WriteLine(inspectionId);
                 }
 
-                Debug.WriteLine("questionnaireIDs:");
                 questionanswers = new List<QuestionAnswer>();
                 foreach (Questionaire questionnaire in questionnaires)
                 {
                     // Get all questionanswers of each questionnaire
                     questionanswers.AddRange((from answ in context.QuestionAnswer where answ.QuestionnaireId == questionnaire.Id select answ).ToList());
-                    Debug.WriteLine(questionnaire.Id);
                 }
 
-                Debug.WriteLine("questionanswers:");
                 foreach (QuestionAnswer questionanswer in questionanswers) {
-                    Debug.WriteLine(questionanswer.QuestionId);
 
                     QuestionnaireResult questionnaireResult = new QuestionnaireResult();
                     questionnaireResult.InspectionId = (from ques in questionnaires where ques.Id == questionanswer.QuestionnaireId select ques.InspectionId).First() ;
-                    questionnaireResult.DateTime = (from insp in context.Inspection where insp.AssignmentId == assignmentId select insp.StartDate).First();
+                    questionnaireResult.DateTime = (from insp in context.Inspection where insp.Id == questionnaireResult.InspectionId select insp.StartDate).First();
                     // TODO: seperate function to check the questionanswers actual type
                     questionnaireResult.Value = Convert.ToInt32(questionanswer.Result);
 
                     // Get all keywords belonging to this value
                     List<string> keywords = new List<string>();
-                    Debug.WriteLine("keywords:");
                     List<long> keywordIds = (from qkey in context.QuestionKeyword where qkey.QuestionId == questionanswer.QuestionId select qkey.KeywordId).ToList();
-                    foreach (int keywordId in keywordIds)
+                    foreach (long keywordId in keywordIds)
                     {
-                        Debug.WriteLine(keywordId);
                         keywords.Add((from keyw in context.Keyword where keyw.Id == keywordId select keyw.Description).First());
-                        Debug.WriteLine((from keyw in context.Keyword where keyw.Id == keywordId select keyw.Description).First());
                     }
                     questionnaireResult.Keywords = keywords;
 
@@ -102,7 +95,7 @@ namespace ParkInspectGroupC.ViewModel
                 AggregatedResult result = new AggregatedResult();
                 result.Value = questionnaireresult.Value;
                 foreach (string keyword in questionnaireresult.Keywords) {
-                    if (result.Keywords.Length < 1)
+                    if (result.Keywords == null)
                     {
                         result.Keywords = keyword;
                     }
@@ -117,5 +110,42 @@ namespace ParkInspectGroupC.ViewModel
 
             return results;
         }
+
+        public List<PlottedResult> QuestionnaireResultsToPlottedResults(List<QuestionnaireResult> list, List<string> keywordfilter)
+        {
+            List<PlottedResult> results = new List<PlottedResult>();
+
+            foreach(QuestionnaireResult questionnaireresult in list)
+            {
+                // compare with filter
+                if (questionnaireresult.Keywords.Count != keywordfilter.Count) continue;
+                if (ContainsAll(questionnaireresult.Keywords, keywordfilter) == false) continue;
+
+
+                // add the plot
+                PlottedResult plottedresult = new PlottedResult();
+                plottedresult.DateTime = questionnaireresult.DateTime;
+                plottedresult.Value = questionnaireresult.Value;
+                results.Add(plottedresult);
+            }
+
+            results.OrderByDescending(r => r.DateTime);
+
+            return results;
+        }
+
+        private bool ContainsAll(List<string> container, List<string> contained)
+        {
+            foreach (string str in contained)
+            {
+                if (container.Contains(str) == false) return false;
+            }
+
+            return true;
+        }
+
     }
+
+
+
 }
