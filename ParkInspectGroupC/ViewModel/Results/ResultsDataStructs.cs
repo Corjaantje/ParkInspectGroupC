@@ -19,4 +19,10 @@ namespace ParkInspectGroupC.ViewModel.Results
         public string Keywords;
         public int Value;
     }
+
+    public struct PlottedResult
+    {
+        public DateTime DateTime;
+        public int Value;
+    }
 }

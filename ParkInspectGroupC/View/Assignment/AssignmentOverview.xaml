@@ -7,7 +7,7 @@
               xmlns:converter="clr-namespace:ParkInspectGroupC.Converter"
              mc:Ignorable="d"
              DataContext="{Binding OpdrachtOverview, Source={StaticResource Locator}}">
-    <Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    <Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition />
