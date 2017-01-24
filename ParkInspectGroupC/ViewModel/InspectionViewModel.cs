@@ -73,10 +73,11 @@ namespace ParkInspectGroupC.ViewModel
 
         private void refillObservableCollection()
         {
-            var result = from Inspection in Inspections
+            var result = from Inspection in allInspections
                 orderby Inspection.Id ascending
                 where Inspection.Location.Contains(SearchCriteria)
                 select Inspection;
+
             Inspections = new ObservableCollection<Inspection>(result);
 
             RaisePropertyChanged("Inspections");
@@ -91,8 +92,9 @@ namespace ParkInspectGroupC.ViewModel
 						 select Inspection;
 
 			Inspections = new ObservableCollection<Inspection>(result);
-
+			
 			RaisePropertyChanged("Inspections");
+			Debug.WriteLine("Hello World");
 		}
 
         public void submitImage()

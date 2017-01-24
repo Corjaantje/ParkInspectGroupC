@@ -7,7 +7,7 @@
         mc:Ignorable="d"
 
         DataContext="{Binding NewAssignment , Source={StaticResource Locator}}">
-    
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -18,8 +18,8 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        
-        
+
+
         <Image Grid.Column="0" Grid.Row="0" x:Name="image" Source="..\..\Image\Logo_WhiteBack.PNG" HorizontalAlignment="Left" MinWidth="50" MaxWidth="125" VerticalAlignment="Top" />
 
         <!--<WrapPanel Grid.Column="1" Grid.Row="0">
@@ -56,5 +56,7 @@
             <Label  x:Name="newAssignmentLabel" Content="{Binding TopLabel}" HorizontalAlignment="Left" Margin="10,10,0,0"
                VerticalAlignment="Top" />
         </StackPanel>
+        <Label x:Name="label1" Content="Eind datum" Grid.Column="1" HorizontalAlignment="Left" Margin="5,5,0,0" Grid.Row="2" VerticalAlignment="Top"/>
+       <DatePicker Grid.Column="1" HorizontalAlignment="Left" Margin="10,36,0,0" Grid.Row="2" VerticalAlignment="Top" Width="179" Height="29" SelectedDate="{Binding EndDate}"/>
     </Grid>
 </UserControl>
