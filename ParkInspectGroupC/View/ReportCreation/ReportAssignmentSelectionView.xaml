@@ -5,10 +5,16 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:ParkInspectGroupC.View.ReportCreation"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300"
              DataContext="{Binding Reports, Source={StaticResource Locator}}">
     <Grid>
-        <ScrollViewer Grid.Row="3" Grid.ColumnSpan="2" HorizontalScrollBarVisibility="Auto"
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <ScrollViewer Grid.Row="0" Grid.ColumnSpan="1" HorizontalScrollBarVisibility="Auto"
                       VerticalScrollBarVisibility="Visible">
             <DataGrid AutoGenerateColumns="False" IsReadOnly="True"
                       SelectedItem="{Binding SelectedAssignment, Mode=TwoWay}" ItemsSource="{Binding AssignmentList}">
