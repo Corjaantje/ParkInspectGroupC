@@ -136,8 +136,7 @@ namespace ParkInspectGroupC.ViewModel
 
 			if (SelectedAssignment != null)
 			{
-				var EditView = new EditAssignmentView(SelectedAssignment, this);
-				EditView.Show();
+				Navigator.SetNewView(new EditAssignmentView(SelectedAssignment, this));
 			}
 		}
 
