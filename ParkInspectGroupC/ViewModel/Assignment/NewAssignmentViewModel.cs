@@ -23,7 +23,7 @@ namespace ParkInspectGroupC.ViewModel
 
             generateAllCustomers();
 
-			EndDate = DateTime.Today;
+			EndDate = DateTime.Now;
 
             CreateAssignment = new RelayCommand(createAssignment);
             AssignmentOverview = new RelayCommand(openAssignmentOverview);
@@ -47,10 +47,10 @@ namespace ParkInspectGroupC.ViewModel
                     assign.CustomerId = getCustomerId();
                     assign.ManagerId = getManager();
                     assign.Description = Description;
-					assign.StartDate = DateTime.Today;
+					assign.StartDate = DateTime.Now;
 					assign.EndDate = endDate;
-                    assign.DateCreated = DateTime.Today;
-                    assign.DateUpdated = DateTime.Today;
+                    assign.DateCreated = DateTime.Now;
+                    assign.DateUpdated = DateTime.Now;
 					assign.ExistsInCentral = 0;
 
 					context.Assignment.Add(assign);
@@ -158,8 +158,15 @@ namespace ParkInspectGroupC.ViewModel
 
 			set
 			{
-				endDate = value;
-			}
+                DateTime localDate = DateTime.Today;
+                if (value > localDate)
+                {
+                    endDate = value;
+                } else
+                {
+                    endDate = DateTime.Now;
+                }
+            }
 		}
 
 		public string Description { get; set; }

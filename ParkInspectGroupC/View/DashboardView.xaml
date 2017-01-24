@@ -5,66 +5,74 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:ParkInspectGroupC.View"
              mc:Ignorable="d"
-             DataContext="{Binding Dashboard, Source={StaticResource Locator}}" Height="443.362" Width="850.894">
-
+             DataContext="{Binding Dashboard, Source={StaticResource Locator}}">
+    
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition MinWidth="50" />
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="200" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="118*" />
-            <RowDefinition Height="94*"/>
-            <RowDefinition Height="211*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <local:MapView Grid.Column="0" Grid.Row="1" Grid.RowSpan="2"  HorizontalAlignment="Right" Width="300" MinHeight="300"
-                                       Margin="0,0,0,5" />
-        <TextBlock FontWeight="Bold" Text="Geplande beschikbaarheid:" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="2" Margin="10,0,0,0" Grid.Row="1" />
-        <DataGrid AutoGenerateColumns="False" CanUserResizeColumns="False" IsReadOnly="True" ItemsSource="{Binding EmployeeAvailability}" GridLinesVisibility="Horizontal" HeadersVisibility="Column" Grid.Column="2" Margin="10,21,71,178" Grid.Row="1" Grid.RowSpan="2">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Start tijd">
-                    <DataGridTextColumn.Binding>
-                        <Binding Path="StartTime" StringFormat="{}{0:t}" />
-                    </DataGridTextColumn.Binding>
-                </DataGridTextColumn>
-                <DataGridTextColumn Header="Eind tijd">
-                    <DataGridTextColumn.Binding>
-                        <Binding Path="EndTime" StringFormat="{}{0:t}" />
-                    </DataGridTextColumn.Binding>
-                </DataGridTextColumn>
-                <DataGridTextColumn Header="Datum">
-                    <DataGridTextColumn.Binding>
-                        <Binding Path="Date" StringFormat="{}{0:d}" />
-                    </DataGridTextColumn.Binding>
-                </DataGridTextColumn>
-            </DataGrid.Columns>
-        </DataGrid>
 
-        <TextBlock Text="Werkelijk gewerkt:" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="2" Grid.Row="2" Margin="10,74,0,0" />
-        <DataGrid AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding EmployeeWorkingHours}" GridLinesVisibility="Horizontal" HeadersVisibility="Column" Grid.Column="2" Margin="10,95,71,10" Grid.Row="2">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Start tijd">
-                    <DataGridTextColumn.Binding>
-                        <Binding Path="StartTime" StringFormat="{}{0:t}" />
-                    </DataGridTextColumn.Binding>
-                </DataGridTextColumn>
-                <DataGridTextColumn Header="Eind tijd">
-                    <DataGridTextColumn.Binding>
-                        <Binding Path="EndTime" StringFormat="{}{0:t}" />
-                    </DataGridTextColumn.Binding>
-                </DataGridTextColumn>
-                <DataGridTextColumn Header="Datum">
-                    <DataGridTextColumn.Binding>
-                        <Binding Path="Date" StringFormat="{}{0:d}" />
-                    </DataGridTextColumn.Binding>
-                </DataGridTextColumn>
-            </DataGrid.Columns>
-        </DataGrid>
-        <TextBlock FontWeight="Bold" Text="Openstaande inspecties:" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="0" Margin="0,92,0,0" Foreground="Black" />
-        <TextBlock Text="Legenda:" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="1" FontWeight="Bold" Margin="10,10,0,0" />
-        <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="1" Margin="10,31,0,0" Width="173" ><Run Text="O - Op"/><Run Text="enstaande inspectie"/></TextBlock>
-        <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="1" Margin="10,47,0,0" Width="267" TextWrapping="Wrap" Text="Grotere cirkel - meer inspecties op locatie" Height="59" />
+        <TextBlock Text="Geplande beschikbaarheid:" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="0" Margin="0,0,0,0" />
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Column="0" Height="200" Margin="0,20,0,0">
+            <DataGrid AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding EmployeeAvailability}" GridLinesVisibility="Horizontal" HeadersVisibility="Column" Margin="0,20,0,0">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Start tijd">
+                        <DataGridTextColumn.Binding>
+                            <Binding Path="StartTime" StringFormat="{}{0:t}" />
+                        </DataGridTextColumn.Binding>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Eind tijd">
+                        <DataGridTextColumn.Binding>
+                            <Binding Path="EndTime" StringFormat="{}{0:t}" />
+                        </DataGridTextColumn.Binding>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Datum">
+                        <DataGridTextColumn.Binding>
+                            <Binding Path="Date" StringFormat="{}{0:d}" />
+                        </DataGridTextColumn.Binding>
+                    </DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </ScrollViewer>
+
+        <TextBlock Text="Werkelijk gewerkt:" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="2" Grid.Row="0" />
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Column="2" Height="200" Margin="0,20,0,0">
+            <DataGrid AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding EmployeeWorkingHours}" GridLinesVisibility="Horizontal" HeadersVisibility="Column" Margin="0,20,0,0">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Start tijd">
+                        <DataGridTextColumn.Binding>
+                            <Binding Path="StartTime" StringFormat="{}{0:t}" />
+                        </DataGridTextColumn.Binding>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Eind tijd">
+                        <DataGridTextColumn.Binding>
+                            <Binding Path="EndTime" StringFormat="{}{0:t}" />
+                        </DataGridTextColumn.Binding>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Datum">
+                        <DataGridTextColumn.Binding>
+                            <Binding Path="Date" StringFormat="{}{0:d}" />
+                        </DataGridTextColumn.Binding>
+                    </DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </ScrollViewer>
+
+        <local:MapView Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" Grid.ColumnSpan="2" Width="350" MinHeight="400" Margin="0,20,0,0" />
+
+        <TextBlock FontWeight="Bold" Text="Openstaande inspecties:" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="0" Margin="5,0,0,0" Foreground="Black" />
+        <TextBlock Text="Legenda:" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" FontWeight="Bold" Margin="170,10,0,0" />
+        <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Margin="170,31,0,0" >
+            <Run Text="O - Op"/>
+            <Run Text="enstaande inspectie"/>
+        </TextBlock>
+        <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Margin="170,47,0,0" TextWrapping="Wrap" Text="Grotere cirkel - meer inspecties op locatie" Height="59" />
 
     </Grid>
 </UserControl>
