@@ -12,6 +12,7 @@ using LocalDatabase.Domain;
 using ParkInspectGroupC.Miscellaneous;
 using ParkInspectGroupC.View;
 using ParkInspectGroupC.Properties;
+using System;
 
 namespace ParkInspectGroupC.ViewModel
 {
@@ -37,9 +38,12 @@ namespace ParkInspectGroupC.ViewModel
 
 		private void showQuestionnaire()
 		{
-            RaisePropertyChanged("SelectedInspection");
-            Settings.Default.QuestionnaireSelectedInspectionId = SelectedInspection.Id;
-            Navigator.SetNewView(new QuestionnaireView());
+            if (SelectedInspection != null)
+            {
+                RaisePropertyChanged("SelectedInspection");
+                Settings.Default.QuestionnaireSelectedInspectionId = SelectedInspection.Id;
+                Navigator.SetNewView(new QuestionnaireView());
+            }
 		}
 
 		private void fillInspections()
@@ -50,21 +54,26 @@ namespace ParkInspectGroupC.ViewModel
                 {
                     var result = context.Inspection.ToList();
 
-                    allInspections = new ObservableCollection<Inspection>(result);
                     Inspections = new ObservableCollection<Inspection>();
-
-                    foreach(var inspection in allInspections)
+					
+                    foreach(var inspection in result)
                     {
                         if(inspection.AssignmentId == Settings.Default.AssignmentId)
                         {
                             Inspections.Add(inspection);
                         }
-                    }
-                }
+					}
+					allInspections = new ObservableCollection<Inspection>(Inspections);
+
+
+				}
+
             }
-            catch
+            catch(Exception e)
             {
+				Debug.Write(e.StackTrace);
                 allInspections = new ObservableCollection<Inspection>();
+				Inspections = new ObservableCollection<Inspection>();
                 Inspections.Add(new Inspection {Id = 100, Location = "Something went wrong"});
             }
 
@@ -226,11 +235,10 @@ namespace ParkInspectGroupC.ViewModel
         {
             using (var context = new LocalParkInspectEntities())
             {
-                var inspections = context.Inspection.ToList();
+				var inspection = context.Inspection.Single(i => i.Id == SelectedInspection.Id);
 
-                foreach (var inspection in inspections)
-                    if (inspection.Id == SelectedInspection.Id)
-                        context.Inspection.Remove(inspection);
+				inspection.ExistsInCentral = 3;
+
                 context.SaveChanges();
             }
 

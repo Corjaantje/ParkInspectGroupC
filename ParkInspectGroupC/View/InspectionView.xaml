@@ -65,7 +65,7 @@
             <Button x:Name="addButton" Content="Add Inspection" Command="{Binding AddInspection}"
                     HorizontalAlignment="Left" Margin="10,10,0,0" />
             <Button x:Name="button2" Content="Delete Inspection"
-                    Command="{Binding DataContext.DeleteInspection, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}"
+                    Command="{Binding DeleteInspection}"
                     HorizontalAlignment="Left" Margin="10,10,0,0" />
             <Button x:Name="ShowQuestionnaire" Content="Vragenlijst" HorizontalAlignment="Left" Margin="10,10,0,0"
                     Command="{Binding ShowQuestionnaire}"/>

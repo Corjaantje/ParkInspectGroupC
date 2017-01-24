@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using GalaSoft.MvvmLight.Command;
 using LocalDatabase.Domain;
+using ParkInspectGroupC.Miscellaneous;
 
 namespace ParkInspectGroupC.ViewModel
 {
@@ -40,6 +41,7 @@ namespace ParkInspectGroupC.ViewModel
             }
 
             AssignmentViewModel.fillAllAssignments();
+            Navigator.Back();
         }
     }
 }
