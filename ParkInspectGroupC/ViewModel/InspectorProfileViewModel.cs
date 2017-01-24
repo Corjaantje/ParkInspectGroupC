@@ -14,7 +14,7 @@ namespace ParkInspectGroupC.ViewModel
         private string _adress;
         private string _email;
 
-        private IEnumerable<object> _inspections;
+        private ObservableCollection<Inspection> _inspections;
 
         private Employee _manager;
 
@@ -59,17 +59,8 @@ namespace ParkInspectGroupC.ViewModel
                 }
                 using (var context = new LocalParkInspectEntities())
                 {
-                    Inspections = (from insp in context.Inspection
-                        where insp.InspectorId == Emp.Id
-                        select new
-                        {
-                            insp.Id,
-                            insp.Location,
-                            InspectionStatus =
-                            (from inspStat in context.InspectionStatus
-                                where inspStat.Id == insp.StatusId
-                                select inspStat).FirstOrDefault().Description
-                        }).ToList();
+                    var iList = context.Inspection.Include("InspectionStatus").Where(i => i.InspectorId == Emp.Id).ToList();
+                    Inspections = new ObservableCollection<Inspection>(iList);
                 }
             }
             catch
@@ -148,7 +139,7 @@ namespace ParkInspectGroupC.ViewModel
             }
         }
 
-        public IEnumerable<object> Inspections
+        public ObservableCollection<Inspection> Inspections
         {
             get { return _inspections; }
             set

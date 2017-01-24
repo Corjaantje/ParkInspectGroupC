@@ -14,7 +14,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         
-        <ScrollViewer Grid.Row="0" Grid.ColumnSpan="0" HorizontalScrollBarVisibility="Auto"
+        <ScrollViewer Grid.Row="0" Grid.ColumnSpan="1" HorizontalScrollBarVisibility="Auto"
                       VerticalScrollBarVisibility="Visible">
             <DataGrid AutoGenerateColumns="False" IsReadOnly="True"
                       SelectedItem="{Binding SelectedAssignment, Mode=TwoWay}" ItemsSource="{Binding AssignmentList}">

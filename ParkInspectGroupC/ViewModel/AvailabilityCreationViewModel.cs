@@ -91,7 +91,8 @@ namespace ParkInspectGroupC.ViewModel
                     EmployeeId = SelectedInspector.Id,
                     Date = Date,
                     StartTime = StartTime,
-                    EndTime = EndTime
+                    EndTime = EndTime,
+                    ExistsInCentral = 0
                 };
 
                 context.Availability.Add(availability);
@@ -102,18 +103,19 @@ namespace ParkInspectGroupC.ViewModel
 
         private bool CanSave()
         {
-            DateTime start;
-            DateTime end;
-            var format = "dd-MM-yyyy HH:mm";
+            TimeSpan start;
+            TimeSpan end;
             if ((Date == null) ||
-                !DateTime.TryParseExact(sTime, format, null, DateTimeStyles.None, out start) ||
-                !DateTime.TryParseExact(eTime, format, null, DateTimeStyles.None, out end))
+                !TimeSpan.TryParseExact(sTime, "g", null, TimeSpanStyles.None, out start) ||
+                !TimeSpan.TryParseExact(eTime, "g", null, TimeSpanStyles.None, out end))
                 return false;
-            foreach (var a in AvailabilityList)
+
+            foreach (var a in AvailabilityList) { 
                 if (a.Date == Date)
                     return false;
-            StartTime = start;
-            EndTime = end;
+            }
+            StartTime = DateTime.Now.Date + start;
+            EndTime = DateTime.Now.Date + end;
             return true;
         }
     }

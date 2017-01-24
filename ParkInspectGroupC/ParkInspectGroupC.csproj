@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -136,6 +136,7 @@
     <Compile Include="Miscellaneous\Navigator.cs" />
     <Compile Include="ViewModel\AssignmentToInspectionViewModel.cs" />
     <Compile Include="ViewModel\Assignment\AssignmentOverviewViewModel.cs" />
+    <Compile Include="ViewModel\Assignment\AssignmentResultViewModel.cs" />
     <Compile Include="ViewModel\AvailabilityCreationViewModel.cs" />
     <Compile Include="ViewModel\AvailabilityEditViewModel.cs" />
     <Compile Include="ViewModel\CustomerCreationViewModel.cs" />
@@ -174,6 +175,9 @@
     <Compile Include="ViewModel\ReportCreation\DiagramPreviewViewModel.cs" />
     <Compile Include="ViewModel\ReportCreation\ReportViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="View\Assignment\AssignmentResultView.xaml.cs">
+      <DependentUpon>AssignmentResultView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\AvailabilityCreationView.xaml.cs">
       <DependentUpon>AvailabilityCreationView.xaml</DependentUpon>
     </Compile>
@@ -325,6 +329,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Assignment\AssignmentOverview.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Assignment\AssignmentResultView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

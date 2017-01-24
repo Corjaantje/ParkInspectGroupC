@@ -47,6 +47,15 @@ namespace ParkInspectGroupC.ViewModel
 			refillCollection();
 		}
 
+		public void addNewAssignment(Assignment a)
+		{
+			// adds a assignment to the list
+			AssignmentCollection.Add(a);
+			ObservedCollection.Add(a);
+			RaisePropertyChanged("AssignmentCollection");
+			RaisePropertyChanged("ObservedCollection");
+		}
+
 		private void refillCollection()
 		{
 			IEnumerable<Assignment> tempCollection;
@@ -81,14 +90,18 @@ namespace ParkInspectGroupC.ViewModel
 		{
 			if (SelectedAssignment != null)
 			{
+				Settings.Default.AssignmentId = SelectedAssignment.Id;
 				var Inspections = new InspectionView();
 				Navigator.SetNewView(Inspections);
-				((InspectionViewModel)Inspections.DataContext).filterInspections((int)SelectedAssignment.Id);
+
 			}
 		}
 
 		private void showDetails()
 		{
+			if (SelectedAssignment == null)
+				return;
+
 			var customerName = "";
 			var managerName = "";
 			var description = SelectedAssignment.Description;
@@ -123,8 +136,7 @@ namespace ParkInspectGroupC.ViewModel
 
 			if (SelectedAssignment != null)
 			{
-				var EditView = new EditAssignmentView(SelectedAssignment, this);
-				EditView.Show();
+				Navigator.SetNewView(new EditAssignmentView(SelectedAssignment, this));
 			}
 		}
 
@@ -176,7 +188,6 @@ namespace ParkInspectGroupC.ViewModel
 		public ICommand ShowResultsRelay { get; set; }
 		//public ICommand ShowQuestionnaire { get; set; }
 		public ICommand ShowFilteredInspections { get; set; }
-
 
 		#endregion
 	}

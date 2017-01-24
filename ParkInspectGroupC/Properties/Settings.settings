@@ -50,5 +50,8 @@
     <Setting Name="Availability" Type="LocalDatabase.Domain.Availability" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="SelectedAssignmentId" Type="System.Int64" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

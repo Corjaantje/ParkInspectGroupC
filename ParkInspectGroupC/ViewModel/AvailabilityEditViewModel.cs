@@ -23,8 +23,8 @@ namespace ParkInspectGroupC.ViewModel
             Date = SelectedAvailability.Date;
             TempStartTime = SelectedAvailability.StartTime;
             TempEndTime = SelectedAvailability.EndTime;
-            STime = TempStartTime.ToString();
-            ETime = TempEndTime.ToString();
+            STime = TempStartTime.Value.TimeOfDay.ToString();
+            ETime = TempEndTime.Value.TimeOfDay.ToString();
             SaveCommand = new RelayCommand(Save, CanSave);
         }
 
@@ -34,7 +34,7 @@ namespace ParkInspectGroupC.ViewModel
             set
             {
                 _sTime = value;
-                RaisePropertyChanged("sTime");
+                RaisePropertyChanged("STime");
             }
         }
 
@@ -44,7 +44,7 @@ namespace ParkInspectGroupC.ViewModel
             set
             {
                 _eTime = value;
-                RaisePropertyChanged("eTime");
+                RaisePropertyChanged("ETime");
             }
         }
 
@@ -61,6 +61,7 @@ namespace ParkInspectGroupC.ViewModel
             {
                 SelectedAvailability.StartTime = TempStartTime;
                 SelectedAvailability.EndTime = TempEndTime;
+                SelectedAvailability.ExistsInCentral = 2;
                 context.Entry(SelectedAvailability).State = EntityState.Modified;
                 context.SaveChanges();
             }
@@ -69,16 +70,14 @@ namespace ParkInspectGroupC.ViewModel
 
         public bool CanSave()
         {
-            DateTime start;
-            DateTime end;
-            var format = "dd-MM-yyyy HH:mm";
-
-            if (!DateTime.TryParseExact(STime, format, null, DateTimeStyles.None, out start) ||
-                !DateTime.TryParseExact(ETime, format, null, DateTimeStyles.None, out end))
+            TimeSpan start;
+            TimeSpan end;
+            if (!TimeSpan.TryParseExact(STime, "g", null, TimeSpanStyles.None, out start) ||
+                !TimeSpan.TryParseExact(ETime, "g", null, TimeSpanStyles.None, out end))
                 return false;
 
-            TempStartTime = start;
-            TempEndTime = end;
+            TempStartTime = DateTime.Now.Date + start;
+            TempEndTime = DateTime.Now.Date + end;
             return true;
         }
     }
