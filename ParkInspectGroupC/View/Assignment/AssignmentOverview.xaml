@@ -32,6 +32,8 @@
                         VerticalAlignment="Top" Width="75" Command="{Binding SearchAll}" />
             <CheckBox x:Name="ClosedAssigments" Content="Gesloten opdrachten" HorizontalAlignment="Left" Margin="10,10,10,10"
                       VerticalAlignment="Center" IsChecked="{Binding ShowClosedAssignments}" />
+            <Button x:Name="NewAssignment" Content="Nieuwe Opdracht" HorizontalAlignment="Left" Margin="10,10, 10, 10"
+                    VerticalAlignment="Center" Command="{Binding newAssigment}" />
         </WrapPanel>
 
         <ScrollViewer VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" Grid.Row="2" VerticalScrollBarVisibility="Auto" Margin="10,10,10,10" >
@@ -47,11 +49,6 @@
 
             </DataGrid>
         </ScrollViewer>
-
-        <WrapPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Bottom">
-            <Button x:Name="NewAssignment" Content="+ Nieuwe Opdracht" HorizontalAlignment="Left" Margin="10,10, 10, 10"
-                    VerticalAlignment="Center" Width="118" Command="{Binding newAssigment}" />
-        </WrapPanel>
 
         <WrapPanel Grid.ColumnSpan="2" Grid.Row="3">
             <Button x:Name="EditAssignment" Content="Bewerken" HorizontalAlignment="Left" Margin="10,10,10,10"
