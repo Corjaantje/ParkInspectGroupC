@@ -135,8 +135,8 @@ namespace ParkInspectGroupC.ViewModel
 					managerName = manager.FirstName + " " + manager.SurName;
 				}
 
-				details = "Klant: " + customerName + "; Manager: " + managerName + "\n" + "Beschrijving: " + description +
-						  "\n" + "Start datum: " + startDate + "; Eind datum: " + endDate;
+				details = "Klant: " + customerName + "\nManager: " + managerName + "\n" + "Beschrijving: " + description +
+						  "\n" + "Start datum: " + startDate + "\nEind datum: " + endDate;
 			}
 			catch
 			{
@@ -158,8 +158,11 @@ namespace ParkInspectGroupC.ViewModel
 
 		private void ShowResults()
 		{
-            Settings.Default.SelectedAssignmentId = SelectedAssignment.Id;
-            Navigator.SetNewView(new AssignmentResultView());
+            if (SelectedAssignment != null)
+            {
+                Settings.Default.SelectedAssignmentId = SelectedAssignment.Id;
+                Navigator.SetNewView(new AssignmentResultView());
+            }
 		}
 
 		#region properties
