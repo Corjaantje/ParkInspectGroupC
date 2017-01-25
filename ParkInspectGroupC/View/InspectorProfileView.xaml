@@ -23,12 +23,12 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="*" MinHeight="160"/>
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="*" MinHeight="160"/>
         </Grid.RowDefinitions>
-        <Label Content="GebruikersProfiel:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Grid.Column="0" Grid.Row="0"/>
+        <Label Content="Mijn Profiel" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontSize="18" Grid.Column="0" Grid.Row="0"/>
 
         <Label Content="Naam:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="0" Grid.Row="1" />
         <Label Content="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged }" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Grid.Row="1" />
@@ -54,15 +54,17 @@
         <Label Content="{Binding Path=ManagerName, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Grid.Row="8" />
 
         <Label Content="Inspecties" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Grid.Column="0" Grid.Row="9"/>
-        <DataGrid ItemsSource="{Binding Inspections, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" Grid.ColumnSpan="2" IsReadOnly="True" Grid.Column="0" Grid.Row="10"  Height="100">
+        <DataGrid ItemsSource="{Binding Inspections, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" MinHeight="160" Grid.ColumnSpan="2" IsReadOnly="True" Grid.Column="0" Grid.Row="10"  Height="100">
             <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Id}" Header="Nummer" />
                 <DataGridTextColumn Binding="{Binding Location}" Header="Locatie" />
                 <DataGridTextColumn Binding="{Binding InspectionStatus.Description}" Header="Status" />
+                <DataGridTextColumn Binding="{Binding StartDate}" Header="Geplande uitvoering" />
             </DataGrid.Columns>
         </DataGrid>
 
         <Label Content="Werktijden" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Grid.Row="12" Grid.Column="0"/>
-        <DataGrid ItemsSource="{Binding Path=InspectorAvailability, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" Grid.ColumnSpan="2" IsReadOnly="True" GridLinesVisibility="Horizontal" HeadersVisibility="Column" Grid.Row="13" Grid.Column="0" Height="100">
+        <DataGrid ItemsSource="{Binding Path=InspectorAvailability, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" MinHeight="160" Grid.ColumnSpan="2" IsReadOnly="True" GridLinesVisibility="Horizontal" HeadersVisibility="Column" Grid.Row="13" Grid.Column="0" Height="100">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Start tijd">
                     <DataGridTextColumn.Binding>
