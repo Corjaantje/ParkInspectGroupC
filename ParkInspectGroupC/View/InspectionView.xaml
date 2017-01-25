@@ -26,12 +26,12 @@
                       HeadersVisibility="Column">
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Id" Binding="{Binding Id}" Foreground="#FF1D1616" />
-                    <DataGridTextColumn Header="Opdracht Id" Binding="{Binding AssignmentId}" Width="*" />
-                    <DataGridTextColumn Header="Regio Id" Binding="{Binding RegionId}" Width="*" />
-                    <DataGridTextColumn Header="Locatie" Binding="{Binding Location}" Width="*" />
-                    <DataGridTextColumn Header="Start datum" Binding="{Binding StartDate}" Width="*" />
-                    <DataGridTextColumn Header="Eind datum" Binding="{Binding EndDate}" Width="*" />
+                    <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="30" Foreground="#FF1D1616" />
+                    <DataGridTextColumn Header="Opdracht Id" Binding="{Binding AssignmentId}" />
+                    <DataGridTextColumn Header="Regio Id" Binding="{Binding RegionId}" />
+                    <DataGridTextColumn Header="Locatie" Binding="{Binding Location}" />
+                    <DataGridTextColumn Header="Start datum" Binding="{Binding StartDate}" />
+                    <DataGridTextColumn Header="Eind datum" Binding="{Binding EndDate}" />
 
                 </DataGrid.Columns>
                 <DataGrid.ColumnHeaderStyle>
