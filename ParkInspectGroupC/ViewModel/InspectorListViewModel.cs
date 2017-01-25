@@ -7,6 +7,7 @@ using GalaSoft.MvvmLight.CommandWpf;
 using LocalDatabase.Domain;
 using ParkInspectGroupC.Miscellaneous;
 using ParkInspectGroupC.View;
+using ParkInspectGroupC.Properties;
 
 namespace ParkInspectGroupC.ViewModel
 {
@@ -14,9 +15,7 @@ namespace ParkInspectGroupC.ViewModel
     {
         private ObservableCollection<Availability> _inspectorAvailability;
         private Availability _selectedAvailability;
-        
         private Employee _selectedInspector;
-
         private bool _showAvailability;
         private int days;
         private string _searchString = "Search";
@@ -134,23 +133,27 @@ namespace ParkInspectGroupC.ViewModel
 
         private void ShowEditView()
         {
+            Settings.Default.Employee = SelectedInspector;
             Navigator.SetNewView(new InspectorEditView());
             ShowAvailability = false;
         }
 
         private void ShowCreateAvailability()
         {
+            Settings.Default.Employee = SelectedInspector;
             Navigator.SetNewView(new AvailabilityCreationView());
             ShowAvailability = false;
         }
 
         private void ShowEditAvailability()
         {
+            Settings.Default.Availability = SelectedAvailability;
             Navigator.SetNewView(new AvailabilityEditView());
         }
 
         private void ShowInspectorInspections()
         {
+            Settings.Default.Employee = SelectedInspector;
             Navigator.SetNewView(new InspectorInspectionsView());
             ShowAvailability = false;
         }
@@ -164,8 +167,9 @@ namespace ParkInspectGroupC.ViewModel
                 days = (int)daysBetweenDates.TotalDays;
             }
 
-            if (days < 7)
+            if (days > 7)
                 return false;
+           
             return true;
         }
     }

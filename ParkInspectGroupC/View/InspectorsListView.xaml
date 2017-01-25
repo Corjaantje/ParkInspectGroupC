@@ -85,12 +85,20 @@
                       GridLinesVisibility="Horizontal" HeadersVisibility="Column" Canvas.Top="30" Canvas.Left="10"
                       CanUserResizeColumns="False">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Tijd" Width="auto">
+                    <DataGridTextColumn Header="Start tijd">
                         <DataGridTextColumn.Binding>
-                            <MultiBinding StringFormat="{}{0}-{1}">
-                                <Binding Path="StartTime" />
-                                <Binding Path="EndTime" />
-                            </MultiBinding>
+                            <Binding Path="StartTime" StringFormat="{}{0:t}" />
+                                <!---->  
+                        </DataGridTextColumn.Binding>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Eind tijd">
+                        <DataGridTextColumn.Binding>
+                            <Binding Path="EndTime" StringFormat="{}{0:t}" />
+                        </DataGridTextColumn.Binding>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Datum">
+                        <DataGridTextColumn.Binding>
+                            <Binding Path="Date" StringFormat="{}{0:d}"/>
                         </DataGridTextColumn.Binding>
                     </DataGridTextColumn>
                     <DataGridTemplateColumn Width="auto">

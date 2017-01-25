@@ -194,22 +194,26 @@ namespace ParkInspectGroupC.ViewModel
 
                 else
                 {
-                    var newInspection = new Inspection
-                    {
-                        AssignmentId = assigmentId,
-                        InspectorId = inspectorId,
-                        StatusId = statusId,
-                        RegionId = regionId,
-                        Location = Locatie,
-                        StartDate = StartDatum,
-                        EndDate = EindDatum
+					var newInspection = new Inspection
+					{
+						Id = context.Inspection.Max(i => i.Id) + 1,
+						AssignmentId = assigmentId,
+						InspectorId = inspectorId,
+						StatusId = statusId,
+						RegionId = regionId,
+						Location = Locatie,
+						StartDate = StartDatum,
+						EndDate = EindDatum,
+						DateCreated = DateTime.Today,
+						DateUpdated = DateTime.Today,
+						ExistsInCentral = 0
                     };
 
                     context.Inspection.Add(newInspection);
                     context.SaveChanges();
                 }
             }
-
+ 
             inspectionVM.hideAddInspection();
         }
     }

@@ -12,10 +12,12 @@ using LocalDatabase.Domain;
 using ParkInspectGroupC.Miscellaneous;
 using ParkInspectGroupC.View;
 using ParkInspectGroupC.Properties;
+using GalaSoft.MvvmLight;
+using System;
 
 namespace ParkInspectGroupC.ViewModel
 {
-    public class InspectionViewModel
+    public class InspectionViewModel : ViewModelBase
     {
         public InspectionViewModel()
         {
@@ -30,18 +32,19 @@ namespace ParkInspectGroupC.ViewModel
 			ShowQuestionnaire = new RelayCommand(showQuestionnaire);
             DeleteInspection = new RelayCommand(deleteInspection);
             assemblyFile = Directory.GetCurrentDirectory();
-            var source = assemblyFile + "\\..\\..\\Image\\silvio.jpeg";
+            var source = assemblyFile + "\\..\\..\\Image\\Testfotos\\01.jpg";
             SourceName = source;
 
-            //BitmapImage i = new BitmapImage(uri);
-            //SourceName = i;
         }
 
 		private void showQuestionnaire()
 		{
-            RaisePropertyChanged("SelectedInspection");
-            Settings.Default.QuestionnaireSelectedInspectionId = SelectedInspection.Id;
-            Navigator.SetNewView(new QuestionnaireView());
+            if (SelectedInspection != null)
+            {
+                RaisePropertyChanged("SelectedInspection");
+                Settings.Default.QuestionnaireSelectedInspectionId = SelectedInspection.Id;
+                Navigator.SetNewView(new QuestionnaireView());
+            }
 		}
 
 		private void fillInspections()
@@ -52,14 +55,26 @@ namespace ParkInspectGroupC.ViewModel
                 {
                     var result = context.Inspection.ToList();
 
-                    allInspections = new ObservableCollection<Inspection>(result);
+                    Inspections = new ObservableCollection<Inspection>();
+					
+                    foreach(var inspection in result)
+                    {
+                        if(inspection.AssignmentId == Settings.Default.AssignmentId)
+                        {
+                            Inspections.Add(inspection);
+                        }
+					}
+					allInspections = new ObservableCollection<Inspection>(Inspections);
 
-                    Inspections = new ObservableCollection<Inspection>(result);
-                }
+
+				}
+
             }
-            catch
+            catch(Exception e)
             {
+				Debug.Write(e.StackTrace);
                 allInspections = new ObservableCollection<Inspection>();
+				Inspections = new ObservableCollection<Inspection>();
                 Inspections.Add(new Inspection {Id = 100, Location = "Something went wrong"});
             }
 
@@ -68,10 +83,12 @@ namespace ParkInspectGroupC.ViewModel
 
         private void refillObservableCollection()
         {
-            var result = from Inspection in Inspections
+            var result = from Inspection in allInspections
                 orderby Inspection.Id ascending
-                where Inspection.Location.Contains(SearchCriteria)
+                where Inspection.Location.ToLower().Contains(SearchCriteria)
+                   || Inspection.Id.ToString().Contains(SearchCriteria)
                 select Inspection;
+
             Inspections = new ObservableCollection<Inspection>(result);
 
             RaisePropertyChanged("Inspections");
@@ -86,8 +103,9 @@ namespace ParkInspectGroupC.ViewModel
 						 select Inspection;
 
 			Inspections = new ObservableCollection<Inspection>(result);
-
+			
 			RaisePropertyChanged("Inspections");
+			Debug.WriteLine("Hello World");
 		}
 
         public void submitImage()
@@ -198,12 +216,19 @@ namespace ParkInspectGroupC.ViewModel
                 MessageBox.Show("Selecteer aub een inspectie");
 
             else
+                Settings.Default.InspectionId = SelectedInspection.Id;
+                Settings.Default.InspectionAssignmentId = SelectedInspection.AssignmentId;
+                Settings.Default.InspectionRegionId = SelectedInspection.RegionId;
+                Settings.Default.InspectionStatusId = SelectedInspection.StatusId;
+                Settings.Default.InspectionLocation = SelectedInspection.Location;
+                Settings.Default.InspectionStartDatum = SelectedInspection.StartDate;
+                Settings.Default.InspectionEindDatum = SelectedInspection.EndDate;
                 Navigator.SetNewView(new InspectionEditView());
         }
 
         public void hideAddInspection()
         {
-            Navigator.SetNewView(new InspectionView());
+            Navigator.Back();
             RaisePropertyChanged("Inspections");
         }
 
@@ -212,11 +237,10 @@ namespace ParkInspectGroupC.ViewModel
         {
             using (var context = new LocalParkInspectEntities())
             {
-                var inspections = context.Inspection.ToList();
+				var inspection = context.Inspection.Single(i => i.Id == SelectedInspection.Id);
 
-                foreach (var inspection in inspections)
-                    if (inspection.Id == SelectedInspection.Id)
-                        context.Inspection.Remove(inspection);
+				inspection.ExistsInCentral = 3;
+
                 context.SaveChanges();
             }
 
@@ -224,14 +248,6 @@ namespace ParkInspectGroupC.ViewModel
             allInspections.Remove(SelectedInspection);
             RaisePropertyChanged("Inspections");
         }
-
-
-        private void RaisePropertyChanged(string prop)
-        {
-            if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(prop));
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         #region properties
 
@@ -257,18 +273,7 @@ namespace ParkInspectGroupC.ViewModel
             set
             {
                 _searchCriteria = value;
-                Debug.WriteLine(_searchCriteria);
-                var searchedInspections = new ObservableCollection<Inspection>();
-
-                foreach (var inspection in allInspections)
-                    if ((SearchCriteria != null) && inspection.Location.ToLower().Contains(SearchCriteria.ToLower()))
-                        searchedInspections.Add(inspection);
-
-
-                Inspections = searchedInspections;
-
-                RaisePropertyChanged("SearchCriteria");
-                RaisePropertyChanged("Inspections");
+                refillObservableCollection();
             }
         }
 

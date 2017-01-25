@@ -2,6 +2,7 @@
 using System.Linq;
 using GalaSoft.MvvmLight;
 using LocalDatabase.Domain;
+using ParkInspectGroupC.Properties;
 
 namespace ParkInspectGroupC.ViewModel
 {
@@ -9,13 +10,13 @@ namespace ParkInspectGroupC.ViewModel
     {
         private string _name;
 
-        public InspectorInspectionsViewModel(Employee selectedInspector)
+        public InspectorInspectionsViewModel()
         {
-            Name = selectedInspector.FirstName + " " + selectedInspector.Prefix + " " + selectedInspector.SurName;
+            Name = Settings.Default.Employee.FirstName + " " + Settings.Default.Employee.Prefix + " " + Settings.Default.Employee.SurName;
             using (var context = new LocalParkInspectEntities())
             {
                 var IList =
-                    context.Inspection.Include("InspectionStatus").Where(i => i.InspectorId == selectedInspector.Id);
+                    context.Inspection.Include("InspectionStatus").Where(i => i.InspectorId == Settings.Default.Employee.Id);
                 Inspections = new ObservableCollection<Inspection>(IList);
             }
         }

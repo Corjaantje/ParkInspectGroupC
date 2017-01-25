@@ -23,8 +23,11 @@ namespace ParkInspectGroupC.ViewModel
 
             generateAllCustomers();
 
+			EndDate = DateTime.Now;
+
             CreateAssignment = new RelayCommand(createAssignment);
             AssignmentOverview = new RelayCommand(openAssignmentOverview);
+			CustomerIndex = 0;
 
         }
 
@@ -33,22 +36,26 @@ namespace ParkInspectGroupC.ViewModel
             Navigator.SetNewView(new AssignmentOverview());
         }
         public void createAssignment()
-        {
-            try
+		{
+			var assign = new Assignment();
+			try
             {
                 using (var context = new LocalParkInspectEntities())
                 {
-                    var assign = new Assignment();
 
                     assign.Id = context.Assignment.Max(u => u.Id) + 1;
                     assign.CustomerId = getCustomerId();
                     assign.ManagerId = getManager();
                     assign.Description = Description;
-                    assign.DateCreated = DateTime.Today;
-                    assign.DateUpdated = DateTime.Today;
+					assign.StartDate = DateTime.Now;
+					assign.EndDate = endDate;
+                    assign.DateCreated = DateTime.Now;
+                    assign.DateUpdated = DateTime.Now;
+					assign.ExistsInCentral = 0;
 
-                    context.Assignment.Add(assign);
-                    context.SaveChanges();
+					context.Assignment.Add(assign);
+					//context.Entry(assign).State = System.Data.Entity.EntityState.Added;
+					context.SaveChanges();
                 }
 
                 TopLabel = "Opdracht aangemaakt";
@@ -57,13 +64,19 @@ namespace ParkInspectGroupC.ViewModel
 
                 Description = "";
 
-                RaisePropertyChanged();
+                RaisePropertyChanged(TopLabel);
+				RaisePropertyChanged(Description);
+
+				AssignmentOverview ao = new View.AssignmentOverview();
+				((AssignmentOverviewViewModel)ao.DataContext).addNewAssignment(assign);
+				Navigator.SetNewView(ao);
+
             }
             catch
             {
                 TopLabel = "Something went wrong, changes are not saved";
 
-                RaisePropertyChanged();
+                RaisePropertyChanged("TopLabel");
             }
         }
 
@@ -128,13 +141,35 @@ namespace ParkInspectGroupC.ViewModel
 
         private int getManager()
         {
-            // needs to properly assign to a manager
-            return 4;
-        }
+			// needs to properly assign to a manager
+			
+            return (int)Properties.Settings.Default.LoggedInEmp.Id;
+		}
 
-        #region properties
+		#region properties
 
-        public string Description { get; set; }
+		private DateTime endDate;
+		public DateTime EndDate
+		{
+			get
+			{
+				return endDate;
+			}
+
+			set
+			{
+                DateTime localDate = DateTime.Today;
+                if (value > localDate)
+                {
+                    endDate = value;
+                } else
+                {
+                    endDate = DateTime.Now;
+                }
+            }
+		}
+
+		public string Description { get; set; }
 
         public string TopLabel { get; set; }
 
@@ -160,6 +195,7 @@ namespace ParkInspectGroupC.ViewModel
 
         public ICommand AssignmentOverview { get; set; }
 
-        #endregion properties
-    }
+
+		#endregion properties
+	}
 }
