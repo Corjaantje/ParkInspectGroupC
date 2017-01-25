@@ -8,6 +8,7 @@ using LocalDatabase.Domain;
 using ParkInspectGroupC.Miscellaneous;
 using ParkInspectGroupC.View;
 using ParkInspectGroupC.Properties;
+using System;
 
 namespace ParkInspectGroupC.ViewModel
 {
@@ -34,7 +35,7 @@ namespace ParkInspectGroupC.ViewModel
 			{
 				using (var context = new LocalParkInspectEntities())
 				{
-					AssignmentCollection = context.Assignment.ToList();
+					AssignmentCollection = context.Assignment.Include("Customer").ToList();
 				}
 			}
 			catch
@@ -47,18 +48,42 @@ namespace ParkInspectGroupC.ViewModel
 			refillCollection();
 		}
 
+		public void addNewAssignment(Assignment a)
+		{
+			// adds a assignment to the list
+			AssignmentCollection.Add(a);
+			ObservedCollection.Add(a);
+			RaisePropertyChanged("AssignmentCollection");
+			RaisePropertyChanged("ObservedCollection");
+		}
+
 		private void refillCollection()
 		{
 			IEnumerable<Assignment> tempCollection;
 			if (_showClosedAssignments)
 				tempCollection = from Assignment in AssignmentCollection
 								 orderby Assignment.Id ascending
-								 where Assignment.Description.Contains(_searchCritetia)
-								 select Assignment;
+								 where Assignment.Description.ToLower().Contains(_searchCritetia.ToLower()) 
+                                    || Assignment.Customer.Name.ToLower().Contains(_searchCritetia.ToLower()) 
+                                    || Assignment.Customer.Location.ToLower().Contains(_searchCritetia.ToLower()) 
+                                    || Assignment.Customer.Phonenumber.ToLower().Contains(_searchCritetia.ToLower()) 
+                                    || Assignment.Customer.Email.ToLower().Contains(_searchCritetia.ToLower()) 
+                                    || Assignment.Customer.Address.ToLower().Contains(_searchCritetia.ToLower())
+                                    || Assignment.Customer.Id.ToString().ToLower().Contains(_searchCritetia.ToLower())
+                                    || Assignment.DateCreated.ToString().ToLower().Contains(_searchCritetia.ToLower())
+                                 select Assignment;
 			else
 				tempCollection = from Assignment in AssignmentCollection
 								 orderby Assignment.Id ascending
-								 where Assignment.Description.Contains(_searchCritetia) && (Assignment.EndDate != null)
+								 where Assignment.Description.ToLower().Contains(_searchCritetia.ToLower()) 
+                                    || Assignment.Customer.Name.ToLower().Contains(_searchCritetia.ToLower())
+                                    || Assignment.Customer.Location.ToLower().Contains(_searchCritetia.ToLower())
+                                    || Assignment.Customer.Phonenumber.ToLower().Contains(_searchCritetia.ToLower())
+                                    || Assignment.Customer.Email.ToLower().Contains(_searchCritetia.ToLower())
+                                    || Assignment.Customer.Address.ToLower().Contains(_searchCritetia.ToLower())
+                                    || Assignment.Customer.Id.ToString().ToLower().Contains(_searchCritetia.ToLower())
+                                    || Assignment.DateCreated.ToString().ToLower().Contains(_searchCritetia.ToLower())
+                                    && (Assignment.EndDate != null)
 								 select Assignment;
 
 			ObservedCollection = new ObservableCollection<Assignment>(tempCollection);
@@ -81,21 +106,28 @@ namespace ParkInspectGroupC.ViewModel
 		{
 			if (SelectedAssignment != null)
 			{
+				Settings.Default.AssignmentId = SelectedAssignment.Id;
 				var Inspections = new InspectionView();
 				Navigator.SetNewView(Inspections);
-				((InspectionViewModel)Inspections.DataContext).filterInspections((int)SelectedAssignment.Id);
+
 			}
 		}
 
 		private void showDetails()
 		{
+			if (SelectedAssignment == null)
+				return;
+
 			var customerName = "";
 			var managerName = "";
 			var description = SelectedAssignment.Description;
-			var startDate = SelectedAssignment.StartDate.ToString();
-			var endDate = SelectedAssignment.EndDate.ToString();
+			var startDate = ((DateTime)SelectedAssignment.StartDate).Date.ToString("d");
+			var endDate = ((DateTime)SelectedAssignment.EndDate).Date.ToString("d");
+            var inputDate = ((DateTime)SelectedAssignment.DateCreated).Date.ToString("d");
+            var status = "";
 
-			var details = "";
+
+            var details = "";
 
 			try
 			{
@@ -104,10 +136,32 @@ namespace ParkInspectGroupC.ViewModel
 					customerName = context.Customer.Single(n => n.Id == SelectedAssignment.CustomerId).Name;
 					var manager = context.Employee.Single(m => m.Id == SelectedAssignment.ManagerId);
 					managerName = manager.FirstName + " " + manager.SurName;
+
+                    List<Inspection> inspections = context.Inspection.ToList();
+
+                    foreach(var inspection in inspections)
+                    {
+                        if(inspection.AssignmentId == SelectedAssignment.Id)
+                        {
+                            if(inspection.InspectionStatus.Id == 2)
+                            {
+                                status = "Closed";
+                            }
+
+                            else
+                            {
+                                status = "Open";
+                                break;
+                            }
+                        }
+                    }
+
 				}
 
-				details = "Klant: " + customerName + "; Manager: " + managerName + "\n" + "Beschrijving: " + description +
-						  "\n" + "Start datum: " + startDate + "; Eind datum: " + endDate;
+                details = "Klant: " + customerName + "; Manager: " + managerName + "\n" + "Beschrijving: " + description +
+                          "\n" + "Start datum: " + startDate + "; Eind datum: " + endDate +
+                          "\n" + "Invoer datum: " + inputDate + "; Status: " + status;
+
 			}
 			catch
 			{
@@ -123,8 +177,7 @@ namespace ParkInspectGroupC.ViewModel
 
 			if (SelectedAssignment != null)
 			{
-				var EditView = new EditAssignmentView(SelectedAssignment, this);
-				EditView.Show();
+				Navigator.SetNewView(new EditAssignmentView(SelectedAssignment, this));
 			}
 		}
 
@@ -176,7 +229,6 @@ namespace ParkInspectGroupC.ViewModel
 		public ICommand ShowResultsRelay { get; set; }
 		//public ICommand ShowQuestionnaire { get; set; }
 		public ICommand ShowFilteredInspections { get; set; }
-
 
 		#endregion
 	}
