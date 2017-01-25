@@ -123,8 +123,11 @@ namespace ParkInspectGroupC.ViewModel
 			var description = SelectedAssignment.Description;
 			var startDate = ((DateTime)SelectedAssignment.StartDate).Date.ToString("d");
 			var endDate = ((DateTime)SelectedAssignment.EndDate).Date.ToString("d");
+            var inputDate = ((DateTime)SelectedAssignment.DateCreated).Date.ToString("d");
+            var status = "";
 
-			var details = "";
+
+            var details = "";
 
 			try
 			{
@@ -133,10 +136,32 @@ namespace ParkInspectGroupC.ViewModel
 					customerName = context.Customer.Single(n => n.Id == SelectedAssignment.CustomerId).Name;
 					var manager = context.Employee.Single(m => m.Id == SelectedAssignment.ManagerId);
 					managerName = manager.FirstName + " " + manager.SurName;
+
+                    List<Inspection> inspections = context.Inspection.ToList();
+
+                    foreach(var inspection in inspections)
+                    {
+                        if(inspection.AssignmentId == SelectedAssignment.Id)
+                        {
+                            if(inspection.InspectionStatus.Id == 2)
+                            {
+                                status = "Closed";
+                            }
+
+                            else
+                            {
+                                status = "Open";
+                                break;
+                            }
+                        }
+                    }
+
 				}
 
-				details = "Klant: " + customerName + "; Manager: " + managerName + "\n" + "Beschrijving: " + description +
-						  "\n" + "Start datum: " + startDate + "; Eind datum: " + endDate;
+                details = "Klant: " + customerName + "; Manager: " + managerName + "\n" + "Beschrijving: " + description +
+                          "\n" + "Start datum: " + startDate + "; Eind datum: " + endDate +
+                          "\n" + "Invoer datum: " + inputDate + "; Status: " + status;
+
 			}
 			catch
 			{
