@@ -16,7 +16,7 @@
             <RowDefinition />
             <RowDefinition />
             <RowDefinition MinHeight="300" />
-            <RowDefinition />
+            <RowDefinition MinHeight="300" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
@@ -28,7 +28,7 @@
                          Text="{Binding SearchCriteria, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" MinWidth="392" />
             <CheckBox x:Name="ClosedAssigments" Content="Gesloten opdrachten" HorizontalAlignment="Left" Margin="10,10,10,10"
                       VerticalAlignment="Center" IsChecked="{Binding ShowClosedAssignments}" />
-            <Button x:Name="NewAssignment" Content="Nieuwe Opdracht" HorizontalAlignment="Left" Margin="10,10, 10, 10"
+            <Button x:Name="NewAssignment" Content="Nieuwe Opdracht..." HorizontalAlignment="Left" Margin="10,10,10,10" Padding="6,1,6,1"
                     VerticalAlignment="Center" Command="{Binding newAssigment}" />
         </WrapPanel>
 
@@ -45,7 +45,7 @@
             </DataGrid>
         </ScrollViewer>
 
-        <WrapPanel Grid.ColumnSpan="2" Grid.Row="3" MinHeight="200">
+        <WrapPanel Grid.ColumnSpan="2" Grid.Row="3" MinHeight="300">
             <Button x:Name="EditAssignment" Content="Bewerken..." HorizontalAlignment="Left" Margin="10,10,10,10" Padding="6,1,6,1"
                         VerticalAlignment="Top" Command="{Binding EditCommand}" />
             <Button x:Name="Resultaten" Content="Resultaten..." HorizontalAlignment="Left" Margin="10,10,10,10" Padding="6,1,6,1"
@@ -56,7 +56,7 @@
                         VerticalAlignment="Top" Command="{Binding ShowDetails}" />
 
             <Label x:Name="Details" HorizontalAlignment="Left" Margin="10,10,10,10" FontSize="13"
-                       VerticalAlignment="Center" MinWidth="472" MaxWidth="472" MinHeight="20" MaxHeight="200">
+                       VerticalAlignment="Center" MinWidth="472" MaxWidth="472" MinHeight="20" MaxHeight="300">
                 <Label.Content>
                     <AccessText TextWrapping="Wrap" Text="{Binding AssignmentDetails}"/>
                 </Label.Content>
