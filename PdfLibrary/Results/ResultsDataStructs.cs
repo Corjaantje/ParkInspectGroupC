@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ParkInspectGroupC.ViewModel.Results
+namespace ParkInspectGroupC.Miscellaneous
 {
     // General collection class
     public class QuestionnaireResult

@@ -86,12 +86,18 @@
     <Compile Include="DiagramPlotter.cs" />
     <Compile Include="PDFGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Results\ResultsCollector.cs" />
+    <Compile Include="Results\ResultsDataStructs.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LocalDatabase\LocalDatabase.csproj">
+      <Project>{d90b7234-64db-4cda-9aed-a36e512e1783}</Project>
+      <Name>LocalDatabase</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ParkInspectGroupC.DOMAIN\ParkInspectGroupC.DOMAIN.csproj">
       <Project>{d1cc6f15-9980-47b1-ac43-11502e5d3668}</Project>
       <Name>ParkInspectGroupC.DOMAIN</Name>
