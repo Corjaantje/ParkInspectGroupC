@@ -10,71 +10,45 @@ namespace ParkInspectGroupC.Miscellaneous
 {
     public class DiagramPlotter
     {
-        public PlotModel GenerateDiagram(Report report, Diagram diagram)
+        // voor testing: gebruik assignmentId = 3 en strings "Vuil nummerbord" en "Auto"
+        public PlotModel GenerateDiagram(long assignmentId, List<string> keywordFilter)
         {
+            ResultsCollector resultsCollector = new ResultsCollector();
+            List<QuestionnaireResult> questionnaireResults = resultsCollector.GetAllAssignmentResults(assignmentId);
+            List<PlottedResult> plottableData = resultsCollector.QuestionnaireResultsToPlottedResults(questionnaireResults, keywordFilter);
+
             var MyModel = new PlotModel();
-            Diagram loadedDiagram;
-            Question loadedQuestion;
-            List<Questionnaire> loadedQuestionnaires;
-            List<Inspection> loadedInspections;
-            using (var context = new ParkInspectEntities())
-            {
-                loadedDiagram = (from a in context.Diagram where a.Id == diagram.Id select a).First();
-                loadedQuestion = (from a in context.Question where a.Id == loadedDiagram.QuestionId select a).First();
-                var loadedAssignment =
-                    (from a in context.Assignment where a.Id == report.AssignmentId select a).FirstOrDefault();
-                loadedInspections =
-                    (from a in context.Inspection where a.AssignmentId == loadedAssignment.Id select a).ToList();
 
-                //loadedAnswers = (from a in context.QuestionAnswer where a.QuestionId == loadedQuestion.Id select a).ToList();
-            }
+            // TODO: geen statische titel qua filter (kan ook meer/minder sleutelwoorden zijn)
+            
+            MyModel.Title = "Statistische data van \"" + keywordFilter[0] + "\" + \"" + keywordFilter[1] + "\"";
+            MyModel.Subtitle = "Opdracht nummer #" + assignmentId;
 
-            MyModel.Title = loadedQuestion.Description;
             MyModel.Axes.Add(new DateTimeAxis
             {
                 Position = AxisPosition.Bottom,
                 Title = "Datum",
-                MinorIntervalType = DateTimeIntervalType.Days,
-                StringFormat = "yyyy/MM/dd",
-                IntervalType = DateTimeIntervalType.Days
+                //MinorIntervalType = DateTimeIntervalType.Days,
+                IntervalType = DateTimeIntervalType.Days,
+                IntervalLength = 50,
+                StringFormat = "MM/dd",
+                MajorGridlineStyle = LineStyle.Dash
+                
             });
+
             MyModel.Axes.Add(new LinearAxis {Position = AxisPosition.Left});
+
             var points = new List<DataPoint>();
             var serie = new LineSeries();
 
-            foreach (var inspection in loadedInspections)
-                using (var context = new ParkInspectEntities())
-                {
-                    // Load the questionnaires.
-                    loadedQuestionnaires =
-                        (from a in context.Questionnaire where a.InspectionId == inspection.Id select a).ToList();
-                    foreach (var questionaire in loadedQuestionnaires)
-                    {
-                        // Load the correct question.
-                        var quest =
-                            (from a in context.Question where a.Id == loadedQuestion.Id select a).FirstOrDefault();
-                        // Load the answer.
-                        var answer =
-                        (from a in context.QuestionAnswer
-                            where (a.QuestionId == quest.Id) && (a.QuestionnaireId == questionaire.Id)
-                            select a).FirstOrDefault();
+            serie.MarkerType = MarkerType.Circle;
 
-                        var date = DateTime.Parse(answer.DateCreated.ToString());
-                        var datapoint = DateTimeAxis.CreateDataPoint(date, Axis.ToDouble(answer.Result));
-                        serie.Points.Add(datapoint);
-                    }
-                }
+            foreach (PlottedResult plottedResult in plottableData)
+            {
+                var datapoint = DateTimeAxis.CreateDataPoint(plottedResult.DateTime.Date, Axis.ToDouble(plottedResult.Value));
+                serie.Points.Add(datapoint);
+            }
 
-            //foreach (var answer in loadedAnswers)
-            //{
-            //	DateTime date = DateTime.Parse(answer.DateCreated.ToString());
-            //	DataPoint datapoint = DateTimeAxis.CreateDataPoint(date, LinearAxis.ToDouble(answer.Result));
-            //	serie.Points.Add(datapoint);
-            //}
-
-            points.Add(DateTimeAxis.CreateDataPoint(DateTime.Parse("2016-12-20"), 75));
-
-            serie.Points.AddRange(points);
             MyModel.Series.Add(serie);
 
             MyModel.ResetAllAxes();

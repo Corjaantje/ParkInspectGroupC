@@ -187,6 +187,7 @@ namespace ParkInspectGroupC.ViewModel
             SimpleIoc.Default.Register<InspectorProfileViewModel>();
             SimpleIoc.Default.Register<DiagramPreviewViewModel>();
             SimpleIoc.Default.Register<ReportViewModel>();
+            SimpleIoc.Default.Register<AssignmentResultViewModel>();
 
             RegisterQuestionnaireModuleViewModels();
         }
@@ -217,6 +218,7 @@ namespace ParkInspectGroupC.ViewModel
             SimpleIoc.Default.Unregister<InspectorProfileViewModel>();
             SimpleIoc.Default.Unregister<DiagramPreviewViewModel>();
             SimpleIoc.Default.Unregister<ReportViewModel>();
+            SimpleIoc.Default.Unregister<AssignmentResultViewModel>();
         }
 
         public void Cleanup()
