@@ -158,9 +158,9 @@ namespace ParkInspectGroupC.ViewModel
 
 				}
 
-                details = "Klant: " + customerName + "; Manager: " + managerName + "\n" + "Beschrijving: " + description +
-                          "\n" + "Start datum: " + startDate + "; Eind datum: " + endDate +
-                          "\n" + "Invoer datum: " + inputDate + "; Status: " + status;
+                details = "Klant: " + customerName + "\nManager: " + managerName + "\n" + "Beschrijving: " + description +
+                          "\n" + "Start datum: " + startDate + "\nEind datum: " + endDate +
+                          "\n" + "Invoer datum: " + inputDate + "\nStatus: " + status;
 
 			}
 			catch
@@ -183,8 +183,11 @@ namespace ParkInspectGroupC.ViewModel
 
 		private void ShowResults()
 		{
-            Settings.Default.SelectedAssignmentId = SelectedAssignment.Id;
-            Navigator.SetNewView(new AssignmentResultView());
+            if (SelectedAssignment != null)
+            {
+                Settings.Default.SelectedAssignmentId = SelectedAssignment.Id;
+                Navigator.SetNewView(new AssignmentResultView());
+            }
 		}
 
 		#region properties
