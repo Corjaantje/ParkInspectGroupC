@@ -34,7 +34,7 @@
                    VerticalAlignment="Top" Width="629" />
         <Button x:Name="SaveButton" Command="{Binding SaveInspectionRelay}" Content="Invoer opslaan en vragenlijst sluiten"
                 HorizontalAlignment="Left" Margin="10,431,0,0" VerticalAlignment="Top" Width="266" />
-        <ListBox x:Name="listBox" ItemsSource="{Binding ListElements}" HorizontalAlignment="Left" Height="403"
+        <ListBox x:Name="listBox" ItemsSource="{Binding ListElements}" HorizontalAlignment="Left" MinHeight="400"
                  Margin="281,50,0,0" VerticalAlignment="Top" Width="358" />
         <Label x:Name="InspectionID_Text" Content="Inspectie ID:" HorizontalAlignment="Left" Margin="16,15,0,0"
                VerticalAlignment="Top" Width="100" />
