@@ -45,7 +45,7 @@ namespace ParkInspectGroupC.ViewModel
                 // check if this inspection already has a filled questionnaire, show those results instead of edit screen
                 using (var context = new LocalParkInspectEntities())
                 {
-                    if ((from ques in context.Questionaire where ques.InspectionId == SelectedInspection.Id select ques).ToList().Count > 0)
+                    if ((from ques in context.Questionaire where ques.InspectionId == SelectedInspection.Id select ques).Count() > 0)
                     {
                         questionnaireAlreadyFilled = true;
                     }
