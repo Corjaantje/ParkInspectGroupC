@@ -33,7 +33,7 @@ namespace ParkInspectGroupC.ViewModel
 
 			_questionnaireModules = new Dictionary<int, QuestionnaireControlData>();
 			_questionnaireModules.Add(1,
-				new QuestionnaireControlData(1, "Aantal voertuigen", new VehicleCountControl(1, this)));
+				new QuestionnaireControlData(1, "Voertuigen per sublocatie", new VehicleCountControl(1, this)));
 			_questionnaireModules.Add(2,
 				new QuestionnaireControlData(2, "Vragenlijst notities", new QuestionnaireCommentControl(2, this)));
 
@@ -147,7 +147,8 @@ namespace ParkInspectGroupC.ViewModel
 
 		private void SaveInspection()
 		{
-			using (var context = new LocalParkInspectEntities())
+            bool error = false;
+            using (var context = new LocalParkInspectEntities())
 			{
                 var questionnaire = new Questionaire // "Questionaire" spelled wrong due to incorrect spelling in localdatabase
                 {
@@ -169,6 +170,7 @@ namespace ParkInspectGroupC.ViewModel
                         SortId = 1 // needs to be specified for proper use
                     };
 
+                    question.ExistsInCentral = 0;
 					context.Question.Add(question);
 
 					// Create QuestionKeywords for each keyword in record (QuestionID, KeywordID)
@@ -180,6 +182,7 @@ namespace ParkInspectGroupC.ViewModel
                             QuestionId = question.Id
                         };
 
+                        questionkeyword.ExistsInCentral = 0;
 						context.QuestionKeyword.Add(questionkeyword);
 					}
 
@@ -191,20 +194,23 @@ namespace ParkInspectGroupC.ViewModel
                         Result = QR.value.ToString()
                     };
 
+                    questionanswer.ExistsInCentral = 0;
 					context.QuestionAnswer.Add(questionanswer);
 				}
+                
                 try
 				{
 					context.SaveChanges();
 				}
 				catch (Exception e)
 				{
-                    MessageBox.Show(e.Message);
+                    MessageBox.Show("ERROR: \n\"" + e.Message + "\nDe gegevens zijn niet opgeslagen.");
+                    error = true;
                 }
 			}
 
-            Navigator.Back();
-		}
+            if (!error) Navigator.Back();
+        }
 
 		#endregion
 
@@ -251,11 +257,14 @@ namespace ParkInspectGroupC.ViewModel
 
 		public void AddListElement(int moduleId)
 		{
-			ListElements.Add(_questionnaireModules[moduleId].ModuleUserControl);
-			(_questionnaireModules[moduleId].ModuleUserControl.DataContext as QuestionnaireModuleViewModelBase)
-				.EditingToolsEnabled(_questionnaireEditingMode);
-			RaisePropertyChanged("ListElements");
-			RaisePropertyChanged("OrderedModuleNames");
+            if (ListElements.Contains(_questionnaireModules[moduleId].ModuleUserControl) == false)
+            {
+                ListElements.Add(_questionnaireModules[moduleId].ModuleUserControl);
+                (_questionnaireModules[moduleId].ModuleUserControl.DataContext as QuestionnaireModuleViewModelBase)
+                    .EditingToolsEnabled(_questionnaireEditingMode);
+                RaisePropertyChanged("ListElements");
+                RaisePropertyChanged("OrderedModuleNames");
+            }
 		}
 
         // used when a new view is sent to the navigator

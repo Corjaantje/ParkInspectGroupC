@@ -64,28 +64,53 @@ namespace ParkInspectGroupC.Miscellaneous
             return results;
         }
 
-        public List<AggregatedResult> QuestionnaireResultsToAggregatedResults(List<QuestionnaireResult> list)
+        public List<AggregatedResult> QuestionnaireResultsToAggregatedResults(List<QuestionnaireResult> list, long inspectionFilter = -1)
         {
             List<AggregatedResult> results = new List<AggregatedResult>();
 
-            foreach (QuestionnaireResult questionnaireresult in list)
+            if (inspectionFilter != -1) // also filter by inspection
             {
-                AggregatedResult result = new AggregatedResult();
-                result.Value = questionnaireresult.Value;
-                foreach (string keyword in questionnaireresult.Keywords)
+                foreach (QuestionnaireResult questionnaireresult in list)
                 {
-                    if (result.Keywords == null)
+                    if (questionnaireresult.InspectionId == inspectionFilter)
                     {
-                        result.Keywords = keyword;
-                    }
-                    else
-                    {
-                        result.Keywords += (", " + keyword);
+                        AggregatedResult result = new AggregatedResult();
+                        result.Value = questionnaireresult.Value;
+                        foreach (string keyword in questionnaireresult.Keywords)
+                        {
+                            if (result.Keywords == null)
+                            {
+                                result.Keywords = keyword;
+                            }
+                            else
+                            {
+                                result.Keywords += (", " + keyword);
+                            }
+                        }
+                        results.Add(result);
                     }
                 }
-                results.Add(result);
             }
-
+            else // show all results
+            {
+                foreach (QuestionnaireResult questionnaireresult in list)
+                {
+                    AggregatedResult result = new AggregatedResult();
+                    result.Value = questionnaireresult.Value;
+                    foreach (string keyword in questionnaireresult.Keywords)
+                    {
+                        if (result.Keywords == null)
+                        {
+                            result.Keywords = keyword;
+                        }
+                        else
+                        {
+                            result.Keywords += (", " + keyword);
+                        }
+                    }
+                    results.Add(result);
+                }
+            }
             return results;
         }
 

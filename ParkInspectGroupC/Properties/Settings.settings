@@ -53,5 +53,8 @@
     <Setting Name="SelectedAssignmentId" Type="System.Int64" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
+    <Setting Name="SingleInspectionResultsId" Type="System.Int64" Scope="User">
+      <Value Profile="(Default)">-1</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

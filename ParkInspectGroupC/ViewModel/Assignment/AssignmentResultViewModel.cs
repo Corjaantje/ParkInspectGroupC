@@ -24,7 +24,16 @@ namespace ParkInspectGroupC.ViewModel
         public AssignmentResultViewModel()
         {
             List<QuestionnaireResult> results = resultsCollector.GetAllAssignmentResults(Settings.Default.SelectedAssignmentId);
+            
+
+            // filter on inspectionId if "SingleInspectionResultsId" Setting is set
+            if (Settings.Default.SingleInspectionResultsId > -1)
+            {
+
+            }
+
             AggregatedResults = new ObservableCollection<AggregatedResult>(resultsCollector.QuestionnaireResultsToAggregatedResults(results));
+
 
             RaisePropertyChanged("SelectedAssignmentId");
 
