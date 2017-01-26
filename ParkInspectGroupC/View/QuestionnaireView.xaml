@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:ParkInspectGroupC.View"
     mc:Ignorable="d"
-    Height="496.431" Width="654.887"
+    MinHeight="490" Width="650"
     DataContext="{Binding QuestionnaireViewModel, Source={StaticResource Locator}}">
 
     <Grid>

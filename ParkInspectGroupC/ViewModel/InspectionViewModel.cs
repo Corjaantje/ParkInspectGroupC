@@ -39,11 +39,30 @@ namespace ParkInspectGroupC.ViewModel
 
 		private void showQuestionnaire()
 		{
+            bool questionnaireAlreadyFilled = false;
             if (SelectedInspection != null)
             {
-                RaisePropertyChanged("SelectedInspection");
-                Settings.Default.QuestionnaireSelectedInspectionId = SelectedInspection.Id;
-                Navigator.SetNewView(new QuestionnaireView());
+                // check if this inspection already has a filled questionnaire, show those results instead of edit screen
+                using (var context = new LocalParkInspectEntities())
+                {
+                    if ((from ques in context.Questionaire where ques.InspectionId == SelectedInspection.Id select ques).Count() > 0)
+                    {
+                        questionnaireAlreadyFilled = true;
+                    }
+                }
+
+                if (questionnaireAlreadyFilled)
+                {
+                    RaisePropertyChanged("SelectedInspection");
+                    Settings.Default.SingleInspectionResultsId = SelectedInspection.Id;
+                    Navigator.SetNewView(new AssignmentResultView());
+                }
+                else
+                {
+                    RaisePropertyChanged("SelectedInspection");
+                    Settings.Default.QuestionnaireSelectedInspectionId = SelectedInspection.Id;
+                    Navigator.SetNewView(new QuestionnaireView());
+                }
             }
 		}
 

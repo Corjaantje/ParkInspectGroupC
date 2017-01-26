@@ -107,7 +107,9 @@ namespace ParkInspectGroupC.ViewModel
 			if (SelectedAssignment != null)
 			{
 				Settings.Default.AssignmentId = SelectedAssignment.Id;
-				var Inspections = new InspectionView();
+                Settings.Default.SelectedAssignmentId = SelectedAssignment.Id; // different purpose than the one above
+
+                var Inspections = new InspectionView();
 				Navigator.SetNewView(Inspections);
 
 			}

@@ -221,5 +221,17 @@ namespace ParkInspectGroupC.Properties {
                 this["SelectedAssignmentId"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public long SingleInspectionResultsId {
+            get {
+                return ((long)(this["SingleInspectionResultsId"]));
+            }
+            set {
+                this["SingleInspectionResultsId"] = value;
+            }
+        }
     }
 }

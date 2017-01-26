@@ -17,6 +17,8 @@ namespace ParkInspectGroupC.ViewModel
 
         public long SelectedAssignmentId { get { return Settings.Default.SelectedAssignmentId; } }
 
+        public string SelectionText { get; set; }
+
         public ObservableCollection<AggregatedResult> AggregatedResults { get; set; }
 
         private ResultsCollector resultsCollector = new ResultsCollector();
@@ -24,9 +26,22 @@ namespace ParkInspectGroupC.ViewModel
         public AssignmentResultViewModel()
         {
             List<QuestionnaireResult> results = resultsCollector.GetAllAssignmentResults(Settings.Default.SelectedAssignmentId);
-            AggregatedResults = new ObservableCollection<AggregatedResult>(resultsCollector.QuestionnaireResultsToAggregatedResults(results));
+
+
+            // filter on inspectionId if "SingleInspectionResultsId" Setting is set
+            if (Settings.Default.SingleInspectionResultsId > -1)
+            {
+                AggregatedResults = new ObservableCollection<AggregatedResult>(resultsCollector.QuestionnaireResultsToAggregatedResults(results, Settings.Default.SingleInspectionResultsId));
+                SelectionText = ("Opdracht #" + SelectedAssignmentId + ", Inspectie #" + Settings.Default.SingleInspectionResultsId);
+            }
+            else
+            {
+                AggregatedResults = new ObservableCollection<AggregatedResult>(resultsCollector.QuestionnaireResultsToAggregatedResults(results));
+                SelectionText = ("Opdracht #" + SelectedAssignmentId);
+            }
 
             RaisePropertyChanged("SelectedAssignmentId");
+            RaisePropertyChanged("SelectionText");
 
             //test
             List<string> filter = new List<string> { "Vuil nummerbord", "Auto" };
