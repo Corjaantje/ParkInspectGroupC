@@ -67,7 +67,8 @@ namespace ParkInspectGroupC.ViewModel.ReportCreation
         public ObservableCollection<InspectionImage> ReportSectionImages { get; set; }
 
         // Holds the quetions that could turn into a diagram.
-        public ObservableCollection<Question> ReportSectionDiagramsQuestion { get; set; }
+        //public ObservableCollection<Question> ReportSectionDiagramsQuestion { get; set; }
+        public ObservableCollection<string> ReportSectionDiagramsKeywords { get; set; }
         // Holds the inspection images that could be exportered in the report.
         public ObservableCollection<InspectionImage> ReportSectionInspectionImage { get; set; }
 
@@ -77,7 +78,7 @@ namespace ParkInspectGroupC.ViewModel.ReportCreation
         public ReportSection SelectedReportSection { get; set; }
         public Diagram SelectedReportSectionDiagram { get; set; }
         public InspectionImage SelectedAddReportSectionInspectionImage { get; set; }
-        public Question SelectedAddReportSectionDiagram { get; set; }
+        public string SelectedAddReportSectionDiagram { get; set; }
         public InspectionImage SelectedReportSectionImage { get; set; }
 
         // Commands
@@ -303,29 +304,19 @@ namespace ParkInspectGroupC.ViewModel.ReportCreation
 
         private void OpenReportSectionDiagram()
         {
-            using (var context = new ParkInspectEntities())
+            ResultsCollector resultsCollector = new ResultsCollector();
+            List<QuestionnaireResult> questionnaireResults = resultsCollector.GetAllAssignmentResults(SelectedAssignment.Id);
+            List<AggregatedResult> aggregatedResults = resultsCollector.QuestionnaireResultsToAggregatedResults(questionnaireResults);
+
+            List<string> keywordSets = new List<string>();
+            foreach (AggregatedResult ar in aggregatedResults)
             {
-                var questions = new List<Question>();
-                var inspections =
-                    (from a in context.Inspection where a.AssignmentId == SelectedAssignment.Id select a).ToList();
-
-                foreach (var inspection in inspections)
+                if (keywordSets.Contains(ar.Keywords) == false)
                 {
-                    var questionnaires = inspection.Questionnaire;
-                    foreach (var questionaire in questionnaires)
-                    {
-                        var questionnaireModules = questionaire.QuestionnaireModule;
-                        foreach (var questionnaireModule in questionnaireModules)
-                        {
-                            var tempQuestions = questionnaireModule.Module.Question;
-                            foreach (var question in tempQuestions)
-                                questions.Add(question);
-                        }
-                    }
+                    keywordSets.Add(ar.Keywords);
                 }
-
-                ReportSectionDiagramsQuestion = new ObservableCollection<Question>(questions);
             }
+            ReportSectionDiagramsKeywords = new ObservableCollection<string>(keywordSets);
 
             _mView = new InspectorImageCreationView();
             _mView.Show();
@@ -352,6 +343,7 @@ namespace ParkInspectGroupC.ViewModel.ReportCreation
 
         private void ConfirmAddReportSectionDiagram()
         {
+            /*
             using (var context = new ParkInspectEntities())
             {
                 var diagram = new Diagram
@@ -365,7 +357,14 @@ namespace ParkInspectGroupC.ViewModel.ReportCreation
                 ReportSectionDiagrams.Add(diagram);
             }
 
-            _mView.Close();
+            _mView.Close();*/
+        }
+
+        private bool CanConfirmAddReportSectionDiagram()
+        {
+            if (SelectedAddReportSectionDiagram != null)
+                return true;
+            return false;
         }
 
         private void OpenReportSectionImage()
@@ -391,12 +390,7 @@ namespace ParkInspectGroupC.ViewModel.ReportCreation
             _dView.Show();
         }
 
-        private bool CanConfirmAddReportSectionDiagram()
-        {
-            if (SelectedAddReportSectionDiagram != null)
-                return true;
-            return false;
-        }
+
 
         private void ConfirmAddReportSectionImage()
         {

@@ -12,9 +12,12 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
-        
-        <ScrollViewer Grid.Row="0" Grid.ColumnSpan="1" HorizontalScrollBarVisibility="Auto"
+
+        <Image Grid.Row="0" Grid.Column="0" x:Name="image" Source="..\..\Image\Logo_WhiteBack.PNG" HorizontalAlignment="Left" MinHeight="30" MaxWidth="100"
+                   VerticalAlignment="Center" Margin="10,10" />
+        <ScrollViewer Grid.Row="1" Grid.ColumnSpan="1" HorizontalScrollBarVisibility="Auto"
                       VerticalScrollBarVisibility="Visible">
             <DataGrid AutoGenerateColumns="False" IsReadOnly="True"
                       SelectedItem="{Binding SelectedAssignment, Mode=TwoWay}" ItemsSource="{Binding AssignmentList}">
