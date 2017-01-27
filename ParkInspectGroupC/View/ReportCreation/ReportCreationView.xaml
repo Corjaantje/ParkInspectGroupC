@@ -8,6 +8,7 @@
              DataContext="{Binding Reports, Source={StaticResource Locator}}">
     <Grid>
         <StackPanel>
+            <Label Content="Rapporten voor opdracht:" />
             <Label Content="{Binding SelectedAssignment.Description}" />
             <Button Content="+" Background="Green" Command="{Binding CreateReportCommand}" />
             <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">

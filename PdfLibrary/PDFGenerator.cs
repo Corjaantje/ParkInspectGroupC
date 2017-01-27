@@ -7,6 +7,8 @@ using MigraDoc.DocumentObjectModel.Shapes;
 using MigraDoc.Rendering;
 using ParkInspectGroupC.DOMAIN;
 using PdfSharp.Pdf;
+using OxyPlot.Wpf;
+using OxyPlot;
 
 namespace ParkInspectGroupC.Miscellaneous
 {
@@ -170,6 +172,15 @@ namespace ParkInspectGroupC.Miscellaneous
 
         private void DefineDiagram(Section section)
         {
+            DiagramPlotter diagramPlotter = new DiagramPlotter();
+
+            var paragraph = section.AddParagraph();
+            PlotModel MyModel = diagramPlotter.GenerateDiagram(3, new List<string> { "Vuil nummerbord", "Auto" });
+
+            var pngExporter = new PngExporter { Width = 500, Height = 500};
+            pngExporter.ExportToFile(MyModel, "../../Image/Testfotos/Vuil_nummerbord__Auto.jpg");
+
+            paragraph.AddImage("../../Image/Testfotos/Vuil_nummerbord__Auto.jpg");
         }
 
         private void DefineImage(Section section)
