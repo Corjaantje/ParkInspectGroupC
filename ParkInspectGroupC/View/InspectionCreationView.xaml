@@ -1,0 +1,89 @@
+<UserControl x:Class="ParkInspectGroupC.View.InspectionCreationView"
+
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:ParkInspectGroupC.View"
+             xmlns:main="clr-namespace:ParkInspectGroupC"
+             xmlns:validation="clr-namespace:ParkInspectGroupC.Validation"
+             xmlns:converter="clr-namespace:ParkInspectGroupC.Converter"
+             xmlns:vm="clr-namespace:ParkInspectGroupC.ViewModel"
+             x:Name="This"
+             mc:Ignorable="d"
+             DataContext="{Binding AddInspection, Source={StaticResource Locator}}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition MinWidth="150" />
+        </Grid.ColumnDefinitions>
+
+
+        <Label Grid.Row="0" Grid.Column="0" Content="Opdracht:" Margin="0,0,10,0" Height="26"
+                   VerticalAlignment="Top" />
+
+
+        <Label Grid.Row="1" Grid.Column="0" Content="Regio:" Margin="0,0,10,0" />
+
+        <Label Grid.Row="2" Grid.Column="0" Content="Locatie:" Margin="0,0,10,0" Height="26"
+                   VerticalAlignment="Top" />
+        <TextBox Grid.Row="2" Grid.Column="1" Margin="0,2,10,2"
+                     Text="{Binding Path=Locatie, UpdateSourceTrigger=PropertyChanged}" />
+
+        <Label Grid.Row="4" Grid.Column="0" Content="Startdatum" Margin="0,0,10,0" />
+        <WrapPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left"
+                       VerticalAlignment="Center" />
+
+        <Label Grid.Row="6" Grid.Column="0" Content="Einddatum" Margin="0,0,10,0" />
+
+        <Label Grid.Row="7" Grid.Column="0" Content="Status:" Margin="0,0,10,0" />
+
+        <Label Grid.Row="8" Grid.Column="0" Content="Inspecteur" Margin="0,0,10,0" />
+
+        <WrapPanel Grid.Row="16" Grid.Column="0" Orientation="Horizontal" Margin="0,0,0,0"
+                       VerticalAlignment="Center">
+            <Button Content="Opslaan" MinWidth="60" Margin="3,3,3,3" Command="{Binding SaveCommand}"
+                        CommandParameter="{Binding ElementName=This}" />
+            <Label Content="{Binding Message}" Foreground="Red" FontSize="10" HorizontalAlignment="Center"
+                       VerticalAlignment="Center" />
+            <!-- <Button Content="Reset" MinWidth="60" Margin="3,3,3,3" /> -->
+        </WrapPanel>
+        <ComboBox x:Name="comboBox" ItemsSource="{Binding Assignments}" SelectedItem="{Binding SelectedAssignment}"
+                      Grid.Column="1" HorizontalAlignment="Left" Margin="0,6,0,0" VerticalAlignment="Top" Width="140" />
+        <ComboBox x:Name="comboBox1" ItemsSource="{Binding Regions}" SelectedItem="{Binding SelectedRegion}"
+                      Grid.Column="1" HorizontalAlignment="Left" Margin="0,5,0,0" Grid.Row="1" VerticalAlignment="Top"
+                      Width="140" />
+        <DatePicker Grid.Column="1" SelectedDate="{Binding StartDatum}" HorizontalAlignment="Left" Margin="0,2,0,0"
+                        Grid.Row="4" VerticalAlignment="Top" Width="140" />
+        <DatePicker Grid.Column="1" SelectedDate="{Binding EindDatum}" HorizontalAlignment="Left" Margin="0,5,0,0"
+                        Grid.Row="6" VerticalAlignment="Top" Width="140" />
+        <ComboBox x:Name="comboBox2" ItemsSource="{Binding Stats}" SelectedItem="{Binding SelectedStatus}"
+                      Grid.Column="1" HorizontalAlignment="Left" Margin="0,5,0,0" Grid.Row="7" VerticalAlignment="Top"
+                      Width="140" />
+        <ComboBox x:Name="comboBox3" ItemsSource="{Binding Inspectors}" SelectedItem="{Binding SelectedInspector}"
+                      Grid.Column="1" HorizontalAlignment="Left" Margin="0,5,0,0" Grid.Row="8" VerticalAlignment="Top"
+                      Width="140" />
+    </Grid>
+</UserControl>

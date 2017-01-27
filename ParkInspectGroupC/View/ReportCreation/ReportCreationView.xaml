@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="ParkInspectGroupC.View.ReportCreation.ReportCreationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:ParkInspectGroupC.View.ReportCreation"
+             mc:Ignorable="d"
+             DataContext="{Binding Reports, Source={StaticResource Locator}}">
+    <Grid>
+        <StackPanel>
+            <Label Content="Rapporten voor opdracht:" />
+            <Label Content="{Binding SelectedAssignment.Description}" />
+            <Button Content="+" Background="Green" Command="{Binding CreateReportCommand}" />
+            <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
+                <DataGrid AutoGenerateColumns="False" IsReadOnly="True"
+                          SelectedItem="{Binding SelectedReport, Mode=TwoWay}" ItemsSource="{Binding ReportList}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Id" Binding="{Binding Id}" />
+                        <DataGridTextColumn Header="Titel" Binding="{Binding Title}" />
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Open"
+                                            Command="{Binding DataContext.OpenReportCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Verwijder"
+                                            Command="{Binding DataContext.DeleteReportCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+            </ScrollViewer>
+        </StackPanel>
+    </Grid>
+</UserControl>

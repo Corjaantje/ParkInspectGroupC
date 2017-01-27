@@ -1,10 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
+
 <edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
   <!-- EF Runtime content -->
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="LocalParkInspectModel.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="data source=C:\Users\rogie\Source\Repos\ParkInspectGroupC\ParkInspectGroupC\bin\Debug\ParkInspect.sqlite" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="LocalParkInspectModel.Store" Provider="System.Data.SQLite.EF6"
+              ProviderManifestToken="data source=C:\Users\rogie\Source\Repos\ParkInspectGroupC\ParkInspectGroupC\bin\Debug\ParkInspect.sqlite"
+              Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator"
+              xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation"
+              xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="Id" />
@@ -655,10 +660,14 @@
             <End Role="WorkingHours" EntitySet="WorkingHours" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="LocalParkInspectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="LocalParkInspectModel" Alias="Self" annotation:UseStrongSpatialTypes="false"
+              xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation"
+              xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation"
+              xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="LocalParkInspectEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Account" EntityType="LocalParkInspectModel.Account" />
           <EntitySet Name="Assignment" EntityType="LocalParkInspectModel.Assignment" />
@@ -753,7 +762,8 @@
             <End Role="Module" EntitySet="Module" />
             <End Role="Question" EntitySet="Question" />
           </AssociationSet>
-          <AssociationSet Name="FK_QuestionaireModule_1_0" Association="LocalParkInspectModel.FK_QuestionaireModule_1_0">
+          <AssociationSet Name="FK_QuestionaireModule_1_0"
+                          Association="LocalParkInspectModel.FK_QuestionaireModule_1_0">
             <End Role="Module" EntitySet="Module" />
             <End Role="QuestionaireModule" EntitySet="QuestionaireModule" />
           </AssociationSet>
@@ -769,7 +779,8 @@
             <End Role="Question" EntitySet="Question" />
             <End Role="QuestionKeyword" EntitySet="QuestionKeyword" />
           </AssociationSet>
-          <AssociationSet Name="FK_QuestionaireModule_0_0" Association="LocalParkInspectModel.FK_QuestionaireModule_0_0">
+          <AssociationSet Name="FK_QuestionaireModule_0_0"
+                          Association="LocalParkInspectModel.FK_QuestionaireModule_0_0">
             <End Role="Questionaire" EntitySet="Questionaire" />
             <End Role="QuestionaireModule" EntitySet="QuestionaireModule" />
           </AssociationSet>
@@ -786,7 +797,8 @@
           <Property Name="DateCreated" Type="DateTime" Nullable="false" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
           <Property Name="ExistsInCentral" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Employee" Relationship="LocalParkInspectModel.FK_Account_0_0" FromRole="Account" ToRole="Employee" />
+          <NavigationProperty Name="Employee" Relationship="LocalParkInspectModel.FK_Account_0_0" FromRole="Account"
+                              ToRole="Employee" />
         </EntityType>
         <EntityType Name="Assignment">
           <Key>
@@ -801,9 +813,12 @@
           <Property Name="DateCreated" Type="DateTime" Nullable="false" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
           <Property Name="ExistsInCentral" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Customer" Relationship="LocalParkInspectModel.FK_Assignment_0_0" FromRole="Assignment" ToRole="Customer" />
-          <NavigationProperty Name="Employee" Relationship="LocalParkInspectModel.FK_Assignment_1_0" FromRole="Assignment" ToRole="Employee" />
-          <NavigationProperty Name="Inspection" Relationship="LocalParkInspectModel.FK_Inspection_3_0" FromRole="Assignment" ToRole="Inspection" />
+          <NavigationProperty Name="Customer" Relationship="LocalParkInspectModel.FK_Assignment_0_0"
+                              FromRole="Assignment" ToRole="Customer" />
+          <NavigationProperty Name="Employee" Relationship="LocalParkInspectModel.FK_Assignment_1_0"
+                              FromRole="Assignment" ToRole="Employee" />
+          <NavigationProperty Name="Inspection" Relationship="LocalParkInspectModel.FK_Inspection_3_0"
+                              FromRole="Assignment" ToRole="Inspection" />
         </EntityType>
         <EntityType Name="Availability">
           <Key>
@@ -817,7 +832,8 @@
           <Property Name="DateCreated" Type="DateTime" Nullable="false" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
           <Property Name="ExistsInCentral" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Employee" Relationship="LocalParkInspectModel.FK_Availability_0_0" FromRole="Availability" ToRole="Employee" />
+          <NavigationProperty Name="Employee" Relationship="LocalParkInspectModel.FK_Availability_0_0"
+                              FromRole="Availability" ToRole="Employee" />
         </EntityType>
         <EntityType Name="Coordinate">
           <Key>
@@ -831,7 +847,8 @@
           <Property Name="DateCreated" Type="DateTime" Nullable="false" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
           <Property Name="ExistsInCentral" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Inspection" Relationship="LocalParkInspectModel.FK_Coordinate_0_0" FromRole="Coordinate" ToRole="Inspection" />
+          <NavigationProperty Name="Inspection" Relationship="LocalParkInspectModel.FK_Coordinate_0_0"
+                              FromRole="Coordinate" ToRole="Inspection" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -846,7 +863,8 @@
           <Property Name="DateCreated" Type="DateTime" Nullable="false" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
           <Property Name="ExistsInCentral" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Assignment" Relationship="LocalParkInspectModel.FK_Assignment_0_0" FromRole="Customer" ToRole="Assignment" />
+          <NavigationProperty Name="Assignment" Relationship="LocalParkInspectModel.FK_Assignment_0_0"
+                              FromRole="Customer" ToRole="Assignment" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -870,26 +888,37 @@
           <Property Name="DateCreated" Type="DateTime" Nullable="false" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
           <Property Name="ExistsInCentral" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Account" Relationship="LocalParkInspectModel.FK_Account_0_0" FromRole="Employee" ToRole="Account" />
-          <NavigationProperty Name="Assignment" Relationship="LocalParkInspectModel.FK_Assignment_1_0" FromRole="Employee" ToRole="Assignment" />
-          <NavigationProperty Name="Availability" Relationship="LocalParkInspectModel.FK_Availability_0_0" FromRole="Employee" ToRole="Availability" />
-          <NavigationProperty Name="Employee1" Relationship="LocalParkInspectModel.FK_Employee_0_0" FromRole="Employee" ToRole="Employee1" />
-          <NavigationProperty Name="Manager" Relationship="LocalParkInspectModel.FK_Employee_0_0" FromRole="Employee1" ToRole="Employee" />
-          <NavigationProperty Name="EmployeeStatus" Relationship="LocalParkInspectModel.FK_Employee_1_0" FromRole="Employee" ToRole="EmployeeStatus" />
-          <NavigationProperty Name="Region" Relationship="LocalParkInspectModel.FK_Employee_2_0" FromRole="Employee" ToRole="Region" />
-          <NavigationProperty Name="Inspection" Relationship="LocalParkInspectModel.FK_Inspection_0_0" FromRole="Employee" ToRole="Inspection" />
-          <NavigationProperty Name="WorkingHours" Relationship="LocalParkInspectModel.FK_WorkingHours_0_0" FromRole="Employee" ToRole="WorkingHours" />
+          <NavigationProperty Name="Account" Relationship="LocalParkInspectModel.FK_Account_0_0" FromRole="Employee"
+                              ToRole="Account" />
+          <NavigationProperty Name="Assignment" Relationship="LocalParkInspectModel.FK_Assignment_1_0"
+                              FromRole="Employee" ToRole="Assignment" />
+          <NavigationProperty Name="Availability" Relationship="LocalParkInspectModel.FK_Availability_0_0"
+                              FromRole="Employee" ToRole="Availability" />
+          <NavigationProperty Name="Employee1" Relationship="LocalParkInspectModel.FK_Employee_0_0" FromRole="Employee"
+                              ToRole="Employee1" />
+          <NavigationProperty Name="Manager" Relationship="LocalParkInspectModel.FK_Employee_0_0" FromRole="Employee1"
+                              ToRole="Employee" />
+          <NavigationProperty Name="EmployeeStatus" Relationship="LocalParkInspectModel.FK_Employee_1_0"
+                              FromRole="Employee" ToRole="EmployeeStatus" />
+          <NavigationProperty Name="Region" Relationship="LocalParkInspectModel.FK_Employee_2_0" FromRole="Employee"
+                              ToRole="Region" />
+          <NavigationProperty Name="Inspection" Relationship="LocalParkInspectModel.FK_Inspection_0_0"
+                              FromRole="Employee" ToRole="Inspection" />
+          <NavigationProperty Name="WorkingHours" Relationship="LocalParkInspectModel.FK_WorkingHours_0_0"
+                              FromRole="Employee" ToRole="WorkingHours" />
         </EntityType>
         <EntityType Name="EmployeeStatus">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="25" FixedLength="false"
+                    Unicode="false" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
           <Property Name="ExistsInCentral" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Employee" Relationship="LocalParkInspectModel.FK_Employee_1_0" FromRole="EmployeeStatus" ToRole="Employee" />
+          <NavigationProperty Name="Employee" Relationship="LocalParkInspectModel.FK_Employee_1_0"
+                              FromRole="EmployeeStatus" ToRole="Employee" />
         </EntityType>
         <EntityType Name="Inspection">
           <Key>
@@ -906,13 +935,20 @@
           <Property Name="DateCreated" Type="DateTime" Nullable="false" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
           <Property Name="ExistsInCentral" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Assignment" Relationship="LocalParkInspectModel.FK_Inspection_3_0" FromRole="Inspection" ToRole="Assignment" />
-          <NavigationProperty Name="Coordinate" Relationship="LocalParkInspectModel.FK_Coordinate_0_0" FromRole="Inspection" ToRole="Coordinate" />
-          <NavigationProperty Name="Employee" Relationship="LocalParkInspectModel.FK_Inspection_0_0" FromRole="Inspection" ToRole="Employee" />
-          <NavigationProperty Name="Region" Relationship="LocalParkInspectModel.FK_Inspection_1_0" FromRole="Inspection" ToRole="Region" />
-          <NavigationProperty Name="InspectionStatus" Relationship="LocalParkInspectModel.FK_Inspection_2_0" FromRole="Inspection" ToRole="InspectionStatus" />
-          <NavigationProperty Name="InspectionImage" Relationship="LocalParkInspectModel.FK_InspectionImage_0_0" FromRole="Inspection" ToRole="InspectionImage" />
-          <NavigationProperty Name="Questionaire" Relationship="LocalParkInspectModel.FK_Questionaire_0_0" FromRole="Inspection" ToRole="Questionaire" />
+          <NavigationProperty Name="Assignment" Relationship="LocalParkInspectModel.FK_Inspection_3_0"
+                              FromRole="Inspection" ToRole="Assignment" />
+          <NavigationProperty Name="Coordinate" Relationship="LocalParkInspectModel.FK_Coordinate_0_0"
+                              FromRole="Inspection" ToRole="Coordinate" />
+          <NavigationProperty Name="Employee" Relationship="LocalParkInspectModel.FK_Inspection_0_0"
+                              FromRole="Inspection" ToRole="Employee" />
+          <NavigationProperty Name="Region" Relationship="LocalParkInspectModel.FK_Inspection_1_0"
+                              FromRole="Inspection" ToRole="Region" />
+          <NavigationProperty Name="InspectionStatus" Relationship="LocalParkInspectModel.FK_Inspection_2_0"
+                              FromRole="Inspection" ToRole="InspectionStatus" />
+          <NavigationProperty Name="InspectionImage" Relationship="LocalParkInspectModel.FK_InspectionImage_0_0"
+                              FromRole="Inspection" ToRole="InspectionImage" />
+          <NavigationProperty Name="Questionaire" Relationship="LocalParkInspectModel.FK_Questionaire_0_0"
+                              FromRole="Inspection" ToRole="Questionaire" />
         </EntityType>
         <EntityType Name="InspectionImage">
           <Key>
@@ -924,18 +960,21 @@
           <Property Name="DateCreated" Type="DateTime" Nullable="false" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
           <Property Name="ExistsInCentral" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Inspection" Relationship="LocalParkInspectModel.FK_InspectionImage_0_0" FromRole="InspectionImage" ToRole="Inspection" />
+          <NavigationProperty Name="Inspection" Relationship="LocalParkInspectModel.FK_InspectionImage_0_0"
+                              FromRole="InspectionImage" ToRole="Inspection" />
         </EntityType>
         <EntityType Name="InspectionStatus">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false"
+                    Unicode="false" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
           <Property Name="ExistsInCentral" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Inspection" Relationship="LocalParkInspectModel.FK_Inspection_2_0" FromRole="InspectionStatus" ToRole="Inspection" />
+          <NavigationProperty Name="Inspection" Relationship="LocalParkInspectModel.FK_Inspection_2_0"
+                              FromRole="InspectionStatus" ToRole="Inspection" />
         </EntityType>
         <EntityType Name="Keyword">
           <Key>
@@ -943,23 +982,28 @@
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" />
           <Property Name="CategoryId" Type="Int64" Nullable="false" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="255" FixedLength="false"
+                    Unicode="false" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
           <Property Name="ExistsInCentral" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="KeywordCategory" Relationship="LocalParkInspectModel.FK_Keyword_0_0" FromRole="Keyword" ToRole="KeywordCategory" />
-          <NavigationProperty Name="QuestionKeyword" Relationship="LocalParkInspectModel.FK_QuestionKeyword_0_0" FromRole="Keyword" ToRole="QuestionKeyword" />
+          <NavigationProperty Name="KeywordCategory" Relationship="LocalParkInspectModel.FK_Keyword_0_0"
+                              FromRole="Keyword" ToRole="KeywordCategory" />
+          <NavigationProperty Name="QuestionKeyword" Relationship="LocalParkInspectModel.FK_QuestionKeyword_0_0"
+                              FromRole="Keyword" ToRole="QuestionKeyword" />
         </EntityType>
         <EntityType Name="KeywordCategory">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="255" FixedLength="false"
+                    Unicode="false" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
           <Property Name="ExistsInCentral" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Keyword" Relationship="LocalParkInspectModel.FK_Keyword_0_0" FromRole="KeywordCategory" ToRole="Keyword" />
+          <NavigationProperty Name="Keyword" Relationship="LocalParkInspectModel.FK_Keyword_0_0"
+                              FromRole="KeywordCategory" ToRole="Keyword" />
         </EntityType>
         <EntityType Name="Module">
           <Key>
@@ -967,13 +1011,16 @@
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="255" FixedLength="false"
+                    Unicode="false" />
           <Property Name="Note" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
           <Property Name="ExistsInCentral" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Question" Relationship="LocalParkInspectModel.FK_Question_1_0" FromRole="Module" ToRole="Question" />
-          <NavigationProperty Name="QuestionaireModule" Relationship="LocalParkInspectModel.FK_QuestionaireModule_1_0" FromRole="Module" ToRole="QuestionaireModule" />
+          <NavigationProperty Name="Question" Relationship="LocalParkInspectModel.FK_Question_1_0" FromRole="Module"
+                              ToRole="Question" />
+          <NavigationProperty Name="QuestionaireModule" Relationship="LocalParkInspectModel.FK_QuestionaireModule_1_0"
+                              FromRole="Module" ToRole="QuestionaireModule" />
         </EntityType>
         <EntityType Name="Question">
           <Key>
@@ -981,15 +1028,20 @@
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" />
           <Property Name="SortId" Type="Int64" Nullable="false" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="255" FixedLength="false"
+                    Unicode="false" />
           <Property Name="ModuleId" Type="Int64" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
           <Property Name="ExistsInCentral" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Module" Relationship="LocalParkInspectModel.FK_Question_1_0" FromRole="Question" ToRole="Module" />
-          <NavigationProperty Name="QuestionSort" Relationship="LocalParkInspectModel.FK_Question_0_0" FromRole="Question" ToRole="QuestionSort" />
-          <NavigationProperty Name="QuestionAnswer" Relationship="LocalParkInspectModel.FK_QuestionAnswer_0_0" FromRole="Question" ToRole="QuestionAnswer" />
-          <NavigationProperty Name="QuestionKeyword" Relationship="LocalParkInspectModel.FK_QuestionKeyword_1_0" FromRole="Question" ToRole="QuestionKeyword" />
+          <NavigationProperty Name="Module" Relationship="LocalParkInspectModel.FK_Question_1_0" FromRole="Question"
+                              ToRole="Module" />
+          <NavigationProperty Name="QuestionSort" Relationship="LocalParkInspectModel.FK_Question_0_0"
+                              FromRole="Question" ToRole="QuestionSort" />
+          <NavigationProperty Name="QuestionAnswer" Relationship="LocalParkInspectModel.FK_QuestionAnswer_0_0"
+                              FromRole="Question" ToRole="QuestionAnswer" />
+          <NavigationProperty Name="QuestionKeyword" Relationship="LocalParkInspectModel.FK_QuestionKeyword_1_0"
+                              FromRole="Question" ToRole="QuestionKeyword" />
         </EntityType>
         <EntityType Name="Questionaire">
           <Key>
@@ -1000,8 +1052,10 @@
           <Property Name="DateCreated" Type="DateTime" Nullable="false" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
           <Property Name="ExistsInCentral" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Inspection" Relationship="LocalParkInspectModel.FK_Questionaire_0_0" FromRole="Questionaire" ToRole="Inspection" />
-          <NavigationProperty Name="QuestionaireModule" Relationship="LocalParkInspectModel.FK_QuestionaireModule_0_0" FromRole="Questionaire" ToRole="QuestionaireModule" />
+          <NavigationProperty Name="Inspection" Relationship="LocalParkInspectModel.FK_Questionaire_0_0"
+                              FromRole="Questionaire" ToRole="Inspection" />
+          <NavigationProperty Name="QuestionaireModule" Relationship="LocalParkInspectModel.FK_QuestionaireModule_0_0"
+                              FromRole="Questionaire" ToRole="QuestionaireModule" />
         </EntityType>
         <EntityType Name="QuestionaireModule">
           <Key>
@@ -1013,8 +1067,10 @@
           <Property Name="DateCreated" Type="DateTime" Nullable="false" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
           <Property Name="ExistsInCentral" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Module" Relationship="LocalParkInspectModel.FK_QuestionaireModule_1_0" FromRole="QuestionaireModule" ToRole="Module" />
-          <NavigationProperty Name="Questionaire" Relationship="LocalParkInspectModel.FK_QuestionaireModule_0_0" FromRole="QuestionaireModule" ToRole="Questionaire" />
+          <NavigationProperty Name="Module" Relationship="LocalParkInspectModel.FK_QuestionaireModule_1_0"
+                              FromRole="QuestionaireModule" ToRole="Module" />
+          <NavigationProperty Name="Questionaire" Relationship="LocalParkInspectModel.FK_QuestionaireModule_0_0"
+                              FromRole="QuestionaireModule" ToRole="Questionaire" />
         </EntityType>
         <EntityType Name="QuestionAnswer">
           <Key>
@@ -1027,7 +1083,8 @@
           <Property Name="DateCreated" Type="DateTime" Nullable="false" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
           <Property Name="ExistsInCentral" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Question" Relationship="LocalParkInspectModel.FK_QuestionAnswer_0_0" FromRole="QuestionAnswer" ToRole="Question" />
+          <NavigationProperty Name="Question" Relationship="LocalParkInspectModel.FK_QuestionAnswer_0_0"
+                              FromRole="QuestionAnswer" ToRole="Question" />
         </EntityType>
         <EntityType Name="QuestionKeyword">
           <Key>
@@ -1039,19 +1096,23 @@
           <Property Name="DateCreated" Type="DateTime" Nullable="false" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
           <Property Name="ExistsInCentral" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Keyword" Relationship="LocalParkInspectModel.FK_QuestionKeyword_0_0" FromRole="QuestionKeyword" ToRole="Keyword" />
-          <NavigationProperty Name="Question" Relationship="LocalParkInspectModel.FK_QuestionKeyword_1_0" FromRole="QuestionKeyword" ToRole="Question" />
+          <NavigationProperty Name="Keyword" Relationship="LocalParkInspectModel.FK_QuestionKeyword_0_0"
+                              FromRole="QuestionKeyword" ToRole="Keyword" />
+          <NavigationProperty Name="Question" Relationship="LocalParkInspectModel.FK_QuestionKeyword_1_0"
+                              FromRole="QuestionKeyword" ToRole="Question" />
         </EntityType>
         <EntityType Name="QuestionSort">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="255" FixedLength="false"
+                    Unicode="false" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
           <Property Name="ExistsInCentral" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Question" Relationship="LocalParkInspectModel.FK_Question_0_0" FromRole="QuestionSort" ToRole="Question" />
+          <NavigationProperty Name="Question" Relationship="LocalParkInspectModel.FK_Question_0_0"
+                              FromRole="QuestionSort" ToRole="Question" />
         </EntityType>
         <EntityType Name="Region">
           <Key>
@@ -1062,8 +1123,10 @@
           <Property Name="DateCreated" Type="DateTime" Nullable="false" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
           <Property Name="ExistsInCentral" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Employee" Relationship="LocalParkInspectModel.FK_Employee_2_0" FromRole="Region" ToRole="Employee" />
-          <NavigationProperty Name="Inspection" Relationship="LocalParkInspectModel.FK_Inspection_1_0" FromRole="Region" ToRole="Inspection" />
+          <NavigationProperty Name="Employee" Relationship="LocalParkInspectModel.FK_Employee_2_0" FromRole="Region"
+                              ToRole="Employee" />
+          <NavigationProperty Name="Inspection" Relationship="LocalParkInspectModel.FK_Inspection_1_0"
+                              FromRole="Region" ToRole="Inspection" />
         </EntityType>
         <EntityType Name="WorkingHours">
           <Key>
@@ -1077,7 +1140,8 @@
           <Property Name="DateCreated" Type="DateTime" Nullable="false" />
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
           <Property Name="ExistsInCentral" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Employee" Relationship="LocalParkInspectModel.FK_WorkingHours_0_0" FromRole="WorkingHours" ToRole="Employee" />
+          <NavigationProperty Name="Employee" Relationship="LocalParkInspectModel.FK_WorkingHours_0_0"
+                              FromRole="WorkingHours" ToRole="Employee" />
         </EntityType>
         <Association Name="FK_Account_0_0">
           <End Type="LocalParkInspectModel.Employee" Role="Employee" Multiplicity="1" />
@@ -1360,7 +1424,8 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="LocalParkInspectModelStoreContainer" CdmEntityContainer="LocalParkInspectEntities">
+        <EntityContainerMapping StorageEntityContainer="LocalParkInspectModelStoreContainer"
+                                CdmEntityContainer="LocalParkInspectEntities">
           <EntitySetMapping Name="Account">
             <EntityTypeMapping TypeName="LocalParkInspectModel.Account">
               <MappingFragment StoreEntitySet="Account">

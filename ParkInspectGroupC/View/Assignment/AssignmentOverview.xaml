@@ -1,0 +1,69 @@
+<UserControl x:Class="ParkInspectGroupC.View.AssignmentOverview"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:ParkInspectGroupC.View"
+              xmlns:converter="clr-namespace:ParkInspectGroupC.Converter"
+             mc:Ignorable="d"
+             DataContext="{Binding OpdrachtOverview, Source={StaticResource Locator}}">
+    <Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition MaxWidth="600"/>
+            <ColumnDefinition MaxWidth="600"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition MinHeight="300" />
+            <RowDefinition MinHeight="300" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Image Grid.Row="0" Grid.Column="0" x:Name="image" Source="..\..\Image\Logo_WhiteBack.PNG" HorizontalAlignment="Left" MinHeight="30" MaxWidth="100"
+                   VerticalAlignment="Center" Margin="10,10" />
+
+        <WrapPanel Grid.ColumnSpan="2" Grid.Row="1">
+            <TextBox x:Name="SearchBox" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap"
+                         Text="{Binding SearchCriteria, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" MinWidth="392" />
+            <CheckBox x:Name="ClosedAssigments" Content="Gesloten opdrachten" HorizontalAlignment="Left" Margin="10,10,10,10"
+                      VerticalAlignment="Center" IsChecked="{Binding ShowClosedAssignments}" />
+            <Button x:Name="NewAssignment" Content="Nieuwe Opdracht..." HorizontalAlignment="Left" Margin="10,10,10,10" Padding="6,1,6,1"
+                    VerticalAlignment="Center" Command="{Binding newAssigment}" />
+        </WrapPanel>
+
+        <ScrollViewer VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" Grid.Row="2" VerticalScrollBarVisibility="Auto" Margin="10,10,10,10" >
+            <DataGrid x:Name="AssignmentList" 
+                          ItemsSource="{Binding ObservedCollection}"
+                          SelectedItem="{Binding SelectedAssignment}" AutoGenerateColumns="False" IsReadOnly="True">
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="#" Binding="{Binding Id}" />
+                    <DataGridTextColumn Header="Beschrijving" Binding="{Binding Description}" Width="*" />
+                </DataGrid.Columns>
+
+            </DataGrid>
+        </ScrollViewer>
+
+        <WrapPanel Grid.ColumnSpan="2" Grid.Row="3" MinHeight="300">
+            <Button x:Name="EditAssignment" Content="Bewerken..." HorizontalAlignment="Left" Margin="10,10,10,10" Padding="6,1,6,1"
+                        VerticalAlignment="Top" Command="{Binding EditCommand}" />
+            <Button x:Name="Resultaten" Content="Resultaten..." HorizontalAlignment="Left" Margin="10,10,10,10" Padding="6,1,6,1"
+                VerticalAlignment="Top" Command="{Binding ShowResultsRelay}" />
+            <Button Grid.Row="4" Grid.Column="0" x:Name="filteredInspections" Content="Inspecties..." Margin="10,10,10,10" Padding="6,1,6,1" VerticalAlignment="Top"
+                    HorizontalAlignment="Left" Command="{Binding ShowFilteredInspections}"/>
+            <Button x:Name="ShowDetails" Content="Toon details" HorizontalAlignment="Left" Margin="10,10,10,10"
+                        VerticalAlignment="Top" Command="{Binding ShowDetails}" />
+
+            <Label x:Name="Details" HorizontalAlignment="Left" Margin="10,10,10,10" FontSize="13"
+                       VerticalAlignment="Center" MinWidth="472" MaxWidth="472" MinHeight="20" MaxHeight="300">
+                <Label.Content>
+                    <AccessText TextWrapping="Wrap" Text="{Binding AssignmentDetails}"/>
+                </Label.Content>
+            </Label>
+
+
+
+        </WrapPanel>
+    </Grid>
+</UserControl>

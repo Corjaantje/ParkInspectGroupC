@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Data;
 using System.Data.SQLite;
-using System.Diagnostics;
 
 namespace LocalDatabase
 {
@@ -12,7 +11,7 @@ namespace LocalDatabase
             try
             {
                 _connection.Open();
-                SQLiteCommand command = new SQLiteCommand(sql, _connection);
+                var command = new SQLiteCommand(sql, _connection);
                 command.ExecuteNonQuery();
                 _connection.Close();
 
@@ -26,12 +25,12 @@ namespace LocalDatabase
 
         public DataTable Get(SQLiteConnection _connection, string sql)
         {
-            DataTable datatable = new DataTable();
+            var datatable = new DataTable();
             try
             {
                 _connection.Open();
-                SQLiteCommand command = new SQLiteCommand(sql, _connection);
-                SQLiteDataReader reader = command.ExecuteReader();
+                var command = new SQLiteCommand(sql, _connection);
+                var reader = command.ExecuteReader();
                 datatable.Load(reader);
                 _connection.Close();
 
